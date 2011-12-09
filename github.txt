@@ -1,0 +1,79 @@
+github
+
+https://github.com/
+http://help.github.com/win-set-up-git/
+
+Create a remote repository.
+
+Create a New Repository
+Project Name: MagicBoxes
+Description: 
+On Dart
+
+Magic Boxes in Dart
+by Dzenan Ridjanovic
+2011-12-09
+
+Spirals on learning Dart.
+
+Based on:
+Magic Boxes [in Java]
+http://code.google.com/p/magic-boxes/ 
+
+Global setup:
+ Set up git
+  git config --global user.name "Dzenan Ridjanovic"
+  git config --global user.email dzenanr@gmail.com
+      
+Next steps:
+  mkdir MagicBoxes (already created)
+  cd MagicBoxes 
+  git init
+  touch README (already created as README.txt)
+  git add README (git add README.txt) or 
+  git add . (all in MagicBoxes)
+  git commit -m 'first commit'
+  git remote add origin git@github.com:dzenanr/MagicBoxes.git
+  git push -u origin master   
+
+-------------------------------------------------------------
+
+Git with Git Bash
+
+Clone a remote repository into a local repository.
+
+cd git/dart/learn/MagicBoxes
+git clone git@github:dzenanr/MagicBoxes .
+
+Get the latest changes from the remote repository
+
+git pull
+
+-------------------------------------------------------------
+
+Create a local repository
+
+cd git/dart/learn/MyBoxes
+git init
+
+Work with a local repository
+
+cd git/dart/learn/MyBoxes
+
+git add .
+git tag
+git commit -m "spiral 01"
+
+git push origin master
+git status
+
+Tagging for versions (spirals)
+
+http://learn.github.com/p/tagging.html
+
+git tag -a s01 -m 'spiral 01'
+git tag
+
+To push tags:
+
+git push --tags
