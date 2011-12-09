@@ -51,29 +51,45 @@ git pull
 
 -------------------------------------------------------------
 
+Configure yourself
+
+git config --global user.name "Your Name"
+git config --global user.email you@gmail.com
+
 Create a local repository
 
-cd git/dart/learn/MyBoxes
+cd git/dart/learn
+mkdir YourBoxes
+cd YourBoxes
 git init
+touch README.txt
+git add README.txt
+git commit -m 'first commit'
+git remote add origin git@github.com:accountname/YourBoxes.git
+git push -u origin master
+Enter passphrase for key ... :
 
 Work with a local repository
 
-cd git/dart/learn/MyBoxes
+cd git/dart/learn/YourBoxes
 
 git add .
 git tag
 git commit -m "spiral 01"
 
+git remote add origin git@github.com:accountname/YourBoxes.git
 git push origin master
+Enter passphrase for key ... :
 git status
 
 Tagging for versions (spirals)
 
 http://learn.github.com/p/tagging.html
 
+git tag
 git tag -a s01 -m 'spiral 01'
 git tag
 
-To push tags:
+To push tags to the remote repository:
 
 git push --tags
