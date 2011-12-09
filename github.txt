@@ -28,12 +28,11 @@ Global setup:
   git config --global user.email dzenanr@gmail.com
       
 Next steps:
-  mkdir MagicBoxes (already created)
+  mkdir MagicBoxes 
   cd MagicBoxes 
   git init
-  touch README (already created as README.txt)
-  git add README (git add README.txt) or 
-  git add . (all in MagicBoxes)
+  touch README 
+  git add README 
   git commit -m 'first commit'
   git remote add origin git@github.com:dzenanr/MagicBoxes.git
   git push -u origin master   
@@ -62,10 +61,14 @@ Create a local repository
 
 cd git
 ls
-cd ..., or
+cd dart
+ls
+cd learn
 
+or
 
 cd git/dart/learn
+
 mkdir YourBoxes
 cd YourBoxes
 git init
