@@ -3,6 +3,8 @@ github
 https://github.com/
 http://help.github.com/win-set-up-git/
 
+-------------------------------------------------------------
+
 Create a remote repository.
 
 Create a New Repository
@@ -58,6 +60,11 @@ git config --global user.email you@gmail.com
 
 Create a local repository
 
+cd git
+ls
+cd ..., or
+
+
 cd git/dart/learn
 mkdir YourBoxes
 cd YourBoxes
@@ -77,7 +84,6 @@ git add .
 git tag
 git commit -m "spiral 01"
 
-git remote add origin git@github.com:accountname/YourBoxes.git
 git push origin master
 Enter passphrase for key ... :
 git status
