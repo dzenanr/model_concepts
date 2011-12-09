@@ -1,11 +1,19 @@
-github
+GitHub
 
 https://github.com/
+
+Create an account at GitHub.
+
+Read:
+
 http://help.github.com/win-set-up-git/
+
+http://www.ralfebert.de/blog/tools/git_screencast/
 
 -------------------------------------------------------------
 
-Create a remote repository.
+After creating an account, create a remote repository.
+The following is what I did for MagicBoxes.
 
 Create a New Repository
 Project Name: MagicBoxes
@@ -52,7 +60,7 @@ git pull
 
 -------------------------------------------------------------
 
-Configure yourself
+Configure yourself (once for all repositories)
 
 git config --global user.name "Your Name"
 git config --global user.email you@gmail.com
