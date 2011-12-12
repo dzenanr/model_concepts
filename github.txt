@@ -92,8 +92,7 @@ Work with a local repository
 cd git/dart/learn/YourBoxes
 
 git add .
-git tag
-git commit -m "spiral 01"
+git commit -m "state briefly changes"
 
 git push origin master
 Enter passphrase for key ... :
