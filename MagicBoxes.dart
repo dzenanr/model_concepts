@@ -1,20 +1,11 @@
 #import('dart:html');
+#source('Box.dart');
+#source('Board.dart');
 
-class MagicBoxes {
-
-  MagicBoxes() {
-  }
-
-  void run() {
-    write("Hello World!");
-  }
-
-  void write(String message) {
-    // the HTML library defines a global "document" variable
-    document.query('#status').innerHTML = message;
-  }
-}
+// See the style guide: http://www.dartlang.org/articles/style-guide/.
 
 void main() {
-  new MagicBoxes().run();
+  // Get a reference to the canvas.
+  CanvasElement canvas = document.query('#canvas');
+  Board board = new Board(canvas);
 }
