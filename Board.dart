@@ -7,24 +7,17 @@ class Board {
   
   CanvasRenderingContext2D context;
   
-  Box box1;
-  Box box2;
-  Box box3;
+  List<Box> boxes;
   
   Board(CanvasElement canvas) {
     context = canvas.getContext("2d");
     width = canvas.width;
     height = canvas.height;
     border();
-    init();
+    boxes = new List();
+    document.on.mouseDown.add(onMouseDown);
     // Redraw every INTERVAL ms.
     document.window.setInterval(redraw, INTERVAL);
-  }
-  
-  void init() {
-    box1 = new Box(this, 20, 20, 80, 40);
-    box2 = new Box(this, 120, 220, 40, 80);
-    box3 = new Box(this, 60, 80, 80, 40);
   }
   
   void border() {
@@ -41,9 +34,26 @@ class Board {
   
   void redraw() {
     clear(); 
-    box1.draw();
-    box2.draw();
-    box3.draw();
+    for (Box box in boxes) {
+      box.draw();
+    }
+  }
+  
+  // Create a box in the position of the mouse click on the board, but not on an existing box.
+  void onMouseDown(MouseEvent event) {
+    Box box = new Box(this, event.offsetX, event.offsetY, 60, 100);
+    bool clickedOnExistingBox = false;
+    for (Box box in boxes) {
+      if (box.contains(event.offsetX, event.offsetY)) {
+        clickedOnExistingBox = true;
+        break;
+      }
+    }
+    if (!clickedOnExistingBox) {
+      if (event.offsetX + box.width > width) box.x = width - box.width;
+      if (event.offsetY + box.height > height) box.y = height - box.height;
+      boxes.add(box);
+    }
   }
 
 }
