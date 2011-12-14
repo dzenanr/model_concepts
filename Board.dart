@@ -1,6 +1,6 @@
 class Board {
   
-  final int INTERVAL = 10; // ms
+  final int INTERVAL = 8; // ms
   
   int width;
   int height;
@@ -39,10 +39,25 @@ class Board {
     }
   }
   
+  /*
+  int get nextBoxNo() {
+    return boxes.length + 1;
+  }
+  */
+  int get nextBoxNo() => boxes.length + 1;
+  
+  int countSelectedBoxesThatContain(int px, int py) {
+    int count = 0;
+    for (Box box in boxes) {
+      if (box.isSelected() && box.contains(px, py)) count++;
+    }
+    return count;
+  }
+  
   // Create a box in the position of the mouse click on the board, but not on an existing box.
   void onMouseDown(MouseEvent event) {
-    Box box = new Box(this, event.offsetX, event.offsetY, 60, 100);
-    bool clickedOnExistingBox = false;
+    Box box = new Box(this, event.offsetX, event.offsetY, 100, 100);
+    bool clickedOnExistingBox = false; 
     for (Box box in boxes) {
       if (box.contains(event.offsetX, event.offsetY)) {
         clickedOnExistingBox = true;
@@ -50,8 +65,8 @@ class Board {
       }
     }
     if (!clickedOnExistingBox) {
-      if (event.offsetX + box.width > width) box.x = width - box.width;
-      if (event.offsetY + box.height > height) box.y = height - box.height;
+      if (event.offsetX + box.width > width) box.x = width - box.width - 1;
+      if (event.offsetY + box.height > height) box.y = height - box.height - 1;
       boxes.add(box);
     }
   }
