@@ -1,9 +1,12 @@
 class Box {
   
-  static final SSS = 6; // selection square size
-  static final TBH = 20; // title box height
-  static final TOS = 4; // text offset size
-  static final IOS = TBH - TOS; // item offset size
+  static final int DEFAULT_WIDTH = 100;
+  static final int DEFAULT_HEIGHT = 100;
+  
+  static final int SSS = 6; // selection square size
+  static final int TBH = 20; // title box height
+  static final int TOS = 4; // text offset size
+  static final int IOS = TBH - TOS; // item offset size
   
   final Board board;
   
@@ -17,16 +20,15 @@ class Box {
   int titleNo;
   String item = "Item";
   
-  // bool default is false.
-  bool _selected; 
-  bool _mouseDown; 
+  bool _selected = false; 
+  bool _mouseDown = false; 
   
   Box(this.board, this.x, this.y, this.width, this.height) {
     titleNo = board.nextBoxNo;
     draw();
-    document.on.mouseDown.add(onMouseDown);
-    document.on.mouseUp.add(onMouseUp);
-    document.on.mouseMove.add(onMouseMove);
+    document.query('#canvas').on.mouseDown.add(onMouseDown);
+    document.query('#canvas').on.mouseUp.add(onMouseUp);
+    document.query('#canvas').on.mouseMove.add(onMouseMove);
   }
   
   void draw() {
@@ -37,7 +39,6 @@ class Box {
     board.context.font = "bold " + textFontSize + "px sans-serif";
     board.context.textAlign = "start";
     board.context.textBaseline = "top";
-    // board.context.fillText(title + " " + titleNo, x + TOS, y + TOS, width - TOS);
     board.context.fillText(toString(), x + TOS, y + TOS, width - TOS);
     board.context.fillText(item + 1, x + TOS, y + TOS + TBH, width - TOS);
     board.context.fillText(item + 2, x + TOS, y + TOS + TBH + IOS, width - TOS);
@@ -60,31 +61,45 @@ class Box {
   
   String toString() => '$title$titleNo ($x, $y)';
   
-  bool contains(int px, int py) {
-    if ((px > x && px < x + width) && (py > y && py < y + height)) return true;
+  bool contains(int pointX, int pointY) {
+    if ((pointX > x && pointX < x + width) && (pointY > y && pointY < y + height)) {
+      return true;
+    }
+    else {
+      return false;
+    }
   }
   
-  void onMouseDown(MouseEvent event) {
-    if (contains(event.offsetX, event.offsetY)) toggleSelection();
+  void onMouseDown(MouseEvent e) {
     _mouseDown = true;
+    // Only when select in the tool bar is on?
+    if (contains(e.offsetX, e.offsetY)) {
+      toggleSelection();
+    }
   }
   
-  void onMouseUp(MouseEvent event) {
+  void onMouseUp(MouseEvent e) {
     _mouseDown = false;
   }
   
   // Change a position of the box with mouse mouvements.  
-  void onMouseMove(MouseEvent event) {
-    int ex = event.offsetX; 
-    int ey = event.offsetY;
-    // if (contains(ex, ey) && isSelected() && mouseDown) {
-    if (contains(ex, ey) && isSelected() && _mouseDown && board.countSelectedBoxesThatContain(ex, ey) < 2) {
-      x =  ex - width / 2;
-      if (x < 0) x = 1;
-      if (x > board.width - width) x = board.width - width - 1;
-      y = ey - height / 2;
-      if (y < 0) y = 1;
-      if (y > board.height - height) y = board.height - height - 1;
+  void onMouseMove(MouseEvent e) {
+    if (contains(e.offsetX, e.offsetY) && isSelected() && _mouseDown && 
+        board.countSelectedBoxesContain(e.offsetX, e.offsetY) < 2) {
+      x =  e.offsetX - width / 2;
+      if (x < 0) {
+        x = 1;
+      }
+      if (x > board.width - width) {
+        x = board.width - width - 1;
+      }
+      y = e.offsetY - height / 2;
+      if (y < 0) {
+        y = 1;
+      }
+      if (y > board.height - height) {
+        y = board.height - height - 1;
+      }
     }
   }
 

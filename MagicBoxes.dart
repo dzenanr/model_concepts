@@ -1,6 +1,7 @@
 #import('dart:html');
 #source('Box.dart');
 #source('Board.dart');
+#source('ToolBar.dart');
 
 // See the style guide: http://www.dartlang.org/articles/style-guide/ .
 
