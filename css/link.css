@@ -1,0 +1,36 @@
+/* link.css */
+
+/* ===[ begin ]=== */
+
+/*
+  Title:                   Link Design Style
+  Author:                  Dzenan Ridjanovic
+  Influenced By:           http://www.simplebits.com/
+  Created:                 2006-09-03
+  Updated:                 2011-12-15
+*/
+
+  a:link {
+    text-decoration: none;
+    font-weight: bold;
+    color: #003366;
+  }
+
+  a:visited {
+    text-decoration: none;
+    font-weight: bold;
+    color: #c50000;
+  }
+
+  a:hover {
+    text-decoration: none;
+    color: #ffffee;
+    background: #336799;
+  }
+
+  a:active {
+    text-decoration: none;
+    color: #ff9911;
+  }
+        			
+/* ===[ end ]=== */

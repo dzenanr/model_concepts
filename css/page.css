@@ -1,0 +1,34 @@
+/* page.css */
+
+/* ===[ begin ]=== */
+
+/*
+  Title:                   Web Page Design Style
+  Author:                  Dzenan Ridjanovic
+  Influenced By:           http://www.simplebits.com/
+  Created:                 2006-09-03
+  Updated:                 2011-12-15
+*/
+
+  body {
+    font-family: verdana, arial, helvetica, sans-serif;
+    font-size: 14px;
+    background: #d7e9f7;
+    width:900px;
+    margin-left: 100px;
+    margin-right: 100px;
+    padding:10px; 
+  }
+
+  section {
+    padding: 4px;
+  }
+
+  p {
+    line-height: 1.5em;
+    text-align: justify;
+    margin-left: 2px;
+    margin-right: 2px;
+  }
+    			
+/* ===[ end ]=== */
