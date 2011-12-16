@@ -2,10 +2,10 @@ class Board {
   
   final int INTERVAL = 8; // ms
   
+  CanvasRenderingContext2D context;
+  
   int width;
   int height;
-  
-  CanvasRenderingContext2D context;
   
   List<Box> boxes;
   ToolBar toolBar;
@@ -15,16 +15,14 @@ class Board {
     width = canvas.width;
     height = canvas.height;
     border();
-    
+ 
+    boxes = new List();
     toolBar = new ToolBar(this);
     
     // Canvas event.
     document.query('#canvas').on.mouseDown.add(onMouseDown);
-    
     // Redraw every INTERVAL ms.
     document.window.setInterval(redraw, INTERVAL);
-    
-    boxes = new List();
   }
   
   void border() {
@@ -95,11 +93,7 @@ class Board {
     
     if (toolBar.isSelect()) {
       if (!clickedOnBox) {
-        deleteBoxes();
-        createBoxes(6);
-        selectBoxes();
-        
-        //deselectBoxes();
+        deselectBoxes();
       }
     } else if (toolBar.isBox()) {
       if (!clickedOnBox) {
@@ -111,6 +105,7 @@ class Board {
           box.y = height - box.height - 1;
         }
         boxes.add(box);
+        toolBar.selectButton();
       }
     } 
   }

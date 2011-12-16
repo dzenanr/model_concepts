@@ -5,18 +5,20 @@ class ToolBar {
   
   final Board board;
   
-  int _selectedButton = BOX;
+  int _selectedButton = SELECT;
   
   ToolBar(this.board) {
+    ButtonElement selectButton = document.query('#select');
+    ButtonElement boxButton = document.query('#box');
+    
     // Tool bar events.
-    /*
-    document.query('#select').on.click.add((MouseEvent e) {
+    selectButton.on.click.add((MouseEvent e) {
       _selectedButton = SELECT;
     });
-    document.query('#box').on.click.add((MouseEvent e) {
+    boxButton.on.click.add((MouseEvent e) {
       _selectedButton = BOX;
+      boxButton.style.maskBoxImage;
     });
-    */
   }
   
   bool isSelect() {
@@ -32,5 +34,7 @@ class ToolBar {
     }
     return false;
   }
+  
+  selectButton() => _selectedButton = SELECT;
   
 }

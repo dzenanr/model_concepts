@@ -72,8 +72,7 @@ class Box {
   
   void onMouseDown(MouseEvent e) {
     _mouseDown = true;
-    // Only when select in the tool bar is on?
-    if (contains(e.offsetX, e.offsetY)) {
+    if (board.toolBar.isSelect() && contains(e.offsetX, e.offsetY)) {
       toggleSelection();
     }
   }

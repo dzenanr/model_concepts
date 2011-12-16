@@ -20,12 +20,12 @@
     <section id="main"> 
       <canvas id="canvas" width="630" height="580">
         Canvas is not supported in your browser.
-      </canvas>
-      <script type="text/javascript" src="MagicBoxes.dart.app.js"></script>
+      </canvas>    
       <footer>
         <button id="select"><img src="img/select.png"/></button>
         <button id="box"><img src="img/box.png"/></button>
       </footer>
+      <script type="text/javascript" src="MagicBoxes.dart.app.js"></script>
     </section>
     
     <section id="right"> 
@@ -33,21 +33,16 @@
         <h3>Creating and Moving Boxes</h3>
       </header>
       <p>
-        Click on the board to create a box. Cklick on the box to select it. Click again to deselect the box.
+        Click on the box button, in the tool bar, each time you want to create a box, by clicking on an empty space in the board.
+      </p>
+      <p>
         To move a non selected box, click on the box and keep the mouse down while moving it. 
         A selected box cannot be moved.
       </p>
-    </section>
-    
-    <section id="right"> 
-      <header>
-        <h3>Tool Bar Problem</h3>
-      </header>
       <p>
-        When both button and canvas events are active, there is a conflict that I do not understand.
-        Uncomment both on (button) click events in the ToolBar class to get the problem: boxes cannot be created.
-        The <a href="https://github.com/dzenanr/MagicBoxes" class="link">code</a> is kept at <a href="https://github.com/" class="link">GitHub</a>. 
+        Click on the box to select it. Click again to deselect it. 
+        If there are several selected boxes, you may deselect them all by clicking on an empty space in the board.
       </p>
-    </section>
+    </section> 
   </body>
 </html>
