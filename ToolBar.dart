@@ -5,7 +5,8 @@ class ToolBar {
   
   final Board board;
   
-  int _selectedButton = SELECT;
+  int _onTool = SELECT;
+  bool _boxToolDblClicked = false;
   
   ToolBar(this.board) {
     ButtonElement selectButton = document.query('#select');
@@ -13,28 +14,39 @@ class ToolBar {
     
     // Tool bar events.
     selectButton.on.click.add((MouseEvent e) {
-      _selectedButton = SELECT;
+      _onTool = SELECT;
+    });
+    selectButton.on.dblClick.add((MouseEvent e) {
+      _onTool = SELECT;
+      _boxToolDblClicked = false;
     });
     boxButton.on.click.add((MouseEvent e) {
-      _selectedButton = BOX;
-      boxButton.style.maskBoxImage;
+      _onTool = BOX;
+    });
+    boxButton.on.dblClick.add((MouseEvent e) {
+      _onTool = BOX;
+      _boxToolDblClicked = true;
     });
   }
   
-  bool isSelect() {
-    if (_selectedButton == SELECT) {
+  bool isSelectToolOn() {
+    if (_onTool == SELECT) {
       return true; 
     }
     return false;
   }
   
-  bool isBox() {
-    if (_selectedButton == BOX) {
+  bool isBoxToolOn() {
+    if (_onTool == BOX) {
       return true; 
     }
     return false;
   }
   
-  selectButton() => _selectedButton = SELECT;
+  void selectToolOn()  {
+    if (!_boxToolDblClicked) {
+      _onTool = SELECT;
+    }
+  }
   
 }

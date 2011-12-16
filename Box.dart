@@ -26,6 +26,7 @@ class Box {
   Box(this.board, this.x, this.y, this.width, this.height) {
     titleNo = board.nextBoxNo;
     draw();
+    // Box events (actually, canvas event).
     document.query('#canvas').on.mouseDown.add(onMouseDown);
     document.query('#canvas').on.mouseUp.add(onMouseUp);
     document.query('#canvas').on.mouseMove.add(onMouseMove);
@@ -72,7 +73,7 @@ class Box {
   
   void onMouseDown(MouseEvent e) {
     _mouseDown = true;
-    if (board.toolBar.isSelect() && contains(e.offsetX, e.offsetY)) {
+    if (board.toolBar.isSelectToolOn() && contains(e.offsetX, e.offsetY)) {
       toggleSelection();
     }
   }

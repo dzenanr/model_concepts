@@ -91,11 +91,11 @@ class Board {
       }
     }
     
-    if (toolBar.isSelect()) {
+    if (toolBar.isSelectToolOn()) {
       if (!clickedOnBox) {
         deselectBoxes();
       }
-    } else if (toolBar.isBox()) {
+    } else if (toolBar.isBoxToolOn()) {
       if (!clickedOnBox) {
         Box box = new Box(this, e.offsetX, e.offsetY, Box.DEFAULT_WIDTH, Box.DEFAULT_HEIGHT);
         if (e.offsetX + box.width > width) {
@@ -105,7 +105,7 @@ class Board {
           box.y = height - box.height - 1;
         }
         boxes.add(box);
-        toolBar.selectButton();
+        toolBar.selectToolOn();
       }
     } 
   }
