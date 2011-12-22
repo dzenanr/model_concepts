@@ -8,6 +8,12 @@ class Board {
   int height;
   
   List<Box> boxes;
+  List<Line> lines;
+  
+  Box beforeLastBoxClicked;
+  Box lastBoxClicked;
+  
+  MenuBar menuBar; 
   ToolBar toolBar;
   
   Board(CanvasElement canvas) {
@@ -17,6 +23,9 @@ class Board {
     border();
  
     boxes = new List();
+    lines = new List();
+    
+    menuBar = new MenuBar(this);
     toolBar = new ToolBar(this);
     
     // Canvas event.
@@ -42,6 +51,9 @@ class Board {
     for (Box box in boxes) {
       box.draw();
     }
+    for (Line line in lines) {
+      line.draw();
+    }
   }
   
   void createBoxes(int n) {
@@ -57,6 +69,28 @@ class Board {
     boxes.clear();
   }
   
+  void deleteBox(Box boxToDelete) {
+    for (Box box in boxes) {
+      if (box == boxToDelete) {
+        int index = boxes.indexOf(box, 0);
+        boxes.removeRange(index, 1);
+        return;
+      }
+    }
+  }
+  
+  void deleteSelectedBoxes() {
+    if (countSelectedBoxes() == 0) {
+      return;
+    }
+    for (Box box in boxes) {
+      if (box.isSelected()) {
+        deleteBox(box);
+      }
+    }
+    deleteSelectedBoxes();
+  }
+  
   void selectBoxes() {
     for (Box box in boxes) {
       box.select();
@@ -69,7 +103,33 @@ class Board {
     }
   }
   
+  void hideSelectedBoxes() {
+    for (Box box in boxes) {
+      if (box.isSelected()) {
+        box.hide();
+      }
+    }
+  }
+  
+  void showHiddenBoxes() {
+    for (Box box in boxes) {
+      if (box.isHidden()) {
+        box.show();
+      }
+    }
+  }
+  
   int get nextBoxNo() => boxes.length + 1;
+  
+  int countSelectedBoxes() {
+    int count = 0;
+    for (Box box in boxes) {
+      if (box.isSelected()) {
+        count++;
+      }
+    }
+    return count;
+  }
   
   int countSelectedBoxesContain(int pointX, int pointY) {
     int count = 0;
@@ -91,12 +151,10 @@ class Board {
       }
     }
     
-    if (toolBar.isSelectToolOn()) {
-      if (!clickedOnBox) {
+    if (!clickedOnBox) {
+      if (toolBar.isSelectToolOn()) {
         deselectBoxes();
-      }
-    } else if (toolBar.isBoxToolOn()) {
-      if (!clickedOnBox) {
+      } else if (toolBar.isBoxToolOn()) {
         Box box = new Box(this, e.offsetX, e.offsetY, Box.DEFAULT_WIDTH, Box.DEFAULT_HEIGHT);
         if (e.offsetX + box.width > width) {
           box.x = width - box.width - 1;
@@ -106,8 +164,14 @@ class Board {
         }
         boxes.add(box);
         toolBar.selectToolOn();
+      } else if (toolBar.isLineToolOn()) {
+        if (beforeLastBoxClicked != null && lastBoxClicked != null) {
+          Line line = new Line(this, beforeLastBoxClicked, lastBoxClicked);
+          lines.add(line);
+        }
+        toolBar.selectToolOn();
       }
-    } 
+    }
   }
 
 }

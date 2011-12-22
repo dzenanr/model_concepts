@@ -20,7 +20,8 @@ class Box {
   int titleNo;
   String item = "Item";
   
-  bool _selected = false; 
+  bool _selected = false;
+  bool _hidden = false;
   bool _mouseDown = false; 
   
   Box(this.board, this.x, this.y, this.width, this.height) {
@@ -33,26 +34,28 @@ class Box {
   }
   
   void draw() {
-    board.context.beginPath();
-    board.context.rect(x, y, width, height);
-    board.context.moveTo(x, y + TBH);
-    board.context.lineTo(x + width, y + TBH);
-    board.context.font = "bold " + textFontSize + "px sans-serif";
-    board.context.textAlign = "start";
-    board.context.textBaseline = "top";
-    board.context.fillText(toString(), x + TOS, y + TOS, width - TOS);
-    board.context.fillText(item + 1, x + TOS, y + TOS + TBH, width - TOS);
-    board.context.fillText(item + 2, x + TOS, y + TOS + TBH + IOS, width - TOS);
-    board.context.fillText(item + 3, x + TOS, y + TOS + TBH + 2 * IOS, width - TOS);
-    board.context.fillText(item + 4, x + TOS, y + TOS + TBH + 3 * IOS, width - TOS);
-    if (isSelected()) {
-      board.context.rect(x, y, SSS, SSS);
-      board.context.rect(x + width - SSS, y, SSS, SSS);
-      board.context.rect(x + width - SSS, y + height - SSS, SSS, SSS);
-      board.context.rect(x, y + height - SSS, SSS, SSS);
-    } 
-    board.context.stroke();
-    board.context.closePath();
+    if (!isHidden()) {
+      board.context.beginPath();
+      board.context.rect(x, y, width, height);
+      board.context.moveTo(x, y + TBH);
+      board.context.lineTo(x + width, y + TBH);
+      board.context.font = "bold " + textFontSize + "px sans-serif";
+      board.context.textAlign = "start";
+      board.context.textBaseline = "top";
+      board.context.fillText(toString(), x + TOS, y + TOS, width - TOS);
+      board.context.fillText(item + 1, x + TOS, y + TOS + TBH, width - TOS);
+      board.context.fillText(item + 2, x + TOS, y + TOS + TBH + IOS, width - TOS);
+      board.context.fillText(item + 3, x + TOS, y + TOS + TBH + 2 * IOS, width - TOS);
+      board.context.fillText(item + 4, x + TOS, y + TOS + TBH + 3 * IOS, width - TOS);
+      if (isSelected()) {
+        board.context.rect(x, y, SSS, SSS);
+        board.context.rect(x + width - SSS, y, SSS, SSS);
+        board.context.rect(x + width - SSS, y + height - SSS, SSS, SSS);
+        board.context.rect(x, y + height - SSS, SSS, SSS);
+      } 
+      board.context.stroke();
+      board.context.closePath();
+    }
   }
   
   select() => _selected = true;
@@ -60,13 +63,16 @@ class Box {
   toggleSelection() => _selected = !_selected;
   bool isSelected() => _selected;
   
+  hide() => _hidden = true;
+  show() => _hidden = false;
+  bool isHidden() => _hidden;
+  
   String toString() => '$title$titleNo ($x, $y)';
   
   bool contains(int pointX, int pointY) {
     if ((pointX > x && pointX < x + width) && (pointY > y && pointY < y + height)) {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }
@@ -75,6 +81,10 @@ class Box {
     _mouseDown = true;
     if (board.toolBar.isSelectToolOn() && contains(e.offsetX, e.offsetY)) {
       toggleSelection();
+    }
+    if (contains(e.offsetX, e.offsetY)) {
+      board.beforeLastBoxClicked = board.lastBoxClicked;
+      board.lastBoxClicked = this;
     }
   }
   

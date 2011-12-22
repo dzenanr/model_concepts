@@ -1,0 +1,29 @@
+/* menu.css */
+
+/* ===[ begin ]=== */
+
+/*
+  Title:                  Menu Design Style
+  Author:                 Dzenan Ridjanovic
+  Influenced By:          http://www.simplebits.com/
+  Created:                2006-09-03
+  Updated:                2011-12-21
+*/
+
+/* ===[ basic menu ]=== */
+
+  .menu {
+    margin: 0px;
+    padding: 0px 0px 0px 0px;
+    background: #fffff0;
+  }
+
+  .menu li {
+    margin: 0px; 
+    padding: 0px;
+    display: inline;
+    list-style-type: none;
+  }
+
+/* ===[ end ]=== */
+

@@ -2,6 +2,8 @@
 #source('Box.dart');
 #source('Board.dart');
 #source('ToolBar.dart');
+#source('Line.dart');
+#source('MenuBar.dart');
 
 // See the style guide: http://www.dartlang.org/articles/style-guide/ .
 

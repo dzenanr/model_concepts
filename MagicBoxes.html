@@ -8,14 +8,23 @@
     <link rel="stylesheet" href="css/layout.css"/>
     <link rel="stylesheet" href="css/layout2c.css"/>
     <link rel="stylesheet" href="css/link.css"/>
+    <link rel="stylesheet" href="css/list.css"/>
+    <link rel="stylesheet" href="css/menu.css"/>
     <link rel="stylesheet" href="css/page.css"/>
   </head>
   
   <body>
     <header>
-      <h2>Magic Boxes in Dart: Boxes with Tool Bar</h2>
+      <h2>Magic Boxes in Dart: Boxes with Lines</h2>
       <!-- http://dev.opera.com/articles/view/html-5-canvas-the-basics/ -->
     </header>
+    
+    <nav id="menu" class="menu">
+      <button id="select-boxes" class="button">Select All Boxes</button>
+      <button id="delete-selected-boxes" class="button">Delete Selected Boxes</button>
+      <button id="hide-selected-boxes" class="button">Hide Selected Boxes</button>
+      <button id="show-hidden-boxes" class="button">Show Hidden Boxes</button>
+    </nav>
     
     <section id="main"> 
       <canvas id="canvas" width="630" height="580">
@@ -24,19 +33,21 @@
       <footer>
         <button id="select"><img src="img/select.png"/></button>
         <button id="box"><img src="img/box.png"/></button>
+        <button id="line"><img src="img/line.png"/></button>
       </footer>
       <script type="text/javascript" src="MagicBoxes.dart.app.js"></script>
     </section>
     
     <section id="right"> 
       <header>
-        <h3>Creating and Moving Boxes</h3>
+        <h3>Creating and Moving Boxes and Lines</h3>
       </header>
       <p>
-        Click the box tool (button), in the tool bar, each time you want to create a box, by clicking on an empty space in the board.
+        Click the box tool to create a box, by clicking on an empty space in the board.
       </p>
       <p>
         To move a non selected box, click the box and keep the mouse down while moving it. 
+        The connected lines will follow.
         A selected box cannot be moved.
       </p>
       <p>
@@ -46,6 +57,17 @@
       <p>
         If you want to create several boxes, double-click the box tool to stay on. 
         To return to the select mode double-click the select tool.
+      </p>
+      <p>
+        Click the line tool to create a line between the last two clicked boxes, 
+        by clicking on an empty space in the board.
+      </p>
+      <p>
+        If you want to create several lines, double-click the line tool to stay on. 
+        To return to the select mode double-click the select tool.
+      </p>
+      <p>
+        The <a href="https://github.com/dzenanr/MagicBoxes" class="link">code</a> is kept at <a href="https://github.com/" class="link">GitHub</a>.
       </p>
     </section> 
   </body>
