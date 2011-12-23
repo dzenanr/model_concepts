@@ -99,8 +99,11 @@ git rm file
 
 git commit -m "state briefly changes"
 
+git status
+
 git push origin master
 Enter passphrase for key ... :
+
 git status
 
 Tagging for versions (spirals)
