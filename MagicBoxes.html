@@ -6,7 +6,6 @@
     <meta name="author" content="Dzenan Ridjanovic"/>
     <title>MagicBoxes</title>   
     <link rel="stylesheet" href="css/layout.css"/>
-    <link rel="stylesheet" href="css/layout2c.css"/>
     <link rel="stylesheet" href="css/link.css"/>
     <link rel="stylesheet" href="css/list.css"/>
     <link rel="stylesheet" href="css/menu.css"/>
@@ -15,19 +14,48 @@
   
   <body>
     <header>
-      <h2>Magic Boxes in Dart: Boxes with Lines</h2>
+      <h2>Magic Boxes in Dart: Line Selection and Horizontal Menu Bar with Menus and Menu Items</h2>
       <!-- http://dev.opera.com/articles/view/html-5-canvas-the-basics/ -->
     </header>
     
-    <nav id="menu" class="menu">
-      <button id="select-boxes" class="button">Select All Boxes</button>
-      <button id="delete-selected-boxes" class="button">Delete Selected Boxes</button>
-      <button id="hide-selected-boxes" class="button">Hide Selected Boxes</button>
-      <button id="show-hidden-boxes" class="button">Show Hidden Boxes</button>
+    <nav>
+     <ul>
+       <li>File
+         <ul>
+           <li></li>
+         </ul>  
+       </li>
+       <li>Edit
+         <ul>
+           <li><button id="select-all">Select All</button></li>
+           <li><button id="delete-selection">Delete Selection</button></li>
+         </ul>
+       </li>
+       <li>View
+         <ul>
+           <li><button id="hide-selection">Hide Selection</button></li>
+           <li><button id="show-hidden-selection">Show Selection</button></li>
+         </ul>
+       </li>
+       <li>Create
+         <ul>
+           <li><button id="create-boxes-in-diagonal">Boxes in Diagonal</button></li>
+           <li><button id="create-boxes-as-tiles">Boxes As Tiles</button></li>
+         </ul>
+       </li>
+       <li>About
+         <ul>
+           <li>Magic Boxes in <a href="http://www.dart.org/">Dart</a></li>
+           <li>Spiral 07</li>
+           <li>2011-12-23</li>
+           <li>Dzenan Ridjanovic</li>
+         </ul>   
+       </li>
+     </ul>
     </nav>
     
-    <section id="main"> 
-      <canvas id="canvas" width="630" height="580">
+    <section> 
+      <canvas id="canvas" width="890" height="560">
         Canvas is not supported in your browser.
       </canvas>    
       <footer>
@@ -38,9 +66,31 @@
       <script type="text/javascript" src="MagicBoxes.dart.app.js"></script>
     </section>
     
-    <section id="right"> 
+    <section>
       <header>
-        <h3>Creating and Moving Boxes and Lines</h3>
+        <h3>Overview</h3>
+      </header>
+      <p>
+        The Magic Boxes tool is developed in <a href="http://www.dartlang.org/">Dart</a> to start learning Dart 
+        (after reading the Getting Started section, developing the first 
+        <a  href="https://plus.google.com/u/0/112767453954051794400/posts/igDQd1ubWQs">example</a>, 
+        and the <a href="https://github.com/dzenanr/pingpong">Ping Pong</a> game). 
+        The spiral approach to learning is used to advance step-by-step. 
+        The tool is based on the <a href="http://code.google.com/p/magic-boxes/">Magic Boxes</a> tool developed in Java.
+      </p>
+      <p>
+        The <a href="https://github.com/dzenanr/MagicBoxes">code</a> of Magic Boxes in Dart is kept at 
+        <a href="https://github.com/">GitHub</a>. 
+        If you are new to <a href="http://sixrevisions.com/resources/git-tutorials-beginners/">Git</a>, 
+        you should really <a href="http://www.ralfebert.de/blog/tools/git_screencast/">start</a> learning it. 
+        However, if you are impatient to start learning Dart, you may want to 
+        <a href="https://github.com/dzenanr/MagicBoxes/tags">download</a> the spirals.
+      </p> 
+    </section>
+     
+    <section>
+      <header>
+        <h3>Creating, Moving and Selecting Boxes and Lines</h3>
       </header>
       <p>
         Click the box tool to create a box, by clicking on an empty space in the board.
@@ -52,7 +102,7 @@
       </p>
       <p>
         Click the box to select it. Click again to deselect it. 
-        If there are several selected boxes, you may deselect them all by clicking on an empty space in the board.
+        If there are several selected boxes (and/or lines), you may deselect them all by clicking on an empty space in the board.
       </p>
       <p>
         If you want to create several boxes, double-click the box tool to stay on. 
@@ -63,11 +113,12 @@
         by clicking on an empty space in the board.
       </p>
       <p>
-        If you want to create several lines, double-click the line tool to stay on. 
-        To return to the select mode double-click the select tool.
+        Click the line, or very close to it, to select it. Click again to deselect it. 
+        If there are several selected lines (and/or boxes), you may deselect them all by clicking on an empty space in the board.
       </p>
       <p>
-        The <a href="https://github.com/dzenanr/MagicBoxes" class="link">code</a> is kept at <a href="https://github.com/" class="link">GitHub</a>.
+        If you want to create several lines, double-click the line tool to stay on. 
+        To return to the select mode double-click the select tool.
       </p>
     </section> 
   </body>

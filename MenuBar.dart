@@ -2,32 +2,48 @@ class MenuBar {
   
   final Board board;
   
-  ButtonElement selectBoxesButton;
-  ButtonElement deleteSelectedBoxesButton;
-  ButtonElement hideSelectedBoxesButton;
-  ButtonElement showHiddenBoxesButton;
+  // Edit
+  ButtonElement selectAllButton;
+  ButtonElement deleteSelectionButton;
+  
+  // View
+  ButtonElement hideSelectionButton;
+  ButtonElement showHiddenSelectionButton;
+  
+  // Utility
+  ButtonElement createBoxesInDiagonalButton;
+  ButtonElement createBoxesAsTilesButton;
   
   MenuBar(this.board) {
-    selectBoxesButton = document.query('#select-boxes');
-    deleteSelectedBoxesButton = document.query('#delete-selected-boxes');
-    hideSelectedBoxesButton = document.query('#hide-selected-boxes');
-    showHiddenBoxesButton = document.query('#show-hidden-boxes');
+    selectAllButton = document.query('#select-all');
+    deleteSelectionButton = document.query('#delete-selection');
+    
+    hideSelectionButton = document.query('#hide-selection');
+    showHiddenSelectionButton = document.query('#show-hidden-selection');
+    
+    createBoxesInDiagonalButton = document.query('#create-boxes-in-diagonal');
+    createBoxesAsTilesButton = document.query('#create-boxes-as-tiles');
     
     // Menu bar events.
-    selectBoxesButton.on.click.add((MouseEvent e) {
-      board.selectBoxes();
+    selectAllButton.on.click.add((MouseEvent e) {
+      board.select();
+    });
+    deleteSelectionButton.on.click.add((MouseEvent e) {
+      board.deleteSelection();
     });
     
-    deleteSelectedBoxesButton.on.click.add((MouseEvent e) {
-      board.deleteSelectedBoxes();
+    hideSelectionButton.on.click.add((MouseEvent e) {
+      board.hideSelection();
+    });
+    showHiddenSelectionButton.on.click.add((MouseEvent e) {
+      board.showHiddenSelection();
     });
     
-    hideSelectedBoxesButton.on.click.add((MouseEvent e) {
-      board.hideSelectedBoxes();
+    createBoxesInDiagonalButton.on.click.add((MouseEvent e) {
+      board.createBoxesInDiagonal();
     });
-    
-    showHiddenBoxesButton.on.click.add((MouseEvent e) {
-      board.showHiddenBoxes();
+    createBoxesAsTilesButton.on.click.add((MouseEvent e) {
+      board.createBoxesAsTiles();
     });
   }
 

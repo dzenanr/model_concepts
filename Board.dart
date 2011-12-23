@@ -1,6 +1,9 @@
 class Board {
   
-  final int INTERVAL = 8; // ms
+  // The acceptable delta error in pixels for clicking on a line between two boxes.
+  static final int DELTA = 8; 
+  // The board is redrawn every INTERVAL ms.
+  static final int INTERVAL = 8; 
   
   CanvasRenderingContext2D context;
   
@@ -16,10 +19,13 @@ class Board {
   MenuBar menuBar; 
   ToolBar toolBar;
   
+  num defaultLineWidth;
+  
   Board(CanvasElement canvas) {
     context = canvas.getContext("2d");
     width = canvas.width;
     height = canvas.height;
+    defaultLineWidth = context.lineWidth;
     border();
  
     boxes = new List();
@@ -37,8 +43,9 @@ class Board {
   void border() {
     context.beginPath();
     context.rect(0, 0, width, height);
-    context.closePath();
+    context.setLineWidth(defaultLineWidth);
     context.stroke();
+    context.closePath();
   }
   
   void clear() {
@@ -48,20 +55,42 @@ class Board {
   
   void redraw() {
     clear(); 
-    for (Box box in boxes) {
-      box.draw();
-    }
     for (Line line in lines) {
       line.draw();
     }
+    for (Box box in boxes) {
+      box.draw();
+    }
   }
   
-  void createBoxes(int n) {
+  void createBoxesInDiagonal() {
     int x = 0; int y = 0;
-    for (int i = 0; i < n; i++) {  
-      boxes.add(new Box(this, x, y, Box.DEFAULT_WIDTH, Box.DEFAULT_HEIGHT));
-      x = x + Box.DEFAULT_WIDTH;
-      y = y + Box.DEFAULT_HEIGHT;
+    while (true) {
+      if (x <= width - Box.DEFAULT_WIDTH && y <= height - Box.DEFAULT_HEIGHT) {
+        Box box = new Box(this, x, y, Box.DEFAULT_WIDTH, Box.DEFAULT_HEIGHT);
+        boxes.add(box);
+        x = x + Box.DEFAULT_WIDTH;
+        y = y + Box.DEFAULT_HEIGHT;
+      } else {
+        return;
+      }
+    }
+  }
+  
+  void createBoxesAsTiles() {
+    int x = 0; int y = 0;
+    while (true) {
+      if (x <= width - Box.DEFAULT_WIDTH) {
+        Box box = new Box(this, x, y, Box.DEFAULT_WIDTH, Box.DEFAULT_HEIGHT);
+        boxes.add(box);
+        x = x + Box.DEFAULT_WIDTH * 2;
+      } else {
+        x = 0;
+        y = y + Box.DEFAULT_HEIGHT * 2;
+        if (y > height - Box.DEFAULT_HEIGHT) {
+          return;
+        }
+      }
     }
   }
   
@@ -69,11 +98,36 @@ class Board {
     boxes.clear();
   }
   
+  void deleteLines() {
+    lines.clear();
+  }
+  
+  void delete() {
+    deleteLines();
+    deleteBoxes();
+    toolBar.backToSelectAsFixedTool();
+  }
+  
   void deleteBox(Box boxToDelete) {
     for (Box box in boxes) {
       if (box == boxToDelete) {
         int index = boxes.indexOf(box, 0);
         boxes.removeRange(index, 1);
+        if (box == beforeLastBoxClicked) {
+          beforeLastBoxClicked == null;
+        } else if (box == lastBoxClicked) {
+          lastBoxClicked == null;
+        }
+        return;
+      }
+    }
+  }
+  
+  void deleteLine(Line lineToDelete) {
+    for (Line line in lines) {
+      if (line == lineToDelete) {
+        int index = lines.indexOf(line, 0);
+        lines.removeRange(index, 1);
         return;
       }
     }
@@ -91,16 +145,65 @@ class Board {
     deleteSelectedBoxes();
   }
   
+  void deleteSelectedLines() {
+    if (countSelectedLines() == 0) {
+      return;
+    }
+    for (Line line in lines) {
+      if (line.isSelected()) {
+        deleteLine(line);
+      }
+    }
+    deleteSelectedLines();
+  }
+  
+  void deleteSelection() {
+    deleteSelectedLines();
+    deleteSelectedBoxes();
+    if (isEmpty()) {
+      toolBar.backToSelectAsFixedTool();
+    }
+  }
+  
+  bool isEmpty() {
+    if (boxes.length == 0 && lines.length == 0) {
+      return true;
+    }
+    return false;
+  }
+  
   void selectBoxes() {
     for (Box box in boxes) {
       box.select();
     }
   }
   
+  void selectLines() {
+    for (Line line in lines) {
+      line.select();
+    }
+  }
+  
+  void select() {
+    selectBoxes();
+    selectLines();
+  }
+  
   void deselectBoxes() {
     for (Box box in boxes) {
       box.deselect();
     }
+  }
+  
+  void deselectLines() {
+    for (Line line in lines) {
+      line.deselect();
+    }
+  }
+  
+  void deselect() {
+    deselectBoxes();
+    deselectLines();
   }
   
   void hideSelectedBoxes() {
@@ -111,6 +214,19 @@ class Board {
     }
   }
   
+  void hideSelectedLines() {
+    for (Line line in lines) {
+      if (line.isSelected()) {
+        line.hide();
+      }
+    }
+  }
+  
+  void hideSelection() {
+    hideSelectedBoxes();
+    hideSelectedLines();
+  }
+  
   void showHiddenBoxes() {
     for (Box box in boxes) {
       if (box.isHidden()) {
@@ -119,12 +235,35 @@ class Board {
     }
   }
   
+  void showHiddenLines() {
+    for (Line line in lines) {
+      if (line.isHidden()) {
+        line.show();
+      }
+    }
+  }
+  
+  void showHiddenSelection() {
+    showHiddenBoxes();
+    showHiddenLines();
+  }
+  
   int get nextBoxNo() => boxes.length + 1;
   
   int countSelectedBoxes() {
     int count = 0;
     for (Box box in boxes) {
       if (box.isSelected()) {
+        count++;
+      }
+    }
+    return count;
+  }
+  
+  int countSelectedLines() {
+    int count = 0;
+    for (Line line in lines) {
+      if (line.isSelected()) {
         count++;
       }
     }
@@ -141,11 +280,40 @@ class Board {
     return count;
   }
   
-  // Create a box in the position of the mouse click on the board, but not on an existing box.
+  int countSelectedLinesContain(int pointX, int pointY) {
+    Point delta = new Point(DELTA, DELTA);
+    int count = 0;
+    for (Line line in lines) {
+      if (line.isSelected() && line.contains(new Point(pointX, pointY), delta)) {
+        count++;
+      }
+    }
+    return count;
+  }
+  
+  Line _lineContains(Point point) {
+    Point delta = new Point(DELTA, DELTA);
+    for (Line line in lines) {
+      if (line.contains(point, delta)) {
+        return line;
+      }
+    }
+  }
+  
+  bool _boxExists(Box box) {
+    for (Box b in boxes) {
+      if (b == box) {
+        return true;
+      }
+    }
+    return false;
+  }
+  
   void onMouseDown(MouseEvent e) {
     bool clickedOnBox = false; 
     for (Box box in boxes) {
       if (box.contains(e.offsetX, e.offsetY)) {
+        // Clicked on the existing box.
         clickedOnBox = true;
         break;
       }
@@ -153,8 +321,17 @@ class Board {
     
     if (!clickedOnBox) {
       if (toolBar.isSelectToolOn()) {
-        deselectBoxes();
+        Point clickedPoint = new Point(e.offsetX, e.offsetY);
+        Line line = _lineContains(clickedPoint);
+        if (line != null) {
+          // Select or deselect the existing line.
+          line.toggleSelection();
+        } else {
+          // Deselect all.
+          deselect();
+        }
       } else if (toolBar.isBoxToolOn()) {
+        // Create a box in the position of the mouse click on the board, but not on an existing box.
         Box box = new Box(this, e.offsetX, e.offsetY, Box.DEFAULT_WIDTH, Box.DEFAULT_HEIGHT);
         if (e.offsetX + box.width > width) {
           box.x = width - box.width - 1;
@@ -163,14 +340,15 @@ class Board {
           box.y = height - box.height - 1;
         }
         boxes.add(box);
-        toolBar.selectToolOn();
       } else if (toolBar.isLineToolOn()) {
-        if (beforeLastBoxClicked != null && lastBoxClicked != null) {
+        // Create a line between the last two clicked boxes.
+        if (beforeLastBoxClicked != null && lastBoxClicked != null && 
+            _boxExists(beforeLastBoxClicked) && _boxExists(lastBoxClicked)) {  
           Line line = new Line(this, beforeLastBoxClicked, lastBoxClicked);
           lines.add(line);
         }
-        toolBar.selectToolOn();
       }
+      toolBar.backToFixedTool();
     }
   }
 

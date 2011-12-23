@@ -7,7 +7,7 @@
   Author:                  Dzenan Ridjanovic
   Influenced By:           http://www.simplebits.com/
   Created:                 2006-09-03
-  Updated:                 2011-12-15
+  Updated:                 2011-12-23
 */
 
   a:link {
@@ -24,24 +24,8 @@
 
   a:hover {
     text-decoration: none;
-    color: #ffffee;
-    background: #336799;
+    color: #d9ece2;
+    background: #663117;
   }
-
-  a:active {
-    text-decoration: none;
-    color: #ff9911;
-  }
-
-  .button {
-    padding: 1px;
-    background: #ffcc99; 
-    border-right: 1px solid #999;
-    border-bottom: 1px solid #999;
-    border-style: outset;
-    border-color: #d7b9c9; 
-    font-weight: bold;
-    text-align: center;
-  }
-        			
+			
 /* ===[ end ]=== */

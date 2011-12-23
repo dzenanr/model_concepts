@@ -22,12 +22,15 @@ class Box {
   
   bool _selected = false;
   bool _hidden = false;
-  bool _mouseDown = false; 
+  bool _mouseDown = false;
+  
+  num defaultLineWidth;
   
   Box(this.board, this.x, this.y, this.width, this.height) {
     titleNo = board.nextBoxNo;
+    defaultLineWidth = board.context.lineWidth;
     draw();
-    // Box events (actually, canvas event).
+    // Box events (actually, canvas events).
     document.query('#canvas').on.mouseDown.add(onMouseDown);
     document.query('#canvas').on.mouseUp.add(onMouseUp);
     document.query('#canvas').on.mouseMove.add(onMouseMove);
@@ -53,6 +56,7 @@ class Box {
         board.context.rect(x + width - SSS, y + height - SSS, SSS, SSS);
         board.context.rect(x, y + height - SSS, SSS, SSS);
       } 
+      board.context.setLineWidth(defaultLineWidth);
       board.context.stroke();
       board.context.closePath();
     }
@@ -69,6 +73,12 @@ class Box {
   
   String toString() => '$title$titleNo ($x, $y)';
   
+  Point center() {
+    int centerX = x + width / 2;
+    int centerY = y + height / 2;
+    return new Point(centerX, centerY);
+  }
+  
   bool contains(int pointX, int pointY) {
     if ((pointX > x && pointX < x + width) && (pointY > y && pointY < y + height)) {
       return true;
@@ -83,7 +93,9 @@ class Box {
       toggleSelection();
     }
     if (contains(e.offsetX, e.offsetY)) {
-      board.beforeLastBoxClicked = board.lastBoxClicked;
+      if (board.lastBoxClicked != null && board.lastBoxClicked != this) {
+        board.beforeLastBoxClicked = board.lastBoxClicked;
+      }
       board.lastBoxClicked = this;
     }
   }
@@ -92,7 +104,7 @@ class Box {
     _mouseDown = false;
   }
   
-  // Change a position of the box with mouse mouvements.  
+  /** Change a position of the box with mouse mouvements. */
   void onMouseMove(MouseEvent e) {
     if (contains(e.offsetX, e.offsetY) && isSelected() && _mouseDown && 
         board.countSelectedBoxesContain(e.offsetX, e.offsetY) < 2) {

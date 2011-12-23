@@ -103,7 +103,7 @@ Tagging for versions (spirals)
 http://learn.github.com/p/tagging.html
 
 git tag
-git tag -a s01 -m 'spiral 01'
+git tag -a s01 -m 'spiral 01: about'
 git tag
 
 To push tags to the remote repository:

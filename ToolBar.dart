@@ -7,7 +7,7 @@ class ToolBar {
   final Board board;
   
   int _onTool;
-  bool _selectToolDblClicked;
+  int _fixedTool;
   
   ButtonElement selectButton;
   ButtonElement boxButton;
@@ -24,7 +24,7 @@ class ToolBar {
     });
     selectButton.on.dblClick.add((MouseEvent e) {
       onTool(SELECT);
-      _selectToolDblClicked = true;
+      _fixedTool = SELECT;
     });
     
     boxButton.on.click.add((MouseEvent e) {
@@ -32,7 +32,7 @@ class ToolBar {
     });
     boxButton.on.dblClick.add((MouseEvent e) {
       onTool(BOX);
-      _selectToolDblClicked = false; 
+      _fixedTool = BOX;
     });
     
     lineButton.on.click.add((MouseEvent e) {
@@ -40,11 +40,11 @@ class ToolBar {
     });
     lineButton.on.dblClick.add((MouseEvent e) {
       onTool(LINE);
-      _selectToolDblClicked = false;
+      _fixedTool = LINE;
     });
     
     onTool(SELECT);
-    _selectToolDblClicked = true;
+    _fixedTool = SELECT;
   }
   
   onTool(int tool) {
@@ -85,10 +85,13 @@ class ToolBar {
     return false;
   }
   
-  void selectToolOn()  {
-    if (_selectToolDblClicked) {
-      onTool(SELECT);
-    }
+  void backToFixedTool()  {
+      onTool(_fixedTool);
+  }
+  
+  void backToSelectAsFixedTool()  {
+    onTool(SELECT);
+    _fixedTool = SELECT;
   }
   
 }
