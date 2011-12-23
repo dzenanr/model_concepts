@@ -92,6 +92,11 @@ Work with a local repository
 cd git/dart/learn/YourBoxes
 
 git add .
+or
+git add file
+or
+git rm file
+
 git commit -m "state briefly changes"
 
 git push origin master
