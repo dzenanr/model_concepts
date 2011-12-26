@@ -2,19 +2,29 @@ class Line {
   
   final Board board;
   
-  Box box1;
-  Box box2;
+  Box box1; // line begin box
+  Box box2; // line end box
+  
+  String box1box2Min; // min cardinality from box1 to box2
+  String box1box2Max; // max cardinality from box1 to box2
+  
+  String box2box1Min; // min cardinality from box2 to box1
+  String box2box1Max; // max cardinality from box2 to box1
   
   bool _selected = false;
   bool _hidden = false;
   
+  String textFontSize = 12;
   num defaultLineWidth;
   
   Line(this.board, this.box1, this.box2) {
+    box1box2Min = '0';
+    box1box2Max = 'N';
+    box2box1Min = '1';
+    box2box1Max = '1';
     draw();
     // Line event (actually, canvas event).
     defaultLineWidth = board.context.lineWidth;
-    draw();
   }
   
   void draw() {
@@ -27,6 +37,13 @@ class Line {
       } else {
         board.context.setLineWidth(defaultLineWidth);
       }
+      board.context.font = '' + textFontSize + 'px sans-serif';
+      Point box1box2MinMaxPoint = calculateMinMaxPointCloseToBeginBox(box1, box2);
+      Point box2box1MinMaxPoint = calculateMinMaxPointCloseToBeginBox(box2, box1);
+      String box1box2MinMax = box1box2Min + '..' + box1box2Max;
+      String box2box1MinMax = box2box1Min + '..' + box2box1Max;
+      board.context.fillText(box1box2MinMax, box1box2MinMaxPoint.x, box1box2MinMaxPoint.y);
+      board.context.fillText(box2box1MinMax, box2box1MinMaxPoint.x, box2box1MinMaxPoint.y);
       board.context.stroke();
       board.context.closePath();
     }
@@ -88,6 +105,38 @@ class Line {
       coord = beginPoint.x + (((point.y - beginPoint.y) * pointDif.x) / pointDif.y) - point.x;
       return coord.abs() <= delta.x;
     }
+  }
+  
+  Point calculateMinMaxPointCloseToBeginBox(Box beginBox, Box endBox) {
+    int x = 0;
+    int y = 0;
+    
+    Point lineBeginPoint = beginBox.center();
+    Point lineEndPoint = endBox.center();
+    Point beginPoint = beginBox.getIntersectionPoint(lineBeginPoint, lineEndPoint);
+    Point endPoint = endBox.getIntersectionPoint(lineEndPoint, lineBeginPoint);
+    
+    int x1 = beginPoint.x;
+    int y1 = beginPoint.y;
+    int x2 = endPoint.x;
+    int y2 = endPoint.y;
+    
+    if (x1 <= x2) {
+      x = x1 + 1 * ((x2 - x1) / 8);
+      if (y1 <= y2) {
+        y = y1 + 1 * ((y2 - y1) / 8);
+      } else {
+        y = y2 + 7 * ((y1 - y2) / 8);
+      }
+    } else {
+      x = x2 + 7 * ((x1 - x2) / 8);
+      if (y1 <= y2) {
+        y = y1 + 1 * ((y2 - y1) / 8);
+      } else {
+        y = y2 + 7 * ((y1 - y2) / 8);
+      }
+    }
+    return new Point(x, y);
   }
 
 }

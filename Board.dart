@@ -15,6 +15,7 @@ class Board {
   
   Box beforeLastBoxClicked;
   Box lastBoxClicked;
+  Box lastBoxSelected;
   
   MenuBar menuBar; 
   ToolBar toolBar;
@@ -22,7 +23,7 @@ class Board {
   num defaultLineWidth;
   
   Board(CanvasElement canvas) {
-    context = canvas.getContext("2d");
+    context = canvas.getContext('2d');
     width = canvas.width;
     height = canvas.height;
     defaultLineWidth = context.lineWidth;
@@ -60,6 +61,12 @@ class Board {
     }
     for (Box box in boxes) {
       box.draw();
+    }
+  }
+  
+  void pringBoxNames() {
+    for (Box box in boxes) {
+      print(box.title);
     }
   }
   
@@ -247,8 +254,6 @@ class Board {
     showHiddenBoxes();
     showHiddenLines();
   }
-  
-  int get nextBoxNo() => boxes.length + 1;
   
   int countSelectedBoxes() {
     int count = 0;

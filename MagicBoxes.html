@@ -5,6 +5,7 @@
     <meta charset="utf-8"/>
     <meta name="author" content="Dzenan Ridjanovic"/>
     <title>MagicBoxes</title>   
+    <link rel="stylesheet" href="css/form.css"/>
     <link rel="stylesheet" href="css/layout.css"/>
     <link rel="stylesheet" href="css/link.css"/>
     <link rel="stylesheet" href="css/list.css"/>
@@ -14,7 +15,7 @@
   
   <body>
     <header>
-      <h2>Magic Boxes in Dart: Line Selection and Horizontal Menu Bar with Menus and Menu Items</h2>
+      <h2>Magic Boxes in Dart: Boxes with User Entered Names and Items</h2>
       <!-- http://dev.opera.com/articles/view/html-5-canvas-the-basics/ -->
     </header>
     
@@ -46,8 +47,8 @@
        <li>About
          <ul>
            <li>Magic Boxes in <a href="http://www.dart.org/">Dart</a></li>
-           <li>Spiral 07</li>
-           <li>2011-12-23</li>
+           <li>Spiral 08</li>
+           <li>2011-12-25</li>
            <li>Dzenan Ridjanovic</li>
          </ul>   
        </li>
@@ -55,13 +56,28 @@
     </nav>
     
     <section> 
-      <canvas id="canvas" width="890" height="560">
+      <canvas id="canvas" width="990" height="560">
         Canvas is not supported in your browser.
       </canvas>    
-      <footer>
+      <footer> 
         <button id="select"><img src="img/select.png"/></button>
         <button id="box"><img src="img/box.png"/></button>
         <button id="line"><img src="img/line.png"/></button>
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+        <label for="boxName">Box</label>
+        <input type="text" id="boxName"/>
+        <label for="itemName">Item</label>
+        <input type="text" id="itemName"/>
+        <select id="itemCategory">
+          <option>attribute</option>
+          <option>guid</option>
+          <option>identifier</option>
+          <option>required</option>
+        </select>
+        <button id="addItem">Add</button>
+        <button id="getItem">Get</button>
+        <button id="setItem">Set</button>
+        <button id="removeItem">Remove</button>
       </footer>
       <script type="text/javascript" src="MagicBoxes.dart.app.js"></script>
     </section>
@@ -93,6 +109,11 @@
         <h3>Creating, Moving and Selecting Boxes and Lines</h3>
       </header>
       <p>
+        With the Spiral 08, you can start designing models such as the meta model in the following diagram. 
+        <a href="#"><img src="img/metamodel.png"/></a>
+        However, you cannot still save a model in a file. 
+      </p>
+      <p>
         Click the box tool to create a box, by clicking on an empty space in the board.
       </p>
       <p>
@@ -103,6 +124,12 @@
       <p>
         Click the box to select it. Click again to deselect it. 
         If there are several selected boxes (and/or lines), you may deselect them all by clicking on an empty space in the board.
+        For the last selected box, its title (name) may be changed by entering text in the Box field. 
+        For the last selected box, an item may be added by entering its name in the Item box, then clicking on the Add button.
+        The item is an attribute of the box. In addition, it may be declared as guid (globally unique identifier--not significant to a user), 
+        identifier (significant to a user) or required (mandatory value). The choice is presented in the pop-up list.
+        An existing item may be obtained by entering its name and clicking on the Get button. The obtained item may be changed (Set button) 
+        or even removed (Remove button).
       </p>
       <p>
         If you want to create several boxes, double-click the box tool to stay on. 
@@ -110,7 +137,12 @@
       </p>
       <p>
         Click the line tool to create a line between the last two clicked boxes, 
-        by clicking on an empty space in the board.
+        by clicking on an empty space in the board. 
+        The first box is a parent and the second box is a child. By default, the parent box has 0..N cardinalities. 
+        The min is 0 and the max is N. By default, the child box has 1..1 cardinalities. 
+        An example is Department--0..N----1..1--Employee. 
+        A department has from 0 to N employees and an employee works for exactly one department.
+        Currently, cardinalities cannot be changed.
       </p>
       <p>
         Click the line, or very close to it, to select it. Click again to deselect it. 

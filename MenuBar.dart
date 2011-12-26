@@ -40,7 +40,8 @@ class MenuBar {
     });
     
     createBoxesInDiagonalButton.on.click.add((MouseEvent e) {
-      board.createBoxesInDiagonal();
+      //board.createBoxesInDiagonal();
+      board.pringBoxNames();
     });
     createBoxesAsTilesButton.on.click.add((MouseEvent e) {
       board.createBoxesAsTiles();
