@@ -49,9 +49,25 @@ class Line {
     }
   }
   
-  select() => _selected = true;
-  deselect() => _selected = false;
-  toggleSelection() => _selected = !_selected;
+  void select() {
+    _selected = true;
+    board.lastLineSelected = this;
+  }
+  
+  void deselect() {
+    _selected = false;
+    board.lastLineSelected = null;
+  }
+  
+  void toggleSelection() { 
+    _selected = !_selected;
+    if (_selected) {
+      board.lastLineSelected = this;
+    } else {
+      board.lastLineSelected = null;
+    }
+  }
+  
   bool isSelected() => _selected;
   
   hide() => _hidden = true;

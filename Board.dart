@@ -16,6 +16,7 @@ class Board {
   Box beforeLastBoxClicked;
   Box lastBoxClicked;
   Box lastBoxSelected;
+  Line lastLineSelected;
   
   MenuBar menuBar; 
   ToolBar toolBar;

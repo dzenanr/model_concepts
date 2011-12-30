@@ -23,6 +23,12 @@ class ToolBar {
   
   Item currentItem;
   
+  LabelElement line12Box1Label;
+  LabelElement line12Box2Label;
+  InputElement line12MinInput;
+  InputElement line12MaxInput;
+  InputElement line12IdCheckbox;
+  
   ToolBar(this.board) {
     selectButton = document.query('#select');
     boxButton = document.query('#box');
@@ -119,6 +125,17 @@ class ToolBar {
             itemNameInput.value = '';
           }
         }
+      }
+    });
+    
+    line12Box1Label = document.query('#line12Box1');
+    line12Box2Label = document.query('#line12Box2');
+    line12IdCheckbox = document.query('#line12Id');
+    line12IdCheckbox.on.click.add((MouseEvent e) {
+      Line line = board.lastLineSelected;
+      if (line != null) {
+        line12Box1Label.text = line.box1.title;
+        line12Box2Label.text = line.box2.title;
       }
     });
   }
