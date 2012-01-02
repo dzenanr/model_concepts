@@ -5,7 +5,6 @@
     <meta charset="utf-8"/>
     <meta name="author" content="Dzenan Ridjanovic"/>
     <title>MagicBoxes</title>   
-    <link rel="stylesheet" href="css/form.css"/>
     <link rel="stylesheet" href="css/layout.css"/>
     <link rel="stylesheet" href="css/link.css"/>
     <link rel="stylesheet" href="css/list.css"/>
@@ -15,7 +14,7 @@
   
   <body>
     <header>
-      <h2>Magic Boxes in Dart: Boxes with User Entered Names and Items</h2>
+      <h2>Magic Boxes in Dart: Lines with User Entered Cardinalities, Ids and Names</h2>
       <!-- http://dev.opera.com/articles/view/html-5-canvas-the-basics/ -->
     </header>
     
@@ -23,33 +22,40 @@
      <ul>
        <li>File
          <ul>
-           <li></li>
+           <li><button id="save-as-png">Save as .png</button></li>
          </ul>  
        </li>
        <li>Edit
          <ul>
-           <li><button id="select-all">Select All</button></li>
-           <li><button id="delete-selection">Delete Selection</button></li>
+           <li><button id="select-all">Select all</button></li>
+           <li><button id="delete-selection">Delete selection</button></li>
          </ul>
        </li>
        <li>View
          <ul>
-           <li><button id="hide-selection">Hide Selection</button></li>
-           <li><button id="show-hidden-selection">Show Selection</button></li>
+           <li><button id="increase-selection-height">+ Selection height</button></li>
+           <li><button id="decrease-selection-height">- Selection height</button></li>
+           <li><button id="increase-selection-width">+ Selection width</button></li>
+           <li><button id="decrease-selection-width">- Selection width</button></li>
+           <li><button id="increase-selection-size">+ Selection size</button></li>
+           <li><button id="decrease-selection-size">- Selection size</button></li>
+           <li><button id="hide-selection">Hide selection</button></li>
+           <li><button id="show-hidden-selection">Show selection</button></li>
          </ul>
        </li>
        <li>Create
          <ul>
-           <li><button id="create-boxes-in-diagonal">Boxes in Diagonal</button></li>
-           <li><button id="create-boxes-as-tiles">Boxes As Tiles</button></li>
+           <li><button id="create-boxes-in-diagonal">Boxes in diagonal</button></li>
+           <li><button id="create-boxes-as-tiles">Boxes as tiles</button></li>
          </ul>
        </li>
-       <li>About
+       <li>About 
          <ul>
            <li>Magic Boxes in <a href="http://www.dart.org/">Dart</a></li>
-           <li>Spiral 08</li>
-           <li>2011-12-25</li>
+           <li>Spiral 09</li>
+           <li>2012-01-02</li>
            <li>Dzenan Ridjanovic</li>
+           <li><img src="img/ondart0.png"/></li>
          </ul>   
        </li>
      </ul>
@@ -61,8 +67,8 @@
       </canvas>    
       <footer> 
         <button id="select"><img src="img/select.png"/></button>
-        <button id="box"><img src="img/box.png"/></button>
         <button id="line"><img src="img/line.png"/></button>
+        <button id="box"><img src="img/box.png"/></button>
         &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
         <label for="boxName">Box</label>
         <input type="text" id="boxName"/>
@@ -73,29 +79,31 @@
           <option>guid</option>
           <option>identifier</option>
           <option>required</option>
-        </select>
+        </select> |
         <button id="addItem">Add</button>
         <button id="getItem">Get</button>
         <button id="setItem">Set</button>
-        <button id="removeItem">Remove</button>
-        <br/>
+        <button id="removeItem">Remove</button>     
+        <br/><br/>       
         <label id="line12Box1">Box1</label> ->
         <label id="line12Box2">Box2</label>
-        <label for="line12Min">Min</label>
-        <input type="text" id="line12Min"/> ..
-        <label for="line12Max">Max</label>
-        <input type="text" id="line12Max"/>
+        <input type="text" id="line12Min" size="1"/> ..
+        <input type="text" id="line12Max" size="1"/>
         <label for="line12Id">Id</label>
         <input type="checkbox" id="line12Id"/>
-        
+        <label for="line12Name">Name</label>
+        <input type="text" id="line12Name"/> |
+        <button id="getLine">Get</button>
+        <br/>
         <label id="line21Box2">Box2</label> ->
         <label id="line21Box1">Box1</label>
-        <label for="line21Min">Min</label>
-        <input type="text" id="line21Min"/> ..
-        <label for="line21Max">Max</label>
-        <input type="text" id="line21Max"/>
+        <input type="text" id="line21Min" size="1"/> ..
+        <input type="text" id="line21Max" size="1"/>
         <label for="line21Id">Id</label>
         <input type="checkbox" id="line21Id"/>
+        <label for="line21Name">Name</label>
+        <input type="text" id="line21Name"/> |   
+        <button id="setLine">Set</button>
       </footer>
       <script type="text/javascript" src="MagicBoxes.dart.app.js"></script>
     </section>
@@ -127,8 +135,10 @@
         <h3>Creating, Moving and Selecting Boxes and Lines</h3>
       </header>
       <p>
-        With the spiral 08, you can start designing a model such as the meta model in the following diagram. 
+        With the spiral 09, you can start designing a model such as the meta model in the following diagram. 
         <a href="#"><img src="img/metamodel.png"/></a>
+      </p>
+      <p>
         However, you cannot still save a model in a file. 
       </p>
       <p>
@@ -142,12 +152,12 @@
       <p>
         Click the box to select it. Click again to deselect it. 
         If there are several selected boxes (and/or lines), you may deselect them all by clicking on an empty space in the board.
-        For the last selected box, its title (name) may be changed by entering text in the Box field. 
+        For the last selected box, its title (name) may be changed by entering text in the Box field of the tool bar. 
         For the last selected box, an item may be added by entering its name in the Item box, then clicking on the Add button.
         The item is an attribute of the box. In addition, it may be declared as guid (globally unique identifier--not significant to a user), 
         identifier (significant to a user) or required (mandatory value). The choice is presented in the pop-up list.
         An existing item may be obtained by entering its name and clicking on the Get button. The obtained item may be changed (Set button) 
-        or even removed (Remove button).
+        or even removed (Remove button). The size of selected boxes may be changed by menu items in the Edit menu. 
       </p>
       <p>
         If you want to create several boxes, double-click the box tool to stay on. 
@@ -160,7 +170,9 @@
         The min is 0 and the max is N. By default, the child box has 1..1 cardinalities. 
         An example is Department--0..N----1..1--Employee. 
         A department has from 0 to N employees and an employee works for exactly one department.
-        Currently, cardinalities cannot be changed.
+        The last selected line may be obtained by clicking on the Get button in the tool bar.
+        For the obtained line, its cardinalities may be changed. For the 1..1 cardinalities, the identifier (id) may be checked on.
+        The line changes may be set by clicking on the Set button.
       </p>
       <p>
         Click the line, or very close to it, to select it. Click again to deselect it. 
@@ -171,6 +183,19 @@
         To return to the select mode double-click the select tool.
       </p>
     </section> 
+    
+    <section>
+      <header>
+        <h3>Your Model</h3>
+      </header>
+      <p>
+        In the File menu, save your model as a .png image:
+      </p>
+      <img alt="Your model saved as .png." id="modelImage"/>
+      <p>
+        You may save the model image as the model.png file in the MagicBoxes/img directory.
+      </p>
+    </section>
     
     <section>
       <header>

@@ -2,6 +2,7 @@ class Box {
   
   static final int DEFAULT_WIDTH = 120;
   static final int DEFAULT_HEIGHT = 120;
+  static final int DEFAULT_INCREMENT = 20;
   
   static final int SSS = 6; // selection square size
   static final int TBH = 20; // title box height

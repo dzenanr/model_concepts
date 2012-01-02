@@ -28,6 +28,17 @@ class ToolBar {
   InputElement line12MinInput;
   InputElement line12MaxInput;
   InputElement line12IdCheckbox;
+  InputElement line12NameInput;
+  
+  LabelElement line21Box2Label;
+  LabelElement line21Box1Label;
+  InputElement line21MinInput;
+  InputElement line21MaxInput;
+  InputElement line21IdCheckbox;
+  InputElement line21NameInput;
+  
+  ButtonElement getLineButton;
+  ButtonElement setLineButton;
   
   ToolBar(this.board) {
     selectButton = document.query('#select');
@@ -97,6 +108,7 @@ class ToolBar {
         if (item != null) {
           currentItem = item;
           itemNameInput.value = item.name;
+          itemOption.value = item.category;
           itemNameInput.select();
         } else {
           currentItem = null;
@@ -110,6 +122,7 @@ class ToolBar {
       if (box != null) {
         if (currentItem != null) {
           currentItem.name = itemNameInput.value;
+          currentItem.category = itemOption.value;
           itemNameInput.select();
         }
       }
@@ -123,6 +136,7 @@ class ToolBar {
           if (box.removeItem(currentItem)) {
             currentItem = null;
             itemNameInput.value = '';
+            itemOption.value = 'attribute';
           }
         }
       }
@@ -130,12 +144,61 @@ class ToolBar {
     
     line12Box1Label = document.query('#line12Box1');
     line12Box2Label = document.query('#line12Box2');
+    line12MinInput = document.query('#line12Min');
+    line12MaxInput = document.query('#line12Max');
     line12IdCheckbox = document.query('#line12Id');
-    line12IdCheckbox.on.click.add((MouseEvent e) {
+    line12NameInput = document.query('#line12Name');
+    
+    line21Box2Label = document.query('#line21Box2');
+    line21Box1Label = document.query('#line21Box1');
+    line21MinInput = document.query('#line21Min');
+    line21MaxInput = document.query('#line21Max');
+    line21IdCheckbox = document.query('#line21Id');
+    line21NameInput = document.query('#line21Name');
+    
+    getLineButton = document.query('#getLine');
+    getLineButton.on.click.add((MouseEvent e) {
       Line line = board.lastLineSelected;
       if (line != null) {
         line12Box1Label.text = line.box1.title;
         line12Box2Label.text = line.box2.title;
+        line12MinInput.value = line.box1box2Min;
+        line12MaxInput.value = line.box1box2Max;
+        line12IdCheckbox.checked = line.box1box2Id;
+        line12NameInput.value = line.box1box2Name;
+        
+        line21Box2Label.text = line.box2.title;
+        line21Box1Label.text = line.box1.title;
+        line21MinInput.value = line.box2box1Min;
+        line21MaxInput.value = line.box2box1Max;
+        line21IdCheckbox.checked = line.box2box1Id;
+        line21NameInput.value = line.box2box1Name;
+      }
+    });
+    
+    setLineButton = document.query('#setLine');
+    setLineButton.on.click.add((MouseEvent e) {
+      Line line = board.lastLineSelected;
+      if (line != null) {
+        line.box1box2Min = line12MinInput.value.trim();
+        line.box1box2Max = line12MaxInput.value.trim();
+        if (line.box1box2Min == '1' && line.box1box2Max == '1') {
+          line.box1box2Id = line12IdCheckbox.checked;
+        } else {
+          line12IdCheckbox.checked = false;
+          line.box1box2Id = false;
+        }
+        line.box1box2Name = line12NameInput.value.trim();
+        
+        line.box2box1Min = line21MinInput.value.trim();
+        line.box2box1Max = line21MaxInput.value.trim();
+        if (line.box2box1Min == '1' && line.box2box1Max == '1') {
+          line.box2box1Id = line21IdCheckbox.checked;
+        } else {
+          line21IdCheckbox.checked = false;
+          line.box2box1Id = false;
+        }  
+        line.box2box1Name = line21NameInput.value.trim();
       }
     });
   }
