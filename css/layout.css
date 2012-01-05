@@ -5,9 +5,10 @@
 /*
   Title:                   Basic Layout Design Style
   Author:                  Dzenan Ridjanovic
-  Influenced By:           http://www.simplebits.com/
+  Influenced By:           
+  http://www.ehow.com/how_12007718_scroll-inside-html-canvas.html
   Created:                 2006-09-03
-  Updated:                 2011-12-22
+  Updated:                 2012-01-04
 */
 
   header {
@@ -25,6 +26,14 @@
     background: #663117;
     padding: 10px;
     border-top: 2px solid #999999;
+  }
+
+  #scrollpane {
+    width: 990px;
+    height: 580px;
+    overflow: auto;
+    border: solid 1px white;
+    background-color: white;
   }
     		
 /* ===[ end ]=== */

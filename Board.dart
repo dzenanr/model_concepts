@@ -1,5 +1,8 @@
 class Board {
   
+  static final int MIN_WIDTH = 990;
+  static final int MIN_HEIGHT = 580;
+  
   // The acceptable delta error in pixels for clicking on a line between two boxes.
   static final int DELTA = 8; 
   // The board is redrawn every INTERVAL ms.
@@ -8,8 +11,8 @@ class Board {
   CanvasElement canvas;
   CanvasRenderingContext2D context;
   
-  int width;
-  int height;
+  int _width;
+  int _height;
   
   List<Box> boxes;
   List<Line> lines;
@@ -26,8 +29,8 @@ class Board {
   
   Board(this.canvas) {
     context = canvas.getContext('2d');
-    width = canvas.width;
-    height = canvas.height;
+    _width = canvas.width;
+    _height = canvas.height;
     defaultLineWidth = context.lineWidth;
     border();
  
@@ -41,6 +44,24 @@ class Board {
     document.query('#canvas').on.mouseDown.add(onMouseDown);
     // Redraw every INTERVAL ms.
     document.window.setInterval(redraw, INTERVAL);
+  }
+  
+  void set width(int width) {
+    _width = width;
+    canvas.width = width;
+  }
+  
+  int get width() {
+    return _width;
+  }
+  
+  void set height(int height) {
+    _height = height;
+    canvas.height = height;
+  }
+  
+  int get height() {
+    return _height;
   }
   
   void border() {
@@ -198,6 +219,26 @@ class Board {
     }
   }
   
+  void selectBoxLines() {
+    for (Box box in boxes) {
+      if (box.isSelected()) {
+        for (Line line in lines) {
+          if (line.box1 == box || line.box2 == box) {
+            line.select();
+          }
+        }
+      }
+    }
+  }
+  
+  void selectLinesBetweenBoxes() {
+    for (Line line in lines) {
+      if (line.box1.isSelected() && line.box2.isSelected()) {
+        line.select();
+      }
+    }
+  }
+  
   void select() {
     selectBoxes();
     selectLines();
@@ -351,6 +392,15 @@ class Board {
       }
     }
     return count;
+  }
+  
+  Line findTwinLine(Line twin) {
+    for (Line line in lines) {
+      if (line != twin && line.box1 == twin.box1 && line.box2 == twin.box2) {
+        return line;
+      }
+    }
+    return null;
   }
   
   Line _lineContains(Point point) {

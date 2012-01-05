@@ -6,8 +6,14 @@ class MenuBar {
   ButtonElement saveAsPngButton;
   
   // Edit
-  ButtonElement selectAllButton;
   ButtonElement deleteSelectionButton;
+  
+  // Select
+  ButtonElement selectAllButton;
+  ButtonElement selectBoxesButton;
+  ButtonElement selectLinesButton;
+  ButtonElement selectBoxLinesButton;
+  ButtonElement selectLinesBetweenBoxesButton;
   
   // View
   ButtonElement increaseSelectionHeightButton;
@@ -19,15 +25,20 @@ class MenuBar {
   ButtonElement hideSelectionButton;
   ButtonElement showHiddenSelectionButton;
   
-  // Utility
+  // Create
   ButtonElement createBoxesInDiagonalButton;
   ButtonElement createBoxesAsTilesButton;
   
   MenuBar(this.board) {  
     saveAsPngButton = document.query('#save-as-png');
     
-    selectAllButton = document.query('#select-all');
     deleteSelectionButton = document.query('#delete-selection');
+    
+    selectAllButton = document.query('#select-all');
+    selectBoxesButton = document.query('#select-boxes');
+    selectLinesButton = document.query('#select-lines');
+    selectBoxLinesButton = document.query('#select-box-lines');
+    selectLinesBetweenBoxesButton = document.query('#select-lines-between-boxes');
     
     increaseSelectionHeightButton = document.query('#increase-selection-height');
     decreaseSelectionHeightButton = document.query('#decrease-selection-height');
@@ -46,11 +57,24 @@ class MenuBar {
       board.saveAsPng();
     });
     
+    deleteSelectionButton.on.click.add((MouseEvent e) {
+      board.deleteSelection();
+    });
+    
     selectAllButton.on.click.add((MouseEvent e) {
       board.select();
     });
-    deleteSelectionButton.on.click.add((MouseEvent e) {
-      board.deleteSelection();
+    selectBoxesButton.on.click.add((MouseEvent e) {
+      board.selectBoxes();
+    });
+    selectLinesButton.on.click.add((MouseEvent e) {
+      board.selectLines();
+    });
+    selectBoxLinesButton.on.click.add((MouseEvent e) {
+      board.selectBoxLines();
+    });
+    selectLinesBetweenBoxesButton.on.click.add((MouseEvent e) {
+      board.selectLinesBetweenBoxes();
     });
     
     increaseSelectionHeightButton.on.click.add((MouseEvent e) {

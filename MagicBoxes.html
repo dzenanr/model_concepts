@@ -14,7 +14,7 @@
   
   <body>
     <header>
-      <h2>Magic Boxes in Dart: Lines with User Entered Cardinalities, Ids and Names</h2>
+      <h2>Magic Boxes in Dart: Inheritance, Twin and Reflexive Lines</h2>
       <!-- http://dev.opera.com/articles/view/html-5-canvas-the-basics/ -->
     </header>
     
@@ -22,38 +22,46 @@
      <ul>
        <li>File
          <ul>
-           <li><button id="save-as-png">Save as .png</button></li>
+           <li><button id="save-as-png">As .png</button></li>
          </ul>  
        </li>
        <li>Edit
          <ul>
-           <li><button id="select-all">Select all</button></li>
-           <li><button id="delete-selection">Delete selection</button></li>
+           <li><button id="delete-selection">Delete</button></li>
+         </ul>
+       </li>
+       <li>Select
+         <ul>
+           <li><button id="select-all">All</button></li>
+           <li><button id="select-boxes">Boxes</button></li>
+           <li><button id="select-lines">Lines</button></li>
+           <li><button id="select-box-lines">Box lines</button></li>
+           <li><button id="select-lines-between-boxes">Between boxes</button></li>
          </ul>
        </li>
        <li>View
          <ul>
-           <li><button id="increase-selection-height">+ Selection height</button></li>
-           <li><button id="decrease-selection-height">- Selection height</button></li>
-           <li><button id="increase-selection-width">+ Selection width</button></li>
-           <li><button id="decrease-selection-width">- Selection width</button></li>
-           <li><button id="increase-selection-size">+ Selection size</button></li>
-           <li><button id="decrease-selection-size">- Selection size</button></li>
-           <li><button id="hide-selection">Hide selection</button></li>
-           <li><button id="show-hidden-selection">Show selection</button></li>
+           <li><button id="increase-selection-height">+ Height</button></li>
+           <li><button id="decrease-selection-height">- Height</button></li>
+           <li><button id="increase-selection-width">+ Width</button></li>
+           <li><button id="decrease-selection-width">-Width</button></li>
+           <li><button id="increase-selection-size">+ Size</button></li>
+           <li><button id="decrease-selection-size">- Size</button></li>
+           <li><button id="hide-selection">Hide</button></li>
+           <li><button id="show-hidden-selection">Show</button></li>
          </ul>
        </li>
        <li>Create
          <ul>
-           <li><button id="create-boxes-in-diagonal">Boxes in diagonal</button></li>
-           <li><button id="create-boxes-as-tiles">Boxes as tiles</button></li>
+           <li><button id="create-boxes-in-diagonal">Diagonal</button></li>
+           <li><button id="create-boxes-as-tiles">Tiles</button></li>
          </ul>
        </li>
        <li>About 
          <ul>
            <li>Magic Boxes in <a href="http://www.dart.org/">Dart</a></li>
-           <li>Spiral 09</li>
-           <li>2012-01-02</li>
+           <li>Spiral 10</li>
+           <li>2012-01-04</li>
            <li>Dzenan Ridjanovic</li>
            <li><img src="img/ondart0.png"/></li>
          </ul>   
@@ -62,14 +70,21 @@
     </nav>
     
     <section> 
-      <canvas id="canvas" width="990" height="560">
-        Canvas is not supported in your browser.
-      </canvas>    
+      <div id="scrollpane">
+        <canvas id="canvas" width="990" height="580">
+          Canvas is not supported in your browser.
+        </canvas>  
+      </div>  
       <footer> 
         <button id="select"><img src="img/select.png"/></button>
         <button id="line"><img src="img/line.png"/></button>
         <button id="box"><img src="img/box.png"/></button>
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+        <label>Board</label>
+        <label for="canvasWidth">width</label>
+        <input type="number" id="canvasWidth" min="990"/>
+        <label for="canvasHeight">height</label>
+        <input type="number" id="canvasHeight" min="580"/>
+        <br/>
         <label for="boxName">Box</label>
         <input type="text" id="boxName"/>
         <label for="itemName">Item</label>
@@ -79,31 +94,41 @@
           <option>guid</option>
           <option>identifier</option>
           <option>required</option>
-        </select> |
+        </select> 
+        <label for="itemSequence">seq</label>
+        <input type="number" id="itemSequence" min="1" size="1" />
         <button id="addItem">Add</button>
         <button id="getItem">Get</button>
         <button id="setItem">Set</button>
         <button id="removeItem">Remove</button>     
-        <br/><br/>       
+        <br/>    
+        <label>Line</label>
+        <select id="lineCategory">
+          <option>relationship</option>
+          <option>inheritance</option>
+          <option>reflexive</option>
+          <option>twin</option>
+        </select>
+        <button id="getLine">Get</button>
+        <button id="setLine">Set</button>
+        <br/>   
         <label id="line12Box1">Box1</label> ->
         <label id="line12Box2">Box2</label>
         <input type="text" id="line12Min" size="1"/> ..
         <input type="text" id="line12Max" size="1"/>
-        <label for="line12Id">Id</label>
+        <label for="line12Id">identifier</label>
         <input type="checkbox" id="line12Id"/>
-        <label for="line12Name">Name</label>
-        <input type="text" id="line12Name"/> |
-        <button id="getLine">Get</button>
+        <label for="line12Name">name</label>
+        <input type="text" id="line12Name"/> 
         <br/>
         <label id="line21Box2">Box2</label> ->
         <label id="line21Box1">Box1</label>
         <input type="text" id="line21Min" size="1"/> ..
         <input type="text" id="line21Max" size="1"/>
-        <label for="line21Id">Id</label>
+        <label for="line21Id">identifier</label>
         <input type="checkbox" id="line21Id"/>
-        <label for="line21Name">Name</label>
-        <input type="text" id="line21Name"/> |   
-        <button id="setLine">Set</button>
+        <label for="line21Name">name</label>
+        <input type="text" id="line21Name"/>    
       </footer>
       <script type="text/javascript" src="MagicBoxes.dart.app.js"></script>
     </section>
@@ -117,8 +142,9 @@
         (after reading the Getting Started section, developing the first 
         <a  href="https://plus.google.com/u/0/112767453954051794400/posts/igDQd1ubWQs">example</a>, 
         and the <a href="https://github.com/dzenanr/pingpong">Ping Pong</a> game). 
-        The spiral approach to learning is used to advance step-by-step. 
-        The tool is based on the <a href="http://code.google.com/p/magic-boxes/">Magic Boxes</a> tool developed in Java.
+        The tool is based on the <a href="http://code.google.com/p/magic-boxes/">Magic Boxes</a> and on 
+        <a href="http://www.modelibra.org/">Modelibra Modeler</a>,
+        both developed in Java.
       </p>
       <p>
         The <a href="https://github.com/dzenanr/MagicBoxes">code</a> of Magic Boxes in Dart is kept at 
@@ -132,17 +158,17 @@
      
     <section>
       <header>
-        <h3>Creating, Moving and Selecting Boxes and Lines</h3>
+        <h3>Creating, Moving, Selecting and Editing Boxes and Lines</h3>
       </header>
       <p>
-        With the spiral 09, you can start designing a model such as the meta model in the following diagram. 
+        With the spiral 10, you can start designing a model such as the meta model in the following diagram. 
         <a href="#"><img src="img/metamodel.png"/></a>
       </p>
       <p>
         However, you cannot still save a model in a file. 
       </p>
       <p>
-        Click the box tool to create a box, by clicking on an empty space in the board.
+        Click the box tool to create a box (a concept in your domain), by clicking on an empty space in the board.
       </p>
       <p>
         To move a non selected box, click the box and keep the mouse down while moving it. 
@@ -154,10 +180,11 @@
         If there are several selected boxes (and/or lines), you may deselect them all by clicking on an empty space in the board.
         For the last selected box, its title (name) may be changed by entering text in the Box field of the tool bar. 
         For the last selected box, an item may be added by entering its name in the Item box, then clicking on the Add button.
-        The item is an attribute of the box. In addition, it may be declared as guid (globally unique identifier--not significant to a user), 
+        The item is an attribute of the box (concept). In addition, it may be declared as guid (globally unique identifier--not significant to a user), 
         identifier (significant to a user) or required (mandatory value). The choice is presented in the pop-up list.
-        An existing item may be obtained by entering its name and clicking on the Get button. The obtained item may be changed (Set button) 
-        or even removed (Remove button). The size of selected boxes may be changed by menu items in the Edit menu. 
+        An existing item may be obtained by entering its name and clicking on the Get button. 
+        The obtained item may be changed, including its sequence position within the box, (Set button) 
+        or even removed (Remove button). The size of selected boxes may be changed by menu items in the View menu. 
       </p>
       <p>
         If you want to create several boxes, double-click the box tool to stay on. 
@@ -171,7 +198,10 @@
         An example is Department--0..N----1..1--Employee. 
         A department has from 0 to N employees and an employee works for exactly one department.
         The last selected line may be obtained by clicking on the Get button in the tool bar.
-        For the obtained line, its cardinalities may be changed. For the 1..1 cardinalities, the identifier (id) may be checked on.
+        The line is a relationship between two boxes (concepts). It has two directions: from parent to child (neighbor) and from child to parent (neighbor). 
+        In addition, it may be declared as inheritance (child inherits from parent), 
+        reflexive (one, not two boxes) or twin (two lines between two boxes). The choice is presented in the pop-up list.
+        The line cardinalities may be changed. For the 1..1 cardinalities, the identifier (id) may be checked on.
         The line changes may be set by clicking on the Set button.
       </p>
       <p>
@@ -201,6 +231,25 @@
       <header>
         <h3>Spirals</h3>
       </header>
+      <p> 
+        The spiral approach to software learning and development, which preserves a project history as a series of code snapshots or spirals, 
+        is used in this project. 
+      </p>
+      <p> 
+        Learning new software concepts and technologies is a challenging task. Learning in spirals, 
+        from simple to more advanced concepts but with concrete software applications, helps students get a reasonable confidence level early on, 
+        and motivates them to learn by providing more useful applications. With each new spiral, the project grows and new concepts are introduced.  
+        A new spiral is explained with respect to the previous one.  The difference between two consecutive spirals is that the next spiral has the new code introduced 
+        and the old code modified or deleted.  This is called learning by anchoring to what we already understand.  With a new spiral, 
+        we can come back to what we did previously and improve it.  In this way, learning in spirals can touch the same topic several times, 
+        but each time with more details in a better version.
+      </p>
+      <p> 
+        There are many books where students have to learn quite a lot before applying new concepts, and even then, it is not obvious how to develop a complete software application. 
+        It took me more than ten years of learning and teaching to find out that the initial learning of a new technology must be task driven and not topic (subject) driven.  
+        Most software books are topic driven.  It takes a quick look at the Table of Contents of almost any software book to realize that each chapter introduces a major topic. 
+        In a spiral, there may be more than one topic and all of them relate to what we want to accomplish with the spiral.
+      </p>
       <ul class="link">
         <li>
           <a href="http://dl.dropbox.com/u/161496/dart/tool/MagicBoxes/spirals/s00/MagicBoxes.html">Spiral 00: Hello World</a>
@@ -232,6 +281,10 @@
         <li>
           <a href="http://dl.dropbox.com/u/161496/dart/tool/MagicBoxes/spirals/s08/MagicBoxes.html">Spiral 08: 
           Boxes with User Entered Names and Items</a>
+        </li>
+        <li>
+          <a href="http://dl.dropbox.com/u/161496/dart/tool/MagicBoxes/spirals/s09/MagicBoxes.html">Spiral 09: 
+          lines with User Entered Cardinalities, Ids and Names</a>
         </li>
       </ul>
     </section>

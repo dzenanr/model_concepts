@@ -11,7 +11,7 @@ class Box {
   
   final Board board;
   
-  String _name = 'Box';
+  String _name = '';
   int x;
   int y;
   int width;
@@ -49,12 +49,13 @@ class Box {
       board.context.textAlign = 'start';
       board.context.textBaseline = 'top';
       board.context.fillText(title, x + TOS, y + TOS, width - TOS);
+      sortItemsBySequence();
       int i = 0;
       for (Item item in items) {
         if (item.category == 'attribute') {
           board.context.font = '' + textFontSize + 'px sans-serif';
           board.context.fillText(item.name, x + TOS, y + TOS + TBH + i * IOS, width - TOS);
-        } else if (item.category == 'globally unique') {
+        } else if (item.category == 'guid') {
           board.context.font = 'italic ' + textFontSize + 'px sans-serif';
           board.context.fillText(item.name, x + TOS, y + TOS + TBH + i * IOS, width - TOS);
         } else if (item.category == 'identifier') {
@@ -111,6 +112,15 @@ class Box {
     return _name;
   }
   
+  int findLastItemSequence() {
+    if (items.isEmpty()) {
+      return 0;
+    } else {
+      Item item = items.last();
+      return item.sequence;
+    }
+  }
+  
   Item findItem(String name) {
     for (Item item in items) {
       if (item.name == name) {
@@ -131,12 +141,48 @@ class Box {
     return false;
   } 
   
+  void sortItemsBySequence() {
+    items.sort(compare(Item i1, Item i2) {
+      if (i1.sequence == i2.sequence) {
+        return 0;
+      } else if (i1.sequence > i2.sequence) {
+        return 1;
+      } else {
+        return -1;
+      }
+    });
+  }
+  
   String toString() => '$title ($x, $y)';
   
   Point center() {
     int centerX = x + width / 2;
     int centerY = y + height / 2;
     return new Point(centerX, centerY);
+  }
+  
+  Point twin1() {
+    int twinX = x + width / 4;
+    int twinY = y + height / 4;
+    return new Point(twinX, twinY);
+  }
+  
+  Point twin2() {
+    int twinX = x + (width / 4) * 3;
+    int twinY = y + (height / 4) * 3;
+    return new Point(twinX, twinY);
+  }
+  
+  Point reflexive1() {
+    int reflexiveX = x;
+    int reflexiveY = y - height / 2;
+    return new Point(reflexiveX, reflexiveY);
+  }
+  
+  Point reflexive2() {
+    int reflexiveX = x + width;
+    int reflexiveY = y - height / 2;
+    return new Point(reflexiveX, reflexiveY);
   }
   
   bool contains(int pointX, int pointY) {
