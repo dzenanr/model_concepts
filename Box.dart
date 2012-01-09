@@ -12,6 +12,7 @@ class Box {
   final Board board;
   
   String _name = '';
+  bool entry = false;
   int x;
   int y;
   int width;
@@ -23,12 +24,7 @@ class Box {
   bool _hidden = false;
   bool _mouseDown = false;
   
-  String textFontSize = 12;
-  num defaultLineWidth;
-  
   Box(this.board, this.x, this.y, this.width, this.height) {
-    defaultLineWidth = board.context.lineWidth;
-    
     items = new List();
     
     draw();
@@ -45,24 +41,28 @@ class Box {
       board.context.rect(x, y, width, height);
       board.context.moveTo(x, y + TBH);
       board.context.lineTo(x + width, y + TBH);
-      board.context.font = 'bold ' + textFontSize + 'px sans-serif';
+      board.context.font = 'bold ' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
       board.context.textAlign = 'start';
       board.context.textBaseline = 'top';
-      board.context.fillText(title, x + TOS, y + TOS, width - TOS);
+      if (entry) {
+        board.context.fillText('|| ' + title, x + TOS, y + TOS, width - TOS);
+      } else {
+        board.context.fillText(title, x + TOS, y + TOS, width - TOS);
+      }
       sortItemsBySequence();
       int i = 0;
       for (Item item in items) {
         if (item.category == 'attribute') {
-          board.context.font = '' + textFontSize + 'px sans-serif';
+          board.context.font = '' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
           board.context.fillText(item.name, x + TOS, y + TOS + TBH + i * IOS, width - TOS);
         } else if (item.category == 'guid') {
-          board.context.font = 'italic ' + textFontSize + 'px sans-serif';
+          board.context.font = 'italic ' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
           board.context.fillText(item.name, x + TOS, y + TOS + TBH + i * IOS, width - TOS);
         } else if (item.category == 'identifier') {
-          board.context.font = 'bold italic ' + textFontSize + 'px sans-serif';
+          board.context.font = 'bold italic ' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
           board.context.fillText(item.name, x + TOS, y + TOS + TBH + i * IOS, width - TOS);
         } else if (item.category == 'required') {
-          board.context.font = 'bold ' + textFontSize + 'px sans-serif';
+          board.context.font = 'bold ' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
           board.context.fillText(item.name, x + TOS, y + TOS + TBH + i * IOS, width - TOS);
         }
         i++;
@@ -73,7 +73,9 @@ class Box {
         board.context.rect(x + width - SSS, y + height - SSS, SSS, SSS);
         board.context.rect(x, y + height - SSS, SSS, SSS);
       } 
-      board.context.setLineWidth(defaultLineWidth);
+      board.context.lineWidth = Board.DEFAULT_LINE_WIDTH;
+      board.context.strokeStyle = Board.DEFAULT_LINE_COLOR;
+      
       board.context.stroke();
       board.context.closePath();
     }
@@ -112,6 +114,26 @@ class Box {
     return _name;
   }
   
+  Map<String, Object> toJson() {
+    Map<String, Object> boxMap = new Map<String, Object>();
+    boxMap["name"] = title;
+    boxMap["entry"] = entry;
+    boxMap["x"] = x;
+    boxMap["y"] = y;
+    boxMap["width"] = width;
+    boxMap["height"] = height;
+    boxMap["items"] = itemsToJson();
+    return boxMap;
+  }
+  
+  List<Map<String, Object>> itemsToJson() {
+    List<Map<String, Object>> itemsList = new List<Map<String, Object>>();
+    for (Item item in items) {
+      itemsList.add(item.toJson());
+    }
+    return itemsList;
+  }
+  
   int findLastItemSequence() {
     if (items.isEmpty()) {
       return 0;
@@ -125,6 +147,32 @@ class Box {
     for (Item item in items) {
       if (item.name == name) {
         return item;
+      }
+    }
+    return null;
+  } 
+  
+  Item findPreviousItem(Item currentItem) {
+    sortItemsBySequence();
+    for (Item item in items) {
+      if (item == currentItem) {
+        int ix = items.indexOf(item, 0);
+        if (ix > 0) {
+          return items[ix - 1];
+        } 
+      }
+    }
+    return null;
+  } 
+  
+  Item findNextItem(Item currentItem) {
+    sortItemsBySequence();
+    for (Item item in items) {
+      if (item == currentItem) {
+        int ix = items.indexOf(item, 0);
+        if (ix < items.length) {
+          return items[ix + 1];
+        } 
       }
     }
     return null;

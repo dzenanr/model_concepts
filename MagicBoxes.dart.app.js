@@ -258,6 +258,9 @@ function $intern(o, type_args) {
   $consts[key] = o;
   return o;
 }
+function $Dart$MapLiteralFactory() {
+  return native__CoreJsUtil__newMapLiteral();
+}
 var isolate$current = null;
 var isolate$rootIsolate = null;
 var isolate$inits = [];
@@ -631,6 +634,12 @@ function isolate$deserializeMessage(message) {
     // Nothing more to do.
     return message;
   }
+}
+var math$INT_REGEXP =
+    /^\s*[+-]?(:?\d+|0[xX][0-9abcdefABCDEF]+)\s*$/;
+function native_MathNatives_parseInt(str) {
+  if (math$INT_REGEXP.test(str)) return +str;
+  throw native_MathNatives__newBadNumberFormat(str);
 }
 function native_NumberImplementation_BIT_XOR(other) {
   "use strict";
@@ -1468,6 +1477,15 @@ ExceptionHelper$Dart.createNoSuchMethodException$member = function(receiver, fun
 function native_ExceptionHelper_createNoSuchMethodException(receiver, functionName, arguments_0){
   return ExceptionHelper$Dart.createNoSuchMethodException$member(receiver, functionName, arguments_0);
 }
+function _CoreJsUtil$Dart(){
+}
+_CoreJsUtil$Dart._newMapLiteral$$member_ = function(){
+  return LinkedHashMapImplementation$Dart.LinkedHashMapImplementation$$Factory(LinkedHashMapImplementation$Dart.$lookupRTT());
+}
+;
+function native__CoreJsUtil__newMapLiteral(){
+  return _CoreJsUtil$Dart._newMapLiteral$$member_();
+}
 function SendPortImpl$Dart(){
 }
 SendPortImpl$Dart.$lookupRTT = function(){
@@ -2193,6 +2211,19 @@ Deserializer$Dart._jsArrayLength$$member_ = function(x){
   return native_Deserializer__jsArrayLength(x);
 }
 ;
+function MathNatives$Dart(){
+}
+MathNatives$Dart.parseInt$member = function(str){
+  return native_MathNatives_parseInt(str);
+}
+;
+MathNatives$Dart._newBadNumberFormat$$member_ = function(x){
+  return BadNumberFormatException$Dart.BadNumberFormatException$$Factory(x);
+}
+;
+function native_MathNatives__newBadNumberFormat(x){
+  return MathNatives$Dart._newBadNumberFormat$$member_(x);
+}
 Number.$lookupRTT = function(){
   return RTT.create($cls('Number'), Number.$RTTimplements);
 }
@@ -5107,6 +5138,12 @@ LinkedHashMap$Dart.$addTo = function(target, typeArgs){
   HashMap$Dart.$addTo(target, [RTT.getTypeArg(target.typeArgs, 0), RTT.getTypeArg(target.typeArgs, 1)]);
 }
 ;
+function Math$Dart(){
+}
+Math$Dart.parseInt$member = function(str){
+  return MathNatives$Dart.parseInt$member(str);
+}
+;
 function num$Dart(){
 }
 num$Dart.$lookupRTT = function(){
@@ -5360,9 +5397,16 @@ function native__CanvasRenderingContext2DWrappingImplementation__set_font(_this,
     throw __dom_wrap_exception(e);
   }
 }
-function native__CanvasRenderingContext2DWrappingImplementation__get_lineWidth(_this) {
+function native__CanvasRenderingContext2DWrappingImplementation__set_lineWidth(_this, value) {
   try {
-    return __dom_wrap(_this.$dom.lineWidth);
+    _this.$dom.lineWidth = __dom_unwrap(value);
+  } catch (e) {
+    throw __dom_wrap_exception(e);
+  }
+}
+function native__CanvasRenderingContext2DWrappingImplementation__set_strokeStyle(_this, value) {
+  try {
+    _this.$dom.strokeStyle = __dom_unwrap(value);
   } catch (e) {
     throw __dom_wrap_exception(e);
   }
@@ -5433,13 +5477,6 @@ function native__CanvasRenderingContext2DWrappingImplementation__moveTo(_this, x
 function native__CanvasRenderingContext2DWrappingImplementation__rect(_this, x, y, width, height) {
   try {
     return __dom_wrap(_this.$dom.rect(__dom_unwrap(x), __dom_unwrap(y), __dom_unwrap(width), __dom_unwrap(height)));
-  } catch (e) {
-    throw __dom_wrap_exception(e);
-  }
-}
-function native__CanvasRenderingContext2DWrappingImplementation__setLineWidth(_this, width) {
-  try {
-    return __dom_wrap(_this.$dom.setLineWidth(__dom_unwrap(width)));
   } catch (e) {
     throw __dom_wrap_exception(e);
   }
@@ -9731,13 +9768,6 @@ function native__WebGLActiveInfoWrappingImplementation__get_name(_this) {
 function native__WebGLRenderingContextWrappingImplementation__clear(_this, mask) {
   try {
     return __dom_wrap(_this.$dom.clear(__dom_unwrap(mask)));
-  } catch (e) {
-    throw __dom_wrap_exception(e);
-  }
-}
-function native__WebGLRenderingContextWrappingImplementation__lineWidth(_this, width) {
-  try {
-    return __dom_wrap(_this.$dom.lineWidth(__dom_unwrap(width)));
   } catch (e) {
     throw __dom_wrap_exception(e);
   }
@@ -21691,16 +21721,20 @@ _CanvasRenderingContext2DWrappingImplementation$Dart._set_font$$member_ = functi
   return native__CanvasRenderingContext2DWrappingImplementation__set_font(_this, value);
 }
 ;
-_CanvasRenderingContext2DWrappingImplementation$Dart.prototype.lineWidth$named = function(){
-  return this.lineWidth$getter().apply(this, arguments);
+_CanvasRenderingContext2DWrappingImplementation$Dart.prototype.lineWidth$setter = function(value){
+  _CanvasRenderingContext2DWrappingImplementation$Dart._set_lineWidth$$member_(this, value);
 }
 ;
-_CanvasRenderingContext2DWrappingImplementation$Dart.prototype.lineWidth$getter = function(){
-  return _CanvasRenderingContext2DWrappingImplementation$Dart._get_lineWidth$$member_(this);
+_CanvasRenderingContext2DWrappingImplementation$Dart._set_lineWidth$$member_ = function(_this, value){
+  return native__CanvasRenderingContext2DWrappingImplementation__set_lineWidth(_this, value);
 }
 ;
-_CanvasRenderingContext2DWrappingImplementation$Dart._get_lineWidth$$member_ = function(_this){
-  return native__CanvasRenderingContext2DWrappingImplementation__get_lineWidth(_this);
+_CanvasRenderingContext2DWrappingImplementation$Dart.prototype.strokeStyle$setter = function(value){
+  _CanvasRenderingContext2DWrappingImplementation$Dart._set_strokeStyle$$member_(this, value);
+}
+;
+_CanvasRenderingContext2DWrappingImplementation$Dart._set_strokeStyle$$member_ = function(_this, value){
+  return native__CanvasRenderingContext2DWrappingImplementation__set_strokeStyle(_this, value);
 }
 ;
 _CanvasRenderingContext2DWrappingImplementation$Dart.prototype.textAlign$setter = function(value){
@@ -21846,21 +21880,6 @@ _CanvasRenderingContext2DWrappingImplementation$Dart.prototype.rect$getter = fun
 ;
 _CanvasRenderingContext2DWrappingImplementation$Dart._rect$$member_ = function(receiver, x, y, width, height){
   return native__CanvasRenderingContext2DWrappingImplementation__rect(receiver, x, y, width, height);
-}
-;
-_CanvasRenderingContext2DWrappingImplementation$Dart.prototype.setLineWidth$member = function(width){
-  _CanvasRenderingContext2DWrappingImplementation$Dart._setLineWidth$$member_(this, width);
-  return;
-}
-;
-_CanvasRenderingContext2DWrappingImplementation$Dart.prototype.setLineWidth$named = function($n, $o, width){
-  if ($o.count || $n != 1)
-    $nsme();
-  return _CanvasRenderingContext2DWrappingImplementation$Dart.prototype.setLineWidth$member.call(this, width);
-}
-;
-_CanvasRenderingContext2DWrappingImplementation$Dart._setLineWidth$$member_ = function(receiver, width){
-  return native__CanvasRenderingContext2DWrappingImplementation__setLineWidth(receiver, width);
 }
 ;
 _CanvasRenderingContext2DWrappingImplementation$Dart.prototype.stroke$member = function(){
@@ -48691,29 +48710,6 @@ _WebGLRenderingContextWrappingImplementation$Dart._clear$$member_ = function(rec
   return native__WebGLRenderingContextWrappingImplementation__clear(receiver, mask);
 }
 ;
-_WebGLRenderingContextWrappingImplementation$Dart.prototype.lineWidth$member = function(width){
-  _WebGLRenderingContextWrappingImplementation$Dart._lineWidth$$member_(this, width);
-  return;
-}
-;
-_WebGLRenderingContextWrappingImplementation$Dart.prototype.lineWidth$named = function($n, $o, width){
-  if ($o.count || $n != 1)
-    $nsme();
-  return _WebGLRenderingContextWrappingImplementation$Dart.prototype.lineWidth$member.call(this, width);
-}
-;
-_WebGLRenderingContextWrappingImplementation$Dart.prototype.lineWidth$named_$lookupRTT = function(){
-  return RTT.createFunction([num$Dart.$lookupRTT()], null);
-}
-;
-_WebGLRenderingContextWrappingImplementation$Dart.prototype.lineWidth$getter = function(){
-  return $bind(_WebGLRenderingContextWrappingImplementation$Dart.prototype.lineWidth$named, _WebGLRenderingContextWrappingImplementation$Dart.prototype.lineWidth$named_$lookupRTT, this);
-}
-;
-_WebGLRenderingContextWrappingImplementation$Dart._lineWidth$$member_ = function(receiver, width){
-  return native__WebGLRenderingContextWrappingImplementation__lineWidth(receiver, width);
-}
-;
 _WebGLRenderingContextWrappingImplementation$Dart.prototype.typeName$getter = function(){
   return 'WebGLRenderingContext';
 }
@@ -51847,6 +51843,11 @@ htmlimpl0a8e4b$LevelDom$Dart.wrapWindow$member = function(raw){
   return raw == null?$Dart$Null:raw.dartObjectLocalStorage$getter() != null?raw.dartObjectLocalStorage$getter():htmlimpl0a8e4b$WindowWrappingImplementation$Dart.WindowWrappingImplementation$_wrap$28$htmlimpl0a8e4b$$Factory_(raw);
 }
 ;
+htmlimpl0a8e4b$LevelDom$Dart.unwrapMaybePrimitive$member = function(raw){
+  var tmp$0;
+  return raw == null || $isString(raw) || !!(tmp$0 = raw , tmp$0 != null && tmp$0.$implements$num$Dart) || $isBool(raw)?raw:raw._ptr$htmlimpl0a8e4b$$getter_();
+}
+;
 htmlimpl0a8e4b$LevelDom$Dart.unwrap$member = function(raw){
   return raw == null?$Dart$Null:raw._ptr$htmlimpl0a8e4b$$getter_();
 }
@@ -51959,12 +51960,14 @@ htmlimpl0a8e4b$CanvasRenderingContext2DWrappingImplementation$Dart.prototype.fon
   this._ptr$htmlimpl0a8e4b$$getter_().font$setter(tmp$0 = value) , tmp$0;
 }
 ;
-htmlimpl0a8e4b$CanvasRenderingContext2DWrappingImplementation$Dart.prototype.lineWidth$named = function(){
-  return this.lineWidth$getter().apply(this, arguments);
+htmlimpl0a8e4b$CanvasRenderingContext2DWrappingImplementation$Dart.prototype.lineWidth$setter = function(value){
+  var tmp$0;
+  this._ptr$htmlimpl0a8e4b$$getter_().lineWidth$setter(tmp$0 = value) , tmp$0;
 }
 ;
-htmlimpl0a8e4b$CanvasRenderingContext2DWrappingImplementation$Dart.prototype.lineWidth$getter = function(){
-  return this._ptr$htmlimpl0a8e4b$$getter_().lineWidth$getter();
+htmlimpl0a8e4b$CanvasRenderingContext2DWrappingImplementation$Dart.prototype.strokeStyle$setter = function(value){
+  var tmp$0;
+  this._ptr$htmlimpl0a8e4b$$getter_().strokeStyle$setter(tmp$0 = htmlimpl0a8e4b$LevelDom$Dart.unwrapMaybePrimitive$member(value)) , tmp$0;
 }
 ;
 htmlimpl0a8e4b$CanvasRenderingContext2DWrappingImplementation$Dart.prototype.textAlign$setter = function(value){
@@ -52072,17 +52075,6 @@ htmlimpl0a8e4b$CanvasRenderingContext2DWrappingImplementation$Dart.prototype.rec
 ;
 htmlimpl0a8e4b$CanvasRenderingContext2DWrappingImplementation$Dart.prototype.rect$getter = function(){
   return $bind(htmlimpl0a8e4b$CanvasRenderingContext2DWrappingImplementation$Dart.prototype.rect$named, htmlimpl0a8e4b$CanvasRenderingContext2DWrappingImplementation$Dart.prototype.rect$named_$lookupRTT, this);
-}
-;
-htmlimpl0a8e4b$CanvasRenderingContext2DWrappingImplementation$Dart.prototype.setLineWidth$member = function(width){
-  this._ptr$htmlimpl0a8e4b$$getter_().setLineWidth$named(1, $noargs, width);
-  return;
-}
-;
-htmlimpl0a8e4b$CanvasRenderingContext2DWrappingImplementation$Dart.prototype.setLineWidth$named = function($n, $o, width){
-  if ($o.count || $n != 1)
-    $nsme();
-  return htmlimpl0a8e4b$CanvasRenderingContext2DWrappingImplementation$Dart.prototype.setLineWidth$member.call(this, width);
 }
 ;
 htmlimpl0a8e4b$CanvasRenderingContext2DWrappingImplementation$Dart.prototype.stroke$member = function(){
@@ -52301,25 +52293,6 @@ htmlimpl0a8e4b$WebGLRenderingContextWrappingImplementation$Dart.prototype.clear$
 ;
 htmlimpl0a8e4b$WebGLRenderingContextWrappingImplementation$Dart.prototype.clear$getter = function(){
   return $bind(htmlimpl0a8e4b$WebGLRenderingContextWrappingImplementation$Dart.prototype.clear$named, htmlimpl0a8e4b$WebGLRenderingContextWrappingImplementation$Dart.prototype.clear$named_$lookupRTT, this);
-}
-;
-htmlimpl0a8e4b$WebGLRenderingContextWrappingImplementation$Dart.prototype.lineWidth$member = function(width){
-  this._ptr$htmlimpl0a8e4b$$getter_().lineWidth$named(1, $noargs, width);
-  return;
-}
-;
-htmlimpl0a8e4b$WebGLRenderingContextWrappingImplementation$Dart.prototype.lineWidth$named = function($n, $o, width){
-  if ($o.count || $n != 1)
-    $nsme();
-  return htmlimpl0a8e4b$WebGLRenderingContextWrappingImplementation$Dart.prototype.lineWidth$member.call(this, width);
-}
-;
-htmlimpl0a8e4b$WebGLRenderingContextWrappingImplementation$Dart.prototype.lineWidth$named_$lookupRTT = function(){
-  return RTT.createFunction([num$Dart.$lookupRTT()], null);
-}
-;
-htmlimpl0a8e4b$WebGLRenderingContextWrappingImplementation$Dart.prototype.lineWidth$getter = function(){
-  return $bind(htmlimpl0a8e4b$WebGLRenderingContextWrappingImplementation$Dart.prototype.lineWidth$named, htmlimpl0a8e4b$WebGLRenderingContextWrappingImplementation$Dart.prototype.lineWidth$named_$lookupRTT, this);
 }
 ;
 function htmlimpl0a8e4b$CSSStyleDeclarationWrappingImplementation$Dart(){
@@ -64941,6 +64914,160 @@ htmld071c1$XMLHttpRequestProgressEvent$Dart.$addTo = function(target){
   htmld071c1$ProgressEvent$Dart.$addTo(target);
 }
 ;
+function native_JSON_parse(jsonString) {
+  var obj = JSON.parse(jsonString, function(key, value) {
+    return convertJsToDart(value, this);
+  });
+  return obj == null ? $Dart$Null : obj;
+}
+function convertJsToDart(obj, container) {
+  // The following kinds of JS objects have the same representation in Dart:
+  //   boolean, number, string, arrays
+  // Dart null is JS undefined.
+  // Only generic JavaScript objects need to be converted into Dart Maps.
+  // This is done by creating a $Dart$MapLiteralType object, and changing
+  // any JS null values into $Dart$Null.
+  switch (typeof(obj)) {
+    case 'boolean':
+    case 'number':
+    case 'string':
+      return obj;
+
+    case 'object':
+      if (obj == null) {
+        if (container instanceof Array) {
+          return $Dart$Null;
+        } else {
+          // $Dart$Null is set to undefined, which will make JSON.parse
+          // delete the member. We return null here, but will fix it up
+          // later.
+          return null;
+        }
+      } else if (obj instanceof Array) {
+        return obj;
+      } else {
+        return fixupJsObjectToDartMap(obj);
+      }
+
+    default:
+      throw 'unexpected kind of JSON value';
+  }
+}
+var $Object_keys = ('keys' in Object) ?
+  function (dict) { return Object.keys(dict); } :
+  function (dict) {
+     var out = [];
+     for (var key in dict) {
+       // TODO(sigmund): remove the propertyIsEnumerable check? That check
+       // ensures that this function returns the same as Object.keys, but seems
+       // unnecessary because this function is only used for user-defined
+       // maps/sets.
+       if (dict.hasOwnProperty(key) && dict.propertyIsEnumerable(key)) {
+         out.push(key);
+       }
+     }
+     return out;
+  };
+function fixupJsObjectToDartMap(obj) {
+  var map = $Dart$MapLiteralFactory();
+  var keys = $Object_keys(obj);
+  for (var i = 0; i < keys.length; i++) {
+    var value = obj[keys[i]];
+    value = (value === null ? $Dart$Null : value);
+    map.ASSIGN_INDEX$operator(keys[i], value);
+  }
+  return map;
+}
+function UnconvertibleException() { }
+function testBrowserHasWorkingStringify() {
+  // Firefox3.6's JSON.stringify is broken; the reviver function's
+  // result isn't used except within arrays.  See
+  // http://skysanders.net/subtext/archive/2010/02/24/confirmed-bug-in-firefox-3.6-native-json-implementation.aspx,
+  // for instance.
+  return JSON.parse(JSON.stringify({works:false}, function(key, value) {
+        return value == false ? true : value;
+      })).works;
+}
+var browserHasWorkingStringify = testBrowserHasWorkingStringify();
+function native_JSON_stringify(obj) {
+  var jsonString;
+  if (browserHasWorkingStringify) {
+    jsonString = JSON.stringify(obj, function(key, value) {
+      return convertDartToJs(value);
+    });
+  } else {
+    jsonString = JSON.stringify(convertDartToJs(obj));
+  }
+  return jsonString;
+}
+function convertDartToJs(obj) {
+  // The following kinds of Dart objects have the same representation in JS:
+  //   boolean, number, string, arrays
+  // Dart null is JS undefined.
+  // Only Dart Maps need to be converted into JavaScript objects.
+  if (obj == $Dart$Null) {
+    return null;
+  } else if (obj == null) {
+    throw 'not expecting JS-null in a Dart object';
+  } else {
+    switch (typeof obj) {
+      case 'boolean':
+      case 'number':
+      case 'string':
+        return obj;
+      case 'object':
+        if (obj instanceof Array) {
+          return convertDartArrayToJsArray(obj);
+        } else if ($isDartMap(obj)) {
+          return convertDartMapToJsObject(obj);
+        } else {
+          throw new UnconvertibleException();
+        }
+      default:
+        throw 'unexpected kind of Dart value';
+    }
+  }
+}
+function convertDartArrayToJsArray(arr) {
+  if (browserHasWorkingStringify) {
+    // The array elements will be (or have been) converted separately.
+    return arr;
+  } else {
+    // Need to recursively convert all the array elements.
+    var len = arr.length$getter();
+    var obj = new Array(len);
+    for (var i = 0; i < len; i++) {
+      var elemValue = arr.INDEX$operator(i);
+      obj[i] = convertDartToJs(elemValue);
+    }
+    return obj;
+  }
+}
+function convertDartMapToJsObject(map) {
+  var valueConverter =
+      browserHasWorkingStringify ? convertDartNullToJsNull : convertDartToJs;
+  var obj = {};
+  var propertyNames = map.getKeys$member();
+  for (var i = 0, len = propertyNames.length$getter(); i < len; i++) {
+    var propertyName = propertyNames.INDEX$operator(i);
+    var propertyValue = map.INDEX$operator(propertyName);
+    obj[propertyName] = valueConverter(propertyValue);
+  }
+  return obj;
+}
+function convertDartNullToJsNull(value) {
+  return value == $Dart$Null ? null : value;
+}
+function jsonc5ef24$JSON$Dart(){
+}
+jsonc5ef24$JSON$Dart.parse$member = function(jsonString){
+  return native_JSON_parse(jsonString);
+}
+;
+jsonc5ef24$JSON$Dart.stringify$member = function(value){
+  return native_JSON_stringify(value);
+}
+;
 function unnamed7b10c8$Board$Dart(){
 }
 unnamed7b10c8$Board$Dart.$lookupRTT = function(){
@@ -64948,16 +65075,17 @@ unnamed7b10c8$Board$Dart.$lookupRTT = function(){
 }
 ;
 unnamed7b10c8$Board$Dart.$Constructor = function(canvas){
-  var tmp$5, tmp$6, tmp$7, tmp$1, tmp$2, tmp$3, tmp$4, tmp$0;
+  var tmp$5, tmp$6, tmp$7, tmp$8, tmp$1, tmp$2, tmp$3, tmp$4, tmp$0;
   this.context$setter(tmp$0 = this.canvas$getter().getContext$named(1, $noargs, '2d')) , tmp$0;
   this._width$unnamed7b10c8$$setter_(tmp$1 = this.canvas$getter().width$getter()) , tmp$1;
   this._height$unnamed7b10c8$$setter_(tmp$2 = this.canvas$getter().height$getter()) , tmp$2;
-  this.defaultLineWidth$setter(tmp$3 = this.context$getter().lineWidth$getter()) , tmp$3;
   this.border$member();
-  this.boxes$setter(tmp$4 = ListFactory$Dart.List$$Factory(null, $Dart$Null)) , tmp$4;
-  this.lines$setter(tmp$5 = ListFactory$Dart.List$$Factory(null, $Dart$Null)) , tmp$5;
-  this.menuBar$setter(tmp$6 = unnamed7b10c8$MenuBar$Dart.MenuBar$$Factory(this)) , tmp$6;
-  this.toolBar$setter(tmp$7 = unnamed7b10c8$ToolBar$Dart.ToolBar$$Factory(this)) , tmp$7;
+  this.boxes$setter(tmp$3 = ListFactory$Dart.List$$Factory(null, $Dart$Null)) , tmp$3;
+  this.lines$setter(tmp$4 = ListFactory$Dart.List$$Factory(null, $Dart$Null)) , tmp$4;
+  this.menuBar$setter(tmp$5 = unnamed7b10c8$MenuBar$Dart.MenuBar$$Factory(this)) , tmp$5;
+  this.toolBar$setter(tmp$6 = unnamed7b10c8$ToolBar$Dart.ToolBar$$Factory(this)) , tmp$6;
+  this.jsonPanel$setter(tmp$7 = unnamed7b10c8$JsonPanel$Dart.JsonPanel$$Factory(this)) , tmp$7;
+  this.pngPanel$setter(tmp$8 = unnamed7b10c8$PngPanel$Dart.PngPanel$$Factory(this)) , tmp$8;
   htmld071c1$document$getter().query$named(1, $noargs, '#canvas').on$getter().mouseDown$getter().add$named(1, $noargs, $bind(unnamed7b10c8$Board$Dart.prototype.onMouseDown$named, unnamed7b10c8$Board$Dart.prototype.onMouseDown$named_$lookupRTT, this));
   htmld071c1$document$getter().window$getter().setInterval$named(2, $noargs, $bind(unnamed7b10c8$Board$Dart.prototype.redraw$named, unnamed7b10c8$Board$Dart.prototype.redraw$named_$lookupRTT, this), unnamed7b10c8$Board$Dart.INTERVAL$getter());
 }
@@ -64972,6 +65100,22 @@ unnamed7b10c8$Board$Dart.Board$$Factory = function(canvas){
   unnamed7b10c8$Board$Dart.$Initializer.call(tmp$0, canvas);
   unnamed7b10c8$Board$Dart.$Constructor.call(tmp$0, canvas);
   return tmp$0;
+}
+;
+unnamed7b10c8$Board$Dart.DEFAULT_LINE_WIDTH$getter = function(){
+  return 1;
+}
+;
+unnamed7b10c8$Board$Dart.DEFAULT_LINE_COLOR$getter = function(){
+  return '#000000';
+}
+;
+unnamed7b10c8$Board$Dart.SOFT_LINE_COLOR$getter = function(){
+  return '#736f6e ';
+}
+;
+unnamed7b10c8$Board$Dart.DEFAULT_FONT_SIZE$getter = function(){
+  return 12;
 }
 ;
 unnamed7b10c8$Board$Dart.DELTA$getter = function(){
@@ -65070,12 +65214,12 @@ unnamed7b10c8$Board$Dart.prototype.toolBar$setter = function(tmp$0){
   this.toolBar$field = tmp$0;
 }
 ;
-unnamed7b10c8$Board$Dart.prototype.defaultLineWidth$getter = function(){
-  return this.defaultLineWidth$field;
+unnamed7b10c8$Board$Dart.prototype.jsonPanel$setter = function(tmp$0){
+  this.jsonPanel$field = tmp$0;
 }
 ;
-unnamed7b10c8$Board$Dart.prototype.defaultLineWidth$setter = function(tmp$0){
-  this.defaultLineWidth$field = tmp$0;
+unnamed7b10c8$Board$Dart.prototype.pngPanel$setter = function(tmp$0){
+  this.pngPanel$field = tmp$0;
 }
 ;
 unnamed7b10c8$Board$Dart.prototype.width$getter = function(){
@@ -65098,10 +65242,178 @@ unnamed7b10c8$Board$Dart.prototype.height$setter = function(height){
   this.canvas$getter().height$setter(tmp$1 = height) , tmp$1;
 }
 ;
+unnamed7b10c8$Board$Dart.prototype.toJson$member = function(){
+  var tmp$1, tmp$2, tmp$3, tmp$0;
+  var boardMap = HashMapImplementation$Dart.HashMapImplementation$$Factory(HashMapImplementation$Dart.$lookupRTT([String$Dart.$lookupRTT(), Object.$lookupRTT()]));
+  boardMap.ASSIGN_INDEX$operator('width', tmp$0 = this.width$getter()) , tmp$0;
+  boardMap.ASSIGN_INDEX$operator('height', tmp$1 = this.height$getter()) , tmp$1;
+  boardMap.ASSIGN_INDEX$operator('boxes', tmp$2 = this.boxesToJson$member()) , tmp$2;
+  boardMap.ASSIGN_INDEX$operator('lines', tmp$3 = this.linesToJson$member()) , tmp$3;
+  return jsonc5ef24$JSON$Dart.stringify$member(boardMap);
+}
+;
+unnamed7b10c8$Board$Dart.prototype.toJson$named = function($n, $o){
+  if ($o.count || $n != 0)
+    $nsme();
+  return unnamed7b10c8$Board$Dart.prototype.toJson$member.call(this);
+}
+;
+unnamed7b10c8$Board$Dart.prototype.fromJson$member = function(json){
+  var tmp$1, tmp$0;
+  var boardMap = jsonc5ef24$JSON$Dart.parse$member(json);
+  this.width$setter(tmp$0 = boardMap.INDEX$operator('width')) , tmp$0;
+  this.height$setter(tmp$1 = boardMap.INDEX$operator('height')) , tmp$1;
+  var boxesList = boardMap.INDEX$operator('boxes');
+  this.boxesFromJson$member(boxesList);
+  var linesList = boardMap.INDEX$operator('lines');
+  this.linesFromJson$member(linesList);
+}
+;
+unnamed7b10c8$Board$Dart.prototype.fromJson$named = function($n, $o, json){
+  if ($o.count || $n != 1)
+    $nsme();
+  return unnamed7b10c8$Board$Dart.prototype.fromJson$member.call(this, json);
+}
+;
+unnamed7b10c8$Board$Dart.prototype.boxesToJson$member = function(){
+  var boxesList = ListFactory$Dart.List$$Factory([Map$Dart.$lookupRTT([String$Dart.$lookupRTT(), Object.$lookupRTT()])], $Dart$Null);
+  {
+    var $0 = this.boxes$getter().iterator$named(0, $noargs);
+    while ($0.hasNext$named(0, $noargs)) {
+      var box = $0.next$named(0, $noargs);
+      {
+        if (!box.isHidden$named(0, $noargs)) {
+          boxesList.add$named(1, $noargs, box.toJson$named(0, $noargs));
+        }
+      }
+    }
+  }
+  return boxesList;
+}
+;
+unnamed7b10c8$Board$Dart.prototype.linesToJson$member = function(){
+  var linesList = ListFactory$Dart.List$$Factory([Map$Dart.$lookupRTT([String$Dart.$lookupRTT(), Object.$lookupRTT()])], $Dart$Null);
+  {
+    var $0 = this.lines$getter().iterator$named(0, $noargs);
+    while ($0.hasNext$named(0, $noargs)) {
+      var line = $0.next$named(0, $noargs);
+      {
+        if (!line.isHidden$named(0, $noargs)) {
+          linesList.add$named(1, $noargs, line.toJson$named(0, $noargs));
+        }
+      }
+    }
+  }
+  return linesList;
+}
+;
+unnamed7b10c8$Board$Dart.prototype.boxesFromJson$member = function(boxesList){
+  var tmp$0;
+  this.boxes$setter(tmp$0 = ListFactory$Dart.List$$Factory(null, $Dart$Null)) , tmp$0;
+  {
+    var $0 = boxesList.iterator$named(0, $noargs);
+    while ($0.hasNext$named(0, $noargs)) {
+      var jsonBox = $0.next$named(0, $noargs);
+      {
+        this.boxes$getter().add$named(1, $noargs, this.boxFromJson$member(jsonBox));
+      }
+    }
+  }
+}
+;
+unnamed7b10c8$Board$Dart.prototype.boxFromJson$member = function(boxMap){
+  var tmp$1, tmp$0;
+  var title = boxMap.INDEX$operator('name');
+  var entry = boxMap.INDEX$operator('entry');
+  var xText = boxMap.INDEX$operator('x');
+  var x = Math$Dart.parseInt$member(xText);
+  var yText = boxMap.INDEX$operator('y');
+  var y = Math$Dart.parseInt$member(yText);
+  var widthText = boxMap.INDEX$operator('width');
+  var width = Math$Dart.parseInt$member(widthText);
+  var heightText = boxMap.INDEX$operator('height');
+  var height = Math$Dart.parseInt$member(heightText);
+  var box = unnamed7b10c8$Box$Dart.Box$$Factory(this, x, y, width, height);
+  box.title$setter(tmp$0 = title) , tmp$0;
+  box.entry$setter(tmp$1 = entry) , tmp$1;
+  var itemsList = boxMap.INDEX$operator('items');
+  {
+    var $0 = itemsList.iterator$named(0, $noargs);
+    while ($0.hasNext$named(0, $noargs)) {
+      var jsonItem = $0.next$named(0, $noargs);
+      {
+        this.itemFromJson$member(box, jsonItem);
+      }
+    }
+  }
+  return box;
+}
+;
+unnamed7b10c8$Board$Dart.prototype.itemFromJson$member = function(box, itemMap){
+  var tmp$1, tmp$0;
+  var name_0 = itemMap.INDEX$operator('name');
+  var category = itemMap.INDEX$operator('category');
+  var item = unnamed7b10c8$Item$Dart.Item$$Factory(box, name_0, category);
+  var sequenceText = itemMap.INDEX$operator('sequence');
+  var sequence = Math$Dart.parseInt$member(sequenceText);
+  item.sequence$setter(tmp$0 = sequence) , tmp$0;
+  item.init$setter(tmp$1 = itemMap.INDEX$operator('init')) , tmp$1;
+}
+;
+unnamed7b10c8$Board$Dart.prototype.linesFromJson$member = function(linesList){
+  var tmp$0;
+  this.lines$setter(tmp$0 = ListFactory$Dart.List$$Factory(null, $Dart$Null)) , tmp$0;
+  {
+    var $0 = linesList.iterator$named(0, $noargs);
+    while ($0.hasNext$named(0, $noargs)) {
+      var jsonLine = $0.next$named(0, $noargs);
+      {
+        var line = this.lineFromJson$member(jsonLine);
+        if (NE$operator(line, $Dart$Null)) {
+          this.lines$getter().add$named(1, $noargs, line);
+        }
+      }
+    }
+  }
+}
+;
+unnamed7b10c8$Board$Dart.prototype.lineFromJson$member = function(lineMap){
+  var tmp$9, tmp$5, tmp$6, tmp$7, tmp$8, tmp$1, tmp$2, tmp$3, tmp$4, tmp$0;
+  var box1Name = lineMap.INDEX$operator('box1Name');
+  var box2Name = lineMap.INDEX$operator('box2Name');
+  var box1 = this.findBox$member(box1Name);
+  var box2 = this.findBox$member(box2Name);
+  if (NE$operator(box1, $Dart$Null) && NE$operator(box2, $Dart$Null)) {
+    var line = unnamed7b10c8$Line$Dart.Line$$Factory(this, box1, box2);
+    line.category$setter(tmp$0 = lineMap.INDEX$operator('category')) , tmp$0;
+    line.internal$setter(tmp$1 = lineMap.INDEX$operator('internal')) , tmp$1;
+    var box1box2Name = lineMap.INDEX$operator('box1box2Name');
+    var box1box2Min = lineMap.INDEX$operator('box1box2Min');
+    var box1box2Max = lineMap.INDEX$operator('box1box2Max');
+    var box1box2Id = lineMap.INDEX$operator('box1box2Id');
+    line.box1box2Name$setter(tmp$2 = box1box2Name) , tmp$2;
+    line.box1box2Min$setter(tmp$3 = box1box2Min) , tmp$3;
+    line.box1box2Max$setter(tmp$4 = box1box2Max) , tmp$4;
+    line.box1box2Id$setter(tmp$5 = box1box2Id) , tmp$5;
+    var box2box1Name = lineMap.INDEX$operator('box2box1Name');
+    var box2box1Min = lineMap.INDEX$operator('box2box1Min');
+    var box2box1Max = lineMap.INDEX$operator('box2box1Max');
+    var box2box1Id = lineMap.INDEX$operator('box2box1Id');
+    line.box2box1Name$setter(tmp$6 = box2box1Name) , tmp$6;
+    line.box2box1Min$setter(tmp$7 = box2box1Min) , tmp$7;
+    line.box2box1Max$setter(tmp$8 = box2box1Max) , tmp$8;
+    line.box2box1Id$setter(tmp$9 = box2box1Id) , tmp$9;
+    return line;
+  }
+  return $Dart$Null;
+}
+;
 unnamed7b10c8$Board$Dart.prototype.border$member = function(){
+  var tmp$1, tmp$0;
   this.context$getter().beginPath$named(0, $noargs);
   this.context$getter().rect$named(4, $noargs, 0, 0, this.width$getter(), this.height$getter());
-  this.context$getter().setLineWidth$named(1, $noargs, this.defaultLineWidth$getter());
+  this.context$getter().lineWidth$setter(tmp$0 = unnamed7b10c8$Board$Dart.DEFAULT_LINE_WIDTH$getter()) , tmp$0;
+  this.context$getter().strokeStyle$setter(tmp$1 = unnamed7b10c8$Board$Dart.DEFAULT_LINE_COLOR$getter()) , tmp$1;
   this.context$getter().stroke$named(0, $noargs);
   this.context$getter().closePath$named(0, $noargs);
 }
@@ -65155,18 +65467,6 @@ unnamed7b10c8$Board$Dart.prototype.redraw$named = function($n, $o){
 ;
 unnamed7b10c8$Board$Dart.prototype.redraw$named_$lookupRTT = function(){
   return RTT.createFunction(null, null);
-}
-;
-unnamed7b10c8$Board$Dart.prototype.saveAsPng$member = function(){
-  var tmp$0;
-  var modelImage = htmld071c1$document$getter().query$named(1, $noargs, '#modelImage');
-  modelImage.src$setter(tmp$0 = this.canvas$getter().toDataURL$named(1, $noargs, 'image/png')) , tmp$0;
-}
-;
-unnamed7b10c8$Board$Dart.prototype.saveAsPng$named = function($n, $o){
-  if ($o.count || $n != 0)
-    $nsme();
-  return unnamed7b10c8$Board$Dart.prototype.saveAsPng$member.call(this);
 }
 ;
 unnamed7b10c8$Board$Dart.prototype.createBoxesInDiagonal$member = function(){
@@ -65654,15 +65954,46 @@ unnamed7b10c8$Board$Dart.prototype.showHiddenLines$member = function(){
   }
 }
 ;
-unnamed7b10c8$Board$Dart.prototype.showHiddenSelection$member = function(){
+unnamed7b10c8$Board$Dart.prototype.showHidden$member = function(){
   this.showHiddenBoxes$member();
   this.showHiddenLines$member();
 }
 ;
-unnamed7b10c8$Board$Dart.prototype.showHiddenSelection$named = function($n, $o){
+unnamed7b10c8$Board$Dart.prototype.showHidden$named = function($n, $o){
   if ($o.count || $n != 0)
     $nsme();
-  return unnamed7b10c8$Board$Dart.prototype.showHiddenSelection$member.call(this);
+  return unnamed7b10c8$Board$Dart.prototype.showHidden$member.call(this);
+}
+;
+unnamed7b10c8$Board$Dart.prototype.hideNonSelection$member = function(){
+  {
+    var $0 = this.boxes$getter().iterator$named(0, $noargs);
+    while ($0.hasNext$named(0, $noargs)) {
+      var box = $0.next$named(0, $noargs);
+      {
+        if (!box.isSelected$named(0, $noargs)) {
+          box.hide$named(0, $noargs);
+        }
+      }
+    }
+  }
+  {
+    var $1 = this.lines$getter().iterator$named(0, $noargs);
+    while ($1.hasNext$named(0, $noargs)) {
+      var line = $1.next$named(0, $noargs);
+      {
+        if (!line.isSelected$named(0, $noargs)) {
+          line.hide$named(0, $noargs);
+        }
+      }
+    }
+  }
+}
+;
+unnamed7b10c8$Board$Dart.prototype.hideNonSelection$named = function($n, $o){
+  if ($o.count || $n != 0)
+    $nsme();
+  return unnamed7b10c8$Board$Dart.prototype.hideNonSelection$member.call(this);
 }
 ;
 unnamed7b10c8$Board$Dart.prototype.countSelectedBoxes$member = function(){
@@ -65720,6 +66051,27 @@ unnamed7b10c8$Board$Dart.prototype.countSelectedBoxesContain$named = function($n
   if ($o.count || $n != 2)
     $nsme();
   return unnamed7b10c8$Board$Dart.prototype.countSelectedBoxesContain$member.call(this, pointX, pointY);
+}
+;
+unnamed7b10c8$Board$Dart.prototype.findBox$member = function(boxName){
+  {
+    var $0 = this.boxes$getter().iterator$named(0, $noargs);
+    while ($0.hasNext$named(0, $noargs)) {
+      var box = $0.next$named(0, $noargs);
+      {
+        if (EQ$operator(box.title$getter(), boxName)) {
+          return box;
+        }
+      }
+    }
+  }
+  return $Dart$Null;
+}
+;
+unnamed7b10c8$Board$Dart.prototype.findBox$named = function($n, $o, boxName){
+  if ($o.count || $n != 1)
+    $nsme();
+  return unnamed7b10c8$Board$Dart.prototype.findBox$member.call(this, boxName);
 }
 ;
 unnamed7b10c8$Board$Dart.prototype.findTwinLine$member = function(twin){
@@ -65840,9 +66192,8 @@ unnamed7b10c8$Box$Dart.$lookupRTT = function(){
 }
 ;
 unnamed7b10c8$Box$Dart.$Constructor = function(board, x, y, width, height){
-  var tmp$1, tmp$0;
-  this.defaultLineWidth$setter(tmp$0 = this.board$getter().context$getter().lineWidth$getter()) , tmp$0;
-  this.items$setter(tmp$1 = ListFactory$Dart.List$$Factory(null, $Dart$Null)) , tmp$1;
+  var tmp$0;
+  this.items$setter(tmp$0 = ListFactory$Dart.List$$Factory(null, $Dart$Null)) , tmp$0;
   this.draw$member();
   htmld071c1$document$getter().query$named(1, $noargs, '#canvas').on$getter().mouseDown$getter().add$named(1, $noargs, $bind(unnamed7b10c8$Box$Dart.prototype.onMouseDown$named, unnamed7b10c8$Box$Dart.prototype.onMouseDown$named_$lookupRTT, this));
   htmld071c1$document$getter().query$named(1, $noargs, '#canvas').on$getter().mouseUp$getter().add$named(1, $noargs, $bind(unnamed7b10c8$Box$Dart.prototype.onMouseUp$named, unnamed7b10c8$Box$Dart.prototype.onMouseUp$named_$lookupRTT, this));
@@ -65851,10 +66202,10 @@ unnamed7b10c8$Box$Dart.$Constructor = function(board, x, y, width, height){
 ;
 unnamed7b10c8$Box$Dart.$Initializer = function(board, x, y, width, height){
   this._name$unnamed7b10c8$$field_ = '';
+  this.entry$field = false;
   this._selected$unnamed7b10c8$$field_ = false;
   this._hidden$unnamed7b10c8$$field_ = false;
   this._mouseDown$unnamed7b10c8$$field_ = false;
-  this.textFontSize$field = 12;
   this.board$field = board;
   this.x$field = x;
   this.y$field = y;
@@ -65917,6 +66268,14 @@ unnamed7b10c8$Box$Dart.prototype._name$unnamed7b10c8$$getter_ = function(){
 ;
 unnamed7b10c8$Box$Dart.prototype._name$unnamed7b10c8$$setter_ = function(tmp$0){
   this._name$unnamed7b10c8$$field_ = tmp$0;
+}
+;
+unnamed7b10c8$Box$Dart.prototype.entry$getter = function(){
+  return this.entry$field;
+}
+;
+unnamed7b10c8$Box$Dart.prototype.entry$setter = function(tmp$0){
+  this.entry$field = tmp$0;
 }
 ;
 unnamed7b10c8$Box$Dart.prototype.x$getter = function(){
@@ -65983,30 +66342,23 @@ unnamed7b10c8$Box$Dart.prototype._mouseDown$unnamed7b10c8$$setter_ = function(tm
   this._mouseDown$unnamed7b10c8$$field_ = tmp$0;
 }
 ;
-unnamed7b10c8$Box$Dart.prototype.textFontSize$getter = function(){
-  return this.textFontSize$field;
-}
-;
-unnamed7b10c8$Box$Dart.prototype.defaultLineWidth$getter = function(){
-  return this.defaultLineWidth$field;
-}
-;
-unnamed7b10c8$Box$Dart.prototype.defaultLineWidth$setter = function(tmp$0){
-  this.defaultLineWidth$field = tmp$0;
-}
-;
 unnamed7b10c8$Box$Dart.prototype.draw$member = function(){
-  var tmp$5, tmp$6, tmp$7, tmp$1, tmp$2, tmp$3, tmp$4, tmp$0;
+  var tmp$9, tmp$5, tmp$6, tmp$7, tmp$8, tmp$1, tmp$2, tmp$3, tmp$4, tmp$0;
   if (!this.isHidden$member()) {
     this.board$getter().context$getter().beginPath$named(0, $noargs);
     this.board$getter().context$getter().clearRect$named(4, $noargs, this.x$getter(), this.y$getter(), this.width$getter(), this.height$getter());
     this.board$getter().context$getter().rect$named(4, $noargs, this.x$getter(), this.y$getter(), this.width$getter(), this.height$getter());
     this.board$getter().context$getter().moveTo$named(2, $noargs, this.x$getter(), ADD$operator(this.y$getter(), unnamed7b10c8$Box$Dart.TBH$getter()));
     this.board$getter().context$getter().lineTo$named(2, $noargs, ADD$operator(this.x$getter(), this.width$getter()), ADD$operator(this.y$getter(), unnamed7b10c8$Box$Dart.TBH$getter()));
-    this.board$getter().context$getter().font$setter(tmp$0 = ADD$operator(ADD$operator('bold ', this.textFontSize$getter()), 'px sans-serif')) , tmp$0;
+    this.board$getter().context$getter().font$setter(tmp$0 = ADD$operator(ADD$operator('bold ', unnamed7b10c8$Board$Dart.DEFAULT_FONT_SIZE$getter()), 'px sans-serif')) , tmp$0;
     this.board$getter().context$getter().textAlign$setter(tmp$1 = 'start') , tmp$1;
     this.board$getter().context$getter().textBaseline$setter(tmp$2 = 'top') , tmp$2;
-    this.board$getter().context$getter().fillText$named(4, $noargs, this.title$getter(), ADD$operator(this.x$getter(), unnamed7b10c8$Box$Dart.TOS$getter()), ADD$operator(this.y$getter(), unnamed7b10c8$Box$Dart.TOS$getter()), SUB$operator(this.width$getter(), unnamed7b10c8$Box$Dart.TOS$getter()));
+    if (this.entry$getter()) {
+      this.board$getter().context$getter().fillText$named(4, $noargs, ADD$operator('|| ', this.title$getter()), ADD$operator(this.x$getter(), unnamed7b10c8$Box$Dart.TOS$getter()), ADD$operator(this.y$getter(), unnamed7b10c8$Box$Dart.TOS$getter()), SUB$operator(this.width$getter(), unnamed7b10c8$Box$Dart.TOS$getter()));
+    }
+     else {
+      this.board$getter().context$getter().fillText$named(4, $noargs, this.title$getter(), ADD$operator(this.x$getter(), unnamed7b10c8$Box$Dart.TOS$getter()), ADD$operator(this.y$getter(), unnamed7b10c8$Box$Dart.TOS$getter()), SUB$operator(this.width$getter(), unnamed7b10c8$Box$Dart.TOS$getter()));
+    }
     this.sortItemsBySequence$member();
     var i = 0;
     {
@@ -66015,22 +66367,22 @@ unnamed7b10c8$Box$Dart.prototype.draw$member = function(){
         var item = $1.next$named(0, $noargs);
         {
           if (EQ$operator(item.category$getter(), 'attribute')) {
-            this.board$getter().context$getter().font$setter(tmp$3 = ADD$operator(ADD$operator('', this.textFontSize$getter()), 'px sans-serif')) , tmp$3;
+            this.board$getter().context$getter().font$setter(tmp$3 = ADD$operator(ADD$operator('', unnamed7b10c8$Board$Dart.DEFAULT_FONT_SIZE$getter()), 'px sans-serif')) , tmp$3;
             this.board$getter().context$getter().fillText$named(4, $noargs, item.name$getter(), ADD$operator(this.x$getter(), unnamed7b10c8$Box$Dart.TOS$getter()), ADD$operator(ADD$operator(ADD$operator(this.y$getter(), unnamed7b10c8$Box$Dart.TOS$getter()), unnamed7b10c8$Box$Dart.TBH$getter()), MUL$operator(i, unnamed7b10c8$Box$Dart.IOS$getter())), SUB$operator(this.width$getter(), unnamed7b10c8$Box$Dart.TOS$getter()));
           }
            else {
             if (EQ$operator(item.category$getter(), 'guid')) {
-              this.board$getter().context$getter().font$setter(tmp$4 = ADD$operator(ADD$operator('italic ', this.textFontSize$getter()), 'px sans-serif')) , tmp$4;
+              this.board$getter().context$getter().font$setter(tmp$4 = ADD$operator(ADD$operator('italic ', unnamed7b10c8$Board$Dart.DEFAULT_FONT_SIZE$getter()), 'px sans-serif')) , tmp$4;
               this.board$getter().context$getter().fillText$named(4, $noargs, item.name$getter(), ADD$operator(this.x$getter(), unnamed7b10c8$Box$Dart.TOS$getter()), ADD$operator(ADD$operator(ADD$operator(this.y$getter(), unnamed7b10c8$Box$Dart.TOS$getter()), unnamed7b10c8$Box$Dart.TBH$getter()), MUL$operator(i, unnamed7b10c8$Box$Dart.IOS$getter())), SUB$operator(this.width$getter(), unnamed7b10c8$Box$Dart.TOS$getter()));
             }
              else {
               if (EQ$operator(item.category$getter(), 'identifier')) {
-                this.board$getter().context$getter().font$setter(tmp$5 = ADD$operator(ADD$operator('bold italic ', this.textFontSize$getter()), 'px sans-serif')) , tmp$5;
+                this.board$getter().context$getter().font$setter(tmp$5 = ADD$operator(ADD$operator('bold italic ', unnamed7b10c8$Board$Dart.DEFAULT_FONT_SIZE$getter()), 'px sans-serif')) , tmp$5;
                 this.board$getter().context$getter().fillText$named(4, $noargs, item.name$getter(), ADD$operator(this.x$getter(), unnamed7b10c8$Box$Dart.TOS$getter()), ADD$operator(ADD$operator(ADD$operator(this.y$getter(), unnamed7b10c8$Box$Dart.TOS$getter()), unnamed7b10c8$Box$Dart.TBH$getter()), MUL$operator(i, unnamed7b10c8$Box$Dart.IOS$getter())), SUB$operator(this.width$getter(), unnamed7b10c8$Box$Dart.TOS$getter()));
               }
                else {
                 if (EQ$operator(item.category$getter(), 'required')) {
-                  this.board$getter().context$getter().font$setter(tmp$6 = ADD$operator(ADD$operator('bold ', this.textFontSize$getter()), 'px sans-serif')) , tmp$6;
+                  this.board$getter().context$getter().font$setter(tmp$6 = ADD$operator(ADD$operator('bold ', unnamed7b10c8$Board$Dart.DEFAULT_FONT_SIZE$getter()), 'px sans-serif')) , tmp$6;
                   this.board$getter().context$getter().fillText$named(4, $noargs, item.name$getter(), ADD$operator(this.x$getter(), unnamed7b10c8$Box$Dart.TOS$getter()), ADD$operator(ADD$operator(ADD$operator(this.y$getter(), unnamed7b10c8$Box$Dart.TOS$getter()), unnamed7b10c8$Box$Dart.TBH$getter()), MUL$operator(i, unnamed7b10c8$Box$Dart.IOS$getter())), SUB$operator(this.width$getter(), unnamed7b10c8$Box$Dart.TOS$getter()));
                 }
               }
@@ -66046,7 +66398,8 @@ unnamed7b10c8$Box$Dart.prototype.draw$member = function(){
       this.board$getter().context$getter().rect$named(4, $noargs, SUB$operator(ADD$operator(this.x$getter(), this.width$getter()), unnamed7b10c8$Box$Dart.SSS$getter()), SUB$operator(ADD$operator(this.y$getter(), this.height$getter()), unnamed7b10c8$Box$Dart.SSS$getter()), unnamed7b10c8$Box$Dart.SSS$getter(), unnamed7b10c8$Box$Dart.SSS$getter());
       this.board$getter().context$getter().rect$named(4, $noargs, this.x$getter(), SUB$operator(ADD$operator(this.y$getter(), this.height$getter()), unnamed7b10c8$Box$Dart.SSS$getter()), unnamed7b10c8$Box$Dart.SSS$getter(), unnamed7b10c8$Box$Dart.SSS$getter());
     }
-    this.board$getter().context$getter().setLineWidth$named(1, $noargs, this.defaultLineWidth$getter());
+    this.board$getter().context$getter().lineWidth$setter(tmp$8 = unnamed7b10c8$Board$Dart.DEFAULT_LINE_WIDTH$getter()) , tmp$8;
+    this.board$getter().context$getter().strokeStyle$setter(tmp$9 = unnamed7b10c8$Board$Dart.DEFAULT_LINE_COLOR$getter()) , tmp$9;
     this.board$getter().context$getter().stroke$named(0, $noargs);
     this.board$getter().context$getter().closePath$named(0, $noargs);
   }
@@ -66158,6 +66511,39 @@ unnamed7b10c8$Box$Dart.prototype.title$setter = function(name_0){
   this._name$unnamed7b10c8$$setter_(tmp$0 = name_0) , tmp$0;
 }
 ;
+unnamed7b10c8$Box$Dart.prototype.toJson$member = function(){
+  var tmp$5, tmp$6, tmp$1, tmp$2, tmp$3, tmp$4, tmp$0;
+  var boxMap = HashMapImplementation$Dart.HashMapImplementation$$Factory(HashMapImplementation$Dart.$lookupRTT([String$Dart.$lookupRTT(), Object.$lookupRTT()]));
+  boxMap.ASSIGN_INDEX$operator('name', tmp$0 = this.title$getter()) , tmp$0;
+  boxMap.ASSIGN_INDEX$operator('entry', tmp$1 = this.entry$getter()) , tmp$1;
+  boxMap.ASSIGN_INDEX$operator('x', tmp$2 = this.x$getter()) , tmp$2;
+  boxMap.ASSIGN_INDEX$operator('y', tmp$3 = this.y$getter()) , tmp$3;
+  boxMap.ASSIGN_INDEX$operator('width', tmp$4 = this.width$getter()) , tmp$4;
+  boxMap.ASSIGN_INDEX$operator('height', tmp$5 = this.height$getter()) , tmp$5;
+  boxMap.ASSIGN_INDEX$operator('items', tmp$6 = this.itemsToJson$member()) , tmp$6;
+  return boxMap;
+}
+;
+unnamed7b10c8$Box$Dart.prototype.toJson$named = function($n, $o){
+  if ($o.count || $n != 0)
+    $nsme();
+  return unnamed7b10c8$Box$Dart.prototype.toJson$member.call(this);
+}
+;
+unnamed7b10c8$Box$Dart.prototype.itemsToJson$member = function(){
+  var itemsList = ListFactory$Dart.List$$Factory([Map$Dart.$lookupRTT([String$Dart.$lookupRTT(), Object.$lookupRTT()])], $Dart$Null);
+  {
+    var $0 = this.items$getter().iterator$named(0, $noargs);
+    while ($0.hasNext$named(0, $noargs)) {
+      var item = $0.next$named(0, $noargs);
+      {
+        itemsList.add$named(1, $noargs, item.toJson$named(0, $noargs));
+      }
+    }
+  }
+  return itemsList;
+}
+;
 unnamed7b10c8$Box$Dart.prototype.findLastItemSequence$member = function(){
   if (this.items$getter().isEmpty$named(0, $noargs)) {
     return 0;
@@ -66193,6 +66579,56 @@ unnamed7b10c8$Box$Dart.prototype.findItem$named = function($n, $o, name_0){
   if ($o.count || $n != 1)
     $nsme();
   return unnamed7b10c8$Box$Dart.prototype.findItem$member.call(this, name_0);
+}
+;
+unnamed7b10c8$Box$Dart.prototype.findPreviousItem$member = function(currentItem){
+  this.sortItemsBySequence$member();
+  {
+    var $0 = this.items$getter().iterator$named(0, $noargs);
+    while ($0.hasNext$named(0, $noargs)) {
+      var item = $0.next$named(0, $noargs);
+      {
+        if (EQ$operator(item, currentItem)) {
+          var ix = this.items$getter().indexOf$named(2, $noargs, item, 0);
+          if (GT$operator(ix, 0)) {
+            return this.items$getter().INDEX$operator(SUB$operator(ix, 1));
+          }
+        }
+      }
+    }
+  }
+  return $Dart$Null;
+}
+;
+unnamed7b10c8$Box$Dart.prototype.findPreviousItem$named = function($n, $o, currentItem){
+  if ($o.count || $n != 1)
+    $nsme();
+  return unnamed7b10c8$Box$Dart.prototype.findPreviousItem$member.call(this, currentItem);
+}
+;
+unnamed7b10c8$Box$Dart.prototype.findNextItem$member = function(currentItem){
+  this.sortItemsBySequence$member();
+  {
+    var $0 = this.items$getter().iterator$named(0, $noargs);
+    while ($0.hasNext$named(0, $noargs)) {
+      var item = $0.next$named(0, $noargs);
+      {
+        if (EQ$operator(item, currentItem)) {
+          var ix = this.items$getter().indexOf$named(2, $noargs, item, 0);
+          if (LT$operator(ix, this.items$getter().length$getter())) {
+            return this.items$getter().INDEX$operator(ADD$operator(ix, 1));
+          }
+        }
+      }
+    }
+  }
+  return $Dart$Null;
+}
+;
+unnamed7b10c8$Box$Dart.prototype.findNextItem$named = function($n, $o, currentItem){
+  if ($o.count || $n != 1)
+    $nsme();
+  return unnamed7b10c8$Box$Dart.prototype.findNextItem$member.call(this, currentItem);
 }
 ;
 unnamed7b10c8$Box$Dart.prototype.removeItem$member = function(item){
@@ -66453,6 +66889,7 @@ unnamed7b10c8$Item$Dart.$Constructor = function(box, name_0, category){
 }
 ;
 unnamed7b10c8$Item$Dart.$Initializer = function(box, name_0, category){
+  this.init$field = '';
   this.box$field = box;
 }
 ;
@@ -66492,6 +66929,108 @@ unnamed7b10c8$Item$Dart.prototype.category$setter = function(tmp$0){
   this.category$field = tmp$0;
 }
 ;
+unnamed7b10c8$Item$Dart.prototype.init$getter = function(){
+  return this.init$field;
+}
+;
+unnamed7b10c8$Item$Dart.prototype.init$setter = function(tmp$0){
+  this.init$field = tmp$0;
+}
+;
+unnamed7b10c8$Item$Dart.prototype.toJson$member = function(){
+  var tmp$1, tmp$2, tmp$3, tmp$0;
+  var itemMap = HashMapImplementation$Dart.HashMapImplementation$$Factory(HashMapImplementation$Dart.$lookupRTT([String$Dart.$lookupRTT(), Object.$lookupRTT()]));
+  itemMap.ASSIGN_INDEX$operator('sequence', tmp$0 = this.sequence$getter()) , tmp$0;
+  itemMap.ASSIGN_INDEX$operator('name', tmp$1 = this.name$getter()) , tmp$1;
+  itemMap.ASSIGN_INDEX$operator('category', tmp$2 = this.category$getter()) , tmp$2;
+  itemMap.ASSIGN_INDEX$operator('init', tmp$3 = this.init$getter()) , tmp$3;
+  return itemMap;
+}
+;
+unnamed7b10c8$Item$Dart.prototype.toJson$named = function($n, $o){
+  if ($o.count || $n != 0)
+    $nsme();
+  return unnamed7b10c8$Item$Dart.prototype.toJson$member.call(this);
+}
+;
+function unnamed7b10c8$JsonPanel$Dart(){
+}
+unnamed7b10c8$JsonPanel$Dart.$lookupRTT = function(){
+  return RTT.create($cls('unnamed7b10c8$JsonPanel$Dart'));
+}
+;
+function unnamed7b10c8$JsonPanel$Dart$$c0$28_28$HoistedConstructor(e){
+  var tmp$0;
+  this.modelJsonTextArea$getter().value$setter(tmp$0 = this.board$getter().toJson$named(0, $noargs)) , tmp$0;
+}
+function unnamed7b10c8$JsonPanel$Dart$$c0$28_28$HoistedConstructor$named($n, $o, e){
+  if ($o.count || $n != 1)
+    $nsme();
+  return unnamed7b10c8$JsonPanel$Dart$$c0$28_28$HoistedConstructor.call(this, e);
+}
+function unnamed7b10c8$JsonPanel$Dart$$c0$28_28$HoistedConstructor$named$named_$lookupRTT(){
+  return RTT.createFunction([htmld071c1$MouseEvent$Dart.$lookupRTT()], RTT.dynamicType);
+}
+function unnamed7b10c8$JsonPanel$Dart$$c1$28_28$HoistedConstructor(e){
+  this.board$getter().fromJson$named(1, $noargs, this.modelJsonTextArea$getter().value$getter());
+}
+function unnamed7b10c8$JsonPanel$Dart$$c1$28_28$HoistedConstructor$named($n, $o, e){
+  if ($o.count || $n != 1)
+    $nsme();
+  return unnamed7b10c8$JsonPanel$Dart$$c1$28_28$HoistedConstructor.call(this, e);
+}
+function unnamed7b10c8$JsonPanel$Dart$$c1$28_28$HoistedConstructor$named$named_$lookupRTT(){
+  return RTT.createFunction([htmld071c1$MouseEvent$Dart.$lookupRTT()], RTT.dynamicType);
+}
+unnamed7b10c8$JsonPanel$Dart.$Constructor = function(board){
+  var tmp$1, tmp$2, tmp$0;
+  this.modelJsonTextArea$setter(tmp$0 = htmld071c1$document$getter().query$named(1, $noargs, '#modelJson')) , tmp$0;
+  this.fromModelToJsonButton$setter(tmp$1 = htmld071c1$document$getter().query$named(1, $noargs, '#fromModelToJson')) , tmp$1;
+  this.fromModelToJsonButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$JsonPanel$Dart$$c0$28_28$HoistedConstructor$named, unnamed7b10c8$JsonPanel$Dart$$c0$28_28$HoistedConstructor$named$named_$lookupRTT, this));
+  this.fromJsonToModelButton$setter(tmp$2 = htmld071c1$document$getter().query$named(1, $noargs, '#fromJsonToModel')) , tmp$2;
+  this.fromJsonToModelButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$JsonPanel$Dart$$c1$28_28$HoistedConstructor$named, unnamed7b10c8$JsonPanel$Dart$$c1$28_28$HoistedConstructor$named$named_$lookupRTT, this));
+}
+;
+unnamed7b10c8$JsonPanel$Dart.$Initializer = function(board){
+  this.board$field = board;
+}
+;
+unnamed7b10c8$JsonPanel$Dart.JsonPanel$$Factory = function(board){
+  var tmp$0 = new unnamed7b10c8$JsonPanel$Dart;
+  tmp$0.$typeInfo = unnamed7b10c8$JsonPanel$Dart.$lookupRTT();
+  unnamed7b10c8$JsonPanel$Dart.$Initializer.call(tmp$0, board);
+  unnamed7b10c8$JsonPanel$Dart.$Constructor.call(tmp$0, board);
+  return tmp$0;
+}
+;
+unnamed7b10c8$JsonPanel$Dart.prototype.board$getter = function(){
+  return this.board$field;
+}
+;
+unnamed7b10c8$JsonPanel$Dart.prototype.modelJsonTextArea$getter = function(){
+  return this.modelJsonTextArea$field;
+}
+;
+unnamed7b10c8$JsonPanel$Dart.prototype.modelJsonTextArea$setter = function(tmp$0){
+  this.modelJsonTextArea$field = tmp$0;
+}
+;
+unnamed7b10c8$JsonPanel$Dart.prototype.fromModelToJsonButton$getter = function(){
+  return this.fromModelToJsonButton$field;
+}
+;
+unnamed7b10c8$JsonPanel$Dart.prototype.fromModelToJsonButton$setter = function(tmp$0){
+  this.fromModelToJsonButton$field = tmp$0;
+}
+;
+unnamed7b10c8$JsonPanel$Dart.prototype.fromJsonToModelButton$getter = function(){
+  return this.fromJsonToModelButton$field;
+}
+;
+unnamed7b10c8$JsonPanel$Dart.prototype.fromJsonToModelButton$setter = function(tmp$0){
+  this.fromJsonToModelButton$field = tmp$0;
+}
+;
 function unnamed7b10c8$Line$Dart(){
 }
 unnamed7b10c8$Line$Dart.$lookupRTT = function(){
@@ -66499,18 +67038,17 @@ unnamed7b10c8$Line$Dart.$lookupRTT = function(){
 }
 ;
 unnamed7b10c8$Line$Dart.$Constructor = function(board, box1, box2){
-  var tmp$1, tmp$0;
+  var tmp$0;
   this.category$setter(tmp$0 = 'relationship') , tmp$0;
   this.draw$member();
-  this.defaultLineWidth$setter(tmp$1 = this.board$getter().context$getter().lineWidth$getter()) , tmp$1;
 }
 ;
 unnamed7b10c8$Line$Dart.$Initializer = function(board, box1, box2){
+  this.internal$field = true;
   this._twin1$unnamed7b10c8$$field_ = false;
   this._twin2$unnamed7b10c8$$field_ = false;
   this._selected$unnamed7b10c8$$field_ = false;
   this._hidden$unnamed7b10c8$$field_ = false;
-  this.textFontSize$field = 12;
   this.board$field = board;
   this.box1$field = box1;
   this.box2$field = box2;
@@ -66546,6 +67084,14 @@ unnamed7b10c8$Line$Dart.prototype._category$unnamed7b10c8$$getter_ = function(){
 ;
 unnamed7b10c8$Line$Dart.prototype._category$unnamed7b10c8$$setter_ = function(tmp$0){
   this._category$unnamed7b10c8$$field_ = tmp$0;
+}
+;
+unnamed7b10c8$Line$Dart.prototype.internal$getter = function(){
+  return this.internal$field;
+}
+;
+unnamed7b10c8$Line$Dart.prototype.internal$setter = function(tmp$0){
+  this.internal$field = tmp$0;
 }
 ;
 unnamed7b10c8$Line$Dart.prototype._twin1$unnamed7b10c8$$getter_ = function(){
@@ -66644,20 +67190,8 @@ unnamed7b10c8$Line$Dart.prototype._hidden$unnamed7b10c8$$setter_ = function(tmp$
   this._hidden$unnamed7b10c8$$field_ = tmp$0;
 }
 ;
-unnamed7b10c8$Line$Dart.prototype.textFontSize$getter = function(){
-  return this.textFontSize$field;
-}
-;
-unnamed7b10c8$Line$Dart.prototype.defaultLineWidth$getter = function(){
-  return this.defaultLineWidth$field;
-}
-;
-unnamed7b10c8$Line$Dart.prototype.defaultLineWidth$setter = function(tmp$0){
-  this.defaultLineWidth$field = tmp$0;
-}
-;
 unnamed7b10c8$Line$Dart.prototype.draw$member = function(){
-  var tmp$5, tmp$1, tmp$2, tmp$3, tmp$4, tmp$0;
+  var tmp$9, tmp$5, tmp$6, tmp$7, tmp$8, tmp$1, tmp$2, tmp$3, tmp$4, tmp$0;
   if (!this.isHidden$member()) {
     this.board$getter().context$getter().beginPath$named(0, $noargs);
     if (this.twin1$getter()) {
@@ -66683,10 +67217,10 @@ unnamed7b10c8$Line$Dart.prototype.draw$member = function(){
       }
     }
     if (this.isSelected$member()) {
-      this.board$getter().context$getter().setLineWidth$named(1, $noargs, ADD$operator(this.defaultLineWidth$getter(), 2));
+      this.board$getter().context$getter().lineWidth$setter(tmp$0 = ADD$operator(unnamed7b10c8$Board$Dart.DEFAULT_LINE_WIDTH$getter(), 2)) , tmp$0;
     }
      else {
-      this.board$getter().context$getter().setLineWidth$named(1, $noargs, this.defaultLineWidth$getter());
+      this.board$getter().context$getter().lineWidth$setter(tmp$1 = unnamed7b10c8$Board$Dart.DEFAULT_LINE_WIDTH$getter()) , tmp$1;
     }
     var box1box2MinMaxPoint = $Dart$Null;
     var box2box1MinMaxPoint = $Dart$Null;
@@ -66707,31 +67241,37 @@ unnamed7b10c8$Line$Dart.prototype.draw$member = function(){
     var box1box2MinMax = ADD$operator(ADD$operator(this.box1box2Min$getter(), '..'), this.box1box2Max$getter());
     var box2box1MinMax = ADD$operator(ADD$operator(this.box2box1Min$getter(), '..'), this.box2box1Max$getter());
     if (this.box1box2Id$getter()) {
-      this.board$getter().context$getter().font$setter(tmp$0 = ADD$operator(ADD$operator('bold italic ', this.textFontSize$getter()), 'px sans-serif')) , tmp$0;
+      this.board$getter().context$getter().font$setter(tmp$2 = ADD$operator(ADD$operator('bold italic ', unnamed7b10c8$Board$Dart.DEFAULT_FONT_SIZE$getter()), 'px sans-serif')) , tmp$2;
     }
      else {
       if (NE$operator(this.box1box2Min$getter(), '0')) {
-        this.board$getter().context$getter().font$setter(tmp$1 = ADD$operator(ADD$operator('bold ', this.textFontSize$getter()), 'px sans-serif')) , tmp$1;
+        this.board$getter().context$getter().font$setter(tmp$3 = ADD$operator(ADD$operator('bold ', unnamed7b10c8$Board$Dart.DEFAULT_FONT_SIZE$getter()), 'px sans-serif')) , tmp$3;
       }
        else {
-        this.board$getter().context$getter().font$setter(tmp$2 = ADD$operator(ADD$operator('', this.textFontSize$getter()), 'px sans-serif')) , tmp$2;
+        this.board$getter().context$getter().font$setter(tmp$4 = ADD$operator(ADD$operator('', unnamed7b10c8$Board$Dart.DEFAULT_FONT_SIZE$getter()), 'px sans-serif')) , tmp$4;
       }
     }
     this.board$getter().context$getter().fillText$named(3, $noargs, box1box2MinMax, box1box2MinMaxPoint.x$getter(), box1box2MinMaxPoint.y$getter());
     this.board$getter().context$getter().fillText$named(3, $noargs, this.box1box2Name$getter(), box1box2NamePoint.x$getter(), box1box2NamePoint.y$getter());
     if (this.box2box1Id$getter()) {
-      this.board$getter().context$getter().font$setter(tmp$3 = ADD$operator(ADD$operator('bold italic ', this.textFontSize$getter()), 'px sans-serif')) , tmp$3;
+      this.board$getter().context$getter().font$setter(tmp$5 = ADD$operator(ADD$operator('bold italic ', unnamed7b10c8$Board$Dart.DEFAULT_FONT_SIZE$getter()), 'px sans-serif')) , tmp$5;
     }
      else {
       if (NE$operator(this.box2box1Min$getter(), '0')) {
-        this.board$getter().context$getter().font$setter(tmp$4 = ADD$operator(ADD$operator('bold ', this.textFontSize$getter()), 'px sans-serif')) , tmp$4;
+        this.board$getter().context$getter().font$setter(tmp$6 = ADD$operator(ADD$operator('bold ', unnamed7b10c8$Board$Dart.DEFAULT_FONT_SIZE$getter()), 'px sans-serif')) , tmp$6;
       }
        else {
-        this.board$getter().context$getter().font$setter(tmp$5 = ADD$operator(ADD$operator('', this.textFontSize$getter()), 'px sans-serif')) , tmp$5;
+        this.board$getter().context$getter().font$setter(tmp$7 = ADD$operator(ADD$operator('', unnamed7b10c8$Board$Dart.DEFAULT_FONT_SIZE$getter()), 'px sans-serif')) , tmp$7;
       }
     }
     this.board$getter().context$getter().fillText$named(3, $noargs, box2box1MinMax, box2box1MinMaxPoint.x$getter(), box2box1MinMaxPoint.y$getter());
     this.board$getter().context$getter().fillText$named(3, $noargs, this.box2box1Name$getter(), box2box1NamePoint.x$getter(), box2box1NamePoint.y$getter());
+    if (!this.internal$getter()) {
+      this.board$getter().context$getter().strokeStyle$setter(tmp$8 = unnamed7b10c8$Board$Dart.SOFT_LINE_COLOR$getter()) , tmp$8;
+    }
+     else {
+      this.board$getter().context$getter().strokeStyle$setter(tmp$9 = unnamed7b10c8$Board$Dart.DEFAULT_LINE_COLOR$getter()) , tmp$9;
+    }
     this.board$getter().context$getter().stroke$named(0, $noargs);
     this.board$getter().context$getter().closePath$named(0, $noargs);
   }
@@ -66748,7 +67288,7 @@ unnamed7b10c8$Line$Dart.prototype.category$getter = function(){
 }
 ;
 unnamed7b10c8$Line$Dart.prototype.category$setter = function(category){
-  var tmp$20, tmp$24, tmp$23, tmp$22, tmp$21, tmp$27, tmp$9, tmp$28, tmp$25, tmp$26, tmp$5, tmp$6, tmp$29, tmp$7, tmp$8, tmp$1, tmp$2, tmp$3, tmp$4, tmp$0, tmp$11, tmp$10, tmp$13, tmp$36, tmp$12, tmp$34, tmp$14, tmp$35, tmp$15, tmp$32, tmp$16, tmp$33, tmp$17, tmp$30, tmp$18, tmp$31, tmp$19;
+  var tmp$20, tmp$24, tmp$23, tmp$22, tmp$21, tmp$27, tmp$9, tmp$28, tmp$25, tmp$26, tmp$5, tmp$6, tmp$29, tmp$7, tmp$8, tmp$1, tmp$2, tmp$3, tmp$4, tmp$0, tmp$11, tmp$38, tmp$10, tmp$37, tmp$13, tmp$36, tmp$12, tmp$34, tmp$14, tmp$35, tmp$15, tmp$32, tmp$16, tmp$33, tmp$17, tmp$30, tmp$18, tmp$31, tmp$19;
   this._category$unnamed7b10c8$$setter_(tmp$0 = category) , tmp$0;
   if (EQ$operator(category, 'relationship')) {
     this.box1box2Name$setter(tmp$1 = '') , tmp$1;
@@ -66778,29 +67318,31 @@ unnamed7b10c8$Line$Dart.prototype.category$setter = function(category){
      else {
       if (EQ$operator(category, 'reflexive')) {
         this.box2$setter(tmp$21 = this.box1$getter()) , tmp$21;
-        this.box1box2Name$setter(tmp$22 = this._putInEnglishPlural$unnamed7b10c8$$member_(this.box1$getter().title$getter().toLowerCase$named(0, $noargs))) , tmp$22;
-        this.box1box2Min$setter(tmp$23 = '0') , tmp$23;
-        this.box1box2Max$setter(tmp$24 = 'N') , tmp$24;
-        this.box1box2Id$setter(tmp$25 = false) , tmp$25;
-        this.box2box1Name$setter(tmp$26 = this.box1$getter().title$getter().toLowerCase$named(0, $noargs)) , tmp$26;
-        this.box2box1Min$setter(tmp$27 = '0') , tmp$27;
-        this.box2box1Max$setter(tmp$28 = '1') , tmp$28;
-        this.box2box1Id$setter(tmp$29 = false) , tmp$29;
-        this._twin1$unnamed7b10c8$$setter_(tmp$30 = false) , tmp$30;
-        this._twin2$unnamed7b10c8$$setter_(tmp$31 = false) , tmp$31;
+        this.internal$setter(tmp$22 = true) , tmp$22;
+        this.box1box2Name$setter(tmp$23 = this._putInEnglishPlural$unnamed7b10c8$$member_(this.box1$getter().title$getter().toLowerCase$named(0, $noargs))) , tmp$23;
+        this.box1box2Min$setter(tmp$24 = '0') , tmp$24;
+        this.box1box2Max$setter(tmp$25 = 'N') , tmp$25;
+        this.box1box2Id$setter(tmp$26 = false) , tmp$26;
+        this.box2box1Name$setter(tmp$27 = this.box1$getter().title$getter().toLowerCase$named(0, $noargs)) , tmp$27;
+        this.box2box1Min$setter(tmp$28 = '0') , tmp$28;
+        this.box2box1Max$setter(tmp$29 = '1') , tmp$29;
+        this.box2box1Id$setter(tmp$30 = false) , tmp$30;
+        this._twin1$unnamed7b10c8$$setter_(tmp$31 = false) , tmp$31;
+        this._twin2$unnamed7b10c8$$setter_(tmp$32 = false) , tmp$32;
       }
        else {
         if (EQ$operator(category, 'twin')) {
           var twinLine = this.board$getter().findTwinLine$named(1, $noargs, this);
           if (NE$operator(twinLine, $Dart$Null)) {
             if (twinLine.twin$getter()) {
-              this._twin1$unnamed7b10c8$$setter_(tmp$32 = false) , tmp$32;
-              this._twin2$unnamed7b10c8$$setter_(tmp$33 = true) , tmp$33;
+              this._twin1$unnamed7b10c8$$setter_(tmp$33 = false) , tmp$33;
+              this._twin2$unnamed7b10c8$$setter_(tmp$34 = true) , tmp$34;
+              twinLine.twin1$setter(tmp$35 = true) , tmp$35;
+              twinLine.twin2$setter(tmp$36 = false) , tmp$36;
             }
              else {
-              this._twin1$unnamed7b10c8$$setter_(tmp$34 = true) , tmp$34;
-              this._twin2$unnamed7b10c8$$setter_(tmp$35 = false) , tmp$35;
-              twinLine.category$setter(tmp$36 = 'twin') , tmp$36;
+              this._twin1$unnamed7b10c8$$setter_(tmp$37 = true) , tmp$37;
+              this._twin2$unnamed7b10c8$$setter_(tmp$38 = false) , tmp$38;
             }
           }
         }
@@ -66825,12 +67367,46 @@ unnamed7b10c8$Line$Dart.prototype.twin1$getter = function(){
   return this._twin1$unnamed7b10c8$$getter_();
 }
 ;
+unnamed7b10c8$Line$Dart.prototype.twin1$setter = function(twin1){
+  var tmp$0;
+  this._twin1$unnamed7b10c8$$setter_(tmp$0 = twin1) , tmp$0;
+}
+;
 unnamed7b10c8$Line$Dart.prototype.twin2$named = function(){
   return this.twin2$getter().apply(this, arguments);
 }
 ;
 unnamed7b10c8$Line$Dart.prototype.twin2$getter = function(){
   return this._twin2$unnamed7b10c8$$getter_();
+}
+;
+unnamed7b10c8$Line$Dart.prototype.twin2$setter = function(twin2){
+  var tmp$0;
+  this._twin2$unnamed7b10c8$$setter_(tmp$0 = twin2) , tmp$0;
+}
+;
+unnamed7b10c8$Line$Dart.prototype.toJson$member = function(){
+  var tmp$9, tmp$5, tmp$6, tmp$7, tmp$8, tmp$1, tmp$2, tmp$3, tmp$4, tmp$11, tmp$10, tmp$0;
+  var lineMap = HashMapImplementation$Dart.HashMapImplementation$$Factory(HashMapImplementation$Dart.$lookupRTT([String$Dart.$lookupRTT(), Object.$lookupRTT()]));
+  lineMap.ASSIGN_INDEX$operator('box1Name', tmp$0 = this.box1$getter().title$getter()) , tmp$0;
+  lineMap.ASSIGN_INDEX$operator('box2Name', tmp$1 = this.box2$getter().title$getter()) , tmp$1;
+  lineMap.ASSIGN_INDEX$operator('category', tmp$2 = this.category$getter()) , tmp$2;
+  lineMap.ASSIGN_INDEX$operator('internal', tmp$3 = this.internal$getter()) , tmp$3;
+  lineMap.ASSIGN_INDEX$operator('box1box2Name', tmp$4 = this.box1box2Name$getter()) , tmp$4;
+  lineMap.ASSIGN_INDEX$operator('box1box2Min', tmp$5 = this.box1box2Min$getter()) , tmp$5;
+  lineMap.ASSIGN_INDEX$operator('box1box2Max', tmp$6 = this.box1box2Max$getter()) , tmp$6;
+  lineMap.ASSIGN_INDEX$operator('box1box2Id', tmp$7 = this.box1box2Id$getter()) , tmp$7;
+  lineMap.ASSIGN_INDEX$operator('box2box1Name', tmp$8 = this.box2box1Name$getter()) , tmp$8;
+  lineMap.ASSIGN_INDEX$operator('box2box1Min', tmp$9 = this.box2box1Min$getter()) , tmp$9;
+  lineMap.ASSIGN_INDEX$operator('box2box1Max', tmp$10 = this.box2box1Max$getter()) , tmp$10;
+  lineMap.ASSIGN_INDEX$operator('box2box1Id', tmp$11 = this.box2box1Id$getter()) , tmp$11;
+  return lineMap;
+}
+;
+unnamed7b10c8$Line$Dart.prototype.toJson$named = function($n, $o){
+  if ($o.count || $n != 0)
+    $nsme();
+  return unnamed7b10c8$Line$Dart.prototype.toJson$member.call(this);
 }
 ;
 unnamed7b10c8$Line$Dart.prototype.select$member = function(){
@@ -67161,7 +67737,7 @@ unnamed7b10c8$MenuBar$Dart.$lookupRTT = function(){
 }
 ;
 function unnamed7b10c8$MenuBar$Dart$$c0$26_26$HoistedConstructor(e){
-  this.board$getter().saveAsPng$named(0, $noargs);
+  this.board$getter().deleteSelection$named(0, $noargs);
 }
 function unnamed7b10c8$MenuBar$Dart$$c0$26_26$HoistedConstructor$named($n, $o, e){
   if ($o.count || $n != 1)
@@ -67172,7 +67748,7 @@ function unnamed7b10c8$MenuBar$Dart$$c0$26_26$HoistedConstructor$named$named_$lo
   return RTT.createFunction([htmld071c1$MouseEvent$Dart.$lookupRTT()], RTT.dynamicType);
 }
 function unnamed7b10c8$MenuBar$Dart$$c1$26_26$HoistedConstructor(e){
-  this.board$getter().deleteSelection$named(0, $noargs);
+  this.board$getter().select$named(0, $noargs);
 }
 function unnamed7b10c8$MenuBar$Dart$$c1$26_26$HoistedConstructor$named($n, $o, e){
   if ($o.count || $n != 1)
@@ -67183,7 +67759,7 @@ function unnamed7b10c8$MenuBar$Dart$$c1$26_26$HoistedConstructor$named$named_$lo
   return RTT.createFunction([htmld071c1$MouseEvent$Dart.$lookupRTT()], RTT.dynamicType);
 }
 function unnamed7b10c8$MenuBar$Dart$$c2$26_26$HoistedConstructor(e){
-  this.board$getter().select$named(0, $noargs);
+  this.board$getter().selectBoxes$named(0, $noargs);
 }
 function unnamed7b10c8$MenuBar$Dart$$c2$26_26$HoistedConstructor$named($n, $o, e){
   if ($o.count || $n != 1)
@@ -67194,7 +67770,7 @@ function unnamed7b10c8$MenuBar$Dart$$c2$26_26$HoistedConstructor$named$named_$lo
   return RTT.createFunction([htmld071c1$MouseEvent$Dart.$lookupRTT()], RTT.dynamicType);
 }
 function unnamed7b10c8$MenuBar$Dart$$c3$26_26$HoistedConstructor(e){
-  this.board$getter().selectBoxes$named(0, $noargs);
+  this.board$getter().selectLines$named(0, $noargs);
 }
 function unnamed7b10c8$MenuBar$Dart$$c3$26_26$HoistedConstructor$named($n, $o, e){
   if ($o.count || $n != 1)
@@ -67205,7 +67781,7 @@ function unnamed7b10c8$MenuBar$Dart$$c3$26_26$HoistedConstructor$named$named_$lo
   return RTT.createFunction([htmld071c1$MouseEvent$Dart.$lookupRTT()], RTT.dynamicType);
 }
 function unnamed7b10c8$MenuBar$Dart$$c4$26_26$HoistedConstructor(e){
-  this.board$getter().selectLines$named(0, $noargs);
+  this.board$getter().selectBoxLines$named(0, $noargs);
 }
 function unnamed7b10c8$MenuBar$Dart$$c4$26_26$HoistedConstructor$named($n, $o, e){
   if ($o.count || $n != 1)
@@ -67216,7 +67792,7 @@ function unnamed7b10c8$MenuBar$Dart$$c4$26_26$HoistedConstructor$named$named_$lo
   return RTT.createFunction([htmld071c1$MouseEvent$Dart.$lookupRTT()], RTT.dynamicType);
 }
 function unnamed7b10c8$MenuBar$Dart$$c5$26_26$HoistedConstructor(e){
-  this.board$getter().selectBoxLines$named(0, $noargs);
+  this.board$getter().selectLinesBetweenBoxes$named(0, $noargs);
 }
 function unnamed7b10c8$MenuBar$Dart$$c5$26_26$HoistedConstructor$named($n, $o, e){
   if ($o.count || $n != 1)
@@ -67227,7 +67803,7 @@ function unnamed7b10c8$MenuBar$Dart$$c5$26_26$HoistedConstructor$named$named_$lo
   return RTT.createFunction([htmld071c1$MouseEvent$Dart.$lookupRTT()], RTT.dynamicType);
 }
 function unnamed7b10c8$MenuBar$Dart$$c6$26_26$HoistedConstructor(e){
-  this.board$getter().selectLinesBetweenBoxes$named(0, $noargs);
+  this.board$getter().increaseHeightOfSelectedBoxes$named(0, $noargs);
 }
 function unnamed7b10c8$MenuBar$Dart$$c6$26_26$HoistedConstructor$named($n, $o, e){
   if ($o.count || $n != 1)
@@ -67238,7 +67814,7 @@ function unnamed7b10c8$MenuBar$Dart$$c6$26_26$HoistedConstructor$named$named_$lo
   return RTT.createFunction([htmld071c1$MouseEvent$Dart.$lookupRTT()], RTT.dynamicType);
 }
 function unnamed7b10c8$MenuBar$Dart$$c7$26_26$HoistedConstructor(e){
-  this.board$getter().increaseHeightOfSelectedBoxes$named(0, $noargs);
+  this.board$getter().decreaseHeightOfSelectedBoxes$named(0, $noargs);
 }
 function unnamed7b10c8$MenuBar$Dart$$c7$26_26$HoistedConstructor$named($n, $o, e){
   if ($o.count || $n != 1)
@@ -67249,7 +67825,7 @@ function unnamed7b10c8$MenuBar$Dart$$c7$26_26$HoistedConstructor$named$named_$lo
   return RTT.createFunction([htmld071c1$MouseEvent$Dart.$lookupRTT()], RTT.dynamicType);
 }
 function unnamed7b10c8$MenuBar$Dart$$c8$26_26$HoistedConstructor(e){
-  this.board$getter().decreaseHeightOfSelectedBoxes$named(0, $noargs);
+  this.board$getter().increaseWidthOfSelectedBoxes$named(0, $noargs);
 }
 function unnamed7b10c8$MenuBar$Dart$$c8$26_26$HoistedConstructor$named($n, $o, e){
   if ($o.count || $n != 1)
@@ -67260,7 +67836,7 @@ function unnamed7b10c8$MenuBar$Dart$$c8$26_26$HoistedConstructor$named$named_$lo
   return RTT.createFunction([htmld071c1$MouseEvent$Dart.$lookupRTT()], RTT.dynamicType);
 }
 function unnamed7b10c8$MenuBar$Dart$$c9$26_26$HoistedConstructor(e){
-  this.board$getter().increaseWidthOfSelectedBoxes$named(0, $noargs);
+  this.board$getter().decreaseWidthOfSelectedBoxes$named(0, $noargs);
 }
 function unnamed7b10c8$MenuBar$Dart$$c9$26_26$HoistedConstructor$named($n, $o, e){
   if ($o.count || $n != 1)
@@ -67271,7 +67847,7 @@ function unnamed7b10c8$MenuBar$Dart$$c9$26_26$HoistedConstructor$named$named_$lo
   return RTT.createFunction([htmld071c1$MouseEvent$Dart.$lookupRTT()], RTT.dynamicType);
 }
 function unnamed7b10c8$MenuBar$Dart$$c10$26_26$HoistedConstructor(e){
-  this.board$getter().decreaseWidthOfSelectedBoxes$named(0, $noargs);
+  this.board$getter().increaseSizeOfSelectedBoxes$named(0, $noargs);
 }
 function unnamed7b10c8$MenuBar$Dart$$c10$26_26$HoistedConstructor$named($n, $o, e){
   if ($o.count || $n != 1)
@@ -67282,7 +67858,7 @@ function unnamed7b10c8$MenuBar$Dart$$c10$26_26$HoistedConstructor$named$named_$l
   return RTT.createFunction([htmld071c1$MouseEvent$Dart.$lookupRTT()], RTT.dynamicType);
 }
 function unnamed7b10c8$MenuBar$Dart$$c11$26_26$HoistedConstructor(e){
-  this.board$getter().increaseSizeOfSelectedBoxes$named(0, $noargs);
+  this.board$getter().decreaseSizeOfSelectedBoxes$named(0, $noargs);
 }
 function unnamed7b10c8$MenuBar$Dart$$c11$26_26$HoistedConstructor$named($n, $o, e){
   if ($o.count || $n != 1)
@@ -67293,7 +67869,7 @@ function unnamed7b10c8$MenuBar$Dart$$c11$26_26$HoistedConstructor$named$named_$l
   return RTT.createFunction([htmld071c1$MouseEvent$Dart.$lookupRTT()], RTT.dynamicType);
 }
 function unnamed7b10c8$MenuBar$Dart$$c12$26_26$HoistedConstructor(e){
-  this.board$getter().decreaseSizeOfSelectedBoxes$named(0, $noargs);
+  this.board$getter().hideSelection$named(0, $noargs);
 }
 function unnamed7b10c8$MenuBar$Dart$$c12$26_26$HoistedConstructor$named($n, $o, e){
   if ($o.count || $n != 1)
@@ -67304,7 +67880,7 @@ function unnamed7b10c8$MenuBar$Dart$$c12$26_26$HoistedConstructor$named$named_$l
   return RTT.createFunction([htmld071c1$MouseEvent$Dart.$lookupRTT()], RTT.dynamicType);
 }
 function unnamed7b10c8$MenuBar$Dart$$c13$26_26$HoistedConstructor(e){
-  this.board$getter().hideSelection$named(0, $noargs);
+  this.board$getter().hideNonSelection$named(0, $noargs);
 }
 function unnamed7b10c8$MenuBar$Dart$$c13$26_26$HoistedConstructor$named($n, $o, e){
   if ($o.count || $n != 1)
@@ -67315,7 +67891,7 @@ function unnamed7b10c8$MenuBar$Dart$$c13$26_26$HoistedConstructor$named$named_$l
   return RTT.createFunction([htmld071c1$MouseEvent$Dart.$lookupRTT()], RTT.dynamicType);
 }
 function unnamed7b10c8$MenuBar$Dart$$c14$26_26$HoistedConstructor(e){
-  this.board$getter().showHiddenSelection$named(0, $noargs);
+  this.board$getter().showHidden$named(0, $noargs);
 }
 function unnamed7b10c8$MenuBar$Dart$$c14$26_26$HoistedConstructor$named($n, $o, e){
   if ($o.count || $n != 1)
@@ -67349,38 +67925,38 @@ function unnamed7b10c8$MenuBar$Dart$$c16$26_26$HoistedConstructor$named$named_$l
 }
 unnamed7b10c8$MenuBar$Dart.$Constructor = function(board){
   var tmp$11, tmp$10, tmp$13, tmp$12, tmp$14, tmp$9, tmp$15, tmp$16, tmp$5, tmp$6, tmp$7, tmp$8, tmp$1, tmp$2, tmp$3, tmp$4, tmp$0;
-  this.saveAsPngButton$setter(tmp$0 = htmld071c1$document$getter().query$named(1, $noargs, '#save-as-png')) , tmp$0;
-  this.deleteSelectionButton$setter(tmp$1 = htmld071c1$document$getter().query$named(1, $noargs, '#delete-selection')) , tmp$1;
-  this.selectAllButton$setter(tmp$2 = htmld071c1$document$getter().query$named(1, $noargs, '#select-all')) , tmp$2;
-  this.selectBoxesButton$setter(tmp$3 = htmld071c1$document$getter().query$named(1, $noargs, '#select-boxes')) , tmp$3;
-  this.selectLinesButton$setter(tmp$4 = htmld071c1$document$getter().query$named(1, $noargs, '#select-lines')) , tmp$4;
-  this.selectBoxLinesButton$setter(tmp$5 = htmld071c1$document$getter().query$named(1, $noargs, '#select-box-lines')) , tmp$5;
-  this.selectLinesBetweenBoxesButton$setter(tmp$6 = htmld071c1$document$getter().query$named(1, $noargs, '#select-lines-between-boxes')) , tmp$6;
-  this.increaseSelectionHeightButton$setter(tmp$7 = htmld071c1$document$getter().query$named(1, $noargs, '#increase-selection-height')) , tmp$7;
-  this.decreaseSelectionHeightButton$setter(tmp$8 = htmld071c1$document$getter().query$named(1, $noargs, '#decrease-selection-height')) , tmp$8;
-  this.increaseSelectionWidthButton$setter(tmp$9 = htmld071c1$document$getter().query$named(1, $noargs, '#increase-selection-width')) , tmp$9;
-  this.decreaseSelectionWidthButton$setter(tmp$10 = htmld071c1$document$getter().query$named(1, $noargs, '#decrease-selection-width')) , tmp$10;
-  this.increaseSelectionSizeButton$setter(tmp$11 = htmld071c1$document$getter().query$named(1, $noargs, '#increase-selection-size')) , tmp$11;
-  this.decreaseSelectionSizeButton$setter(tmp$12 = htmld071c1$document$getter().query$named(1, $noargs, '#decrease-selection-size')) , tmp$12;
-  this.hideSelectionButton$setter(tmp$13 = htmld071c1$document$getter().query$named(1, $noargs, '#hide-selection')) , tmp$13;
-  this.showHiddenSelectionButton$setter(tmp$14 = htmld071c1$document$getter().query$named(1, $noargs, '#show-hidden-selection')) , tmp$14;
+  this.deleteSelectionButton$setter(tmp$0 = htmld071c1$document$getter().query$named(1, $noargs, '#delete-selection')) , tmp$0;
+  this.selectAllButton$setter(tmp$1 = htmld071c1$document$getter().query$named(1, $noargs, '#select-all')) , tmp$1;
+  this.selectBoxesButton$setter(tmp$2 = htmld071c1$document$getter().query$named(1, $noargs, '#select-boxes')) , tmp$2;
+  this.selectLinesButton$setter(tmp$3 = htmld071c1$document$getter().query$named(1, $noargs, '#select-lines')) , tmp$3;
+  this.selectBoxLinesButton$setter(tmp$4 = htmld071c1$document$getter().query$named(1, $noargs, '#select-box-lines')) , tmp$4;
+  this.selectLinesBetweenBoxesButton$setter(tmp$5 = htmld071c1$document$getter().query$named(1, $noargs, '#select-lines-between-boxes')) , tmp$5;
+  this.increaseSelectionHeightButton$setter(tmp$6 = htmld071c1$document$getter().query$named(1, $noargs, '#increase-selection-height')) , tmp$6;
+  this.decreaseSelectionHeightButton$setter(tmp$7 = htmld071c1$document$getter().query$named(1, $noargs, '#decrease-selection-height')) , tmp$7;
+  this.increaseSelectionWidthButton$setter(tmp$8 = htmld071c1$document$getter().query$named(1, $noargs, '#increase-selection-width')) , tmp$8;
+  this.decreaseSelectionWidthButton$setter(tmp$9 = htmld071c1$document$getter().query$named(1, $noargs, '#decrease-selection-width')) , tmp$9;
+  this.increaseSelectionSizeButton$setter(tmp$10 = htmld071c1$document$getter().query$named(1, $noargs, '#increase-selection-size')) , tmp$10;
+  this.decreaseSelectionSizeButton$setter(tmp$11 = htmld071c1$document$getter().query$named(1, $noargs, '#decrease-selection-size')) , tmp$11;
+  this.hideSelectionButton$setter(tmp$12 = htmld071c1$document$getter().query$named(1, $noargs, '#hide-selection')) , tmp$12;
+  this.hideNonSelectionButton$setter(tmp$13 = htmld071c1$document$getter().query$named(1, $noargs, '#hide-non-selection')) , tmp$13;
+  this.showHiddenButton$setter(tmp$14 = htmld071c1$document$getter().query$named(1, $noargs, '#show-hidden')) , tmp$14;
   this.createBoxesInDiagonalButton$setter(tmp$15 = htmld071c1$document$getter().query$named(1, $noargs, '#create-boxes-in-diagonal')) , tmp$15;
   this.createBoxesAsTilesButton$setter(tmp$16 = htmld071c1$document$getter().query$named(1, $noargs, '#create-boxes-as-tiles')) , tmp$16;
-  this.saveAsPngButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$MenuBar$Dart$$c0$26_26$HoistedConstructor$named, unnamed7b10c8$MenuBar$Dart$$c0$26_26$HoistedConstructor$named$named_$lookupRTT, this));
-  this.deleteSelectionButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$MenuBar$Dart$$c1$26_26$HoistedConstructor$named, unnamed7b10c8$MenuBar$Dart$$c1$26_26$HoistedConstructor$named$named_$lookupRTT, this));
-  this.selectAllButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$MenuBar$Dart$$c2$26_26$HoistedConstructor$named, unnamed7b10c8$MenuBar$Dart$$c2$26_26$HoistedConstructor$named$named_$lookupRTT, this));
-  this.selectBoxesButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$MenuBar$Dart$$c3$26_26$HoistedConstructor$named, unnamed7b10c8$MenuBar$Dart$$c3$26_26$HoistedConstructor$named$named_$lookupRTT, this));
-  this.selectLinesButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$MenuBar$Dart$$c4$26_26$HoistedConstructor$named, unnamed7b10c8$MenuBar$Dart$$c4$26_26$HoistedConstructor$named$named_$lookupRTT, this));
-  this.selectBoxLinesButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$MenuBar$Dart$$c5$26_26$HoistedConstructor$named, unnamed7b10c8$MenuBar$Dart$$c5$26_26$HoistedConstructor$named$named_$lookupRTT, this));
-  this.selectLinesBetweenBoxesButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$MenuBar$Dart$$c6$26_26$HoistedConstructor$named, unnamed7b10c8$MenuBar$Dart$$c6$26_26$HoistedConstructor$named$named_$lookupRTT, this));
-  this.increaseSelectionHeightButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$MenuBar$Dart$$c7$26_26$HoistedConstructor$named, unnamed7b10c8$MenuBar$Dart$$c7$26_26$HoistedConstructor$named$named_$lookupRTT, this));
-  this.decreaseSelectionHeightButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$MenuBar$Dart$$c8$26_26$HoistedConstructor$named, unnamed7b10c8$MenuBar$Dart$$c8$26_26$HoistedConstructor$named$named_$lookupRTT, this));
-  this.increaseSelectionWidthButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$MenuBar$Dart$$c9$26_26$HoistedConstructor$named, unnamed7b10c8$MenuBar$Dart$$c9$26_26$HoistedConstructor$named$named_$lookupRTT, this));
-  this.decreaseSelectionWidthButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$MenuBar$Dart$$c10$26_26$HoistedConstructor$named, unnamed7b10c8$MenuBar$Dart$$c10$26_26$HoistedConstructor$named$named_$lookupRTT, this));
-  this.increaseSelectionSizeButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$MenuBar$Dart$$c11$26_26$HoistedConstructor$named, unnamed7b10c8$MenuBar$Dart$$c11$26_26$HoistedConstructor$named$named_$lookupRTT, this));
-  this.decreaseSelectionSizeButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$MenuBar$Dart$$c12$26_26$HoistedConstructor$named, unnamed7b10c8$MenuBar$Dart$$c12$26_26$HoistedConstructor$named$named_$lookupRTT, this));
-  this.hideSelectionButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$MenuBar$Dart$$c13$26_26$HoistedConstructor$named, unnamed7b10c8$MenuBar$Dart$$c13$26_26$HoistedConstructor$named$named_$lookupRTT, this));
-  this.showHiddenSelectionButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$MenuBar$Dart$$c14$26_26$HoistedConstructor$named, unnamed7b10c8$MenuBar$Dart$$c14$26_26$HoistedConstructor$named$named_$lookupRTT, this));
+  this.deleteSelectionButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$MenuBar$Dart$$c0$26_26$HoistedConstructor$named, unnamed7b10c8$MenuBar$Dart$$c0$26_26$HoistedConstructor$named$named_$lookupRTT, this));
+  this.selectAllButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$MenuBar$Dart$$c1$26_26$HoistedConstructor$named, unnamed7b10c8$MenuBar$Dart$$c1$26_26$HoistedConstructor$named$named_$lookupRTT, this));
+  this.selectBoxesButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$MenuBar$Dart$$c2$26_26$HoistedConstructor$named, unnamed7b10c8$MenuBar$Dart$$c2$26_26$HoistedConstructor$named$named_$lookupRTT, this));
+  this.selectLinesButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$MenuBar$Dart$$c3$26_26$HoistedConstructor$named, unnamed7b10c8$MenuBar$Dart$$c3$26_26$HoistedConstructor$named$named_$lookupRTT, this));
+  this.selectBoxLinesButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$MenuBar$Dart$$c4$26_26$HoistedConstructor$named, unnamed7b10c8$MenuBar$Dart$$c4$26_26$HoistedConstructor$named$named_$lookupRTT, this));
+  this.selectLinesBetweenBoxesButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$MenuBar$Dart$$c5$26_26$HoistedConstructor$named, unnamed7b10c8$MenuBar$Dart$$c5$26_26$HoistedConstructor$named$named_$lookupRTT, this));
+  this.increaseSelectionHeightButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$MenuBar$Dart$$c6$26_26$HoistedConstructor$named, unnamed7b10c8$MenuBar$Dart$$c6$26_26$HoistedConstructor$named$named_$lookupRTT, this));
+  this.decreaseSelectionHeightButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$MenuBar$Dart$$c7$26_26$HoistedConstructor$named, unnamed7b10c8$MenuBar$Dart$$c7$26_26$HoistedConstructor$named$named_$lookupRTT, this));
+  this.increaseSelectionWidthButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$MenuBar$Dart$$c8$26_26$HoistedConstructor$named, unnamed7b10c8$MenuBar$Dart$$c8$26_26$HoistedConstructor$named$named_$lookupRTT, this));
+  this.decreaseSelectionWidthButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$MenuBar$Dart$$c9$26_26$HoistedConstructor$named, unnamed7b10c8$MenuBar$Dart$$c9$26_26$HoistedConstructor$named$named_$lookupRTT, this));
+  this.increaseSelectionSizeButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$MenuBar$Dart$$c10$26_26$HoistedConstructor$named, unnamed7b10c8$MenuBar$Dart$$c10$26_26$HoistedConstructor$named$named_$lookupRTT, this));
+  this.decreaseSelectionSizeButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$MenuBar$Dart$$c11$26_26$HoistedConstructor$named, unnamed7b10c8$MenuBar$Dart$$c11$26_26$HoistedConstructor$named$named_$lookupRTT, this));
+  this.hideSelectionButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$MenuBar$Dart$$c12$26_26$HoistedConstructor$named, unnamed7b10c8$MenuBar$Dart$$c12$26_26$HoistedConstructor$named$named_$lookupRTT, this));
+  this.hideNonSelectionButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$MenuBar$Dart$$c13$26_26$HoistedConstructor$named, unnamed7b10c8$MenuBar$Dart$$c13$26_26$HoistedConstructor$named$named_$lookupRTT, this));
+  this.showHiddenButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$MenuBar$Dart$$c14$26_26$HoistedConstructor$named, unnamed7b10c8$MenuBar$Dart$$c14$26_26$HoistedConstructor$named$named_$lookupRTT, this));
   this.createBoxesInDiagonalButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$MenuBar$Dart$$c15$26_26$HoistedConstructor$named, unnamed7b10c8$MenuBar$Dart$$c15$26_26$HoistedConstructor$named$named_$lookupRTT, this));
   this.createBoxesAsTilesButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$MenuBar$Dart$$c16$26_26$HoistedConstructor$named, unnamed7b10c8$MenuBar$Dart$$c16$26_26$HoistedConstructor$named$named_$lookupRTT, this));
 }
@@ -67399,14 +67975,6 @@ unnamed7b10c8$MenuBar$Dart.MenuBar$$Factory = function(board){
 ;
 unnamed7b10c8$MenuBar$Dart.prototype.board$getter = function(){
   return this.board$field;
-}
-;
-unnamed7b10c8$MenuBar$Dart.prototype.saveAsPngButton$getter = function(){
-  return this.saveAsPngButton$field;
-}
-;
-unnamed7b10c8$MenuBar$Dart.prototype.saveAsPngButton$setter = function(tmp$0){
-  this.saveAsPngButton$field = tmp$0;
 }
 ;
 unnamed7b10c8$MenuBar$Dart.prototype.deleteSelectionButton$getter = function(){
@@ -67513,12 +68081,20 @@ unnamed7b10c8$MenuBar$Dart.prototype.hideSelectionButton$setter = function(tmp$0
   this.hideSelectionButton$field = tmp$0;
 }
 ;
-unnamed7b10c8$MenuBar$Dart.prototype.showHiddenSelectionButton$getter = function(){
-  return this.showHiddenSelectionButton$field;
+unnamed7b10c8$MenuBar$Dart.prototype.hideNonSelectionButton$getter = function(){
+  return this.hideNonSelectionButton$field;
 }
 ;
-unnamed7b10c8$MenuBar$Dart.prototype.showHiddenSelectionButton$setter = function(tmp$0){
-  this.showHiddenSelectionButton$field = tmp$0;
+unnamed7b10c8$MenuBar$Dart.prototype.hideNonSelectionButton$setter = function(tmp$0){
+  this.hideNonSelectionButton$field = tmp$0;
+}
+;
+unnamed7b10c8$MenuBar$Dart.prototype.showHiddenButton$getter = function(){
+  return this.showHiddenButton$field;
+}
+;
+unnamed7b10c8$MenuBar$Dart.prototype.showHiddenButton$setter = function(tmp$0){
+  this.showHiddenButton$field = tmp$0;
 }
 ;
 unnamed7b10c8$MenuBar$Dart.prototype.createBoxesInDiagonalButton$getter = function(){
@@ -67535,6 +68111,59 @@ unnamed7b10c8$MenuBar$Dart.prototype.createBoxesAsTilesButton$getter = function(
 ;
 unnamed7b10c8$MenuBar$Dart.prototype.createBoxesAsTilesButton$setter = function(tmp$0){
   this.createBoxesAsTilesButton$field = tmp$0;
+}
+;
+function unnamed7b10c8$PngPanel$Dart(){
+}
+unnamed7b10c8$PngPanel$Dart.$lookupRTT = function(){
+  return RTT.create($cls('unnamed7b10c8$PngPanel$Dart'));
+}
+;
+function unnamed7b10c8$PngPanel$Dart$$c0$27_27$HoistedConstructor(e){
+  this.toPng$member();
+}
+function unnamed7b10c8$PngPanel$Dart$$c0$27_27$HoistedConstructor$named($n, $o, e){
+  if ($o.count || $n != 1)
+    $nsme();
+  return unnamed7b10c8$PngPanel$Dart$$c0$27_27$HoistedConstructor.call(this, e);
+}
+function unnamed7b10c8$PngPanel$Dart$$c0$27_27$HoistedConstructor$named$named_$lookupRTT(){
+  return RTT.createFunction([htmld071c1$MouseEvent$Dart.$lookupRTT()], RTT.dynamicType);
+}
+unnamed7b10c8$PngPanel$Dart.$Constructor = function(board){
+  var tmp$0;
+  this.fromModelToPngButton$setter(tmp$0 = htmld071c1$document$getter().query$named(1, $noargs, '#fromModelToPng')) , tmp$0;
+  this.fromModelToPngButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$PngPanel$Dart$$c0$27_27$HoistedConstructor$named, unnamed7b10c8$PngPanel$Dart$$c0$27_27$HoistedConstructor$named$named_$lookupRTT, this));
+}
+;
+unnamed7b10c8$PngPanel$Dart.$Initializer = function(board){
+  this.board$field = board;
+}
+;
+unnamed7b10c8$PngPanel$Dart.PngPanel$$Factory = function(board){
+  var tmp$0 = new unnamed7b10c8$PngPanel$Dart;
+  tmp$0.$typeInfo = unnamed7b10c8$PngPanel$Dart.$lookupRTT();
+  unnamed7b10c8$PngPanel$Dart.$Initializer.call(tmp$0, board);
+  unnamed7b10c8$PngPanel$Dart.$Constructor.call(tmp$0, board);
+  return tmp$0;
+}
+;
+unnamed7b10c8$PngPanel$Dart.prototype.board$getter = function(){
+  return this.board$field;
+}
+;
+unnamed7b10c8$PngPanel$Dart.prototype.fromModelToPngButton$getter = function(){
+  return this.fromModelToPngButton$field;
+}
+;
+unnamed7b10c8$PngPanel$Dart.prototype.fromModelToPngButton$setter = function(tmp$0){
+  this.fromModelToPngButton$field = tmp$0;
+}
+;
+unnamed7b10c8$PngPanel$Dart.prototype.toPng$member = function(){
+  var tmp$0;
+  var modelImage = htmld071c1$document$getter().query$named(1, $noargs, '#modelImage');
+  modelImage.src$setter(tmp$0 = this.board$getter().canvas$getter().toDataURL$named(1, $noargs, 'image/png')) , tmp$0;
 }
 ;
 function unnamed7b10c8$ToolBar$Dart(){
@@ -67640,14 +68269,15 @@ function unnamed7b10c8$ToolBar$Dart$$c7$26_26$HoistedConstructor$named$named_$lo
   return RTT.createFunction([htmld071c1$Event$Dart.$lookupRTT()], RTT.dynamicType);
 }
 function unnamed7b10c8$ToolBar$Dart$$c8$26_26$HoistedConstructor(e){
-  var tmp$1, tmp$2, tmp$3, tmp$4, tmp$0;
+  var tmp$5, tmp$1, tmp$2, tmp$3, tmp$4, tmp$0;
   var box = this.board$getter().lastBoxSelected$getter();
   if (NE$operator(box, $Dart$Null)) {
     this.boxNameInput$getter().value$setter(tmp$0 = box.title$getter()) , tmp$0;
-    this.currentItem$setter(tmp$1 = $Dart$Null) , tmp$1;
-    this.itemSequenceInput$getter().valueAsNumber$setter(tmp$2 = 0) , tmp$2;
+    this.boxEntryCheckbox$getter().checked$setter(tmp$1 = box.entry$getter()) , tmp$1;
+    this.currentItem$setter(tmp$2 = $Dart$Null) , tmp$2;
     this.itemNameInput$getter().value$setter(tmp$3 = '') , tmp$3;
     this.itemOption$getter().value$setter(tmp$4 = 'attribute') , tmp$4;
+    this.itemInitInput$getter().value$setter(tmp$5 = '') , tmp$5;
   }
 }
 function unnamed7b10c8$ToolBar$Dart$$c8$26_26$HoistedConstructor$named($n, $o, e){
@@ -67662,7 +68292,13 @@ function unnamed7b10c8$ToolBar$Dart$$c9$26_26$HoistedConstructor(e){
   var tmp$0;
   var box = this.board$getter().lastBoxSelected$getter();
   if (NE$operator(box, $Dart$Null)) {
-    box.title$setter(tmp$0 = this.boxNameInput$getter().value$getter()) , tmp$0;
+    var boxName = this.boxNameInput$getter().value$getter().trim$named(0, $noargs);
+    if (NE$operator(boxName, '')) {
+      var otherBox = this.board$getter().findBox$named(1, $noargs, boxName);
+      if (EQ$operator(otherBox, $Dart$Null)) {
+        box.title$setter(tmp$0 = boxName) , tmp$0;
+      }
+    }
   }
 }
 function unnamed7b10c8$ToolBar$Dart$$c9$26_26$HoistedConstructor$named($n, $o, e){
@@ -67674,11 +68310,10 @@ function unnamed7b10c8$ToolBar$Dart$$c9$26_26$HoistedConstructor$named$named_$lo
   return RTT.createFunction([htmld071c1$Event$Dart.$lookupRTT()], RTT.dynamicType);
 }
 function unnamed7b10c8$ToolBar$Dart$$c10$26_26$HoistedConstructor(e){
-  var tmp$1, tmp$0;
-  if (NE$operator(this.currentItem$getter(), $Dart$Null)) {
-    this.currentItem$getter().name$setter(tmp$0 = this.itemNameInput$getter().value$getter()) , tmp$0;
-    this.currentItem$getter().category$setter(tmp$1 = this.itemOption$getter().value$getter()) , tmp$1;
-    this.itemNameInput$getter().select$named(0, $noargs);
+  var tmp$0;
+  var box = this.board$getter().lastBoxSelected$getter();
+  if (NE$operator(box, $Dart$Null)) {
+    box.entry$setter(tmp$0 = this.boxEntryCheckbox$getter().checked$getter()) , tmp$0;
   }
 }
 function unnamed7b10c8$ToolBar$Dart$$c10$26_26$HoistedConstructor$named($n, $o, e){
@@ -67687,15 +68322,16 @@ function unnamed7b10c8$ToolBar$Dart$$c10$26_26$HoistedConstructor$named($n, $o, 
   return unnamed7b10c8$ToolBar$Dart$$c10$26_26$HoistedConstructor.call(this, e);
 }
 function unnamed7b10c8$ToolBar$Dart$$c10$26_26$HoistedConstructor$named$named_$lookupRTT(){
-  return RTT.createFunction([htmld071c1$MouseEvent$Dart.$lookupRTT()], RTT.dynamicType);
+  return RTT.createFunction([htmld071c1$Event$Dart.$lookupRTT()], RTT.dynamicType);
 }
 function unnamed7b10c8$ToolBar$Dart$$c11$26_26$HoistedConstructor(e){
-  var tmp$0;
-  var box = this.board$getter().lastBoxSelected$getter();
-  if (NE$operator(box, $Dart$Null)) {
-    var item = unnamed7b10c8$Item$Dart.Item$$Factory(box, this.itemNameInput$getter().value$getter(), this.itemOption$getter().value$getter());
-    this.itemSequenceInput$getter().valueAsNumber$setter(tmp$0 = item.sequence$getter()) , tmp$0;
+  var tmp$1, tmp$2, tmp$0;
+  if (NE$operator(this.currentItem$getter(), $Dart$Null)) {
+    this.currentItem$getter().name$setter(tmp$0 = this.itemNameInput$getter().value$getter()) , tmp$0;
+    this.currentItem$getter().category$setter(tmp$1 = this.itemOption$getter().value$getter()) , tmp$1;
+    this.itemNameInput$getter().select$named(0, $noargs);
   }
+  this.itemInitInput$getter().value$setter(tmp$2 = '') , tmp$2;
 }
 function unnamed7b10c8$ToolBar$Dart$$c11$26_26$HoistedConstructor$named($n, $o, e){
   if ($o.count || $n != 1)
@@ -67706,20 +68342,16 @@ function unnamed7b10c8$ToolBar$Dart$$c11$26_26$HoistedConstructor$named$named_$l
   return RTT.createFunction([htmld071c1$MouseEvent$Dart.$lookupRTT()], RTT.dynamicType);
 }
 function unnamed7b10c8$ToolBar$Dart$$c12$26_26$HoistedConstructor(e){
-  var tmp$5, tmp$1, tmp$2, tmp$3, tmp$4, tmp$0;
+  var tmp$0;
   var box = this.board$getter().lastBoxSelected$getter();
   if (NE$operator(box, $Dart$Null)) {
-    var item = box.findItem$named(1, $noargs, this.itemNameInput$getter().value$getter());
-    if (NE$operator(item, $Dart$Null)) {
-      this.currentItem$setter(tmp$0 = item) , tmp$0;
-      this.itemNameInput$getter().value$setter(tmp$1 = item.name$getter()) , tmp$1;
-      this.itemOption$getter().value$setter(tmp$2 = item.category$getter()) , tmp$2;
-      this.itemSequenceInput$getter().valueAsNumber$setter(tmp$3 = item.sequence$getter()) , tmp$3;
-      this.itemNameInput$getter().select$named(0, $noargs);
-    }
-     else {
-      this.currentItem$setter(tmp$4 = $Dart$Null) , tmp$4;
-      this.itemSequenceInput$getter().valueAsNumber$setter(tmp$5 = 0) , tmp$5;
+    var itemName = this.itemNameInput$getter().value$getter().trim$named(0, $noargs);
+    if (NE$operator(itemName, '')) {
+      var otherItem = box.findItem$named(1, $noargs, itemName);
+      if (EQ$operator(otherItem, $Dart$Null)) {
+        var item = unnamed7b10c8$Item$Dart.Item$$Factory(box, itemName, this.itemOption$getter().value$getter());
+        item.init$setter(tmp$0 = this.itemInitInput$getter().value$getter().trim$named(0, $noargs)) , tmp$0;
+      }
     }
   }
 }
@@ -67732,14 +68364,19 @@ function unnamed7b10c8$ToolBar$Dart$$c12$26_26$HoistedConstructor$named$named_$l
   return RTT.createFunction([htmld071c1$MouseEvent$Dart.$lookupRTT()], RTT.dynamicType);
 }
 function unnamed7b10c8$ToolBar$Dart$$c13$26_26$HoistedConstructor(e){
-  var tmp$1, tmp$2, tmp$0;
+  var tmp$1, tmp$2, tmp$3, tmp$4, tmp$0;
   var box = this.board$getter().lastBoxSelected$getter();
   if (NE$operator(box, $Dart$Null)) {
-    if (NE$operator(this.currentItem$getter(), $Dart$Null)) {
-      this.currentItem$getter().name$setter(tmp$0 = this.itemNameInput$getter().value$getter()) , tmp$0;
-      this.currentItem$getter().category$setter(tmp$1 = this.itemOption$getter().value$getter()) , tmp$1;
-      this.currentItem$getter().sequence$setter(tmp$2 = this.itemSequenceInput$getter().valueAsNumber$getter()) , tmp$2;
+    var item = box.findItem$named(1, $noargs, this.itemNameInput$getter().value$getter());
+    if (NE$operator(item, $Dart$Null)) {
+      this.currentItem$setter(tmp$0 = item) , tmp$0;
+      this.itemNameInput$getter().value$setter(tmp$1 = item.name$getter()) , tmp$1;
+      this.itemOption$getter().value$setter(tmp$2 = item.category$getter()) , tmp$2;
+      this.itemInitInput$getter().value$setter(tmp$3 = item.init$getter()) , tmp$3;
       this.itemNameInput$getter().select$named(0, $noargs);
+    }
+     else {
+      this.currentItem$setter(tmp$4 = $Dart$Null) , tmp$4;
     }
   }
 }
@@ -67752,15 +68389,23 @@ function unnamed7b10c8$ToolBar$Dart$$c13$26_26$HoistedConstructor$named$named_$l
   return RTT.createFunction([htmld071c1$MouseEvent$Dart.$lookupRTT()], RTT.dynamicType);
 }
 function unnamed7b10c8$ToolBar$Dart$$c14$26_26$HoistedConstructor(e){
-  var tmp$1, tmp$2, tmp$3, tmp$0;
+  var tmp$5, tmp$1, tmp$2, tmp$3, tmp$4, tmp$0;
   var box = this.board$getter().lastBoxSelected$getter();
   if (NE$operator(box, $Dart$Null)) {
     if (NE$operator(this.currentItem$getter(), $Dart$Null)) {
-      if (box.removeItem$named(1, $noargs, this.currentItem$getter())) {
-        this.currentItem$setter(tmp$0 = $Dart$Null) , tmp$0;
-        this.itemSequenceInput$getter().valueAsNumber$setter(tmp$1 = 0) , tmp$1;
-        this.itemNameInput$getter().value$setter(tmp$2 = '') , tmp$2;
-        this.itemOption$getter().value$setter(tmp$3 = 'attribute') , tmp$3;
+      var previousItem = box.findPreviousItem$named(1, $noargs, this.currentItem$getter());
+      if (NE$operator(previousItem, $Dart$Null)) {
+        var previousSequence = previousItem.sequence$getter();
+        var currentSequence = this.currentItem$getter().sequence$getter();
+        this.currentItem$getter().sequence$setter(tmp$0 = previousSequence) , tmp$0;
+        previousItem.sequence$setter(tmp$1 = currentSequence) , tmp$1;
+        this.itemNameInput$getter().select$named(0, $noargs);
+      }
+       else {
+        this.currentItem$setter(tmp$2 = $Dart$Null) , tmp$2;
+        this.itemNameInput$getter().value$setter(tmp$3 = '') , tmp$3;
+        this.itemOption$getter().value$setter(tmp$4 = 'attribute') , tmp$4;
+        this.itemInitInput$getter().value$setter(tmp$5 = '') , tmp$5;
       }
     }
   }
@@ -67774,22 +68419,25 @@ function unnamed7b10c8$ToolBar$Dart$$c14$26_26$HoistedConstructor$named$named_$l
   return RTT.createFunction([htmld071c1$MouseEvent$Dart.$lookupRTT()], RTT.dynamicType);
 }
 function unnamed7b10c8$ToolBar$Dart$$c15$26_26$HoistedConstructor(e){
-  var tmp$11, tmp$10, tmp$12, tmp$9, tmp$5, tmp$6, tmp$7, tmp$8, tmp$1, tmp$2, tmp$3, tmp$4, tmp$0;
-  var line = this.board$getter().lastLineSelected$getter();
-  if (NE$operator(line, $Dart$Null)) {
-    line.category$setter(tmp$0 = this.lineOption$getter().value$getter()) , tmp$0;
-    this.line12Box1Label$getter().text$setter(tmp$1 = line.box1$getter().title$getter()) , tmp$1;
-    this.line12Box2Label$getter().text$setter(tmp$2 = line.box2$getter().title$getter()) , tmp$2;
-    this.line12MinInput$getter().value$setter(tmp$3 = line.box1box2Min$getter()) , tmp$3;
-    this.line12MaxInput$getter().value$setter(tmp$4 = line.box1box2Max$getter()) , tmp$4;
-    this.line12IdCheckbox$getter().checked$setter(tmp$5 = line.box1box2Id$getter()) , tmp$5;
-    this.line12NameInput$getter().value$setter(tmp$6 = line.box1box2Name$getter()) , tmp$6;
-    this.line21Box2Label$getter().text$setter(tmp$7 = line.box2$getter().title$getter()) , tmp$7;
-    this.line21Box1Label$getter().text$setter(tmp$8 = line.box1$getter().title$getter()) , tmp$8;
-    this.line21MinInput$getter().value$setter(tmp$9 = line.box2box1Min$getter()) , tmp$9;
-    this.line21MaxInput$getter().value$setter(tmp$10 = line.box2box1Max$getter()) , tmp$10;
-    this.line21IdCheckbox$getter().checked$setter(tmp$11 = line.box2box1Id$getter()) , tmp$11;
-    this.line21NameInput$getter().value$setter(tmp$12 = line.box2box1Name$getter()) , tmp$12;
+  var tmp$5, tmp$1, tmp$2, tmp$3, tmp$4, tmp$0;
+  var box = this.board$getter().lastBoxSelected$getter();
+  if (NE$operator(box, $Dart$Null)) {
+    if (NE$operator(this.currentItem$getter(), $Dart$Null)) {
+      var nextItem = box.findNextItem$named(1, $noargs, this.currentItem$getter());
+      if (NE$operator(nextItem, $Dart$Null)) {
+        var nextSequence = nextItem.sequence$getter();
+        var currentSequence = this.currentItem$getter().sequence$getter();
+        this.currentItem$getter().sequence$setter(tmp$0 = nextSequence) , tmp$0;
+        nextItem.sequence$setter(tmp$1 = currentSequence) , tmp$1;
+        this.itemNameInput$getter().select$named(0, $noargs);
+      }
+       else {
+        this.currentItem$setter(tmp$2 = $Dart$Null) , tmp$2;
+        this.itemNameInput$getter().value$setter(tmp$3 = '') , tmp$3;
+        this.itemOption$getter().value$setter(tmp$4 = 'attribute') , tmp$4;
+        this.itemInitInput$getter().value$setter(tmp$5 = '') , tmp$5;
+      }
+    }
   }
 }
 function unnamed7b10c8$ToolBar$Dart$$c15$26_26$HoistedConstructor$named($n, $o, e){
@@ -67801,22 +68449,21 @@ function unnamed7b10c8$ToolBar$Dart$$c15$26_26$HoistedConstructor$named$named_$l
   return RTT.createFunction([htmld071c1$MouseEvent$Dart.$lookupRTT()], RTT.dynamicType);
 }
 function unnamed7b10c8$ToolBar$Dart$$c16$26_26$HoistedConstructor(e){
-  var tmp$11, tmp$10, tmp$12, tmp$9, tmp$5, tmp$6, tmp$7, tmp$8, tmp$1, tmp$2, tmp$3, tmp$4, tmp$0;
-  var line = this.board$getter().lastLineSelected$getter();
-  if (NE$operator(line, $Dart$Null)) {
-    this.lineOption$getter().value$setter(tmp$0 = line.category$getter()) , tmp$0;
-    this.line12Box1Label$getter().text$setter(tmp$1 = line.box1$getter().title$getter()) , tmp$1;
-    this.line12Box2Label$getter().text$setter(tmp$2 = line.box2$getter().title$getter()) , tmp$2;
-    this.line12MinInput$getter().value$setter(tmp$3 = line.box1box2Min$getter()) , tmp$3;
-    this.line12MaxInput$getter().value$setter(tmp$4 = line.box1box2Max$getter()) , tmp$4;
-    this.line12IdCheckbox$getter().checked$setter(tmp$5 = line.box1box2Id$getter()) , tmp$5;
-    this.line12NameInput$getter().value$setter(tmp$6 = line.box1box2Name$getter()) , tmp$6;
-    this.line21Box2Label$getter().text$setter(tmp$7 = line.box2$getter().title$getter()) , tmp$7;
-    this.line21Box1Label$getter().text$setter(tmp$8 = line.box1$getter().title$getter()) , tmp$8;
-    this.line21MinInput$getter().value$setter(tmp$9 = line.box2box1Min$getter()) , tmp$9;
-    this.line21MaxInput$getter().value$setter(tmp$10 = line.box2box1Max$getter()) , tmp$10;
-    this.line21IdCheckbox$getter().checked$setter(tmp$11 = line.box2box1Id$getter()) , tmp$11;
-    this.line21NameInput$getter().value$setter(tmp$12 = line.box2box1Name$getter()) , tmp$12;
+  var tmp$1, tmp$2, tmp$0;
+  var box = this.board$getter().lastBoxSelected$getter();
+  if (NE$operator(box, $Dart$Null)) {
+    if (NE$operator(this.currentItem$getter(), $Dart$Null)) {
+      var itemName = this.itemNameInput$getter().value$getter().trim$named(0, $noargs);
+      if (NE$operator(itemName, '')) {
+        var otherItem = box.findItem$named(1, $noargs, itemName);
+        if (EQ$operator(otherItem, $Dart$Null)) {
+          this.currentItem$getter().name$setter(tmp$0 = itemName) , tmp$0;
+        }
+      }
+      this.currentItem$getter().category$setter(tmp$1 = this.itemOption$getter().value$getter()) , tmp$1;
+      this.currentItem$getter().init$setter(tmp$2 = this.itemInitInput$getter().value$getter()) , tmp$2;
+      this.itemNameInput$getter().select$named(0, $noargs);
+    }
   }
 }
 function unnamed7b10c8$ToolBar$Dart$$c16$26_26$HoistedConstructor$named($n, $o, e){
@@ -67828,6 +68475,112 @@ function unnamed7b10c8$ToolBar$Dart$$c16$26_26$HoistedConstructor$named$named_$l
   return RTT.createFunction([htmld071c1$MouseEvent$Dart.$lookupRTT()], RTT.dynamicType);
 }
 function unnamed7b10c8$ToolBar$Dart$$c17$26_26$HoistedConstructor(e){
+  var tmp$1, tmp$2, tmp$3, tmp$0;
+  var box = this.board$getter().lastBoxSelected$getter();
+  if (NE$operator(box, $Dart$Null)) {
+    if (NE$operator(this.currentItem$getter(), $Dart$Null)) {
+      if (box.removeItem$named(1, $noargs, this.currentItem$getter())) {
+        this.currentItem$setter(tmp$0 = $Dart$Null) , tmp$0;
+        this.itemNameInput$getter().value$setter(tmp$1 = '') , tmp$1;
+        this.itemOption$getter().value$setter(tmp$2 = 'attribute') , tmp$2;
+        this.itemInitInput$getter().value$setter(tmp$3 = '') , tmp$3;
+      }
+    }
+  }
+}
+function unnamed7b10c8$ToolBar$Dart$$c17$26_26$HoistedConstructor$named($n, $o, e){
+  if ($o.count || $n != 1)
+    $nsme();
+  return unnamed7b10c8$ToolBar$Dart$$c17$26_26$HoistedConstructor.call(this, e);
+}
+function unnamed7b10c8$ToolBar$Dart$$c17$26_26$HoistedConstructor$named$named_$lookupRTT(){
+  return RTT.createFunction([htmld071c1$MouseEvent$Dart.$lookupRTT()], RTT.dynamicType);
+}
+function unnamed7b10c8$ToolBar$Dart$$c18$26_26$HoistedConstructor(e){
+  var tmp$11, tmp$10, tmp$13, tmp$12, tmp$9, tmp$5, tmp$6, tmp$7, tmp$8, tmp$1, tmp$2, tmp$3, tmp$4, tmp$0;
+  var line = this.board$getter().lastLineSelected$getter();
+  if (NE$operator(line, $Dart$Null)) {
+    line.category$setter(tmp$0 = this.lineOption$getter().value$getter()) , tmp$0;
+    this.lineInternalCheckbox$getter().checked$setter(tmp$1 = line.internal$getter()) , tmp$1;
+    this.line12Box1Label$getter().text$setter(tmp$2 = line.box1$getter().title$getter()) , tmp$2;
+    this.line12Box2Label$getter().text$setter(tmp$3 = line.box2$getter().title$getter()) , tmp$3;
+    this.line12MinInput$getter().value$setter(tmp$4 = line.box1box2Min$getter()) , tmp$4;
+    this.line12MaxInput$getter().value$setter(tmp$5 = line.box1box2Max$getter()) , tmp$5;
+    this.line12IdCheckbox$getter().checked$setter(tmp$6 = line.box1box2Id$getter()) , tmp$6;
+    this.line12NameInput$getter().value$setter(tmp$7 = line.box1box2Name$getter()) , tmp$7;
+    this.line21Box2Label$getter().text$setter(tmp$8 = line.box2$getter().title$getter()) , tmp$8;
+    this.line21Box1Label$getter().text$setter(tmp$9 = line.box1$getter().title$getter()) , tmp$9;
+    this.line21MinInput$getter().value$setter(tmp$10 = line.box2box1Min$getter()) , tmp$10;
+    this.line21MaxInput$getter().value$setter(tmp$11 = line.box2box1Max$getter()) , tmp$11;
+    this.line21IdCheckbox$getter().checked$setter(tmp$12 = line.box2box1Id$getter()) , tmp$12;
+    this.line21NameInput$getter().value$setter(tmp$13 = line.box2box1Name$getter()) , tmp$13;
+  }
+}
+function unnamed7b10c8$ToolBar$Dart$$c18$26_26$HoistedConstructor$named($n, $o, e){
+  if ($o.count || $n != 1)
+    $nsme();
+  return unnamed7b10c8$ToolBar$Dart$$c18$26_26$HoistedConstructor.call(this, e);
+}
+function unnamed7b10c8$ToolBar$Dart$$c18$26_26$HoistedConstructor$named$named_$lookupRTT(){
+  return RTT.createFunction([htmld071c1$MouseEvent$Dart.$lookupRTT()], RTT.dynamicType);
+}
+function unnamed7b10c8$ToolBar$Dart$$c19$26_26$HoistedConstructor(e){
+  var tmp$11, tmp$10, tmp$13, tmp$12, tmp$9, tmp$5, tmp$6, tmp$7, tmp$8, tmp$1, tmp$2, tmp$3, tmp$4, tmp$0;
+  var line = this.board$getter().lastLineSelected$getter();
+  if (NE$operator(line, $Dart$Null)) {
+    line.internal$setter(tmp$0 = this.lineInternalCheckbox$getter().checked$getter()) , tmp$0;
+    this.lineOption$getter().value$setter(tmp$1 = line.category$getter()) , tmp$1;
+    this.line12Box1Label$getter().text$setter(tmp$2 = line.box1$getter().title$getter()) , tmp$2;
+    this.line12Box2Label$getter().text$setter(tmp$3 = line.box2$getter().title$getter()) , tmp$3;
+    this.line12MinInput$getter().value$setter(tmp$4 = line.box1box2Min$getter()) , tmp$4;
+    this.line12MaxInput$getter().value$setter(tmp$5 = line.box1box2Max$getter()) , tmp$5;
+    this.line12IdCheckbox$getter().checked$setter(tmp$6 = line.box1box2Id$getter()) , tmp$6;
+    this.line12NameInput$getter().value$setter(tmp$7 = line.box1box2Name$getter()) , tmp$7;
+    this.line21Box2Label$getter().text$setter(tmp$8 = line.box2$getter().title$getter()) , tmp$8;
+    this.line21Box1Label$getter().text$setter(tmp$9 = line.box1$getter().title$getter()) , tmp$9;
+    this.line21MinInput$getter().value$setter(tmp$10 = line.box2box1Min$getter()) , tmp$10;
+    this.line21MaxInput$getter().value$setter(tmp$11 = line.box2box1Max$getter()) , tmp$11;
+    this.line21IdCheckbox$getter().checked$setter(tmp$12 = line.box2box1Id$getter()) , tmp$12;
+    this.line21NameInput$getter().value$setter(tmp$13 = line.box2box1Name$getter()) , tmp$13;
+  }
+}
+function unnamed7b10c8$ToolBar$Dart$$c19$26_26$HoistedConstructor$named($n, $o, e){
+  if ($o.count || $n != 1)
+    $nsme();
+  return unnamed7b10c8$ToolBar$Dart$$c19$26_26$HoistedConstructor.call(this, e);
+}
+function unnamed7b10c8$ToolBar$Dart$$c19$26_26$HoistedConstructor$named$named_$lookupRTT(){
+  return RTT.createFunction([htmld071c1$Event$Dart.$lookupRTT()], RTT.dynamicType);
+}
+function unnamed7b10c8$ToolBar$Dart$$c20$26_26$HoistedConstructor(e){
+  var tmp$11, tmp$10, tmp$13, tmp$12, tmp$9, tmp$5, tmp$6, tmp$7, tmp$8, tmp$1, tmp$2, tmp$3, tmp$4, tmp$0;
+  var line = this.board$getter().lastLineSelected$getter();
+  if (NE$operator(line, $Dart$Null)) {
+    this.lineOption$getter().value$setter(tmp$0 = line.category$getter()) , tmp$0;
+    this.lineInternalCheckbox$getter().checked$setter(tmp$1 = line.internal$getter()) , tmp$1;
+    this.line12Box1Label$getter().text$setter(tmp$2 = line.box1$getter().title$getter()) , tmp$2;
+    this.line12Box2Label$getter().text$setter(tmp$3 = line.box2$getter().title$getter()) , tmp$3;
+    this.line12MinInput$getter().value$setter(tmp$4 = line.box1box2Min$getter()) , tmp$4;
+    this.line12MaxInput$getter().value$setter(tmp$5 = line.box1box2Max$getter()) , tmp$5;
+    this.line12IdCheckbox$getter().checked$setter(tmp$6 = line.box1box2Id$getter()) , tmp$6;
+    this.line12NameInput$getter().value$setter(tmp$7 = line.box1box2Name$getter()) , tmp$7;
+    this.line21Box2Label$getter().text$setter(tmp$8 = line.box2$getter().title$getter()) , tmp$8;
+    this.line21Box1Label$getter().text$setter(tmp$9 = line.box1$getter().title$getter()) , tmp$9;
+    this.line21MinInput$getter().value$setter(tmp$10 = line.box2box1Min$getter()) , tmp$10;
+    this.line21MaxInput$getter().value$setter(tmp$11 = line.box2box1Max$getter()) , tmp$11;
+    this.line21IdCheckbox$getter().checked$setter(tmp$12 = line.box2box1Id$getter()) , tmp$12;
+    this.line21NameInput$getter().value$setter(tmp$13 = line.box2box1Name$getter()) , tmp$13;
+  }
+}
+function unnamed7b10c8$ToolBar$Dart$$c20$26_26$HoistedConstructor$named($n, $o, e){
+  if ($o.count || $n != 1)
+    $nsme();
+  return unnamed7b10c8$ToolBar$Dart$$c20$26_26$HoistedConstructor.call(this, e);
+}
+function unnamed7b10c8$ToolBar$Dart$$c20$26_26$HoistedConstructor$named$named_$lookupRTT(){
+  return RTT.createFunction([htmld071c1$MouseEvent$Dart.$lookupRTT()], RTT.dynamicType);
+}
+function unnamed7b10c8$ToolBar$Dart$$c21$26_26$HoistedConstructor(e){
   var tmp$9, tmp$5, tmp$6, tmp$7, tmp$8, tmp$1, tmp$2, tmp$3, tmp$4, tmp$11, tmp$10, tmp$0;
   var line = this.board$getter().lastLineSelected$getter();
   if (NE$operator(line, $Dart$Null)) {
@@ -67853,16 +68606,16 @@ function unnamed7b10c8$ToolBar$Dart$$c17$26_26$HoistedConstructor(e){
     line.box2box1Name$setter(tmp$11 = this.line21NameInput$getter().value$getter().trim$named(0, $noargs)) , tmp$11;
   }
 }
-function unnamed7b10c8$ToolBar$Dart$$c17$26_26$HoistedConstructor$named($n, $o, e){
+function unnamed7b10c8$ToolBar$Dart$$c21$26_26$HoistedConstructor$named($n, $o, e){
   if ($o.count || $n != 1)
     $nsme();
-  return unnamed7b10c8$ToolBar$Dart$$c17$26_26$HoistedConstructor.call(this, e);
+  return unnamed7b10c8$ToolBar$Dart$$c21$26_26$HoistedConstructor.call(this, e);
 }
-function unnamed7b10c8$ToolBar$Dart$$c17$26_26$HoistedConstructor$named$named_$lookupRTT(){
+function unnamed7b10c8$ToolBar$Dart$$c21$26_26$HoistedConstructor$named$named_$lookupRTT(){
   return RTT.createFunction([htmld071c1$MouseEvent$Dart.$lookupRTT()], RTT.dynamicType);
 }
 unnamed7b10c8$ToolBar$Dart.$Constructor = function(board){
-  var tmp$20, tmp$24, tmp$23, tmp$22, tmp$21, tmp$27, tmp$9, tmp$28, tmp$25, tmp$26, tmp$5, tmp$6, tmp$29, tmp$7, tmp$8, tmp$1, tmp$2, tmp$3, tmp$4, tmp$0, tmp$11, tmp$10, tmp$13, tmp$12, tmp$14, tmp$15, tmp$16, tmp$17, tmp$30, tmp$18, tmp$19;
+  var tmp$20, tmp$24, tmp$23, tmp$22, tmp$21, tmp$27, tmp$9, tmp$28, tmp$25, tmp$26, tmp$5, tmp$6, tmp$29, tmp$7, tmp$8, tmp$1, tmp$2, tmp$3, tmp$4, tmp$0, tmp$11, tmp$10, tmp$13, tmp$12, tmp$34, tmp$14, tmp$15, tmp$32, tmp$16, tmp$33, tmp$17, tmp$30, tmp$18, tmp$31, tmp$19;
   this.selectButton$setter(tmp$0 = htmld071c1$document$getter().query$named(1, $noargs, '#select')) , tmp$0;
   this.boxButton$setter(tmp$1 = htmld071c1$document$getter().query$named(1, $noargs, '#box')) , tmp$1;
   this.lineButton$setter(tmp$2 = htmld071c1$document$getter().query$named(1, $noargs, '#line')) , tmp$2;
@@ -67883,36 +68636,44 @@ unnamed7b10c8$ToolBar$Dart.$Constructor = function(board){
   this.boxNameInput$setter(tmp$8 = htmld071c1$document$getter().query$named(1, $noargs, '#boxName')) , tmp$8;
   this.boxNameInput$getter().on$getter().focus$getter().add$named(1, $noargs, $bind(unnamed7b10c8$ToolBar$Dart$$c8$26_26$HoistedConstructor$named, unnamed7b10c8$ToolBar$Dart$$c8$26_26$HoistedConstructor$named$named_$lookupRTT, this));
   this.boxNameInput$getter().on$getter().input$getter().add$named(1, $noargs, $bind(unnamed7b10c8$ToolBar$Dart$$c9$26_26$HoistedConstructor$named, unnamed7b10c8$ToolBar$Dart$$c9$26_26$HoistedConstructor$named$named_$lookupRTT, this));
-  this.itemNameInput$setter(tmp$9 = htmld071c1$document$getter().query$named(1, $noargs, '#itemName')) , tmp$9;
-  this.itemOption$setter(tmp$10 = htmld071c1$document$getter().query$named(1, $noargs, '#itemCategory')) , tmp$10;
-  this.itemOption$getter().on$getter().change$getter().add$named(1, $noargs, $bind(unnamed7b10c8$ToolBar$Dart$$c10$26_26$HoistedConstructor$named, unnamed7b10c8$ToolBar$Dart$$c10$26_26$HoistedConstructor$named$named_$lookupRTT, this));
-  this.itemSequenceInput$setter(tmp$11 = htmld071c1$document$getter().query$named(1, $noargs, '#itemSequence')) , tmp$11;
-  this.addItemButton$setter(tmp$12 = htmld071c1$document$getter().query$named(1, $noargs, '#addItem')) , tmp$12;
-  this.addItemButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$ToolBar$Dart$$c11$26_26$HoistedConstructor$named, unnamed7b10c8$ToolBar$Dart$$c11$26_26$HoistedConstructor$named$named_$lookupRTT, this));
-  this.getItemButton$setter(tmp$13 = htmld071c1$document$getter().query$named(1, $noargs, '#getItem')) , tmp$13;
-  this.getItemButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$ToolBar$Dart$$c12$26_26$HoistedConstructor$named, unnamed7b10c8$ToolBar$Dart$$c12$26_26$HoistedConstructor$named$named_$lookupRTT, this));
-  this.setItemButton$setter(tmp$14 = htmld071c1$document$getter().query$named(1, $noargs, '#setItem')) , tmp$14;
-  this.setItemButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$ToolBar$Dart$$c13$26_26$HoistedConstructor$named, unnamed7b10c8$ToolBar$Dart$$c13$26_26$HoistedConstructor$named$named_$lookupRTT, this));
-  this.removeItemButton$setter(tmp$15 = htmld071c1$document$getter().query$named(1, $noargs, '#removeItem')) , tmp$15;
-  this.removeItemButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$ToolBar$Dart$$c14$26_26$HoistedConstructor$named, unnamed7b10c8$ToolBar$Dart$$c14$26_26$HoistedConstructor$named$named_$lookupRTT, this));
-  this.lineOption$setter(tmp$16 = htmld071c1$document$getter().query$named(1, $noargs, '#lineCategory')) , tmp$16;
-  this.lineOption$getter().on$getter().change$getter().add$named(1, $noargs, $bind(unnamed7b10c8$ToolBar$Dart$$c15$26_26$HoistedConstructor$named, unnamed7b10c8$ToolBar$Dart$$c15$26_26$HoistedConstructor$named$named_$lookupRTT, this));
-  this.getLineButton$setter(tmp$17 = htmld071c1$document$getter().query$named(1, $noargs, '#getLine')) , tmp$17;
-  this.getLineButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$ToolBar$Dart$$c16$26_26$HoistedConstructor$named, unnamed7b10c8$ToolBar$Dart$$c16$26_26$HoistedConstructor$named$named_$lookupRTT, this));
-  this.setLineButton$setter(tmp$18 = htmld071c1$document$getter().query$named(1, $noargs, '#setLine')) , tmp$18;
-  this.setLineButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$ToolBar$Dart$$c17$26_26$HoistedConstructor$named, unnamed7b10c8$ToolBar$Dart$$c17$26_26$HoistedConstructor$named$named_$lookupRTT, this));
-  this.line12Box1Label$setter(tmp$19 = htmld071c1$document$getter().query$named(1, $noargs, '#line12Box1')) , tmp$19;
-  this.line12Box2Label$setter(tmp$20 = htmld071c1$document$getter().query$named(1, $noargs, '#line12Box2')) , tmp$20;
-  this.line12MinInput$setter(tmp$21 = htmld071c1$document$getter().query$named(1, $noargs, '#line12Min')) , tmp$21;
-  this.line12MaxInput$setter(tmp$22 = htmld071c1$document$getter().query$named(1, $noargs, '#line12Max')) , tmp$22;
-  this.line12IdCheckbox$setter(tmp$23 = htmld071c1$document$getter().query$named(1, $noargs, '#line12Id')) , tmp$23;
-  this.line12NameInput$setter(tmp$24 = htmld071c1$document$getter().query$named(1, $noargs, '#line12Name')) , tmp$24;
-  this.line21Box2Label$setter(tmp$25 = htmld071c1$document$getter().query$named(1, $noargs, '#line21Box2')) , tmp$25;
-  this.line21Box1Label$setter(tmp$26 = htmld071c1$document$getter().query$named(1, $noargs, '#line21Box1')) , tmp$26;
-  this.line21MinInput$setter(tmp$27 = htmld071c1$document$getter().query$named(1, $noargs, '#line21Min')) , tmp$27;
-  this.line21MaxInput$setter(tmp$28 = htmld071c1$document$getter().query$named(1, $noargs, '#line21Max')) , tmp$28;
-  this.line21IdCheckbox$setter(tmp$29 = htmld071c1$document$getter().query$named(1, $noargs, '#line21Id')) , tmp$29;
-  this.line21NameInput$setter(tmp$30 = htmld071c1$document$getter().query$named(1, $noargs, '#line21Name')) , tmp$30;
+  this.boxEntryCheckbox$setter(tmp$9 = htmld071c1$document$getter().query$named(1, $noargs, '#boxEntry')) , tmp$9;
+  this.boxEntryCheckbox$getter().on$getter().change$getter().add$named(1, $noargs, $bind(unnamed7b10c8$ToolBar$Dart$$c10$26_26$HoistedConstructor$named, unnamed7b10c8$ToolBar$Dart$$c10$26_26$HoistedConstructor$named$named_$lookupRTT, this));
+  this.itemNameInput$setter(tmp$10 = htmld071c1$document$getter().query$named(1, $noargs, '#itemName')) , tmp$10;
+  this.itemOption$setter(tmp$11 = htmld071c1$document$getter().query$named(1, $noargs, '#itemCategory')) , tmp$11;
+  this.itemOption$getter().on$getter().change$getter().add$named(1, $noargs, $bind(unnamed7b10c8$ToolBar$Dart$$c11$26_26$HoistedConstructor$named, unnamed7b10c8$ToolBar$Dart$$c11$26_26$HoistedConstructor$named$named_$lookupRTT, this));
+  this.itemInitInput$setter(tmp$12 = htmld071c1$document$getter().query$named(1, $noargs, '#itemInit')) , tmp$12;
+  this.addItemButton$setter(tmp$13 = htmld071c1$document$getter().query$named(1, $noargs, '#addItem')) , tmp$13;
+  this.addItemButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$ToolBar$Dart$$c12$26_26$HoistedConstructor$named, unnamed7b10c8$ToolBar$Dart$$c12$26_26$HoistedConstructor$named$named_$lookupRTT, this));
+  this.getItemButton$setter(tmp$14 = htmld071c1$document$getter().query$named(1, $noargs, '#getItem')) , tmp$14;
+  this.getItemButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$ToolBar$Dart$$c13$26_26$HoistedConstructor$named, unnamed7b10c8$ToolBar$Dart$$c13$26_26$HoistedConstructor$named$named_$lookupRTT, this));
+  this.upItemButton$setter(tmp$15 = htmld071c1$document$getter().query$named(1, $noargs, '#upItem')) , tmp$15;
+  this.upItemButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$ToolBar$Dart$$c14$26_26$HoistedConstructor$named, unnamed7b10c8$ToolBar$Dart$$c14$26_26$HoistedConstructor$named$named_$lookupRTT, this));
+  this.downItemButton$setter(tmp$16 = htmld071c1$document$getter().query$named(1, $noargs, '#downItem')) , tmp$16;
+  this.downItemButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$ToolBar$Dart$$c15$26_26$HoistedConstructor$named, unnamed7b10c8$ToolBar$Dart$$c15$26_26$HoistedConstructor$named$named_$lookupRTT, this));
+  this.setItemButton$setter(tmp$17 = htmld071c1$document$getter().query$named(1, $noargs, '#setItem')) , tmp$17;
+  this.setItemButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$ToolBar$Dart$$c16$26_26$HoistedConstructor$named, unnamed7b10c8$ToolBar$Dart$$c16$26_26$HoistedConstructor$named$named_$lookupRTT, this));
+  this.removeItemButton$setter(tmp$18 = htmld071c1$document$getter().query$named(1, $noargs, '#removeItem')) , tmp$18;
+  this.removeItemButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$ToolBar$Dart$$c17$26_26$HoistedConstructor$named, unnamed7b10c8$ToolBar$Dart$$c17$26_26$HoistedConstructor$named$named_$lookupRTT, this));
+  this.lineOption$setter(tmp$19 = htmld071c1$document$getter().query$named(1, $noargs, '#lineCategory')) , tmp$19;
+  this.lineOption$getter().on$getter().change$getter().add$named(1, $noargs, $bind(unnamed7b10c8$ToolBar$Dart$$c18$26_26$HoistedConstructor$named, unnamed7b10c8$ToolBar$Dart$$c18$26_26$HoistedConstructor$named$named_$lookupRTT, this));
+  this.lineInternalCheckbox$setter(tmp$20 = htmld071c1$document$getter().query$named(1, $noargs, '#lineInternal')) , tmp$20;
+  this.lineInternalCheckbox$getter().on$getter().change$getter().add$named(1, $noargs, $bind(unnamed7b10c8$ToolBar$Dart$$c19$26_26$HoistedConstructor$named, unnamed7b10c8$ToolBar$Dart$$c19$26_26$HoistedConstructor$named$named_$lookupRTT, this));
+  this.getLineButton$setter(tmp$21 = htmld071c1$document$getter().query$named(1, $noargs, '#getLine')) , tmp$21;
+  this.getLineButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$ToolBar$Dart$$c20$26_26$HoistedConstructor$named, unnamed7b10c8$ToolBar$Dart$$c20$26_26$HoistedConstructor$named$named_$lookupRTT, this));
+  this.setLineButton$setter(tmp$22 = htmld071c1$document$getter().query$named(1, $noargs, '#setLine')) , tmp$22;
+  this.setLineButton$getter().on$getter().click$getter().add$named(1, $noargs, $bind(unnamed7b10c8$ToolBar$Dart$$c21$26_26$HoistedConstructor$named, unnamed7b10c8$ToolBar$Dart$$c21$26_26$HoistedConstructor$named$named_$lookupRTT, this));
+  this.line12Box1Label$setter(tmp$23 = htmld071c1$document$getter().query$named(1, $noargs, '#line12Box1')) , tmp$23;
+  this.line12Box2Label$setter(tmp$24 = htmld071c1$document$getter().query$named(1, $noargs, '#line12Box2')) , tmp$24;
+  this.line12MinInput$setter(tmp$25 = htmld071c1$document$getter().query$named(1, $noargs, '#line12Min')) , tmp$25;
+  this.line12MaxInput$setter(tmp$26 = htmld071c1$document$getter().query$named(1, $noargs, '#line12Max')) , tmp$26;
+  this.line12IdCheckbox$setter(tmp$27 = htmld071c1$document$getter().query$named(1, $noargs, '#line12Id')) , tmp$27;
+  this.line12NameInput$setter(tmp$28 = htmld071c1$document$getter().query$named(1, $noargs, '#line12Name')) , tmp$28;
+  this.line21Box2Label$setter(tmp$29 = htmld071c1$document$getter().query$named(1, $noargs, '#line21Box2')) , tmp$29;
+  this.line21Box1Label$setter(tmp$30 = htmld071c1$document$getter().query$named(1, $noargs, '#line21Box1')) , tmp$30;
+  this.line21MinInput$setter(tmp$31 = htmld071c1$document$getter().query$named(1, $noargs, '#line21Min')) , tmp$31;
+  this.line21MaxInput$setter(tmp$32 = htmld071c1$document$getter().query$named(1, $noargs, '#line21Max')) , tmp$32;
+  this.line21IdCheckbox$setter(tmp$33 = htmld071c1$document$getter().query$named(1, $noargs, '#line21Id')) , tmp$33;
+  this.line21NameInput$setter(tmp$34 = htmld071c1$document$getter().query$named(1, $noargs, '#line21Name')) , tmp$34;
 }
 ;
 unnamed7b10c8$ToolBar$Dart.$Initializer = function(board){
@@ -68007,6 +68768,14 @@ unnamed7b10c8$ToolBar$Dart.prototype.boxNameInput$setter = function(tmp$0){
   this.boxNameInput$field = tmp$0;
 }
 ;
+unnamed7b10c8$ToolBar$Dart.prototype.boxEntryCheckbox$getter = function(){
+  return this.boxEntryCheckbox$field;
+}
+;
+unnamed7b10c8$ToolBar$Dart.prototype.boxEntryCheckbox$setter = function(tmp$0){
+  this.boxEntryCheckbox$field = tmp$0;
+}
+;
 unnamed7b10c8$ToolBar$Dart.prototype.itemNameInput$getter = function(){
   return this.itemNameInput$field;
 }
@@ -68023,12 +68792,12 @@ unnamed7b10c8$ToolBar$Dart.prototype.itemOption$setter = function(tmp$0){
   this.itemOption$field = tmp$0;
 }
 ;
-unnamed7b10c8$ToolBar$Dart.prototype.itemSequenceInput$getter = function(){
-  return this.itemSequenceInput$field;
+unnamed7b10c8$ToolBar$Dart.prototype.itemInitInput$getter = function(){
+  return this.itemInitInput$field;
 }
 ;
-unnamed7b10c8$ToolBar$Dart.prototype.itemSequenceInput$setter = function(tmp$0){
-  this.itemSequenceInput$field = tmp$0;
+unnamed7b10c8$ToolBar$Dart.prototype.itemInitInput$setter = function(tmp$0){
+  this.itemInitInput$field = tmp$0;
 }
 ;
 unnamed7b10c8$ToolBar$Dart.prototype.addItemButton$getter = function(){
@@ -68045,6 +68814,22 @@ unnamed7b10c8$ToolBar$Dart.prototype.getItemButton$getter = function(){
 ;
 unnamed7b10c8$ToolBar$Dart.prototype.getItemButton$setter = function(tmp$0){
   this.getItemButton$field = tmp$0;
+}
+;
+unnamed7b10c8$ToolBar$Dart.prototype.upItemButton$getter = function(){
+  return this.upItemButton$field;
+}
+;
+unnamed7b10c8$ToolBar$Dart.prototype.upItemButton$setter = function(tmp$0){
+  this.upItemButton$field = tmp$0;
+}
+;
+unnamed7b10c8$ToolBar$Dart.prototype.downItemButton$getter = function(){
+  return this.downItemButton$field;
+}
+;
+unnamed7b10c8$ToolBar$Dart.prototype.downItemButton$setter = function(tmp$0){
+  this.downItemButton$field = tmp$0;
 }
 ;
 unnamed7b10c8$ToolBar$Dart.prototype.setItemButton$getter = function(){
@@ -68077,6 +68862,14 @@ unnamed7b10c8$ToolBar$Dart.prototype.lineOption$getter = function(){
 ;
 unnamed7b10c8$ToolBar$Dart.prototype.lineOption$setter = function(tmp$0){
   this.lineOption$field = tmp$0;
+}
+;
+unnamed7b10c8$ToolBar$Dart.prototype.lineInternalCheckbox$getter = function(){
+  return this.lineInternalCheckbox$field;
+}
+;
+unnamed7b10c8$ToolBar$Dart.prototype.lineInternalCheckbox$setter = function(tmp$0){
+  this.lineInternalCheckbox$field = tmp$0;
 }
 ;
 unnamed7b10c8$ToolBar$Dart.prototype.getLineButton$getter = function(){
@@ -68195,21 +68988,21 @@ unnamed7b10c8$ToolBar$Dart.prototype.onTool$member = function(tool){
   var tmp$9, tmp$5, tmp$6, tmp$7, tmp$8, tmp$1, tmp$2, tmp$3, tmp$4, tmp$0;
   this._onTool$unnamed7b10c8$$setter_(tmp$0 = tool) , tmp$0;
   if (EQ$operator(this._onTool$unnamed7b10c8$$getter_(), unnamed7b10c8$ToolBar$Dart.SELECT$getter())) {
-    this.selectButton$getter().style$getter().borderColor$setter(tmp$1 = '#000000') , tmp$1;
-    this.boxButton$getter().style$getter().borderColor$setter(tmp$2 = '#808080') , tmp$2;
-    this.lineButton$getter().style$getter().borderColor$setter(tmp$3 = '#808080') , tmp$3;
+    this.selectButton$getter().style$getter().borderColor$setter(tmp$1 = unnamed7b10c8$Board$Dart.DEFAULT_LINE_COLOR$getter()) , tmp$1;
+    this.boxButton$getter().style$getter().borderColor$setter(tmp$2 = unnamed7b10c8$Board$Dart.SOFT_LINE_COLOR$getter()) , tmp$2;
+    this.lineButton$getter().style$getter().borderColor$setter(tmp$3 = unnamed7b10c8$Board$Dart.SOFT_LINE_COLOR$getter()) , tmp$3;
   }
    else {
     if (EQ$operator(this._onTool$unnamed7b10c8$$getter_(), unnamed7b10c8$ToolBar$Dart.BOX$getter())) {
-      this.selectButton$getter().style$getter().borderColor$setter(tmp$4 = '#808080') , tmp$4;
-      this.boxButton$getter().style$getter().borderColor$setter(tmp$5 = '#000000') , tmp$5;
-      this.lineButton$getter().style$getter().borderColor$setter(tmp$6 = '#808080') , tmp$6;
+      this.selectButton$getter().style$getter().borderColor$setter(tmp$4 = unnamed7b10c8$Board$Dart.SOFT_LINE_COLOR$getter()) , tmp$4;
+      this.boxButton$getter().style$getter().borderColor$setter(tmp$5 = unnamed7b10c8$Board$Dart.DEFAULT_LINE_COLOR$getter()) , tmp$5;
+      this.lineButton$getter().style$getter().borderColor$setter(tmp$6 = unnamed7b10c8$Board$Dart.SOFT_LINE_COLOR$getter()) , tmp$6;
     }
      else {
       if (EQ$operator(this._onTool$unnamed7b10c8$$getter_(), unnamed7b10c8$ToolBar$Dart.LINE$getter())) {
-        this.selectButton$getter().style$getter().borderColor$setter(tmp$7 = '#808080') , tmp$7;
-        this.boxButton$getter().style$getter().borderColor$setter(tmp$8 = '#808080') , tmp$8;
-        this.lineButton$getter().style$getter().borderColor$setter(tmp$9 = '#000000') , tmp$9;
+        this.selectButton$getter().style$getter().borderColor$setter(tmp$7 = unnamed7b10c8$Board$Dart.SOFT_LINE_COLOR$getter()) , tmp$7;
+        this.boxButton$getter().style$getter().borderColor$setter(tmp$8 = unnamed7b10c8$Board$Dart.SOFT_LINE_COLOR$getter()) , tmp$8;
+        this.lineButton$getter().style$getter().borderColor$setter(tmp$9 = unnamed7b10c8$Board$Dart.DEFAULT_LINE_COLOR$getter()) , tmp$9;
       }
     }
   }
@@ -68352,18 +69145,22 @@ isolate$inits.push(function(){
 isolate$inits.push(function(){
   isolate$current.unnamed7b10c8$Box$DartIOS$field = static$uninitialized;
   this._name$unnamed7b10c8$$field_ = '';
+  this.entry$field = false;
   this._selected$unnamed7b10c8$$field_ = false;
   this._hidden$unnamed7b10c8$$field_ = false;
   this._mouseDown$unnamed7b10c8$$field_ = false;
-  this.textFontSize$field = 12;
 }
 );
 isolate$inits.push(function(){
+  this.init$field = '';
+}
+);
+isolate$inits.push(function(){
+  this.internal$field = true;
   this._twin1$unnamed7b10c8$$field_ = false;
   this._twin2$unnamed7b10c8$$field_ = false;
   this._selected$unnamed7b10c8$$field_ = false;
   this._hidden$unnamed7b10c8$$field_ = false;
-  this.textFontSize$field = 12;
 }
 );
 RunEntry(unnamed7b10c8$main$member, this.arguments ? (this.arguments.slice ? [].concat(this.arguments.slice()) : this.arguments) : []);

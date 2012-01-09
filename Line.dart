@@ -6,6 +6,8 @@ class Line {
   Box box2; // line end box
   
   String _category; // relationship, inheritance, reflexive, twin
+  bool internal = true;
+  
   bool _twin1 = false;
   bool _twin2 = false;
   
@@ -22,14 +24,9 @@ class Line {
   bool _selected = false;
   bool _hidden = false;
   
-  String textFontSize = 12;
-  num defaultLineWidth;
-  
   Line(this.board, this.box1, this.box2) {
     category = 'relationship';
     draw();
-    // Line event (actually, canvas event).
-    defaultLineWidth = board.context.lineWidth;
   }
   
   void draw() {
@@ -51,9 +48,9 @@ class Line {
         board.context.lineTo(box2.center().x, box2.center().y);
       }      
       if (isSelected()) {
-        board.context.setLineWidth(defaultLineWidth + 2);
+        board.context.lineWidth = Board.DEFAULT_LINE_WIDTH + 2;
       } else {
-        board.context.setLineWidth(defaultLineWidth);
+        board.context.lineWidth = Board.DEFAULT_LINE_WIDTH;
       }
       Point box1box2MinMaxPoint;
       Point box2box1MinMaxPoint;
@@ -74,23 +71,30 @@ class Line {
       String box1box2MinMax = box1box2Min + '..' + box1box2Max;
       String box2box1MinMax = box2box1Min + '..' + box2box1Max;
       if (box1box2Id) {
-        board.context.font = 'bold italic ' + textFontSize + 'px sans-serif';
+        board.context.font = 'bold italic ' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
       } else if (box1box2Min != '0') {
-        board.context.font = 'bold ' + textFontSize + 'px sans-serif';
+        board.context.font = 'bold ' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
       } else {
-        board.context.font = '' + textFontSize + 'px sans-serif';
+        board.context.font = '' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
       }
       board.context.fillText(box1box2MinMax, box1box2MinMaxPoint.x, box1box2MinMaxPoint.y);
       board.context.fillText(box1box2Name, box1box2NamePoint.x, box1box2NamePoint.y);
       if (box2box1Id) {
-        board.context.font = 'bold italic ' + textFontSize + 'px sans-serif';
+        board.context.font = 'bold italic ' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
       } else if (box2box1Min != '0') {
-        board.context.font = 'bold ' + textFontSize + 'px sans-serif';
+        board.context.font = 'bold ' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
       } else {
-        board.context.font = '' + textFontSize + 'px sans-serif';
+        board.context.font = '' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
       }
       board.context.fillText(box2box1MinMax, box2box1MinMaxPoint.x, box2box1MinMaxPoint.y);
       board.context.fillText(box2box1Name, box2box1NamePoint.x, box2box1NamePoint.y);
+      
+      if (!internal) {
+        board.context.strokeStyle = Board.SOFT_LINE_COLOR;
+      } else {
+        board.context.strokeStyle = Board.DEFAULT_LINE_COLOR;
+      }
+      
       board.context.stroke();
       board.context.closePath();
     }
@@ -126,6 +130,7 @@ class Line {
       _twin2 = false;
     } else if (category == 'reflexive') {
       box2 = box1;
+      internal = true;
       
       box1box2Name = _putInEnglishPlural(box1.title.toLowerCase());
       box1box2Min = '0';
@@ -145,10 +150,11 @@ class Line {
         if (twinLine.twin) {
           _twin1 = false;
           _twin2 = true;
+          twinLine.twin1 = true;
+          twinLine.twin2 = false;
         } else {
           _twin1 = true;
           _twin2 = false;
-          twinLine.category = 'twin';
         }   
       }
     }
@@ -161,8 +167,37 @@ class Line {
   bool get reflexive() => category == 'reflexive';
   bool get twin() => category == 'twin';
   
+  void set twin1(bool twin1) {
+    _twin1 = twin1;
+  }
+  
   bool get twin1() => _twin1;
+  
+  void set twin2(bool twin2) {
+    _twin2 = twin2;
+  }
+  
   bool get twin2() => _twin2;
+  
+  Map<String, Object> toJson() {
+    Map<String, Object> lineMap = new Map<String, Object>();
+    lineMap["box1Name"] = box1.title;
+    lineMap["box2Name"] = box2.title;
+    lineMap["category"] = category;
+    lineMap["internal"] = internal;
+    
+    lineMap["box1box2Name"] = box1box2Name;
+    lineMap["box1box2Min"] = box1box2Min;
+    lineMap["box1box2Max"] = box1box2Max;
+    lineMap["box1box2Id"] = box1box2Id;
+    
+    lineMap["box2box1Name"] = box2box1Name;
+    lineMap["box2box1Min"] = box2box1Min;
+    lineMap["box2box1Max"] = box2box1Max;
+    lineMap["box2box1Id"] = box2box1Id;
+    
+    return lineMap;
+  }
   
   void select() {
     _selected = true;

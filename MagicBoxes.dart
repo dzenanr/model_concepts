@@ -1,10 +1,13 @@
 #import('dart:html');
+#import("dart:json");
 #source('Box.dart');
 #source('Board.dart');
 #source('ToolBar.dart');
 #source('Line.dart');
 #source('MenuBar.dart');
 #source('Item.dart');
+#source('JsonPanel.dart');
+#source('PngPanel.dart');
 
 // See the style guide: http://www.dartlang.org/articles/style-guide/ .
 

@@ -27,5 +27,17 @@
     color: #d9ece2;
     background: #663117;
   }
+
+  .button {
+    padding: 1px;
+    background: #ffcc99; 
+    border-right: 1px solid #999;
+    border-bottom: 1px solid #999;
+    border-style: outset;
+    border-color: #d7b9c9; 
+    font-weight: bold;
+    text-align: center;
+  }
+
 			
 /* ===[ end ]=== */

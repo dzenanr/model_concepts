@@ -3,7 +3,6 @@ class MenuBar {
   final Board board;
   
   // File
-  ButtonElement saveAsPngButton;
   
   // Edit
   ButtonElement deleteSelectionButton;
@@ -23,15 +22,14 @@ class MenuBar {
   ButtonElement increaseSelectionSizeButton;
   ButtonElement decreaseSelectionSizeButton;
   ButtonElement hideSelectionButton;
-  ButtonElement showHiddenSelectionButton;
+  ButtonElement hideNonSelectionButton;
+  ButtonElement showHiddenButton;
   
   // Create
   ButtonElement createBoxesInDiagonalButton;
   ButtonElement createBoxesAsTilesButton;
   
   MenuBar(this.board) {  
-    saveAsPngButton = document.query('#save-as-png');
-    
     deleteSelectionButton = document.query('#delete-selection');
     
     selectAllButton = document.query('#select-all');
@@ -47,16 +45,13 @@ class MenuBar {
     increaseSelectionSizeButton = document.query('#increase-selection-size');
     decreaseSelectionSizeButton = document.query('#decrease-selection-size');
     hideSelectionButton = document.query('#hide-selection');
-    showHiddenSelectionButton = document.query('#show-hidden-selection');
+    hideNonSelectionButton = document.query('#hide-non-selection');
+    showHiddenButton = document.query('#show-hidden');
     
     createBoxesInDiagonalButton = document.query('#create-boxes-in-diagonal');
     createBoxesAsTilesButton = document.query('#create-boxes-as-tiles');
     
     // Menu bar events.
-    saveAsPngButton.on.click.add((MouseEvent e) {
-      board.saveAsPng();
-    });
-    
     deleteSelectionButton.on.click.add((MouseEvent e) {
       board.deleteSelection();
     });
@@ -98,13 +93,15 @@ class MenuBar {
     hideSelectionButton.on.click.add((MouseEvent e) {
       board.hideSelection();
     });
-    showHiddenSelectionButton.on.click.add((MouseEvent e) {
-      board.showHiddenSelection();
+    hideNonSelectionButton.on.click.add((MouseEvent e) {
+      board.hideNonSelection();
+    });
+    showHiddenButton.on.click.add((MouseEvent e) {
+      board.showHidden();
     });
     
     createBoxesInDiagonalButton.on.click.add((MouseEvent e) {
       board.createBoxesInDiagonal();
-      //board.printBoxNames();
     });
     createBoxesAsTilesButton.on.click.add((MouseEvent e) {
       board.createBoxesAsTiles();

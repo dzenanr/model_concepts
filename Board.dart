@@ -2,11 +2,18 @@ class Board {
   
   static final int MIN_WIDTH = 990;
   static final int MIN_HEIGHT = 580;
+  static final int DEFAULT_LINE_WIDTH = 1;
+  static final String DEFAULT_LINE_COLOR = '#000000'; // black
+  static final String SOFT_LINE_COLOR = '#736f6e '; // gray
+  // static final String SOFT_LINE_COLOR = '#c0c0c0 '; // silver
+  static final String DEFAULT_FONT_SIZE = 12;
   
   // The acceptable delta error in pixels for clicking on a line between two boxes.
   static final int DELTA = 8; 
   // The board is redrawn every INTERVAL ms.
   static final int INTERVAL = 8; 
+  
+  static final String FILE_NAME = 'model.txt';
   
   CanvasElement canvas;
   CanvasRenderingContext2D context;
@@ -24,14 +31,13 @@ class Board {
   
   MenuBar menuBar; 
   ToolBar toolBar;
-  
-  num defaultLineWidth;
+  JsonPanel jsonPanel;
+  PngPanel pngPanel;
   
   Board(this.canvas) {
     context = canvas.getContext('2d');
     _width = canvas.width;
     _height = canvas.height;
-    defaultLineWidth = context.lineWidth;
     border();
  
     boxes = new List();
@@ -39,6 +45,8 @@ class Board {
     
     menuBar = new MenuBar(this);
     toolBar = new ToolBar(this);
+    jsonPanel = new JsonPanel(this);
+    pngPanel = new PngPanel(this);
     
     // Canvas event.
     document.query('#canvas').on.mouseDown.add(onMouseDown);
@@ -64,10 +72,133 @@ class Board {
     return _height;
   }
   
+  String toJson() {
+    Map<String, Object> boardMap = new Map<String, Object>();
+    boardMap["width"] = width;
+    boardMap["height"] = height;
+    boardMap["boxes"] = boxesToJson();
+    boardMap["lines"] = linesToJson();
+    return JSON.stringify(boardMap);
+  }
+  
+  void fromJson(String json) {
+    Map<String, Object> boardMap = JSON.parse(json);
+    width = boardMap["width"];
+    height = boardMap["height"];
+    List<Map<String, Object>> boxesList = boardMap["boxes"];
+    boxesFromJson(boxesList);
+    List<Map<String, Object>> linesList = boardMap["lines"];
+    linesFromJson(linesList);
+  }
+  
+  List<Map<String, Object>> boxesToJson() {
+    List<Map<String, Object>> boxesList = new List<Map<String, Object>>();
+    for (Box box in boxes) {
+      if (!box.isHidden()) {
+        boxesList.add(box.toJson());
+      }
+    }
+    return boxesList;
+  }
+  
+  List<Map<String, Object>> linesToJson() {
+    List<Map<String, Object>> linesList = new List<Map<String, Object>>();
+    for (Line line in lines) {
+      if (!line.isHidden()) {
+        linesList.add(line.toJson());
+      }
+    }
+    return linesList;
+  }
+  
+  void boxesFromJson(List<Map<String, Object>> boxesList) {
+    boxes = new List();
+    for (Map<String, Object> jsonBox in boxesList) {
+      boxes.add(boxFromJson(jsonBox));
+    }
+  }
+  
+  Box boxFromJson(Map<String, Object> boxMap) {
+    String title = boxMap["name"];
+    bool entry = boxMap["entry"];
+    String xText = boxMap["x"];
+    int x = Math.parseInt(xText);
+    String yText = boxMap["y"];
+    int y = Math.parseInt(yText);
+    String widthText = boxMap["width"];
+    int width = Math.parseInt(widthText);
+    String heightText = boxMap["height"];
+    int height = Math.parseInt(heightText);
+    Box box = new Box(this, x, y, width, height);
+    box.title = title;
+    box.entry = entry;
+    List<Map<String, Object>> itemsList = boxMap["items"];
+    for (Map<String, Object> jsonItem in itemsList) {
+      itemFromJson(box, jsonItem);
+    }
+    return box;
+  }
+  
+  Item itemFromJson(Box box, Map<String, Object> itemMap) {
+    String name = itemMap["name"];
+    String category = itemMap["category"];
+    Item item = new Item(box, name, category);
+    String sequenceText = itemMap["sequence"];
+    int sequence = Math.parseInt(sequenceText);
+    item.sequence = sequence;
+    item.init = itemMap["init"];
+  }
+  
+  void linesFromJson(List<Map<String, Object>> linesList) {
+    lines = new List();
+    for (Map<String, Object> jsonLine in linesList) {
+      Line line = lineFromJson(jsonLine);
+      if (line != null) {
+        lines.add(line);
+      }
+    }
+  }
+  
+  Line lineFromJson(Map<String, Object> lineMap) {
+    String box1Name = lineMap["box1Name"];
+    String box2Name = lineMap["box2Name"];
+    Box box1 = findBox(box1Name);
+    Box box2 = findBox(box2Name);
+    if (box1 != null && box2 != null) {
+      Line line = new Line(this, box1, box2);
+      line.category = lineMap["category"];
+      line.internal = lineMap["internal"];
+      
+      String box1box2Name = lineMap["box1box2Name"];
+      String box1box2Min = lineMap["box1box2Min"];
+      String box1box2Max = lineMap["box1box2Max"];
+      bool box1box2Id = lineMap["box1box2Id"];
+      
+      line.box1box2Name = box1box2Name;
+      line.box1box2Min = box1box2Min;
+      line.box1box2Max = box1box2Max;
+      line.box1box2Id = box1box2Id;
+      
+      String box2box1Name = lineMap["box2box1Name"];
+      String box2box1Min = lineMap["box2box1Min"];
+      String box2box1Max = lineMap["box2box1Max"];
+      bool box2box1Id = lineMap["box2box1Id"];
+      
+      line.box2box1Name = box2box1Name;
+      line.box2box1Min = box2box1Min;
+      line.box2box1Max = box2box1Max;
+      line.box2box1Id = box2box1Id;
+      
+      return line;
+    }
+    return null;
+  }
+  
   void border() {
     context.beginPath();
     context.rect(0, 0, width, height);
-    context.setLineWidth(defaultLineWidth);
+    context.lineWidth = DEFAULT_LINE_WIDTH;
+    context.strokeStyle = DEFAULT_LINE_COLOR;
     context.stroke();
     context.closePath();
   }
@@ -91,11 +222,6 @@ class Board {
     for (Box box in boxes) {
       print(box.title);
     }
-  }
-  
-  void saveAsPng() {
-    ImageElement modelImage = document.query('#modelImage');
-    modelImage.src = canvas.toDataURL("image/png");
   }
   
   void createBoxesInDiagonal() {
@@ -348,9 +474,22 @@ class Board {
     }
   }
   
-  void showHiddenSelection() {
+  void showHidden() {
     showHiddenBoxes();
     showHiddenLines();
+  }
+  
+  void hideNonSelection() {
+    for (Box box in boxes) {
+      if (!box.isSelected()) {
+        box.hide();
+      }
+    }
+    for (Line line in lines) {
+      if (!line.isSelected()) {
+        line.hide();
+      }
+    }
   }
   
   int countSelectedBoxes() {
@@ -392,6 +531,15 @@ class Board {
       }
     }
     return count;
+  }
+  
+  Box findBox(String boxName) {
+    for (Box box in boxes) {
+      if (box.title == boxName) {
+        return box;
+      }
+    }
+    return null;
   }
   
   Line findTwinLine(Line twin) {
