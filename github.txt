@@ -60,6 +60,7 @@ git clone git@github.com:dzenanr/MagicBoxes.git
 Get the latest changes from the remote repository
 
 git pull
+git pull origin master
 
 -------------------------------------------------------------
 
@@ -100,20 +101,56 @@ git add file
 or
 git rm file
 or
-git add -u
+git add -u (to remove all)
 
 git commit -m "state briefly changes"
 
 git status
 
+git push
 git push origin master
 Enter passphrase for key ... :
 
 git status
 
+
+Ignoring files
+
+http://help.github.com/ignore-files/
+
+create .gitignore in MagicBoxes folder
+add 
+MagicBoxes.dart.app.js
+*~
+to exclude JavaScript file that is already in the repository:
+git rm --cached MagicBoxes.dart.app.js
+
+
 Tagging for versions (spirals)
 
 http://learn.github.com/p/tagging.html
+
+git tag
+git tag -a s00 -m 'spiral 00'
+git tag
+
+To push tags to the remote repository:
+
+git push --tags
+Enter passphrase for key ... :
+
+
+Switching from master to spiral
+
+
+git checkout s01
+
+Switching from spiral to master
+
+to exclude js:
+git checkout MagicBoxes.dart.app.js
+
+git checkout master
 
 ____________________________________________________________________
 
@@ -176,20 +213,6 @@ git status
 to ignore changes in JavaScrip file:
 git checkout MagicBoxes.dart.app.js
 git checkout master
-
-see for ignoring files:
-http://help.github.com/ignore-files/
-
-create .gitignore in MagicBoxes folder
-add MagicBoxes.dart.app.js
-to exclude JavaScript file that is already in the repository:
-git rm --cached MagicBoxes.dart.app.js
-
-To push tags to the remote repository:
-
-git push --tags
-Enter passphrase for key ... :
-
 
 see for ignoring files:
 http://help.github.com/ignore-files/
