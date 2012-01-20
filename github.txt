@@ -10,6 +10,8 @@ http://help.github.com/win-set-up-git/
 
 http://www.ralfebert.de/blog/tools/git_screencast/
 
+http://scottr.org/presentations/git-in-5-minutes/
+
 -------------------------------------------------------------
 
 After creating an account, create a remote repository.
@@ -149,6 +151,8 @@ Switching from spiral to master
 
 to exclude js:
 git checkout MagicBoxes.dart.app.js
+or (see http://scottr.org/presentations/git-in-5-minutes/)
+git stash
 
 git checkout master
 
