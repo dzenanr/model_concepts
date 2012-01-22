@@ -106,6 +106,8 @@ or
 git add -u (to remove all)
 
 git commit -m "state briefly changes"
+or
+git commit -a -m "state briefly changes"
 
 git status
 
