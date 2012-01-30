@@ -158,6 +158,34 @@ git stash
 
 git checkout master
 
+
+Branches
+
+git checkout -b topic-name-1 master
+git checkout -b topic-name-2 master
+git checkout topic-name-1
+git checkout topic-name-2
+
+git checkout master
+git merge topic-name-1 
+git branch -d topic-name-1
+
+git merge topic-name-2
+resolve conflicts
+git status
+git commit -a (describe the merge resolution here)
+git status
+git branch -d topic-name-2
+
+to loose all changes after the last commit:
+git reset --hard
+
+to work temporarily on a branch and then delete it
+git checkout -b temp master
+...
+git branch -D temp 
+
+
 ____________________________________________________________________
 
 Ubuntu
