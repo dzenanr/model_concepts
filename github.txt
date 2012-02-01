@@ -186,6 +186,11 @@ git checkout -b temp master
 git branch -D temp 
 
 
+Team Work
+
+git pull origin master
+
+
 ____________________________________________________________________
 
 Ubuntu
