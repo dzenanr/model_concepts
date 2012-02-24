@@ -9,7 +9,7 @@
 #source('JsonPanel.dart');
 #source('PngPanel.dart');
 
-// branch s11a
+// branch s11a (script changes for Dart)
 
 // See the style guide: http://www.dartlang.org/articles/style-guide/ .
 
