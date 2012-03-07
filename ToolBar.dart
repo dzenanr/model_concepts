@@ -241,8 +241,6 @@ class ToolBar {
           line.box2box1Id = false;
         }  
         line.box2box1Name = line21NameInput.value.trim();
-        
-        
       }
     });
     

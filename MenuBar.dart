@@ -104,7 +104,6 @@ class MenuBar {
     
     createBoxesInDiagonalButton.on.click.add((MouseEvent e) {
       board.createBoxesInDiagonal();
-      //board.printBoxNames();
     });
     createBoxesAsTilesButton.on.click.add((MouseEvent e) {
       board.createBoxesAsTiles();
