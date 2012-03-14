@@ -13,7 +13,7 @@ class Board {
   // The board is redrawn every INTERVAL ms.
   static final int INTERVAL = 8; 
   
-  static final String FILE_NAME = 'model.txt';
+  // static final String FILE_NAME = 'model.txt';
   
   CanvasElement canvas;
   CanvasRenderingContext2D context;
@@ -591,8 +591,10 @@ class Board {
           deselect();
         }
       } else if (toolBar.isBoxToolOn()) {
-        // Create a box in the position of the mouse click on the board, but not on an existing box.
-        Box box = new Box(this, e.offsetX, e.offsetY, Box.DEFAULT_WIDTH, Box.DEFAULT_HEIGHT);
+        // Create a box in the position of the mouse click on the board, 
+        // but not on an existing box.
+        Box box = new Box(this, e.offsetX, e.offsetY, 
+          Box.DEFAULT_WIDTH, Box.DEFAULT_HEIGHT);
         if (e.offsetX + box.width > width) {
           box.x = width - box.width - 1;
         }

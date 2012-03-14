@@ -36,10 +36,13 @@ class MenuBar {
     selectBoxesButton = document.query('#select-boxes');
     selectLinesButton = document.query('#select-lines');
     selectBoxLinesButton = document.query('#select-box-lines');
-    selectLinesBetweenBoxesButton = document.query('#select-lines-between-boxes');
+    selectLinesBetweenBoxesButton = 
+      document.query('#select-lines-between-boxes');
     
-    increaseSelectionHeightButton = document.query('#increase-selection-height');
-    decreaseSelectionHeightButton = document.query('#decrease-selection-height');
+    increaseSelectionHeightButton = 
+      document.query('#increase-selection-height');
+    decreaseSelectionHeightButton = 
+      document.query('#decrease-selection-height');
     increaseSelectionWidthButton = document.query('#increase-selection-width');
     decreaseSelectionWidthButton = document.query('#decrease-selection-width');
     increaseSelectionSizeButton = document.query('#increase-selection-size');

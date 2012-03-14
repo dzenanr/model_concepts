@@ -53,17 +53,25 @@ class Box {
       int i = 0;
       for (Item item in items) {
         if (item.category == 'attribute') {
-          board.context.font = '' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
-          board.context.fillText(item.name, x + TOS, y + TOS + TBH + i * IOS, width - TOS);
+          board.context.font = '' + Board.DEFAULT_FONT_SIZE + 
+          'px sans-serif';
+          board.context.fillText(item.name, x + TOS, y + TOS + TBH + i * IOS, 
+            width - TOS);
         } else if (item.category == 'guid') {
-          board.context.font = 'italic ' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
-          board.context.fillText(item.name, x + TOS, y + TOS + TBH + i * IOS, width - TOS);
+          board.context.font = 'italic ' + Board.DEFAULT_FONT_SIZE + 
+          'px sans-serif';
+          board.context.fillText(item.name, x + TOS, y + TOS + TBH + i * IOS, 
+            width - TOS);
         } else if (item.category == 'identifier') {
-          board.context.font = 'bold italic ' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
-          board.context.fillText(item.name, x + TOS, y + TOS + TBH + i * IOS, width - TOS);
+          board.context.font = 'bold italic ' + Board.DEFAULT_FONT_SIZE + 
+          'px sans-serif';
+          board.context.fillText(item.name, x + TOS, y + TOS + TBH + i * IOS, 
+            width - TOS);
         } else if (item.category == 'required') {
-          board.context.font = 'bold ' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
-          board.context.fillText(item.name, x + TOS, y + TOS + TBH + i * IOS, width - TOS);
+          board.context.font = 'bold ' + Board.DEFAULT_FONT_SIZE + 
+          'px sans-serif';
+          board.context.fillText(item.name, x + TOS, y + TOS + TBH + i * IOS, 
+            width - TOS);
         }
         i++;
       }
@@ -234,9 +242,11 @@ class Box {
   }
   
   bool contains(int pointX, int pointY) {
-    if ((pointX > x && pointX < x + width) && (pointY > y && pointY < y + height)) {
+    if ((pointX > x && pointX < x + width) 
+        && (pointY > y && pointY < y + height)) {
       return true;
-    } else {
+    }
+    else {
       return false;
     }
   }
@@ -247,6 +257,37 @@ class Box {
    * <x1,y1> is inside the box, <x2,y2> may be inside or outside. 
    * Fast algorithm.
    */
+  
+  /**
+  Point getIntersectionPoint(Point lineBeginPoint, Point lineEndPoint) {
+    int x1 = lineBeginPoint.x;
+    int y1 = lineBeginPoint.y;
+    int x2 = lineEndPoint.x;
+    int y2 = lineEndPoint.y;
+    if (x2 == x1) {
+      /* vertical line */
+      return new Point(x2, (y2 < y1 ? y : y + height));
+    } 
+    if (y2 == y1) {
+      /* horizontal line */
+      return new Point((x2 < x1 ? x : x + width), y2);
+    } 
+      
+    double m = (y2 - y1) / (x2 - x1);
+    int intersectionX = (x2 < x1 ? x : x + width);
+    double fy = m * (intersectionX - x2) + y2;
+    int intersectionY;
+    /* float comparison, because fy may be bigger than the biggest integer */
+    if (fy >= y && fy <= y + height) {
+      intersectionY = fy.toInt();
+    } else {
+      y = (y2 < y1 ? y : y + height);
+      x = ((fy - y2) / m).toInt() + x2;
+    }
+    return new Point(intersectionX, intersectionY);
+  }
+  */
+  
   Point getIntersectionPoint(Point lineBeginPoint, Point lineEndPoint) {
     int x1 = lineBeginPoint.x;
     int y1 = lineBeginPoint.y;

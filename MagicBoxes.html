@@ -36,7 +36,9 @@
            <li><button id="select-boxes">Boxes</button></li>
            <li><button id="select-lines">Lines</button></li>
            <li><button id="select-box-lines">Box lines</button></li>
-           <li><button id="select-lines-between-boxes">Between boxes</button></li>
+           <li><button id="select-lines-between-boxes">
+             Between boxes</button>
+           </li>
          </ul>
        </li>
        <li>View
@@ -64,7 +66,9 @@
            <li>Spiral 11</li>
            <li>2012-01-08</li>
            <li>
-             <a href="https://plus.google.com/u/0/b/113649577593294551754/">On Dart</a>
+             <a href="https://plus.google.com/u/0/b/113649577593294551754/">
+               On Dart
+             </a>
            </li>
            <li>
              <a href="http://www.ondart.info/"><img src="img/ondart0.png"/></a>
@@ -165,28 +169,53 @@
     
     <section>
       <header>
+        <h3>Spiral 11: From Model to JSON and from JSON to Model</h3>
+      </header>
+      <p>
+        With spiral 11, 
+        you can start designing a model such as the meta model in the 
+        following diagram.
+      </p>
+      <p>
+        <a href="#"><img src="model/metamodel.png"/></a> 
+      </p>
+    </section>
+    
+    <section>
+      <header>
         <h3>Overview</h3>
       </header>
       <p>
-        With the Magic Boxes tool you may create a model of boxes (concepts), with items (attributes), and lines (relationships).
-        Click the box tool in the tool bar (brown background) to create a box, by clicking on an empty space in the board.
-        To move a non selected box, click the box and keep the mouse down while moving it.
+        With the Magic Boxes tool you may create a model of boxes (concepts), 
+        with items (attributes), and lines (relationships).
+        Click the box tool in the tool bar (brown background) to create a box, 
+        by clicking on an empty space in the board.
+        To move a non selected box, 
+        click the box and keep the mouse down while moving it.
         Click the box to select it. Click again to deselect it.
       </p>
       <p>
-        A name of the selected box may be entered in the Box field of the tool bar.
-        A box item may be created by entering its name in the Item field of the tool bar and by clicking on the Add button.
-        An existing item may be selected by entering its name and clicking on the Get button.
+        A name of the selected box may be entered in the Box field of 
+        the tool bar.
+        A box item may be created by entering its name in the Item field of 
+        the tool bar and by clicking on the Add button.
+        An existing item may be selected by entering its name and 
+        clicking on the Get button.
       </p> 
       <p>
-        Click the line tool to create a line between two boxes by clicking on the boxes, then by clicking on an empty space in the board.  
+        Click the line tool to create a line between two boxes by clicking 
+        on the boxes, then by clicking on an empty space in the board.  
         Click the line to select it. Click again to deselect it.
-        The selected line may be displayed in the tool bar by clicking on the Get button.
+        The selected line may be displayed in the tool bar by clicking 
+        on the Get button.
       </p>
       <p> 
-        You may transform a model to JSON by clicking on the To JSON button above the JSON panel.
-        Copy the JSON text from the JSON panel into a local text file to save the model. 
-        Later, paste the JSON text into the JSON panel and click on the From JSON button to obtain back the model. 
+        You may transform a model to JSON by clicking on the To JSON button 
+        above the JSON panel.
+        Copy the JSON text from the JSON panel into a local text file to 
+        save the model. 
+        Later, paste the JSON text into the JSON panel and click on the 
+        From JSON button to obtain back the model. 
       </p>
       
     </section>
@@ -196,18 +225,60 @@
         <h3>Objective</h3>
       </header>
       <p>
-        The Magic Boxes tool is developed in <a href="http://www.dartlang.org/">Dart</a> to start learning Dart 
+        The Magic Boxes tool is developed in 
+        <a href="http://www.dartlang.org/">Dart</a> to start learning Dart 
         (after reading the Getting Started section, developing the first 
-        <a  href="https://plus.google.com/u/0/112767453954051794400/posts/igDQd1ubWQs">example</a>, 
-        and the <a href="https://github.com/dzenanr/pingpong">Ping Pong</a> game). 
-        The tool is based on <a href="http://code.google.com/p/magic-boxes/">Magic Boxes</a> and 
+        <a  href="http://goo.gl/udRZX">example</a>, 
+        and the 
+        <a href="https://github.com/dzenanr/pingpong">Ping Pong</a> game). 
+        The tool is based on 
+        <a href="http://code.google.com/p/magic-boxes/">Magic Boxes</a> and 
         <a href="http://www.modelibra.org/">Modelibra Modeler</a>,
         both developed in Java.
       </p>
       <p>
-        The tool is developed in a step-by-step approach, spiral by spiral. Spiral 12 will be the last spiral of this
-        pedagogical project. Each spiral will be explained in a chapter of a forthcoming book entitled 
-        Learning Dart in Spirals by Developing Magic Boxes.
+        The tool is developed in a step-by-step approach, spiral by spiral. 
+      </p>
+    </section>
+    
+    <section>
+      <header>
+        <h3>Spirals</h3>
+      </header>
+      <p> 
+        The spiral approach to software learning and development, 
+        which preserves a project history 
+        as a series of code snapshots or spirals, 
+        is used in this project. 
+      </p>
+      <p> 
+        Learning new software concepts and technologies is a challenging task. 
+        Learning in spirals, from simple to more advanced concepts 
+        but with concrete software applications, helps students get a 
+        reasonable confidence level early on, 
+        and motivates them to learn by providing more useful applications. 
+        With each new spiral, the project grows and new concepts are introduced.  
+        A new spiral is explained with respect to the previous one.  
+        The difference between two consecutive spirals is that the next spiral 
+        has the new code introduced and the old code modified or deleted.  
+        This is called learning by anchoring to what we already understand.  
+        With a new spiral, we can come back to what we did previously and 
+        improve it.  
+        In this way, learning in spirals can touch the same topic several times, 
+        but each time with more details in a better version.
+      </p>
+      <p> 
+        There are many books where students have to learn quite a lot 
+        before applying new concepts, and even then, 
+        it is not obvious how to develop a complete software application. 
+        It took me more than ten years of learning and teaching to find out 
+        that the initial learning of a new technology must be task driven and 
+        not topic (subject) driven.  
+        Most software books are topic driven.  
+        It takes a quick look at the Table of Contents of almost any 
+        software book to realize that each chapter introduces a major topic. 
+        In a spiral, there may be more than one topic and all of them 
+        relate to what we want to accomplish with the spiral.
       </p>
     </section>
     
@@ -216,25 +287,21 @@
         <h3>Code</h3>
       </header>
       <p>
-        The <a href="https://github.com/dzenanr/MagicBoxes">code</a> of Magic Boxes in Dart is kept at 
+        The 
+        <a href="https://github.com/dzenanr/MagicBoxes">code</a> 
+        of Magic Boxes in Dart is kept at 
         <a href="https://github.com/">GitHub</a>. 
-        If you are new to <a href="http://sixrevisions.com/resources/git-tutorials-beginners/">Git</a>, 
-        you should really <a href="http://www.ralfebert.de/blog/tools/git_screencast/">start</a> learning it. 
+        If you are new to 
+        <a href="http://sixrevisions.com/resources/git-tutorials-beginners/">
+          Git
+        </a>, 
+        you should really 
+        <a href="http://www.ralfebert.de/blog/tools/git_screencast/">start</a> 
+        learning it. 
         However, if you are impatient to start learning Dart, you may want to 
-        <a href="https://github.com/dzenanr/MagicBoxes/tags">download</a> the spirals.
+        <a href="https://github.com/dzenanr/MagicBoxes/tags">download</a> 
+        the spirals.
       </p> 
-    </section>
-    
-    <section>
-      <header>
-        <h3>Spiral 11: From Model to JSON and from JSON to Model</h3>
-      </header>
-      <p>
-        With spiral 11, you can start designing a model such as the meta model in the following diagram.
-      </p>
-      <p>
-        <a href="#"><img src="model/metamodel.png"/></a> 
-      </p>
     </section>
      
     <section>
@@ -242,71 +309,106 @@
         <h3>Tiny User Guide</h3>
       </header>      
       <p>
-        Click the box tool to create a box (a concept in your domain), by clicking on an empty space in the board.
-        You have to select the box to enter its name in the box field of the tool bar.
+        Click the box tool to create a box (a concept in your domain), 
+        by clicking on an empty space in the board.
+        You have to select the box to enter its name in the 
+        box field of the tool bar.
       </p>
       <p>
-        To move a non selected box, click the box and keep the mouse down while moving it. 
+        To move a non selected box, 
+        click the box and keep the mouse down while moving it. 
         The connected lines will follow.
         A selected box cannot be moved.
       </p>
       <p>
         Click the box to select it. Click again to deselect it. 
-        If there are several selected boxes (and/or lines), you may deselect them all by clicking on an empty space in the board.
-        For the last selected box, its title (name) may be changed by entering text in the Box field of the tool bar. 
+        If there are several selected boxes (and/or lines), 
+        you may deselect them all by clicking on an empty space in the board.
+        For the last selected box, 
+        its title (name) may be changed by entering text in the 
+        Box field of the tool bar. 
       </p>
       <p>
-        For the last selected box, click in the Box field to obtain and change its name.
+        For the last selected box, 
+        click in the Box field to obtain and change its name.
         The box may be declared as entry into the model. 
-        A new item may be added to the selected box by entering its name in the Item box, then clicking on the Add button.
-        The item is an attribute of the box (concept). In addition, it may be declared as guid (globally unique identifier--not significant to a user), 
-        identifier (significant to a user) or required (mandatory value). The choice is presented in the pop-up list. 
+        A new item may be added to the selected box by entering its name in 
+        the Item box, then clicking on the Add button.
+        The item is an attribute of the box (concept). 
+        In addition, it may be declared as guid 
+        (globally unique identifier--not significant to a user), 
+        identifier (significant to a user) or required (mandatory value). 
+        The choice is presented in the pop-up list. 
         An item may have an initial (default) value.
-        An existing item may be selected by entering its name and clicking on the Get button. 
-        The selected item may be changed (Set button), including its sequence position within the box (Up or Down buttons),  
-        or even removed (Remove button). The size of selected boxes may be changed by menu items in the View menu. 
+        An existing item may be selected by entering its name and 
+        clicking on the Get button. 
+        The selected item may be changed (Set button), 
+        including its sequence position within the box (Up or Down buttons),  
+        or even removed (Remove button). 
+        The size of selected boxes may be changed 
+        by menu items in the View menu. 
       </p>
       <p>
-        If you want to create several boxes, double-click the box tool to stay on. 
+        If you want to create several boxes, 
+        double-click the box tool to stay on. 
         To return to the select mode double-click the select tool.
       </p>
       <p>
         Click the line tool to create a line between the last two clicked boxes, 
         by clicking on an empty space in the board. 
-        The first box is a parent and the second box is a child. By default, the parent box has 0..N cardinalities. 
-        The min is 0 and the max is N. By default, the child box has 1..1 cardinalities. 
+        The first box is a parent and the second box is a child. 
+        By default, the parent box has 0..N cardinalities. 
+        The min is 0 and the max is N. 
+        By default, the child box has 1..1 cardinalities. 
         An example is Department--0..N----1..1--Employee. 
-        A department has from 0 to N employees and an employee works for exactly one department.
+        A department has from 0 to N employees and 
+        an employee works for exactly one department.
       </p>
       <p>
         The line is a relationship between two boxes (concepts). 
-        It has two directions: from parent to child (neighbor) and from child to parent (neighbor).
-        The selected line may be transformed (and obtained in the tool bar) to inheritance line (child inherits from parent), 
-        to reflexive line (one-parent box, not two boxes) or to twin line (two lines between the same two boxes must be first created). 
+        It has two directions: from parent to child (neighbor) and 
+        from child to parent (neighbor).
+        The selected line may be transformed (and obtained in the tool bar) 
+        to inheritance line (child inherits from parent), 
+        to reflexive line (one-parent box, not two boxes) or 
+        to twin line 
+        (two lines between the same two boxes must be first created). 
         The choice is presented in the pop-up list. 
         By default, a new line is internal. 
-        The child box of the internal line usually is not an entry point into the model. 
-        The selected line may also be obtained by clicking on the Get button in the tool bar.
-        The line cardinalities may be changed. For the 1..1 cardinalities, the identifier (id) may be checked on.
+        The child box of the internal line usually is not an entry point 
+        into the model. 
+        The selected line may also be obtained by clicking on the 
+        Get button in the tool bar.
+        The line cardinalities may be changed. 
+        For the 1..1 cardinalities, the identifier (id) may be checked on.
         The line changes may be set by clicking on the Set button.
       </p>
       <p>
-        Click the line, or very close to it, to select it. Click again to deselect it. 
-        A reflexive line is selected by clicking on a horizontal portion of the line.
-        If two lines are created between the same two boxes, the last line may be selected by clicking on both lines. 
-        The selected line should be displayed in the tool bar by clicking on the Get button. 
+        Click the line, or very close to it, to select it. 
+        Click again to deselect it. 
+        A reflexive line is selected by clicking on a horizontal portion 
+        of the line.
+        If two lines are created between the same two boxes, 
+        the last line may be selected by clicking on both lines. 
+        The selected line should be displayed in the tool bar by clicking 
+        on the Get button. 
         Then, the twin choice will separate the two lines into twins. 
-        If there are several selected lines (and/or boxes), you may deselect them all by clicking on an empty space in the board.
+        If there are several selected lines (and/or boxes), 
+        you may deselect them all by clicking on an empty space in the board.
       </p>
       <p>
-        If you want to create several lines, double-click the line tool to stay on. 
+        If you want to create several lines, 
+        double-click the line tool to stay on. 
         To return to the select mode double-click the select tool.
       </p>
       <p>
         Transform a model, but only non-hidden boxes and lines, to 
-        <a href="http://www.json.org/">JSON</a> by clicking on the To JSON button above the JSON panel.
+        <a href="http://www.json.org/">JSON</a> 
+        by clicking on the To JSON button above the JSON panel.
         Copy the JSON text from the JSON panel into a local text file 
-        to save the model. Later, paste the JSON text into the JSON panel and click on the From JSON button to obtain the model. 
+        to save the model. 
+        Later, paste the JSON text into the JSON panel and click on 
+        the From JSON button to obtain the model. 
       </p>
       <p>
         Transform a model to a 
@@ -316,70 +418,5 @@
       </p>
     </section> 
     
-    <section>
-      <header>
-        <h3>Spirals</h3>
-      </header>
-      <p> 
-        The spiral approach to software learning and development, which preserves a project history as a series of code snapshots or spirals, 
-        is used in this project. 
-      </p>
-      <p> 
-        Learning new software concepts and technologies is a challenging task. Learning in spirals, 
-        from simple to more advanced concepts but with concrete software applications, helps students get a reasonable confidence level early on, 
-        and motivates them to learn by providing more useful applications. With each new spiral, the project grows and new concepts are introduced.  
-        A new spiral is explained with respect to the previous one.  The difference between two consecutive spirals is that the next spiral has the new code introduced 
-        and the old code modified or deleted.  This is called learning by anchoring to what we already understand.  With a new spiral, 
-        we can come back to what we did previously and improve it.  In this way, learning in spirals can touch the same topic several times, 
-        but each time with more details in a better version.
-      </p>
-      <p> 
-        There are many books where students have to learn quite a lot before applying new concepts, and even then, it is not obvious how to develop a complete software application. 
-        It took me more than ten years of learning and teaching to find out that the initial learning of a new technology must be task driven and not topic (subject) driven.  
-        Most software books are topic driven.  It takes a quick look at the Table of Contents of almost any software book to realize that each chapter introduces a major topic. 
-        In a spiral, there may be more than one topic and all of them relate to what we want to accomplish with the spiral.
-      </p>
-      <ul class="link">
-        <li>
-          <a href="http://dl.dropbox.com/u/161496/dart/tool/MagicBoxes/spirals/s00/MagicBoxes.html">Spiral 00: Hello World</a>
-        </li>
-        <li>
-          <a href="http://dl.dropbox.com/u/161496/dart/tool/MagicBoxes/spirals/s01/MagicBoxes.html">Spiral 01: Two Boxes</a>
-        </li>
-        <li>
-          <a href="http://dl.dropbox.com/u/161496/dart/tool/MagicBoxes/spirals/s02/MagicBoxes.html">Spiral 02: Moving Monsters</a>
-        </li>
-        <li>
-          <a href="http://dl.dropbox.com/u/161496/dart/tool/MagicBoxes/spirals/s03/MagicBoxes.html">Spiral 03: 
-          Creating Boxes and Moving Selected Boxes</a>
-        </li>
-        <li>
-          <a href="http://dl.dropbox.com/u/161496/dart/tool/MagicBoxes/spirals/s04/MagicBoxes.html">Spiral 04: 
-          Boxes, with Text, Move Properly</a>
-        </li>
-        <li>
-          <a href="http://dl.dropbox.com/u/161496/dart/tool/MagicBoxes/spirals/s05/MagicBoxes.html">Spiral 05: Boxes with Tool Bar</a>
-        </li>
-        <li>
-          <a href="http://dl.dropbox.com/u/161496/dart/tool/MagicBoxes/spirals/s06/MagicBoxes.html">Spiral 06: Boxes with Lines</a>
-        </li>
-        <li>
-          <a href="http://dl.dropbox.com/u/161496/dart/tool/MagicBoxes/spirals/s07/MagicBoxes.html">Spiral 07: 
-          Line Selection and Horizontal Menu Bar with Menus and Menu Items </a>
-        </li>
-        <li>
-          <a href="http://dl.dropbox.com/u/161496/dart/tool/MagicBoxes/spirals/s08/MagicBoxes.html">Spiral 08: 
-          Boxes with User Entered Names and Items</a>
-        </li>
-        <li>
-          <a href="http://dl.dropbox.com/u/161496/dart/tool/MagicBoxes/spirals/s09/MagicBoxes.html">Spiral 09: 
-          Lines with User Entered Cardinalities, Ids and Names</a>
-        </li>
-        <li>
-          <a href="http://dl.dropbox.com/u/161496/dart/tool/MagicBoxes/spirals/s10/MagicBoxes.html">Spiral 10: 
-          Inheritance, Reflexive and Twin Lines</a>
-        </li>
-      </ul>
-    </section>
   </body>
 </html>

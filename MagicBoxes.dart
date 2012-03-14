@@ -1,5 +1,5 @@
 #import('dart:html');
-#import("dart:json");
+#import('dart:json');
 #source('Box.dart');
 #source('Board.dart');
 #source('ToolBar.dart');
@@ -9,7 +9,7 @@
 #source('JsonPanel.dart');
 #source('PngPanel.dart');
 
-// branch s11a (script changes for Dart)
+// Branch s11a.
 
 // See the style guide: http://www.dartlang.org/articles/style-guide/ .
 

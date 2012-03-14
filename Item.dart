@@ -7,9 +7,7 @@ class Item {
   String category; // attribute, guid, identifier, required
   String init = '';
   
-  Item(this.box, String name, String category) {
-    this.name = name;
-    this.category = category;
+  Item(this.box, this.name, this.category) {
     sequence = box.findLastItemSequence() + 10;
     box.items.add(this);
   }
