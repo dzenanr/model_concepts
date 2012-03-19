@@ -3,6 +3,9 @@ class MenuBar {
   final Board board;
   
   // File
+  InputElement modelNameInput;
+  ButtonElement openModelButton;
+  ButtonElement saveModelButton;
   
   // Edit
   ButtonElement deleteSelectionButton;
@@ -29,7 +32,11 @@ class MenuBar {
   ButtonElement createBoxesInDiagonalButton;
   ButtonElement createBoxesAsTilesButton;
   
-  MenuBar(this.board) {  
+  MenuBar(this.board) { 
+    modelNameInput = document.query('#model-name');
+    openModelButton = document.query('#open-model');
+    saveModelButton = document.query('#save-model');
+    
     deleteSelectionButton = document.query('#delete-selection');
     
     selectAllButton = document.query('#select-all');
@@ -52,6 +59,15 @@ class MenuBar {
     createBoxesAsTilesButton = document.query('#create-boxes-as-tiles');
     
     // Menu bar events.
+    openModelButton.on.click.add((MouseEvent e) {
+      String modelName = modelNameInput.value.trim();
+      board.openModel(modelName);
+    });
+    saveModelButton.on.click.add((MouseEvent e) {
+      String modelName = modelNameInput.value.trim();
+      board.saveModel(modelName);
+    });
+    
     deleteSelectionButton.on.click.add((MouseEvent e) {
       board.deleteSelection();
     });

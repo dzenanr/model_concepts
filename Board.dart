@@ -72,6 +72,20 @@ class Board {
     return _height;
   }
   
+  void openModel(String name) {
+    String json = window.localStorage.getItem(name);
+    if (json != null) {
+      fromJson(json);
+    }
+  }
+  
+  void saveModel(String name) {
+    String json = toJson();
+    if (json != null) {
+      window.localStorage.setItem(name, json);
+    }
+  }
+  
   String toJson() {
     Map<String, Object> boardMap = new Map<String, Object>();
     boardMap["width"] = width;
