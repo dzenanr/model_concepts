@@ -23,6 +23,7 @@ class ToolBar {
   InputElement itemInitInput;
   ButtonElement addItemButton;
   ButtonElement getItemButton;
+  ButtonElement getNextItemButton;
   ButtonElement upItemButton;
   ButtonElement downItemButton;
   ButtonElement setItemButton;
@@ -182,6 +183,30 @@ class ToolBar {
         } else {
           currentItem = null;
         }
+      }
+    });
+    
+    getNextItemButton = document.query('#getNextItem');
+    getNextItemButton.on.click.add((MouseEvent e) {
+      Box box = board.lastBoxSelected;
+      if (box != null) {
+        if (currentItem != null) {
+          Item nextItem = box.findNextItem(currentItem);
+          if (nextItem != null) {
+            currentItem = nextItem;
+            itemNameInput.value = nextItem.name;
+            itemCategoryOption.value = nextItem.category;
+            itemTypeOption.value = nextItem.type;
+            itemInitInput.value = nextItem.init;
+            itemNameInput.select();
+          } else {
+            currentItem = null;
+            itemNameInput.value = '';
+            itemCategoryOption.value = 'attribute';
+            itemTypeOption.value = 'String';
+            itemInitInput.value = '';
+          }
+        } 
       }
     });
     
