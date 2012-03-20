@@ -160,6 +160,7 @@ class Board {
     String sequenceText = itemMap["sequence"];
     int sequence = Math.parseInt(sequenceText);
     item.sequence = sequence;
+    item.type = itemMap["type"];
     item.init = itemMap["init"];
   }
   

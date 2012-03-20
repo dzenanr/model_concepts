@@ -5,11 +5,10 @@ class Item {
   int sequence; // sequence number within the box: 10, 20, ...
   String name;
   String category; // attribute, guid, identifier, required
+  String type; // String, num, int, double, bool, Date, Other
   String init = '';
   
-  Item(this.box, String name, String category) {
-    this.name = name;
-    this.category = category;
+  Item(this.box, this.name, this.category) {
     sequence = box.findLastItemSequence() + 10;
     box.items.add(this);
   }
@@ -19,6 +18,7 @@ class Item {
     itemMap["sequence"] = sequence;
     itemMap["name"] = name;
     itemMap["category"] = category; 
+    itemMap["type"] = type;
     itemMap["init"] = init;
     return itemMap;
   }

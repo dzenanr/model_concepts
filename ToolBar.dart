@@ -18,7 +18,8 @@ class ToolBar {
   InputElement boxNameInput;
   InputElement boxEntryCheckbox;
   InputElement itemNameInput;
-  OptionElement itemOption;
+  OptionElement itemCategoryOption;
+  OptionElement itemTypeOption;
   InputElement itemInitInput;
   ButtonElement addItemButton;
   ButtonElement getItemButton;
@@ -100,7 +101,8 @@ class ToolBar {
         boxEntryCheckbox.checked = box.entry;
         currentItem = null;
         itemNameInput.value = '';
-        itemOption.value = 'attribute';
+        itemCategoryOption.value = 'attribute';
+        itemTypeOption.value = 'String';
         itemInitInput.value = '';
       }
     });
@@ -127,11 +129,21 @@ class ToolBar {
     
     itemNameInput = document.query('#itemName');
     
-    itemOption = document.query('#itemCategory');
-    itemOption.on.change.add((MouseEvent e) {
+    itemCategoryOption = document.query('#itemCategory');
+    itemCategoryOption.on.change.add((MouseEvent e) {
       if (currentItem != null) {
         currentItem.name = itemNameInput.value;
-        currentItem.category = itemOption.value;
+        currentItem.category = itemCategoryOption.value;
+        itemNameInput.select();
+      } 
+      itemInitInput.value = '';
+    });
+    
+    itemTypeOption = document.query('#itemType');
+    itemTypeOption.on.change.add((MouseEvent e) {
+      if (currentItem != null) {
+        currentItem.name = itemNameInput.value;
+        currentItem.type = itemTypeOption.value;
         itemNameInput.select();
       } 
       itemInitInput.value = '';
@@ -147,7 +159,8 @@ class ToolBar {
         if (itemName != '') {
           Item otherItem = box.findItem(itemName);
           if (otherItem == null) {
-            Item item = new Item(box, itemName, itemOption.value);
+            Item item = new Item(box, itemName, itemCategoryOption.value);
+            item.type = itemTypeOption.value;
             item.init = itemInitInput.value.trim();
           }
         }
@@ -162,7 +175,8 @@ class ToolBar {
         if (item != null) {
           currentItem = item;
           itemNameInput.value = item.name;
-          itemOption.value = item.category;
+          itemCategoryOption.value = item.category;
+          itemTypeOption.value = item.type;
           itemInitInput.value = item.init;
           itemNameInput.select();
         } else {
@@ -186,7 +200,8 @@ class ToolBar {
           } else {
             currentItem = null;
             itemNameInput.value = '';
-            itemOption.value = 'attribute';
+            itemCategoryOption.value = 'attribute';
+            itemTypeOption.value = 'String';
             itemInitInput.value = '';
           }
         } 
@@ -208,7 +223,8 @@ class ToolBar {
           } else {
             currentItem = null;
             itemNameInput.value = '';
-            itemOption.value = 'attribute';
+            itemCategoryOption.value = 'attribute';
+            itemTypeOption.value = 'String';
             itemInitInput.value = '';
           }
         }
@@ -227,7 +243,8 @@ class ToolBar {
               currentItem.name = itemName;
             }
           }
-          currentItem.category = itemOption.value;
+          currentItem.category = itemCategoryOption.value;
+          currentItem.type = itemTypeOption.value;
           currentItem.init = itemInitInput.value;
           itemNameInput.select();
         }
@@ -242,7 +259,8 @@ class ToolBar {
           if (box.removeItem(currentItem)) {
             currentItem = null;
             itemNameInput.value = '';
-            itemOption.value = 'attribute';
+            itemCategoryOption.value = 'attribute';
+            itemTypeOption.value = 'String';
             itemInitInput.value = '';
           }
         }

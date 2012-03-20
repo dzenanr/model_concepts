@@ -66,7 +66,7 @@
          <ul>
            <li>Magic Boxes in <a href="http://www.dart.org/">Dart</a></li>
            <li>Spiral 12</li>
-           <li>2012-03-20</li>
+           <li>2012-03-21</li>
            <li>
              <a href="https://plus.google.com/u/0/b/113649577593294551754/">
                On Dart
@@ -111,6 +111,15 @@
           <option>identifier</option>
           <option>required</option>
         </select> 
+        <select id="itemType">
+          <option>String</option>
+          <option>num</option>
+          <option>int</option>
+          <option>double</option>
+          <option>bool</option>
+          <option>Date</option>
+          <option>Other</option>
+        </select>
         <label for="itemInit">init</label>
         <input type="text" id="itemInit" size="16"/>
         <button class="button" id="addItem">Add</button>
@@ -339,6 +348,9 @@
         (globally unique identifier--not significant to a user), 
         identifier (significant to a user) or required (mandatory value). 
         The choice is presented in the pop-up list. 
+        A default type for an item is String. 
+        An item type may be changed by selecting a different type 
+        from the pop-up list.
         An item may have an initial (default) value.
         An existing item may be selected by entering its name and 
         clicking on the Get button. 
