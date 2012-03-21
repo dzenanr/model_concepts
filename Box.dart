@@ -150,7 +150,15 @@ class Box {
       }
     }
     return null;
-  } 
+  }
+  
+  Item findFirstItem() {
+    if (items.isEmpty()) {
+      return null;
+    } else {
+      return items[0];
+    }
+  }
   
   Item findPreviousItem(Item currentItem) {
     sortItemsBySequence();
@@ -170,7 +178,7 @@ class Box {
     for (Item item in items) {
       if (item == currentItem) {
         int ix = items.indexOf(item, 0);
-        if (ix < items.length) {
+        if (ix < items.length - 1) {
           return items[ix + 1];
         } 
       }

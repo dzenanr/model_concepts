@@ -25,6 +25,7 @@
            <li><input type="text" id="model-name"/></li>
            <li><button id="open-model">Open Model</button></li>
            <li><button id="save-model">Save Model</button></li>
+           <li><button id="close-model">Close Model</button></li>
          </ul>  
        </li>
        <li>Edit
@@ -118,6 +119,9 @@
           <option>double</option>
           <option>bool</option>
           <option>Date</option>
+          <option>Email</option>
+          <option>Url</option>
+          <option>Dynamic</option>
           <option>Other</option>
         </select>
         <label for="itemInit">init</label>
@@ -166,12 +170,14 @@
     
     <section> 
       <button class="button" id="fromModelToJson">To JSON</button>
-      <button class="button" id="fromJsonToModel">From JSON</button>  
+      <button class="button" id="fromJsonToModel">From JSON</button>
+      <button class="button" id="clear">Clear</button>  
       <textarea name="modelJson" rows=20 cols=120 id="modelJson"></textarea>
     </section> 
     
     <section>
       <button class="button" id="fromModelToPng">To PNG</button>
+      <button class="button" id="remove">Remove</button>
       <img alt="Your model as PNG." id="modelImage"/>
     </section>
     
@@ -182,10 +188,9 @@
     
     <section>
       <header>
-        <h3>Spiral 12: Final Touches</h3>
+        <h3>Spiral 12: Local Storage</h3>
       </header>
       <p>
-        Spiral 12 is the final version of the MagicBoxes project.
         With spiral 12, you can design a model such as the meta model 
         in the following diagram.
         The model may be saved in a local storage and later opened.

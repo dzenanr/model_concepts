@@ -206,6 +206,16 @@ class ToolBar {
             itemTypeOption.value = 'String';
             itemInitInput.value = '';
           }
+        } else {
+          if (!box.items.isEmpty()) {
+            Item firstItem = box.findFirstItem();
+            currentItem = firstItem;
+            itemNameInput.value = firstItem.name;
+            itemCategoryOption.value = firstItem.category;
+            itemTypeOption.value = firstItem.type;
+            itemInitInput.value = firstItem.init;
+            itemNameInput.select();
+          }
         } 
       }
     });

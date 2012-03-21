@@ -6,6 +6,7 @@ class MenuBar {
   InputElement modelNameInput;
   ButtonElement openModelButton;
   ButtonElement saveModelButton;
+  ButtonElement closeModelButton;
   
   // Edit
   ButtonElement deleteSelectionButton;
@@ -36,6 +37,7 @@ class MenuBar {
     modelNameInput = document.query('#model-name');
     openModelButton = document.query('#open-model');
     saveModelButton = document.query('#save-model');
+    closeModelButton = document.query('#close-model');
     
     deleteSelectionButton = document.query('#delete-selection');
     
@@ -66,6 +68,10 @@ class MenuBar {
     saveModelButton.on.click.add((MouseEvent e) {
       String modelName = modelNameInput.value.trim();
       board.saveModel(modelName);
+    });
+    closeModelButton.on.click.add((MouseEvent e) {
+      modelNameInput.value = '';
+      board.delete();
     });
     
     deleteSelectionButton.on.click.add((MouseEvent e) {
