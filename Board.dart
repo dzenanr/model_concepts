@@ -86,6 +86,12 @@ class Board {
     }
   }
   
+  void closeModel() {
+    delete();
+    jsonPanel.clear();
+    pngPanel.hide();
+  } 
+  
   String toJson() {
     Map<String, Object> boardMap = new Map<String, Object>();
     boardMap["width"] = width;

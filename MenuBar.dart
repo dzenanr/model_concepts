@@ -71,7 +71,7 @@ class MenuBar {
     });
     closeModelButton.on.click.add((MouseEvent e) {
       modelNameInput.value = '';
-      board.delete();
+      board.closeModel();
     });
     
     deleteSelectionButton.on.click.add((MouseEvent e) {

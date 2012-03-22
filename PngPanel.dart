@@ -4,21 +4,27 @@ final Board board;
   
   ImageElement modelImage;
   ButtonElement fromModelToPngButton;
-  ButtonElement removeButton;
+  ButtonElement clearButton;
   
   PngPanel(this.board) {
     modelImage = document.query('#modelImage');
     fromModelToPngButton = document.query('#fromModelToPng');
     fromModelToPngButton.on.click.add((MouseEvent e) {
       modelImage.src = board.canvas.toDataURL("image/png");
-      modelImage.hidden = false;
+      show();
     });
-    removeButton = document.query('#remove');
-    removeButton.on.click.add((MouseEvent e) {
-      modelImage.hidden = true;
+    clearButton = document.query('#clearImage');
+    clearButton.on.click.add((MouseEvent e) {
+      hide();
     });
   }
   
+  void hide() {
+    modelImage.hidden = true;
+  }
+  
+  void show() {
+    modelImage.hidden = false;
+  }
+  
 }
-
-

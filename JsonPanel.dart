@@ -18,10 +18,14 @@ class JsonPanel {
     fromJsonToModelButton.on.click.add((MouseEvent e) {
       board.fromJson(modelJsonTextArea.value);
     });
-    clearButton = document.query('#clear');
+    clearButton = document.query('#clearJson');
     clearButton.on.click.add((MouseEvent e) {
-      modelJsonTextArea.value = '';
+      clear();
     });
+  }
+  
+  void clear() {
+    modelJsonTextArea.value = '';
   }
 
 }
