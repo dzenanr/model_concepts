@@ -202,6 +202,7 @@ class Line {
   void select() {
     _selected = true;
     board.lastLineSelected = this;
+    board.toolBar.bringSelectedLine();
   }
   
   void deselect() {
@@ -210,11 +211,10 @@ class Line {
   }
   
   void toggleSelection() { 
-    _selected = !_selected;
-    if (_selected) {
-      board.lastLineSelected = this;
+    if (isSelected()) {
+      deselect();
     } else {
-      board.lastLineSelected = null;
+      select();
     }
   }
   

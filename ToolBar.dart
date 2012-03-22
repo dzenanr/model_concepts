@@ -26,15 +26,12 @@ class ToolBar {
   ButtonElement getNextItemButton;
   ButtonElement upItemButton;
   ButtonElement downItemButton;
-  ButtonElement setItemButton;
   ButtonElement removeItemButton;
   
   Item currentItem;
   
   OptionElement lineOption;
   InputElement lineInternalCheckbox;
-  ButtonElement getLineButton;
-  ButtonElement setLineButton;
   
   LabelElement line12Box1Label;
   LabelElement line12Box2Label;
@@ -95,18 +92,6 @@ class ToolBar {
     });
     
     boxNameInput = document.query('#boxName');
-    boxNameInput.on.focus.add((Event e) {
-      Box box = board.lastBoxSelected;
-      if (box != null) {
-        boxNameInput.value = box.title;
-        boxEntryCheckbox.checked = box.entry;
-        currentItem = null;
-        itemNameInput.value = '';
-        itemCategoryOption.value = 'attribute';
-        itemTypeOption.value = 'String';
-        itemInitInput.value = '';
-      }
-    });
     boxNameInput.on.input.add((Event e) {
       Box box = board.lastBoxSelected;
       if (box != null) {
@@ -129,21 +114,33 @@ class ToolBar {
     });
     
     itemNameInput = document.query('#itemName');
+    itemNameInput.on.input.add((Event e) {
+      Box box = board.lastBoxSelected;
+      if (box != null) {
+        if (currentItem != null) {
+          String itemName = itemNameInput.value.trim();
+          if (itemName != '') {
+            Item otherItem = box.findItem(itemName);
+            if (otherItem == null) {
+              currentItem.name = itemName;
+            }
+          }
+          itemNameInput.select();
+        }
+      }
+    });
     
     itemCategoryOption = document.query('#itemCategory');
     itemCategoryOption.on.change.add((MouseEvent e) {
       if (currentItem != null) {
-        currentItem.name = itemNameInput.value;
         currentItem.category = itemCategoryOption.value;
         itemNameInput.select();
       } 
-      itemInitInput.value = '';
     });
     
     itemTypeOption = document.query('#itemType');
     itemTypeOption.on.change.add((MouseEvent e) {
       if (currentItem != null) {
-        currentItem.name = itemNameInput.value;
         currentItem.type = itemTypeOption.value;
         itemNameInput.select();
       } 
@@ -151,6 +148,15 @@ class ToolBar {
     });
     
     itemInitInput = document.query('#itemInit');
+    itemInitInput.on.input.add((Event e) {
+      Box box = board.lastBoxSelected;
+      if (box != null) {
+        if (currentItem != null) {
+          currentItem.init = itemInitInput.value.trim();
+          itemNameInput.select();
+        }
+      }
+    });
     
     addItemButton = document.query('#addItem');
     addItemButton.on.click.add((MouseEvent e) {
@@ -266,26 +272,6 @@ class ToolBar {
       }
     });
     
-    setItemButton = document.query('#setItem');
-    setItemButton.on.click.add((MouseEvent e) {
-      Box box = board.lastBoxSelected;
-      if (box != null) {
-        if (currentItem != null) {
-          String itemName = itemNameInput.value.trim();
-          if (itemName != '') {
-            Item otherItem = box.findItem(itemName);
-            if (otherItem == null) {
-              currentItem.name = itemName;
-            }
-          }
-          currentItem.category = itemCategoryOption.value;
-          currentItem.type = itemTypeOption.value;
-          currentItem.init = itemInitInput.value;
-          itemNameInput.select();
-        }
-      }
-    });
-    
     removeItemButton = document.query('#removeItem');
     removeItemButton.on.click.add((MouseEvent e) {
       Box box = board.lastBoxSelected;
@@ -307,22 +293,6 @@ class ToolBar {
       Line line = board.lastLineSelected;
       if (line != null) {
         line.category = lineOption.value;
-        
-        lineInternalCheckbox.checked = line.internal;
-        
-        line12Box1Label.text = line.box1.title;
-        line12Box2Label.text = line.box2.title;
-        line12MinInput.value = line.box1box2Min;
-        line12MaxInput.value = line.box1box2Max;
-        line12IdCheckbox.checked = line.box1box2Id;
-        line12NameInput.value = line.box1box2Name;
-        
-        line21Box2Label.text = line.box2.title;
-        line21Box1Label.text = line.box1.title;
-        line21MinInput.value = line.box2box1Min;
-        line21MaxInput.value = line.box2box1Max;
-        line21IdCheckbox.checked = line.box2box1Id;
-        line21NameInput.value = line.box2box1Name;
       }
     });
     
@@ -331,87 +301,118 @@ class ToolBar {
       Line line = board.lastLineSelected;
       if (line != null) {
         line.internal = lineInternalCheckbox.checked;
-        
-        lineOption.value = line.category;
-        
-        line12Box1Label.text = line.box1.title;
-        line12Box2Label.text = line.box2.title;
-        line12MinInput.value = line.box1box2Min;
-        line12MaxInput.value = line.box1box2Max;
-        line12IdCheckbox.checked = line.box1box2Id;
-        line12NameInput.value = line.box1box2Name;
-        
-        line21Box2Label.text = line.box2.title;
-        line21Box1Label.text = line.box1.title;
-        line21MinInput.value = line.box2box1Min;
-        line21MaxInput.value = line.box2box1Max;
-        line21IdCheckbox.checked = line.box2box1Id;
-        line21NameInput.value = line.box2box1Name;
       }
     });
     
-    getLineButton = document.query('#getLine');
-    getLineButton.on.click.add((MouseEvent e) {
+    line12Box1Label = document.query('#line12Box1');
+    line12Box2Label = document.query('#line12Box2');
+    
+    line12MinInput = document.query('#line12Min');
+    line12MinInput.on.input.add((Event e) {
       Line line = board.lastLineSelected;
       if (line != null) {
-        lineOption.value = line.category;
-        lineInternalCheckbox.checked = line.internal;
-        
-        line12Box1Label.text = line.box1.title;
-        line12Box2Label.text = line.box2.title;
-        line12MinInput.value = line.box1box2Min;
-        line12MaxInput.value = line.box1box2Max;
-        line12IdCheckbox.checked = line.box1box2Id;
-        line12NameInput.value = line.box1box2Name;
-        
-        line21Box2Label.text = line.box2.title;
-        line21Box1Label.text = line.box1.title;
-        line21MinInput.value = line.box2box1Min;
-        line21MaxInput.value = line.box2box1Max;
-        line21IdCheckbox.checked = line.box2box1Id;
-        line21NameInput.value = line.box2box1Name;
+        line.box1box2Min = line12MinInput.value.trim();
       }
     });
     
-    setLineButton = document.query('#setLine');
-    setLineButton.on.click.add((MouseEvent e) {
+    line12MaxInput = document.query('#line12Max');
+    line12MaxInput.on.input.add((Event e) {
       Line line = board.lastLineSelected;
-      if (line != null) {   
-        line.box1box2Min = line12MinInput.value.trim();
+      if (line != null) {
         line.box1box2Max = line12MaxInput.value.trim();
+      }
+    });
+    
+    line12IdCheckbox = document.query('#line12Id');
+    line12IdCheckbox.on.change.add((Event e) {
+      Line line = board.lastLineSelected;
+      if (line != null) {
         if (line.box1box2Min == '1' && line.box1box2Max == '1') {
           line.box1box2Id = line12IdCheckbox.checked;
         } else {
           line12IdCheckbox.checked = false;
           line.box1box2Id = false;
         }
+      }
+    });
+    
+    line12NameInput = document.query('#line12Name');
+    line12NameInput.on.input.add((Event e) {
+      Line line = board.lastLineSelected;
+      if (line != null) {
         line.box1box2Name = line12NameInput.value.trim();
-        
+      }
+    });
+    
+    line21Box2Label = document.query('#line21Box2');
+    line21Box1Label = document.query('#line21Box1');
+    
+    line21MinInput = document.query('#line21Min');
+    line21MinInput.on.input.add((Event e) {
+      Line line = board.lastLineSelected;
+      if (line != null) {
         line.box2box1Min = line21MinInput.value.trim();
+      }
+    });
+    
+    line21MaxInput = document.query('#line21Max');
+    line21MaxInput.on.input.add((Event e) {
+      Line line = board.lastLineSelected;
+      if (line != null) {
         line.box2box1Max = line21MaxInput.value.trim();
+      }
+    });
+    
+    line21IdCheckbox = document.query('#line21Id');
+    line21IdCheckbox.on.change.add((Event e) {
+      Line line = board.lastLineSelected;
+      if (line != null) {
         if (line.box2box1Min == '1' && line.box2box1Max == '1') {
           line.box2box1Id = line21IdCheckbox.checked;
         } else {
           line21IdCheckbox.checked = false;
           line.box2box1Id = false;
         }  
-        line.box2box1Name = line21NameInput.value.trim();
       }
     });
     
-    line12Box1Label = document.query('#line12Box1');
-    line12Box2Label = document.query('#line12Box2');
-    line12MinInput = document.query('#line12Min');
-    line12MaxInput = document.query('#line12Max');
-    line12IdCheckbox = document.query('#line12Id');
-    line12NameInput = document.query('#line12Name');
-    
-    line21Box2Label = document.query('#line21Box2');
-    line21Box1Label = document.query('#line21Box1');
-    line21MinInput = document.query('#line21Min');
-    line21MaxInput = document.query('#line21Max');
-    line21IdCheckbox = document.query('#line21Id');
     line21NameInput = document.query('#line21Name');
+    line21NameInput.on.input.add((Event e) {
+      Line line = board.lastLineSelected;
+      if (line != null) {
+        line.box2box1Name = line21NameInput.value.trim();
+      }
+    });
+  }
+  
+  void bringSelectedBox() {
+    Box box = board.lastBoxSelected;
+    if (box != null) {
+      boxNameInput.value = box.title;
+      boxEntryCheckbox.checked = box.entry;
+    }
+  }
+  
+  void bringSelectedLine() {
+    Line line = board.lastLineSelected;
+    if (line != null) {
+      lineOption.value = line.category;
+      lineInternalCheckbox.checked = line.internal;
+      
+      line12Box1Label.text = line.box1.title;
+      line12Box2Label.text = line.box2.title;
+      line12MinInput.value = line.box1box2Min;
+      line12MaxInput.value = line.box1box2Max;
+      line12IdCheckbox.checked = line.box1box2Id;
+      line12NameInput.value = line.box1box2Name;
+      
+      line21Box2Label.text = line.box2.title;
+      line21Box1Label.text = line.box1.title;
+      line21MinInput.value = line.box2box1Min;
+      line21MaxInput.value = line.box2box1Max;
+      line21IdCheckbox.checked = line.box2box1Id;
+      line21NameInput.value = line.box2box1Name;
+    }
   }
   
   onTool(int tool) {

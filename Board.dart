@@ -533,6 +533,16 @@ class Board {
     return count;
   }
   
+  int countBoxesContain(int pointX, int pointY) {
+    int count = 0;
+    for (Box box in boxes) {
+      if (box.contains(pointX, pointY)) {
+        count++;
+      }
+    }
+    return count;
+  }
+  
   int countSelectedBoxesContain(int pointX, int pointY) {
     int count = 0;
     for (Box box in boxes) {
@@ -612,8 +622,10 @@ class Board {
           deselect();
         }
       } else if (toolBar.isBoxToolOn()) {
-        // Create a box in the position of the mouse click on the board, but not on an existing box.
-        Box box = new Box(this, e.offsetX, e.offsetY, Box.DEFAULT_WIDTH, Box.DEFAULT_HEIGHT);
+        // Create a box in the position of the mouse click on the board, 
+        // but not on an existing box.
+        Box box = new Box(this, e.offsetX, e.offsetY, 
+          Box.DEFAULT_WIDTH, Box.DEFAULT_HEIGHT);
         if (e.offsetX + box.width > width) {
           box.x = width - box.width - 1;
         }

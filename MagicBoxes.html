@@ -67,7 +67,7 @@
          <ul>
            <li>Magic Boxes in <a href="http://www.dart.org/">Dart</a></li>
            <li>Spiral 12</li>
-           <li>2012-03-21</li>
+           <li>2012-03-23</li>
            <li>
              <a href="https://plus.google.com/u/0/b/113649577593294551754/">
                On Dart
@@ -131,7 +131,6 @@
         <button class="button" id="getNextItem">Get Next</button>
         <button class="button" id="upItem">Up</button>
         <button class="button" id="downItem">Down</button>
-        <button class="button" id="setItem">Set</button>
         <button class="button" id="removeItem">Remove</button>     
         <br/>    
         <label>Line</label>
@@ -143,8 +142,6 @@
         </select>
         <label for="lineInternal">internal</label>
         <input type="checkbox" id="lineInternal"/>
-        <button class="button" id="getLine">Get</button>
-        <button class="button" id="setLine">Set</button>
         <br/> 
         &nbsp; &nbsp;  
         <label id="line12Box1">Box1</label> ->
@@ -209,24 +206,24 @@
         with items (attributes), and lines (relationships).
         Click the box tool in the tool bar (brown background) to create a box, 
         by clicking on an empty space in the board.
-        To move a non selected box, 
-        click the box and keep the mouse down while moving it.
+        To move a box, click the box and keep the mouse down while moving it.
         Click the box to select it. Click again to deselect it.
       </p>
       <p>
+        The selected box is displayed in the tool bar.
         A name of the selected box may be entered in the Box field of 
         the tool bar.
         A box item may be created by entering its name in the Item field of 
         the tool bar and by clicking on the Add button.
         An existing item may be selected by entering its name and 
-        clicking on the Get button.
+        clicking on the Get button. The next item is obtained by clicking 
+        on the Get Next button.
       </p> 
       <p>
         Click the line tool to create a line between two boxes by clicking 
         on the boxes, then by clicking on an empty space in the board.  
         Click the line to select it. Click again to deselect it.
-        The selected line may be displayed in the tool bar by clicking 
-        on the Get button.
+        The selected line is displayed in the tool bar.
       </p>
       <p>
         Name the current model in the File menu and 
@@ -330,13 +327,13 @@
         box field of the tool bar.
       </p>
       <p>
-        To move a non selected box, 
+        To move a box, 
         click the box and keep the mouse down while moving it. 
         The connected lines will follow.
-        A selected box cannot be moved.
       </p>
       <p>
         Click the box to select it. Click again to deselect it. 
+        The selected box is displayed in the tool bar.
         If there are several selected boxes (and/or lines), 
         you may deselect them all by clicking on an empty space in the board.
         For the last selected box, 
@@ -344,9 +341,7 @@
         Box field of the tool bar. 
       </p>
       <p>
-        For the last selected box, 
-        click in the Box field to obtain and change its name.
-        The box may be declared as entry into the model. 
+        The last selected box, may be declared as entry into the model. 
         A new item may be added to the selected box by entering its name in 
         the Item box, then clicking on the Add button.
         The item is an attribute of the box (concept). 
@@ -361,7 +356,7 @@
         An existing item may be selected by entering its name and 
         clicking on the Get button.
         The next item is obtained by clicking on the Get Next button.
-        The selected item may be changed (Set button), 
+        The selected (current) item may be changed, 
         including its sequence position within the box (Up or Down buttons),  
         or even removed (Remove button). 
         The size of selected boxes may be changed 
@@ -396,22 +391,18 @@
         By default, a new line is internal. 
         The child box of the internal line usually is not an entry point 
         into the model. 
-        The selected line may also be obtained by clicking on the 
-        Get button in the tool bar.
         The line cardinalities may be changed. 
         For the 1..1 cardinalities, the identifier (id) may be checked on.
-        The line changes may be set by clicking on the Set button.
       </p>
       <p>
         Click the line, or very close to it, to select it. 
         Click again to deselect it. 
+        The selected line is displayed in the tool bar.
         A reflexive line is selected by clicking on a horizontal portion 
         of the line.
         If two lines are created between the same two boxes, 
-        the last line may be selected by clicking on both lines. 
-        The selected line should be displayed in the tool bar by clicking 
-        on the Get button. 
-        Then, the twin choice will separate the two lines into twins. 
+        the last line may be selected by clicking on both lines.  
+        The twin choice will separate the two lines into twins. 
         If there are several selected lines (and/or boxes), 
         you may deselect them all by clicking on an empty space in the board.
       </p>

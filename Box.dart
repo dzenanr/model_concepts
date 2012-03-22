@@ -53,17 +53,25 @@ class Box {
       int i = 0;
       for (Item item in items) {
         if (item.category == 'attribute') {
-          board.context.font = '' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
-          board.context.fillText(item.name, x + TOS, y + TOS + TBH + i * IOS, width - TOS);
+          board.context.font = 
+            '' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
+          board.context.fillText(item.name, x + TOS, y + TOS + TBH + i * IOS, 
+            width - TOS);
         } else if (item.category == 'guid') {
-          board.context.font = 'italic ' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
-          board.context.fillText(item.name, x + TOS, y + TOS + TBH + i * IOS, width - TOS);
+          board.context.font = 
+            'italic ' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
+          board.context.fillText(item.name, x + TOS, y + TOS + TBH + i * IOS, 
+            width - TOS);
         } else if (item.category == 'identifier') {
-          board.context.font = 'bold italic ' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
-          board.context.fillText(item.name, x + TOS, y + TOS + TBH + i * IOS, width - TOS);
+          board.context.font = 
+            'bold italic ' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
+          board.context.fillText(item.name, x + TOS, y + TOS + TBH + i * IOS, 
+            width - TOS);
         } else if (item.category == 'required') {
-          board.context.font = 'bold ' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
-          board.context.fillText(item.name, x + TOS, y + TOS + TBH + i * IOS, width - TOS);
+          board.context.font = 
+            'bold ' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
+          board.context.fillText(item.name, x + TOS, y + TOS + TBH + i * IOS, 
+            width - TOS);
         }
         i++;
       }
@@ -84,6 +92,7 @@ class Box {
   void select() {
     _selected = true;
     board.lastBoxSelected = this;
+    board.toolBar.bringSelectedBox();
   }
   
   void deselect() {
@@ -92,11 +101,10 @@ class Box {
   }
   
   void toggleSelection() { 
-    _selected = !_selected;
-    if (_selected) {
-      board.lastBoxSelected = this;
+    if (isSelected()) {
+      deselect();
     } else {
-      board.lastBoxSelected = null;
+      select();
     }
   }
   
@@ -298,8 +306,8 @@ class Box {
   
   /** Change a position of the box with mouse mouvements. */
   void onMouseMove(MouseEvent e) {
-    if (contains(e.offsetX, e.offsetY) && isSelected() && _mouseDown && 
-        board.countSelectedBoxesContain(e.offsetX, e.offsetY) < 2) {
+    if (contains(e.offsetX, e.offsetY) && _mouseDown && 
+        board.countBoxesContain(e.offsetX, e.offsetY) < 2) {
       x =  e.offsetX - width / 2;
       if (x < 0) {
         x = 1;
