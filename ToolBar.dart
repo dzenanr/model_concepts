@@ -57,7 +57,7 @@ class ToolBar {
     selectButton.on.click.add((MouseEvent e) {
       onTool(SELECT);
     });
-    selectButton.on.dblClick.add((MouseEvent e) {
+    selectButton.on.doubleClick.add((MouseEvent e) {
       onTool(SELECT);
       _fixedTool = SELECT;
     });
@@ -65,7 +65,7 @@ class ToolBar {
     boxButton.on.click.add((MouseEvent e) {
       onTool(BOX);
     });
-    boxButton.on.dblClick.add((MouseEvent e) {
+    boxButton.on.doubleClick.add((MouseEvent e) {
       onTool(BOX);
       _fixedTool = BOX;
     });
@@ -73,7 +73,7 @@ class ToolBar {
     lineButton.on.click.add((MouseEvent e) {
       onTool(LINE);
     });
-    lineButton.on.dblClick.add((MouseEvent e) {
+    lineButton.on.doubleClick.add((MouseEvent e) {
       onTool(LINE);
       _fixedTool = LINE;
     });
