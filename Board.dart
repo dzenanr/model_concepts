@@ -564,6 +564,17 @@ class Board {
     return count;
   }
   
+  int countLinesBetween(Box box1, Box box2) {
+    int count = 0;
+    for (Line line in lines) {
+      if ((line.box1 == box1 && line.box2 == box2) || 
+          (line.box1 == box2 && line.box2 == box1)) {
+        count++;
+      }
+    }
+    return count;
+  }
+  
   Box findBox(String boxName) {
     for (Box box in boxes) {
       if (box.title == boxName) {
@@ -636,7 +647,8 @@ class Board {
       } else if (toolBar.isLineToolOn()) {
         // Create a line between the last two clicked boxes.
         if (beforeLastBoxClicked != null && lastBoxClicked != null && 
-            _boxExists(beforeLastBoxClicked) && _boxExists(lastBoxClicked)) {  
+          _boxExists(beforeLastBoxClicked) && _boxExists(lastBoxClicked) &&
+          countLinesBetween(beforeLastBoxClicked, lastBoxClicked) < 2) {   
           Line line = new Line(this, beforeLastBoxClicked, lastBoxClicked);
           lines.add(line);
         }
