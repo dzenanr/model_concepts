@@ -25,7 +25,7 @@ class Box {
   bool _mouseDown = false;
   
   Box(this.board, this.x, this.y, this.width, this.height) {
-    items = new List();
+    items = new List<Item>();
     
     draw();
     // Box events (actually, canvas events).

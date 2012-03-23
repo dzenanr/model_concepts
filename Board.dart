@@ -40,8 +40,8 @@ class Board {
     _height = canvas.height;
     border();
  
-    boxes = new List();
-    lines = new List();
+    boxes = new List<Box>();
+    lines = new List<Line>();
     
     menuBar = new MenuBar(this);
     toolBar = new ToolBar(this);
@@ -132,7 +132,7 @@ class Board {
   }
   
   void boxesFromJson(List<Map<String, Object>> boxesList) {
-    boxes = new List();
+    boxes = new List<Box>();
     for (Map<String, Object> jsonBox in boxesList) {
       boxes.add(boxFromJson(jsonBox));
     }
@@ -171,7 +171,7 @@ class Board {
   }
   
   void linesFromJson(List<Map<String, Object>> linesList) {
-    lines = new List();
+    lines = new List<Line>();
     for (Map<String, Object> jsonLine in linesList) {
       Line line = lineFromJson(jsonLine);
       if (line != null) {
