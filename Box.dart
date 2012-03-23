@@ -168,6 +168,14 @@ class Box {
     }
   }
   
+  Item findLastItem() {
+    if (items.isEmpty()) {
+      return null;
+    } else {
+      return items.last();
+    }
+  }
+  
   Item findPreviousItem(Item currentItem) {
     sortItemsBySequence();
     for (Item item in items) {
@@ -250,7 +258,8 @@ class Box {
   }
   
   bool contains(int pointX, int pointY) {
-    if ((pointX > x && pointX < x + width) && (pointY > y && pointY < y + height)) {
+    if ((pointX > x && pointX < x + width) && 
+        (pointY > y && pointY < y + height)) {
       return true;
     } else {
       return false;

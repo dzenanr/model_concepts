@@ -22,10 +22,11 @@ class ToolBar {
   OptionElement itemTypeOption;
   InputElement itemInitInput;
   ButtonElement addItemButton;
+  ButtonElement getPreviousItemButton;
   ButtonElement getItemButton;
   ButtonElement getNextItemButton;
-  ButtonElement upItemButton;
-  ButtonElement downItemButton;
+  ButtonElement moveUpItemButton;
+  ButtonElement moveDownItemButton;
   ButtonElement removeItemButton;
   
   Item currentItem;
@@ -174,6 +175,40 @@ class ToolBar {
       }
     });
     
+    getPreviousItemButton = document.query('#getPreviousItem');
+    getPreviousItemButton.on.click.add((MouseEvent e) {
+      Box box = board.lastBoxSelected;
+      if (box != null) {
+        if (currentItem != null) {
+          Item previousItem = box.findPreviousItem(currentItem);
+          if (previousItem != null) {
+            currentItem = previousItem;
+            itemNameInput.value = previousItem.name;
+            itemCategoryOption.value = previousItem.category;
+            itemTypeOption.value = previousItem.type;
+            itemInitInput.value = previousItem.init;
+            itemNameInput.select();
+          } else {
+            currentItem = null;
+            itemNameInput.value = '';
+            itemCategoryOption.value = 'attribute';
+            itemTypeOption.value = 'String';
+            itemInitInput.value = '';
+          }
+        } else {
+          if (!box.items.isEmpty()) {
+            Item lastItem = box.findLastItem();
+            currentItem = lastItem;
+            itemNameInput.value = lastItem.name;
+            itemCategoryOption.value = lastItem.category;
+            itemTypeOption.value = lastItem.type;
+            itemInitInput.value = lastItem.init;
+            itemNameInput.select();
+          }
+        } 
+      }
+    });
+    
     getItemButton = document.query('#getItem');
     getItemButton.on.click.add((MouseEvent e) {
       Box box = board.lastBoxSelected;
@@ -226,8 +261,8 @@ class ToolBar {
       }
     });
     
-    upItemButton = document.query('#upItem');
-    upItemButton.on.click.add((MouseEvent e) {
+    moveUpItemButton = document.query('#moveUpItem');
+    moveUpItemButton.on.click.add((MouseEvent e) {
       Box box = board.lastBoxSelected;
       if (box != null) {
         if (currentItem != null) {
@@ -249,8 +284,8 @@ class ToolBar {
       }
     });
     
-    downItemButton = document.query('#downItem');
-    downItemButton.on.click.add((MouseEvent e) {
+    moveDownItemButton = document.query('#moveDownItem');
+    moveDownItemButton.on.click.add((MouseEvent e) {
       Box box = board.lastBoxSelected;
       if (box != null) {
         if (currentItem != null) {

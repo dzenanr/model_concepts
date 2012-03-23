@@ -71,23 +71,29 @@ class Line {
       String box1box2MinMax = box1box2Min + '..' + box1box2Max;
       String box2box1MinMax = box2box1Min + '..' + box2box1Max;
       if (box1box2Id) {
-        board.context.font = 'bold italic ' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
+        board.context.font = 
+          'bold italic ' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
       } else if (box1box2Min != '0') {
         board.context.font = 'bold ' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
       } else {
         board.context.font = '' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
       }
-      board.context.fillText(box1box2MinMax, box1box2MinMaxPoint.x, box1box2MinMaxPoint.y);
-      board.context.fillText(box1box2Name, box1box2NamePoint.x, box1box2NamePoint.y);
+      board.context.fillText(box1box2MinMax, box1box2MinMaxPoint.x, 
+        box1box2MinMaxPoint.y);
+      board.context.fillText(box1box2Name, box1box2NamePoint.x, 
+        box1box2NamePoint.y);
       if (box2box1Id) {
-        board.context.font = 'bold italic ' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
+        board.context.font = 
+          'bold italic ' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
       } else if (box2box1Min != '0') {
         board.context.font = 'bold ' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
       } else {
         board.context.font = '' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
       }
-      board.context.fillText(box2box1MinMax, box2box1MinMaxPoint.x, box2box1MinMaxPoint.y);
-      board.context.fillText(box2box1Name, box2box1NamePoint.x, box2box1NamePoint.y);
+      board.context.fillText(box2box1MinMax, box2box1MinMaxPoint.x, 
+        box2box1MinMaxPoint.y);
+      board.context.fillText(box2box1Name, box2box1NamePoint.x, 
+        box2box1NamePoint.y);
       
       if (!internal) {
         board.context.strokeStyle = Board.SOFT_LINE_COLOR;
@@ -290,14 +296,18 @@ class Line {
     
     // Rapid test: Verify if the point is in the line rectangle.
     if (pointDif.x > 0) {
-      inLineRectX = (point.x >= (beginPoint.x - delta.x)) && (point.x <= (endPoint.x + delta.x));
+      inLineRectX = (point.x >= (beginPoint.x - delta.x)) && 
+      (point.x <= (endPoint.x + delta.x));
     } else {
-      inLineRectX = (point.x >= (endPoint.x - delta.x)) && (point.x <= (beginPoint.x + delta.x));
+      inLineRectX = (point.x >= (endPoint.x - delta.x)) && 
+      (point.x <= (beginPoint.x + delta.x));
     }
     if (pointDif.y > 0) {
-      inLineRectY = (point.y >= (beginPoint.y - delta.y)) && (point.y <= (endPoint.y + delta.y));
+      inLineRectY = (point.y >= (beginPoint.y - delta.y)) && 
+      (point.y <= (endPoint.y + delta.y));
     } else {
-      inLineRectY = (point.y >= (endPoint.y - delta.y)) && (point.y <= (beginPoint.y + delta.y));
+      inLineRectY = (point.y >= (endPoint.y - delta.y)) && 
+      (point.y <= (beginPoint.y + delta.y));
     }
     inLineRect = inLineRectX && inLineRectY;
     if (!inLineRect) {
@@ -310,10 +320,12 @@ class Line {
     }
     
     if (pointDif.x.abs() > pointDif.y.abs()) {
-      coord = beginPoint.y + (((point.x - beginPoint.x) * pointDif.y) / pointDif.x) - point.y;
+      coord = beginPoint.y + 
+      (((point.x - beginPoint.x) * pointDif.y) / pointDif.x) - point.y;
       return coord.abs() <= delta.y;
     } else {
-      coord = beginPoint.x + (((point.y - beginPoint.y) * pointDif.x) / pointDif.y) - point.x;
+      coord = beginPoint.x + 
+      (((point.y - beginPoint.y) * pointDif.x) / pointDif.y) - point.x;
       return coord.abs() <= delta.x;
     }
   }
@@ -334,7 +346,8 @@ class Line {
       lineBeginPoint = beginBox.center();
       lineEndPoint = endBox.center();
     }
-    Point beginPoint = beginBox.getIntersectionPoint(lineBeginPoint, lineEndPoint);
+    Point beginPoint = beginBox.getIntersectionPoint(lineBeginPoint, 
+      lineEndPoint);
     Point endPoint = endBox.getIntersectionPoint(lineEndPoint, lineBeginPoint);
     
     int x1 = beginPoint.x;
@@ -362,7 +375,8 @@ class Line {
   
   Point calculateNamePointCloseToBeginBox(Box beginBox, Box endBox) {
     if (reflexive) {
-      return new Point(beginBox.reflexive1().x + 30, beginBox.reflexive1().y + 30);
+      return new Point(beginBox.reflexive1().x + 30, 
+        beginBox.reflexive1().y + 30);
     }
     
     int x = 0;
@@ -380,7 +394,8 @@ class Line {
       lineBeginPoint = beginBox.center();
       lineEndPoint = endBox.center();
     }
-    Point beginPoint = beginBox.getIntersectionPoint(lineBeginPoint, lineEndPoint);
+    Point beginPoint = beginBox.getIntersectionPoint(lineBeginPoint, 
+      lineEndPoint);
     Point endPoint = endBox.getIntersectionPoint(lineEndPoint, lineBeginPoint);
     
     int x1 = beginPoint.x;

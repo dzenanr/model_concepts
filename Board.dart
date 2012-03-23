@@ -4,8 +4,8 @@ class Board {
   static final int MIN_HEIGHT = 580;
   static final int DEFAULT_LINE_WIDTH = 1;
   static final String DEFAULT_LINE_COLOR = '#000000'; // black
-  static final String SOFT_LINE_COLOR = '#736f6e '; // gray
-  // static final String SOFT_LINE_COLOR = '#c0c0c0 '; // silver
+  static final String SOFT_LINE_COLOR = '#999493'; // gray; old: 736f6e
+  // static final String SOFT_LINE_COLOR = '#c0c0c0'; // silver
   static final String DEFAULT_FONT_SIZE = 12;
   
   // The acceptable delta error in pixels for clicking on a line between two boxes.
