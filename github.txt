@@ -146,8 +146,13 @@ Enter passphrase for key ... :
 
 Switching from master to spiral
 
-
+from master to tag
 git checkout s01
+from tag to branch
+git checkout -b s01a
+to use branch
+git checkout s01a
+
 
 Switching from spiral to master
 
