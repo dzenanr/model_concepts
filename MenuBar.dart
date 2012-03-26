@@ -2,7 +2,7 @@ class MenuBar {
   
   final Board board;
   
-  // File
+  // Model
   InputElement modelNameInput;
   ButtonElement openModelButton;
   ButtonElement saveModelButton;
