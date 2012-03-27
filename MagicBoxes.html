@@ -94,9 +94,9 @@
         &nbsp; &nbsp;
         <label>Board</label>
         <label for="canvasWidth">width</label>
-        <input type="number" id="canvasWidth" min="990"/>
+        <input type="number" id="canvasWidth" min="990" size="5"/>
         <label for="canvasHeight">height</label>
-        <input type="number" id="canvasHeight" min="580"/>
+        <input type="number" id="canvasHeight" min="580" size="5"/>
         <br/>
         <label for="boxName">Box</label>
         <input type="text" id="boxName"/>
@@ -127,11 +127,11 @@
         <label for="itemInit">init</label>
         <input type="text" id="itemInit" size="16"/>
         <button class="button" id="addItem">Add</button>
-        <button class="button" id="getPreviousItem">Get -1</button>
-        <button class="button" id="getItem">Get 1</button>
+        <button class="button" id="getItem">Get</button>
         <button class="button" id="getNextItem">Get +1</button>
-        <button class="button" id="moveUpItem">Move -1</button>
+        <button class="button" id="getPreviousItem">Get -1</button>
         <button class="button" id="moveDownItem">Move +1</button>
+        <button class="button" id="moveUpItem">Move -1</button>
         <button class="button" id="removeItem">Remove</button>     
         <br/>    
         <label>Line</label>
@@ -186,12 +186,11 @@
     
     <section>
       <header>
-        <h3>Spiral 12: Local Storage</h3>
+        <h3>Spiral 13: Final Touches</h3>
       </header>
       <p>
-        With spiral 12, you can design a model such as the meta model 
+        With spiral 13, you can design a model such as the meta model 
         in the following diagram.
-        The model may be saved in a local storage and later opened.
       </p>
       <p>
         <a href="#"><img src="model/metamodel.png"/></a> 
@@ -217,7 +216,7 @@
         A box item may be created by entering its name in the Item field of 
         the tool bar and by clicking on the Add button.
         An existing item may be selected by entering its name and 
-        clicking on the Get 1 button. The next item is obtained by clicking 
+        clicking on the Get button. The next item is obtained by clicking 
         on the Get +1 button.
       </p> 
       <p>
@@ -355,12 +354,12 @@
         from the pop-up list.
         An item may have an initial (default) value.
         An existing item may be selected, to become the current item,
-        by entering its name and clicking on the Get 1 button.
-        The previous item is obtained by clicking on the Get -1 button.
+        by entering its name and clicking on the Get button.
         The next item is obtained by clicking on the Get +1 button.
+        The previous item is obtained by clicking on the Get -1 button.
         The current item may be changed, 
         including its sequence position within the box 
-        (Move -1 or Move + buttons), or even removed (Remove button). 
+        (Move + or Move -1 buttons), or even removed (Remove button). 
         The size of selected boxes may be changed 
         by menu items in the View menu. 
       </p>
