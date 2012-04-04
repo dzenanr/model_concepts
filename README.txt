@@ -4,7 +4,7 @@ https://plus.google.com/u/0/b/113649577593294551754/113649577593294551754/posts
 
 Magic Boxes in Dart
 by Dzenan Ridjanovic
-2011-12-09 -- 2012-03-26
+2011-12-09 -- 2012-04-04
 
 Learning Dart in Spirals by Developing Magic Boxes
 
