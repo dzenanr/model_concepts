@@ -3,10 +3,10 @@ class Board {
   static final int MIN_WIDTH = 990;
   static final int MIN_HEIGHT = 580;
   static final int DEFAULT_LINE_WIDTH = 1;
+  static final int DEFAULT_FONT_SIZE = 12;
   static final String DEFAULT_LINE_COLOR = '#000000'; // black
   static final String SOFT_LINE_COLOR = '#999493'; // gray; old: 736f6e
   // static final String SOFT_LINE_COLOR = '#c0c0c0'; // silver
-  static final String DEFAULT_FONT_SIZE = 12;
   
   // The acceptable delta error in pixels for clicking on a line between two boxes.
   static final int DELTA = 8; 
@@ -73,7 +73,7 @@ class Board {
   }
   
   void openModel(String name) {
-    String json = window.localStorage.getItem(name);
+    String json = window.localStorage[name];
     if (json != null) {
       fromJson(json);
     }
@@ -82,7 +82,7 @@ class Board {
   void saveModel(String name) {
     String json = toJson();
     if (json != null) {
-      window.localStorage.setItem(name, json);
+      window.localStorage[name] = name;
     }
   }
   
@@ -141,14 +141,10 @@ class Board {
   Box boxFromJson(Map<String, Object> boxMap) {
     String title = boxMap["name"];
     bool entry = boxMap["entry"];
-    String xText = boxMap["x"];
-    int x = Math.parseInt(xText);
-    String yText = boxMap["y"];
-    int y = Math.parseInt(yText);
-    String widthText = boxMap["width"];
-    int width = Math.parseInt(widthText);
-    String heightText = boxMap["height"];
-    int height = Math.parseInt(heightText);
+    int x = boxMap["x"];
+    int y = boxMap["y"];
+    int width = boxMap["width"];
+    int height = boxMap["height"];
     Box box = new Box(this, x, y, width, height);
     box.title = title;
     box.entry = entry;
@@ -163,8 +159,7 @@ class Board {
     String name = itemMap["name"];
     String category = itemMap["category"];
     Item item = new Item(box, name, category);
-    String sequenceText = itemMap["sequence"];
-    int sequence = Math.parseInt(sequenceText);
+    int sequence = itemMap["sequence"];
     item.sequence = sequence;
     item.type = itemMap["type"];
     item.init = itemMap["init"];
