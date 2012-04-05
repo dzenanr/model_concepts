@@ -82,7 +82,7 @@ class Board {
   void saveModel(String name) {
     String json = toJson();
     if (json != null) {
-      window.localStorage[name] = name;
+      window.localStorage[name] = json;
     }
   }
   
