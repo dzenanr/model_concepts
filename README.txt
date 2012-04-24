@@ -6,7 +6,8 @@ Magic Boxes in Dart
 by Dzenan Ridjanovic
 2011-12-09 -- 2012-04-05
 
-Learning Dart in Spirals by Developing Magic Boxes
+Learning Dart in Spirals by Developing Magic Boxes.
+The last spiral is a graphical model designer.
 
 Blog:
 http://dzenanr.github.com/
