@@ -2,6 +2,13 @@ GitHub
 
 https://github.com/
 
+Education
+
+https://github.com/edu
+http://www.atlassian.com/software/views/bitbucket-academic-license.jsp
+http://www.assembla.com/plans
+https://codeplane.com/
+
 Create an account at GitHub.
 
 Read:
@@ -53,7 +60,7 @@ Git with Git Bash
 
 Clone a remote repository into a local repository.
 
-cd git/dart/learn/MagicBoxes
+cd git/dart/learn
 Read only:
 git clone git://github.com/dzenanr/MagicBoxes.git
 Read+Write:

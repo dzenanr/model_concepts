@@ -228,32 +228,32 @@ class Box {
   String toString() => '$title ($x, $y)';
   
   Point center() {
-    int centerX = x + width / 2;
-    int centerY = y + height / 2;
+    int centerX = (x + width / 2).toInt();
+    int centerY = (y + height / 2).toInt();
     return new Point(centerX, centerY);
   }
   
   Point twin1() {
-    int twinX = x + width / 4;
-    int twinY = y + height / 4;
+    int twinX = (x + width / 4).toInt();
+    int twinY = (y + height / 4).toInt();
     return new Point(twinX, twinY);
   }
   
   Point twin2() {
-    int twinX = x + (width / 4) * 3;
-    int twinY = y + (height / 4) * 3;
+    int twinX = (x + (width / 4) * 3).toInt();
+    int twinY = (y + (height / 4) * 3).toInt();
     return new Point(twinX, twinY);
   }
   
   Point reflexive1() {
     int reflexiveX = x;
-    int reflexiveY = y - height / 2;
+    int reflexiveY = (y - height / 2).toInt();
     return new Point(reflexiveX, reflexiveY);
   }
   
   Point reflexive2() {
     int reflexiveX = x + width;
-    int reflexiveY = y - height / 2;
+    int reflexiveY = (y - height / 2).toInt();
     return new Point(reflexiveX, reflexiveY);
   }
   
@@ -273,10 +273,10 @@ class Box {
    * Fast algorithm.
    */
   Point getIntersectionPoint(Point lineBeginPoint, Point lineEndPoint) {
-    int x1 = lineBeginPoint.x;
-    int y1 = lineBeginPoint.y;
-    int x2 = lineEndPoint.x;
-    int y2 = lineEndPoint.y;
+    int x1 = lineBeginPoint.x.toInt();
+    int y1 = lineBeginPoint.y.toInt();
+    int x2 = lineEndPoint.x.toInt();
+    int y2 = lineEndPoint.y.toInt();
     if (x2 == x1) /* vertical line */
       return new Point(x2, (y2 < y1 ? this.y : this.y + this.height));
     if (y2 == y1) /* horizontal line */
@@ -317,14 +317,14 @@ class Box {
   void onMouseMove(MouseEvent e) {
     if (contains(e.offsetX, e.offsetY) && _mouseDown && 
         board.countBoxesContain(e.offsetX, e.offsetY) < 2) {
-      x =  e.offsetX - width / 2;
+      x =  (e.offsetX - width / 2).toInt();
       if (x < 0) {
         x = 1;
       }
       if (x > board.width - width) {
         x = board.width - width - 1;
       }
-      y = e.offsetY - height / 2;
+      y = (e.offsetY - height / 2).toInt();
       if (y < 0) {
         y = 1;
       }

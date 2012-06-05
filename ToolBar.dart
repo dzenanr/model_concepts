@@ -18,8 +18,8 @@ class ToolBar {
   InputElement boxNameInput;
   InputElement boxEntryCheckbox;
   InputElement itemNameInput;
-  OptionElement itemCategoryOption;
-  OptionElement itemTypeOption;
+  SelectElement itemCategorySelect;
+  SelectElement itemTypeSelect;
   InputElement itemInitInput;
   ButtonElement addItemButton;
   ButtonElement getItemButton;
@@ -31,7 +31,7 @@ class ToolBar {
   
   Item currentItem;
   
-  OptionElement lineOption;
+  SelectElement lineSelect;
   InputElement lineInternalCheckbox;
   
   LabelElement line12Box1Label;
@@ -131,18 +131,18 @@ class ToolBar {
       }
     });
     
-    itemCategoryOption = document.query('#itemCategory');
-    itemCategoryOption.on.change.add((MouseEvent e) {
+    itemCategorySelect = document.query('#itemCategory');
+    itemCategorySelect.on.change.add((MouseEvent e) {
       if (currentItem != null) {
-        currentItem.category = itemCategoryOption.value;
+        currentItem.category = itemCategorySelect.value;
         itemNameInput.select();
       } 
     });
     
-    itemTypeOption = document.query('#itemType');
-    itemTypeOption.on.change.add((MouseEvent e) {
+    itemTypeSelect = document.query('#itemType');
+    itemTypeSelect.on.change.add((MouseEvent e) {
       if (currentItem != null) {
-        currentItem.type = itemTypeOption.value;
+        currentItem.type = itemTypeSelect.value;
         itemNameInput.select();
       } 
       itemInitInput.value = '';
@@ -167,8 +167,8 @@ class ToolBar {
         if (itemName != '') {
           Item otherItem = box.findItem(itemName);
           if (otherItem == null) {
-            Item item = new Item(box, itemName, itemCategoryOption.value);
-            item.type = itemTypeOption.value;
+            Item item = new Item(box, itemName, itemCategorySelect.value);
+            item.type = itemTypeSelect.value;
             item.init = itemInitInput.value.trim();
           }
         }
@@ -183,8 +183,8 @@ class ToolBar {
         if (item != null) {
           currentItem = item;
           itemNameInput.value = item.name;
-          itemCategoryOption.value = item.category;
-          itemTypeOption.value = item.type;
+          itemCategorySelect.value = item.category;
+          itemTypeSelect.value = item.type;
           itemInitInput.value = item.init;
           itemNameInput.select();
         } else {
@@ -202,15 +202,15 @@ class ToolBar {
           if (nextItem != null) {
             currentItem = nextItem;
             itemNameInput.value = nextItem.name;
-            itemCategoryOption.value = nextItem.category;
-            itemTypeOption.value = nextItem.type;
+            itemCategorySelect.value = nextItem.category;
+            itemTypeSelect.value = nextItem.type;
             itemInitInput.value = nextItem.init;
             itemNameInput.select();
           } else {
             currentItem = null;
             itemNameInput.value = '';
-            itemCategoryOption.value = 'attribute';
-            itemTypeOption.value = 'String';
+            itemCategorySelect.value = 'attribute';
+            itemTypeSelect.value = 'String';
             itemInitInput.value = '';
           }
         } else {
@@ -218,8 +218,8 @@ class ToolBar {
             Item firstItem = box.findFirstItem();
             currentItem = firstItem;
             itemNameInput.value = firstItem.name;
-            itemCategoryOption.value = firstItem.category;
-            itemTypeOption.value = firstItem.type;
+            itemCategorySelect.value = firstItem.category;
+            itemTypeSelect.value = firstItem.type;
             itemInitInput.value = firstItem.init;
             itemNameInput.select();
           }
@@ -236,15 +236,15 @@ class ToolBar {
           if (previousItem != null) {
             currentItem = previousItem;
             itemNameInput.value = previousItem.name;
-            itemCategoryOption.value = previousItem.category;
-            itemTypeOption.value = previousItem.type;
+            itemCategorySelect.value = previousItem.category;
+            itemTypeSelect.value = previousItem.type;
             itemInitInput.value = previousItem.init;
             itemNameInput.select();
           } else {
             currentItem = null;
             itemNameInput.value = '';
-            itemCategoryOption.value = 'attribute';
-            itemTypeOption.value = 'String';
+            itemCategorySelect.value = 'attribute';
+            itemTypeSelect.value = 'String';
             itemInitInput.value = '';
           }
         } else {
@@ -252,8 +252,8 @@ class ToolBar {
             Item lastItem = box.findLastItem();
             currentItem = lastItem;
             itemNameInput.value = lastItem.name;
-            itemCategoryOption.value = lastItem.category;
-            itemTypeOption.value = lastItem.type;
+            itemCategorySelect.value = lastItem.category;
+            itemTypeSelect.value = lastItem.type;
             itemInitInput.value = lastItem.init;
             itemNameInput.select();
           }
@@ -276,8 +276,8 @@ class ToolBar {
           } else {
             currentItem = null;
             itemNameInput.value = '';
-            itemCategoryOption.value = 'attribute';
-            itemTypeOption.value = 'String';
+            itemCategorySelect.value = 'attribute';
+            itemTypeSelect.value = 'String';
             itemInitInput.value = '';
           }
         }
@@ -299,8 +299,8 @@ class ToolBar {
           } else {
             currentItem = null;
             itemNameInput.value = '';
-            itemCategoryOption.value = 'attribute';
-            itemTypeOption.value = 'String';
+            itemCategorySelect.value = 'attribute';
+            itemTypeSelect.value = 'String';
             itemInitInput.value = '';
           }
         } 
@@ -315,19 +315,19 @@ class ToolBar {
           if (box.removeItem(currentItem)) {
             currentItem = null;
             itemNameInput.value = '';
-            itemCategoryOption.value = 'attribute';
-            itemTypeOption.value = 'String';
+            itemCategorySelect.value = 'attribute';
+            itemTypeSelect.value = 'String';
             itemInitInput.value = '';
           }
         }
       }
     });
     
-    lineOption = document.query('#lineCategory');
-    lineOption.on.change.add((MouseEvent e) {
+    lineSelect = document.query('#lineCategory');
+    lineSelect.on.change.add((MouseEvent e) {
       Line line = board.lastLineSelected;
       if (line != null) {
-        line.category = lineOption.value;
+        line.category = lineSelect.value;
       }
     });
     
@@ -431,7 +431,7 @@ class ToolBar {
   void bringSelectedLine() {
     Line line = board.lastLineSelected;
     if (line != null) {
-      lineOption.value = line.category;
+      lineSelect.value = line.category;
       lineInternalCheckbox.checked = line.internal;
       
       line12Box1Label.text = line.box1.title;

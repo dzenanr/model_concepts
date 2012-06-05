@@ -350,24 +350,24 @@ class Line {
       lineEndPoint);
     Point endPoint = endBox.getIntersectionPoint(lineEndPoint, lineBeginPoint);
     
-    int x1 = beginPoint.x;
-    int y1 = beginPoint.y;
-    int x2 = endPoint.x;
-    int y2 = endPoint.y;
+    int x1 = beginPoint.x.toInt();
+    int y1 = beginPoint.y.toInt();
+    int x2 = endPoint.x.toInt();
+    int y2 = endPoint.y.toInt();
     
     if (x1 <= x2) {
-      x = x1 + 1 * ((x2 - x1) / 8);
+      x = (x1 + 1 * ((x2 - x1) / 8)).toInt();
       if (y1 <= y2) {
-        y = y1 + 1 * ((y2 - y1) / 8);
+        y = (y1 + 1 * ((y2 - y1) / 8)).toInt();
       } else {
-        y = y2 + 7 * ((y1 - y2) / 8);
+        y = (y2 + 7 * ((y1 - y2) / 8)).toInt();
       }
     } else {
-      x = x2 + 7 * ((x1 - x2) / 8);
+      x = (x2 + 7 * ((x1 - x2) / 8)).toInt();
       if (y1 <= y2) {
-        y = y1 + 1 * ((y2 - y1) / 8);
+        y = (y1 + 1 * ((y2 - y1) / 8)).toInt();
       } else {
-        y = y2 + 7 * ((y1 - y2) / 8);
+        y = (y2 + 7 * ((y1 - y2) / 8)).toInt();
       }
     }
     return new Point(x, y);
@@ -398,24 +398,24 @@ class Line {
       lineEndPoint);
     Point endPoint = endBox.getIntersectionPoint(lineEndPoint, lineBeginPoint);
     
-    int x1 = beginPoint.x;
-    int y1 = beginPoint.y;
-    int x2 = endPoint.x;
-    int y2 = endPoint.y;
+    int x1 = beginPoint.x.toInt();
+    int y1 = beginPoint.y.toInt();
+    int x2 = endPoint.x.toInt();
+    int y2 = endPoint.y.toInt();
     
     if (x1 <= x2) {
-      x = x1 + 3 * ((x2 - x1) / 8);
+      x = (x1 + 3 * ((x2 - x1) / 8)).toInt();
       if (y1 <= y2) {
-          y = y1 + 3 * ((y2 - y1) / 8);
+          y = (y1 + 3 * ((y2 - y1) / 8)).toInt();
       } else {
-          y = y2 + 5 * ((y1 - y2) / 8);
+          y = (y2 + 5 * ((y1 - y2) / 8)).toInt();
       }
     } else {
-      x = x2 + 5 * ((x1 - x2) / 8);
+      x = (x2 + 5 * ((x1 - x2) / 8)).toInt();
       if (y1 <= y2) {
-          y = y1 + 3 * ((y2 - y1) / 8);
+          y = (y1 + 3 * ((y2 - y1) / 8)).toInt();
       } else {
-          y = y2 + 5 * ((y1 - y2) / 8);
+          y = (y2 + 5 * ((y1 - y2) / 8)).toInt();
       }
     }
     return new Point(x, y);
