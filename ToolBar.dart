@@ -324,7 +324,7 @@ class ToolBar {
     });
     
     lineSelect = document.query('#lineCategory');
-    lineSelect.on.change.add((MouseEvent e) {
+    lineSelect.on.change.add((Event e) {
       Line line = board.lastLineSelected;
       if (line != null) {
         line.category = lineSelect.value;

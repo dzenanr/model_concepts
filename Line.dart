@@ -268,7 +268,7 @@ class Line {
    * with the error of delta in pixels.
    */
   bool contains(Point point, Point delta) {
-    if (box1.contains(point.x, point.y) || box2.contains(point.x, point.y)) {
+    if (box1.contains(point.x.toInt(), point.y.toInt()) || box2.contains(point.x.toInt(), point.y.toInt())) {
       return false;
     }
     

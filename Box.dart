@@ -278,22 +278,22 @@ class Box {
     int x2 = lineEndPoint.x.toInt();
     int y2 = lineEndPoint.y.toInt();
     if (x2 == x1) /* vertical line */
-      return new Point(x2, (y2 < y1 ? this.y : this.y + this.height));
+      return new Point(x2, (y2 < y1 ? y : y + height));
     if (y2 == y1) /* horizontal line */
-      return new Point((x2 < x1 ? this.x : this.x + this.width), y2);
+      return new Point((x2 < x1 ? x : x + width), y2);
 
     double m = (y2 - y1) / (x2 - x1);
-    int x = (x2 < x1 ? this.x : this.x + this.width);
-    double fy = m * (x - x2) + y2;
-    int y;
+    int xx = (x2 < x1 ? x : x + width);
+    double fy = m * (xx - x2) + y2;
+    int yy;
     /* float comparison, because fy may be bigger than the biggest integer */
-    if (fy >= this.y && fy <= this.y + this.height) {
-      y = fy.toInt();
+    if (fy >= y && fy <= y + height) {
+      yy = fy.toInt();
     } else {
-      y = (y2 < y1 ? this.y : this.y + this.height);
-      x = ((fy - y2) / m).toInt() + x2;
+      yy = (y2 < y1 ? y : y + height);
+      xx = ((fy - y2) / m).toInt() + x2;
     }
-    return new Point(x, y);
+    return new Point(xx, yy);
   }
   
   void onMouseDown(MouseEvent e) {
