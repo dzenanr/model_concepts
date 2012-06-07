@@ -41,35 +41,35 @@ class Box {
       board.context.rect(x, y, width, height);
       board.context.moveTo(x, y + TBH);
       board.context.lineTo(x + width, y + TBH);
-      board.context.font = 'bold ' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
+      board.context.font = 'bold ${Board.DEFAULT_FONT_SIZE} px sans-serif';
       board.context.textAlign = 'start';
       board.context.textBaseline = 'top';
       if (entry) {
-        board.context.fillText('|| ' + title, x + TOS, y + TOS, width - TOS);
+        board.context.fillText('|| $title', x + TOS, y + TOS, width - TOS);
       } else {
         board.context.fillText(title, x + TOS, y + TOS, width - TOS);
       }
       sortItemsBySequence();
+      int dfs = Board.DEFAULT_FONT_SIZE;
       int i = 0;
       for (Item item in items) {
         if (item.category == 'attribute') {
-          board.context.font = 
-            '' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
+          board.context.font = '${dfs}px sans-serif';
           board.context.fillText(item.name, x + TOS, y + TOS + TBH + i * IOS, 
             width - TOS);
         } else if (item.category == 'guid') {
           board.context.font = 
-            'italic ' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
+            'italic ${dfs}px sans-serif';
           board.context.fillText(item.name, x + TOS, y + TOS + TBH + i * IOS, 
             width - TOS);
         } else if (item.category == 'identifier') {
           board.context.font = 
-            'bold italic ' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
+            'bold italic ${dfs}px sans-serif';
           board.context.fillText(item.name, x + TOS, y + TOS + TBH + i * IOS, 
             width - TOS);
         } else if (item.category == 'required') {
           board.context.font = 
-            'bold ' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
+            'bold ${dfs}px sans-serif';
           board.context.fillText(item.name, x + TOS, y + TOS + TBH + i * IOS, 
             width - TOS);
         }

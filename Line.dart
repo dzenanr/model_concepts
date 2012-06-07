@@ -68,27 +68,26 @@ class Line {
         box2box1NamePoint = calculateNamePointCloseToBeginBox(box2, box1);
       }
       
-      String box1box2MinMax = box1box2Min + '..' + box1box2Max;
-      String box2box1MinMax = box2box1Min + '..' + box2box1Max;
+      String box1box2MinMax = '$box1box2Min..$box1box2Max';
+      String box2box1MinMax = '$box2box1Min..$box2box1Max';
+      int dfs = Board.DEFAULT_FONT_SIZE;
       if (box1box2Id) {
-        board.context.font = 
-          'bold italic ' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
+        board.context.font = 'bold italic ${dfs}px sans-serif';
       } else if (box1box2Min != '0') {
-        board.context.font = 'bold ' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
+        board.context.font = 'bold ${dfs}px sans-serif';
       } else {
-        board.context.font = '' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
+        board.context.font = '${dfs}px sans-serif';
       }
       board.context.fillText(box1box2MinMax, box1box2MinMaxPoint.x, 
         box1box2MinMaxPoint.y);
       board.context.fillText(box1box2Name, box1box2NamePoint.x, 
         box1box2NamePoint.y);
       if (box2box1Id) {
-        board.context.font = 
-          'bold italic ' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
+        board.context.font = 'bold italic ${dfs}px sans-serif';
       } else if (box2box1Min != '0') {
-        board.context.font = 'bold ' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
+        board.context.font = 'bold ${dfs}px sans-serif';
       } else {
-        board.context.font = '' + Board.DEFAULT_FONT_SIZE + 'px sans-serif';
+        board.context.font = '${dfs}px sans-serif';
       }
       board.context.fillText(box2box1MinMax, box2box1MinMaxPoint.x, 
         box2box1MinMaxPoint.y);
@@ -237,14 +236,14 @@ class Line {
         String lastCharacterString = text.substring(text.length - 1,
             text.length);
         if (lastCharacterString == 'x') {
-          plural = text + "es";
+          plural = '${text}es';
         } else if (lastCharacterString == 'z') {
-          plural = text + "zes";
+          plural = '${text}zes';
         } else if (lastCharacterString == 'y') {
           String withoutLast = _dropEnd(text, lastCharacterString);
-          plural = withoutLast + "ies";
+          plural = '${withoutLast}ies';
         } else {
-          plural = text + "s";
+          plural = '${text}s';
         }
       }
     } catch (Exception e) {
