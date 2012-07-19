@@ -2,6 +2,10 @@ GitHub
 
 https://github.com/
 
+Git
+
+http://marklodato.github.com/visual-git-guide/index-en.html
+
 Education
 
 https://github.com/edu
