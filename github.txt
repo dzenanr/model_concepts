@@ -5,6 +5,7 @@ https://github.com/
 Git
 
 http://marklodato.github.com/visual-git-guide/index-en.html
+https://github.com/erlang/otp/wiki/Writing-good-commit-messages
 
 Education
 
