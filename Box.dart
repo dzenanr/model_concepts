@@ -13,10 +13,10 @@ class Box {
 
   String _name = '';
   bool entry = false;
-  int x;
-  int y;
-  int width;
-  int height;
+  num x;
+  num y;
+  num width;
+  num height;
 
   List<Item> items;
 
@@ -118,7 +118,7 @@ class Box {
     _name = name;
   }
 
-  String get title() {
+  String get title {
     return _name;
   }
 
@@ -273,19 +273,19 @@ class Box {
    * Fast algorithm.
    */
   Point getIntersectionPoint(Point lineBeginPoint, Point lineEndPoint) {
-    int x1 = lineBeginPoint.x.toInt();
-    int y1 = lineBeginPoint.y.toInt();
-    int x2 = lineEndPoint.x.toInt();
-    int y2 = lineEndPoint.y.toInt();
+    num x1 = lineBeginPoint.x;
+    num y1 = lineBeginPoint.y;
+    num x2 = lineEndPoint.x;
+    num y2 = lineEndPoint.y;
     if (x2 == x1) /* vertical line */
       return new Point(x2, (y2 < y1 ? y : y + height));
     if (y2 == y1) /* horizontal line */
       return new Point((x2 < x1 ? x : x + width), y2);
 
-    double m = (y2 - y1) / (x2 - x1);
-    int xx = (x2 < x1 ? x : x + width);
-    double fy = m * (xx - x2) + y2;
-    int yy;
+    num m = (y2 - y1) / (x2 - x1);
+    num xx = (x2 < x1 ? x : x + width);
+    num fy = m * (xx - x2) + y2;
+    num yy;
     /* float comparison, because fy may be bigger than the biggest integer */
     if (fy >= y && fy <= y + height) {
       yy = fy.toInt();

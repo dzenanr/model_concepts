@@ -59,7 +59,7 @@ class Board {
     canvas.width = width;
   }
 
-  int get width() {
+  int get width {
     return _width;
   }
 
@@ -68,7 +68,7 @@ class Board {
     canvas.height = height;
   }
 
-  int get height() {
+  int get height {
     return _height;
   }
 
@@ -102,13 +102,15 @@ class Board {
   }
 
   void fromJson(String json) {
-    Map<String, Object> boardMap = JSON.parse(json);
-    width = boardMap["width"];
-    height = boardMap["height"];
-    List<Map<String, Object>> boxesList = boardMap["boxes"];
-    boxesFromJson(boxesList);
-    List<Map<String, Object>> linesList = boardMap["lines"];
-    linesFromJson(linesList);
+    if (json != null) {
+      Map<String, Object> boardMap = JSON.parse(json);
+      width = boardMap["width"];
+      height = boardMap["height"];
+      List<Map<String, Object>> boxesList = boardMap["boxes"];
+      boxesFromJson(boxesList);
+      List<Map<String, Object>> linesList = boardMap["lines"];
+      linesFromJson(linesList);
+    }
   }
 
   List<Map<String, Object>> boxesToJson() {
@@ -141,10 +143,10 @@ class Board {
   Box boxFromJson(Map<String, Object> boxMap) {
     String title = boxMap["name"];
     bool entry = boxMap["entry"];
-    int x = boxMap["x"];
-    int y = boxMap["y"];
-    int width = boxMap["width"];
-    int height = boxMap["height"];
+    num x = boxMap["x"];
+    num y = boxMap["y"];
+    num width = boxMap["width"];
+    num height = boxMap["height"];
     Box box = new Box(this, x, y, width, height);
     box.title = title;
     box.entry = entry;

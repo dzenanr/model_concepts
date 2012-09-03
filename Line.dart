@@ -167,24 +167,24 @@ class Line {
     }
   }
 
-  String get category() => _category;
+  String get category => _category;
 
-  bool get relationship() => category == 'relationship';
-  bool get inheritance() => category == 'inheritance';
-  bool get reflexive() => category == 'reflexive';
-  bool get twin() => category == 'twin';
+  bool get relationship => category == 'relationship';
+  bool get inheritance => category == 'inheritance';
+  bool get reflexive => category == 'reflexive';
+  bool get twin => category == 'twin';
 
   void set twin1(bool twin1) {
     _twin1 = twin1;
   }
 
-  bool get twin1() => _twin1;
+  bool get twin1 => _twin1;
 
   void set twin2(bool twin2) {
     _twin2 = twin2;
   }
 
-  bool get twin2() => _twin2;
+  bool get twin2 => _twin2;
 
   Map<String, Object> toJson() {
     Map<String, Object> lineMap = new Map<String, Object>();
@@ -248,7 +248,7 @@ class Line {
           plural = '${text}s';
         }
       }
-    } catch (Exception e) {
+    } on Exception catch (e) {
       return text;
     }
     return plural;
