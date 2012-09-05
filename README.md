@@ -1,19 +1,14 @@
-On Dart
-https://plus.google.com/u/0/b/113649577593294551754/
-https://plus.google.com/u/0/b/113649577593294551754/113649577593294551754/posts
 
-Magic Boxes in Dart
+#Magic Boxes in Dart#
+
 by Dzenan Ridjanovic
 2011-12-09 -- 2012-09-03
 
 Learning Dart in Spirals by Developing Magic Boxes.
 The last spiral is a graphical model designer.
 
-Blog:
-http://dzenanr.github.com/
-
 Code:
-https://github.com/dzenanr/MagicBoxes
+https://github.com/dzenanr/magic_boxes.dart
 
 Summary:
 http://goo.gl/DqF7d
@@ -24,4 +19,11 @@ http://code.google.com/p/magic-boxes/
 and
 Modelibra Modeler [in Java]
 http://www.modelibra.org/
+
+Blog:
+http://dzenanr.github.com/
+
+On Dart
+https://plus.google.com/u/0/b/113649577593294551754/
+https://plus.google.com/u/0/b/113649577593294551754/113649577593294551754/posts
 
