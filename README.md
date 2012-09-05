@@ -8,7 +8,7 @@ Learning Dart in Spirals by Developing Magic Boxes.
 The last spiral is a graphical model designer.
 
 Code:
-https://github.com/dzenanr/magic_boxes.dart
+https://github.com/dzenanr/magic_boxes
 
 Summary:
 http://goo.gl/DqF7d
