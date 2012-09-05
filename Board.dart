@@ -102,7 +102,7 @@ class Board {
   }
 
   void fromJson(String json) {
-    if (json != null) {
+    if (json != null && json.trim() != '') {
       Map<String, Object> boardMap = JSON.parse(json);
       width = boardMap["width"];
       height = boardMap["height"];
