@@ -13,11 +13,11 @@
   body {
     font-family: verdana, arial, helvetica, sans-serif;
     font-size: 16px;
-    background: #d9ece2;
+    background: #fafafa;
     width: 1000px;
     margin-left: auto;
     margin-right: auto;
-    padding:10px; 
+    padding:10px;
   }
 
   section {
@@ -29,6 +29,7 @@
     text-align: justify;
     margin-left: 2px;
     margin-right: 2px;
+    background: #fefefe;
   }
-    			
+
 /* ===[ end ]=== */

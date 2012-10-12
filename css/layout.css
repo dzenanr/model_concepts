@@ -5,7 +5,7 @@
 /*
   Title:                   Basic Layout Design Style
   Author:                  Dzenan Ridjanovic
-  Influenced By:           
+  Influenced By:
   http://www.ehow.com/how_12007718_scroll-inside-html-canvas.html
   Created:                 2006-09-03
   Updated:                 2012-01-04
@@ -14,10 +14,10 @@
   header {
     color: #663117;
     padding: 4px;
-    background: #d7e9f7;
+    background: #d9ece2;
     text-align: center;
   }
-    	
+
   footer {
     font-family: arial, sans-serif;
     font-size: 14px;
@@ -35,5 +35,5 @@
     border: solid 1px white;
     background-color: white;
   }
-    		
+
 /* ===[ end ]=== */

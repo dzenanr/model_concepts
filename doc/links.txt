@@ -1,5 +1,9 @@
 Links
 
+Color
+
+http://www.w3schools.com/tags/ref_colorpicker.asp
+
 CSS
 
 http://www.barelyfitz.com/screencast/html-training/css/positioning/
