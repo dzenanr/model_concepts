@@ -25,7 +25,7 @@ class JsonPanel {
     });
     clearJsonButton = document.query('#clearJson');
     clearJsonButton.on.click.add((MouseEvent e) {
-      modelJsonTextArea.value = '';
+      clearJson();
     });
 
     prettyParagraph = document.query('#fromJsonToPretty');
@@ -37,12 +37,20 @@ class JsonPanel {
     });
     clearPrettyButton = document.query('#clearPretty');
     clearPrettyButton.on.click.add((MouseEvent e) {
-      prettyParagraph.innerHTML = '';
+      clearPrettyJson();
     });
+  }
+  
+  void clearJson() {
+    modelJsonTextArea.value = '';
+  }
+  
+  void clearPrettyJson() {
+    prettyParagraph.innerHTML = '';
   }
 
   // based on http://ketanjetty.com/coldfusion/javascript/format-json/
-  prettyJson(String json) {
+  String prettyJson(String json) {
     var pretty = '';
     var position = 0;
     var indent = '&nbsp;&nbsp;&nbsp;&nbsp;';

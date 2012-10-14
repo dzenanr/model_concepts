@@ -291,7 +291,7 @@ class Box {
       yy = fy.toInt();
     } else {
       yy = (y2 < y1 ? y : y + height);
-      xx = ((fy - y2) / m).toInt() + x2;
+      xx = (fy - y2) ~/ m + x2;
     }
     return new Point(xx, yy);
   }

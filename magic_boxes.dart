@@ -1,4 +1,5 @@
 #import('dart:html');
+#import('dart:isolate');
 #import('dart:json');
 #source('Box.dart');
 #source('Board.dart');
