@@ -4,7 +4,9 @@
 by Dzenan Ridjanovic
 2011-12-09 -- 2012-09-03
 
-Learning Dart in Spirals by Developing Magic Boxes.
+Categories: design tool, graphical models, canvas, local storage, json.
+
+Description: Learning Dart in Spirals by Developing Magic Boxes.
 The last spiral is a graphical model designer.
 
 Code:
