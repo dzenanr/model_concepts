@@ -1,14 +1,17 @@
-#import('dart:html');
-#import('dart:isolate');
-#import('dart:json');
-#source('Box.dart');
-#source('Board.dart');
-#source('ToolBar.dart');
-#source('Line.dart');
-#source('MenuBar.dart');
-#source('Item.dart');
-#source('JsonPanel.dart');
-#source('PngPanel.dart');
+
+
+import 'dart:html';
+import 'dart:isolate';
+import 'dart:json';
+
+part 'Box.dart';
+part 'Board.dart';
+part 'ToolBar.dart';
+part 'Line.dart';
+part 'MenuBar.dart';
+part 'Item.dart';
+part 'JsonPanel.dart';
+part 'PngPanel.dart';
 
 // See the style guide: http://www.dartlang.org/articles/style-guide/ .
 
