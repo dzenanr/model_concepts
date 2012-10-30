@@ -143,10 +143,10 @@ class Box {
   }
 
   int findLastItemSequence() {
-    if (items.isEmpty()) {
+    if (items.isEmpty) {
       return 0;
     } else {
-      Item item = items.last();
+      Item item = items.last;
       return item.sequence;
     }
   }
@@ -161,7 +161,7 @@ class Box {
   }
 
   Item findFirstItem() {
-    if (items.isEmpty()) {
+    if (items.isEmpty) {
       return null;
     } else {
       return items[0];
@@ -169,10 +169,10 @@ class Box {
   }
 
   Item findLastItem() {
-    if (items.isEmpty()) {
+    if (items.isEmpty) {
       return null;
     } else {
-      return items.last();
+      return items.last;
     }
   }
 

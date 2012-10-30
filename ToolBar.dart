@@ -214,7 +214,7 @@ class ToolBar {
             itemInitInput.value = '';
           }
         } else {
-          if (!box.items.isEmpty()) {
+          if (!box.items.isEmpty) {
             Item firstItem = box.findFirstItem();
             currentItem = firstItem;
             itemNameInput.value = firstItem.name;
@@ -248,7 +248,7 @@ class ToolBar {
             itemInitInput.value = '';
           }
         } else {
-          if (!box.items.isEmpty()) {
+          if (!box.items.isEmpty) {
             Item lastItem = box.findLastItem();
             currentItem = lastItem;
             itemNameInput.value = lastItem.name;
