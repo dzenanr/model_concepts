@@ -277,10 +277,12 @@ class Box {
     num y1 = lineBeginPoint.y;
     num x2 = lineEndPoint.x;
     num y2 = lineEndPoint.y;
-    if (x2 == x1) /* vertical line */
+    if (x2 == x1) { /* vertical line */
       return new Point(x2, (y2 < y1 ? y : y + height));
-    if (y2 == y1) /* horizontal line */
+    }
+    if (y2 == y1) { /* horizontal line */
       return new Point((x2 < x1 ? x : x + width), y2);
+    }
 
     num m = (y2 - y1) / (x2 - x1);
     num xx = (x2 < x1 ? x : x + width);

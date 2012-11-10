@@ -4,14 +4,14 @@ import 'dart:html';
 import 'dart:isolate';
 import 'dart:json';
 
-part 'Box.dart';
-part 'Board.dart';
-part 'ToolBar.dart';
-part 'Line.dart';
-part 'MenuBar.dart';
-part 'Item.dart';
-part 'JsonPanel.dart';
-part 'PngPanel.dart';
+part 'box.dart';
+part 'board.dart';
+part 'tool_bar.dart';
+part 'line.dart';
+part 'menu_bar.dart';
+part 'item.dart';
+part 'json_panel.dart';
+part 'png_panel.dart';
 
 // See the style guide: http://www.dartlang.org/articles/style-guide/ .
 

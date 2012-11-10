@@ -2,7 +2,7 @@
 #Magic Boxes in Dart#
 
 by Dzenan Ridjanovic
-2011-12-09 -- 2012-10-12
+2011-12-09 -- 2012-11-10
 
 Categories: design tool, graphical models, canvas, local storage, json.
 
