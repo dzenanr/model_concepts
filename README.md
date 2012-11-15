@@ -8,6 +8,10 @@ Categories: design tool, graphical models, canvas, local storage, json.
 
 Description: Learning Dart in Spirals by Developing Magic Boxes.
 The last spiral is a graphical model designer.
+The JSON representation of a model is generated in Magic Boxes. 
+This representation is used in the 
+[Dartling] (https://github.com/dzenanr/dartling) domain model framework to 
+generate code for the model.
 
 Code:
 https://github.com/dzenanr/magic_boxes
@@ -26,6 +30,5 @@ Blog:
 http://dzenanr.github.com/
 
 On Dart
-https://plus.google.com/u/0/b/113649577593294551754/
 https://plus.google.com/u/0/b/113649577593294551754/113649577593294551754/posts
 
