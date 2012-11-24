@@ -1,3 +1,5 @@
+part of magic_boxes;
+
 class Box {
 
   static final int DEFAULT_WIDTH = 120;

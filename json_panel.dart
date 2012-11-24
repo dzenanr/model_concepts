@@ -1,3 +1,5 @@
+part of magic_boxes;
+
 class JsonPanel {
 
   final Board board;

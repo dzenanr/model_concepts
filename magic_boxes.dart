@@ -1,4 +1,4 @@
-
+library magic_boxes;
 
 import 'dart:html';
 import 'dart:isolate';

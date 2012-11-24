@@ -1,3 +1,5 @@
+part of magic_boxes;
+
 class Item {
 
   final Box box;

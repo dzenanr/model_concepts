@@ -1,3 +1,5 @@
+part of magic_boxes;
+
 class Line {
 
   final Board board;
@@ -380,8 +382,8 @@ class Line {
         beginBox.reflexive1().y + 30);
     }
 
-    int x = 0;
-    int y = 0;
+    num x = 0;
+    num y = 0;
 
     Point lineBeginPoint;
     Point lineEndPoint;
@@ -399,24 +401,24 @@ class Line {
       lineEndPoint);
     Point endPoint = endBox.getIntersectionPoint(lineEndPoint, lineBeginPoint);
 
-    int x1 = beginPoint.x.toInt();
-    int y1 = beginPoint.y.toInt();
-    int x2 = endPoint.x.toInt();
-    int y2 = endPoint.y.toInt();
+    num x1 = beginPoint.x;
+    num y1 = beginPoint.y;
+    num x2 = endPoint.x;
+    num y2 = endPoint.y;
 
     if (x1 <= x2) {
-      x = (x1 + 3 * ((x2 - x1) / 8)).toInt();
+      x = (x1 + 3 * ((x2 - x1) / 8));
       if (y1 <= y2) {
-          y = (y1 + 3 * ((y2 - y1) / 8)).toInt();
+          y = (y1 + 3 * ((y2 - y1) / 8));
       } else {
-          y = (y2 + 5 * ((y1 - y2) / 8)).toInt();
+          y = (y2 + 5 * ((y1 - y2) / 8));
       }
     } else {
-      x = (x2 + 5 * ((x1 - x2) / 8)).toInt();
+      x = (x2 + 5 * ((x1 - x2) / 8));
       if (y1 <= y2) {
-          y = (y1 + 3 * ((y2 - y1) / 8)).toInt();
+          y = (y1 + 3 * ((y2 - y1) / 8));
       } else {
-          y = (y2 + 5 * ((y1 - y2) / 8)).toInt();
+          y = (y2 + 5 * ((y1 - y2) / 8));
       }
     }
     return new Point(x, y);

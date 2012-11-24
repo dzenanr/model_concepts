@@ -1,3 +1,5 @@
+part of magic_boxes;
+
 class MenuBar {
 
   final Board board;

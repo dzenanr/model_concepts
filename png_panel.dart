@@ -1,3 +1,5 @@
+part of magic_boxes;
+
 class PngPanel {
 
 final Board board;

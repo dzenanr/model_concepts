@@ -1,3 +1,5 @@
+part of magic_boxes;
+
 class ToolBar {
 
   static final int SELECT = 1;

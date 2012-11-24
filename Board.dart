@@ -1,3 +1,5 @@
+part of magic_boxes;
+
 class Board {
 
   static final int MIN_WIDTH = 990;
