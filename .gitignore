@@ -1,3 +1,5 @@
-magic_boxes.dart.js
-magic_boxes.dart.js.map
+.children
+*.js
+*.js.deps
+*.js.map
 *~

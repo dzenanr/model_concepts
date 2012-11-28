@@ -216,7 +216,7 @@ class Box {
   }
 
   void sortItemsBySequence() {
-    items.sort(compare(Item i1, Item i2) {
+    items.sort((Item i1, Item i2) {
       if (i1.sequence == i2.sequence) {
         return 0;
       } else if (i1.sequence > i2.sequence) {
