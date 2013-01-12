@@ -12,7 +12,7 @@ final Board board;
     modelImage = document.query('#modelImage');
     fromModelToPngButton = document.query('#fromModelToPng');
     fromModelToPngButton.on.click.add((MouseEvent e) {
-      modelImage.src = board.canvas.toDataURL("image/png");
+      modelImage.src = board.canvas.toDataUrl("image/png");
       show();
     });
     clearButton = document.query('#clearImage');
