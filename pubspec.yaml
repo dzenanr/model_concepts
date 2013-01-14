@@ -1,0 +1,8 @@
+name: magic_boxes
+author: Dzenan Ridjanovic <dzenanr@gmail.com>
+homepage: http://ondart.me/
+version: 0.1.0
+description: >
+  A graphical model designer for dartling.
+dependencies:
+  browser: any

@@ -1,17 +1,6 @@
-library magic_boxes;
-
 import 'dart:html';
-import 'dart:isolate';
-import 'dart:json';
 
-part 'box.dart';
-part 'board.dart';
-part 'tool_bar.dart';
-part 'line.dart';
-part 'menu_bar.dart';
-part 'item.dart';
-part 'json_panel.dart';
-part 'png_panel.dart';
+import 'package:magic_boxes/magic_boxes.dart';
 
 // See the style guide: http://www.dartlang.org/articles/style-guide/ .
 
