@@ -35,7 +35,7 @@ class JsonPanel {
 
     prettyJsonButton = document.query('#prettyJson');
     prettyJsonButton.on.click.add((MouseEvent e) {
-      prettyParagraph.innerHTML = prettyJson(modelJsonTextArea.value);
+      prettyParagraph.innerHtml = prettyJson(modelJsonTextArea.value);
     });
     clearPrettyButton = document.query('#clearPretty');
     clearPrettyButton.on.click.add((MouseEvent e) {
@@ -48,7 +48,7 @@ class JsonPanel {
   }
 
   void clearPrettyJson() {
-    prettyParagraph.innerHTML = '';
+    prettyParagraph.innerHtml = '';
   }
 
   // based on http://ketanjetty.com/coldfusion/javascript/format-json/

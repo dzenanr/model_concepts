@@ -101,12 +101,12 @@ class Board {
     boardMap["height"] = height;
     boardMap["boxes"] = boxesToJson();
     boardMap["lines"] = linesToJson();
-    return JSON.stringify(boardMap);
+    return stringify(boardMap);
   }
 
   void fromJson(String json) {
     if (json != null && json.trim() != '') {
-      Map<String, Object> boardMap = JSON.parse(json);
+      Map<String, Object> boardMap = parse(json);
       width = boardMap["width"];
       height = boardMap["height"];
       List<Map<String, Object>> boxesList = boardMap["boxes"];
