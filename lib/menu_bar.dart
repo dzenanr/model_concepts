@@ -63,71 +63,71 @@ class MenuBar {
     createBoxesAsTilesButton = document.query('#create-boxes-as-tiles');
 
     // Menu bar events.
-    openModelButton.on.click.add((MouseEvent e) {
+    openModelButton.onClick.listen((MouseEvent e) {
       String modelName = modelNameInput.value.trim();
       board.openModel(modelName);
     });
-    saveModelButton.on.click.add((MouseEvent e) {
+    saveModelButton.onClick.listen((MouseEvent e) {
       String modelName = modelNameInput.value.trim();
       board.saveModel(modelName);
     });
-    closeModelButton.on.click.add((MouseEvent e) {
+    closeModelButton.onClick.listen((MouseEvent e) {
       //modelNameInput.value = '';
       board.closeModel();
     });
 
-    deleteSelectionButton.on.click.add((MouseEvent e) {
+    deleteSelectionButton.onClick.listen((MouseEvent e) {
       board.deleteSelection();
     });
 
-    selectAllButton.on.click.add((MouseEvent e) {
+    selectAllButton.onClick.listen((MouseEvent e) {
       board.select();
     });
-    selectBoxesButton.on.click.add((MouseEvent e) {
+    selectBoxesButton.onClick.listen((MouseEvent e) {
       board.selectBoxes();
     });
-    selectLinesButton.on.click.add((MouseEvent e) {
+    selectLinesButton.onClick.listen((MouseEvent e) {
       board.selectLines();
     });
-    selectBoxLinesButton.on.click.add((MouseEvent e) {
+    selectBoxLinesButton.onClick.listen((MouseEvent e) {
       board.selectBoxLines();
     });
-    selectLinesBetweenBoxesButton.on.click.add((MouseEvent e) {
+    selectLinesBetweenBoxesButton.onClick.listen((MouseEvent e) {
       board.selectLinesBetweenBoxes();
     });
 
-    increaseSelectionHeightButton.on.click.add((MouseEvent e) {
+    increaseSelectionHeightButton.onClick.listen((MouseEvent e) {
       board.increaseHeightOfSelectedBoxes();
     });
-    decreaseSelectionHeightButton.on.click.add((MouseEvent e) {
+    decreaseSelectionHeightButton.onClick.listen((MouseEvent e) {
       board.decreaseHeightOfSelectedBoxes();
     });
-    increaseSelectionWidthButton.on.click.add((MouseEvent e) {
+    increaseSelectionWidthButton.onClick.listen((MouseEvent e) {
       board.increaseWidthOfSelectedBoxes();
     });
-    decreaseSelectionWidthButton.on.click.add((MouseEvent e) {
+    decreaseSelectionWidthButton.onClick.listen((MouseEvent e) {
       board.decreaseWidthOfSelectedBoxes();
     });
-    increaseSelectionSizeButton.on.click.add((MouseEvent e) {
+    increaseSelectionSizeButton.onClick.listen((MouseEvent e) {
       board.increaseSizeOfSelectedBoxes();
     });
-    decreaseSelectionSizeButton.on.click.add((MouseEvent e) {
+    decreaseSelectionSizeButton.onClick.listen((MouseEvent e) {
       board.decreaseSizeOfSelectedBoxes();
     });
-    hideSelectionButton.on.click.add((MouseEvent e) {
+    hideSelectionButton.onClick.listen((MouseEvent e) {
       board.hideSelection();
     });
-    hideNonSelectionButton.on.click.add((MouseEvent e) {
+    hideNonSelectionButton.onClick.listen((MouseEvent e) {
       board.hideNonSelection();
     });
-    showHiddenButton.on.click.add((MouseEvent e) {
+    showHiddenButton.onClick.listen((MouseEvent e) {
       board.showHidden();
     });
 
-    createBoxesInDiagonalButton.on.click.add((MouseEvent e) {
+    createBoxesInDiagonalButton.onClick.listen((MouseEvent e) {
       board.createBoxesInDiagonal();
     });
-    createBoxesAsTilesButton.on.click.add((MouseEvent e) {
+    createBoxesAsTilesButton.onClick.listen((MouseEvent e) {
       board.createBoxesAsTiles();
     });
   }

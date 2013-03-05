@@ -13,7 +13,7 @@ class Board {
   // The acceptable delta error in pixels for clicking on a line between two boxes.
   static final int DELTA = 8;
   // The board is redrawn every INTERVAL ms.
-  static final int INTERVAL = 8;
+  static const int INTERVAL = 8;
 
   static final String FILE_NAME = 'model.txt';
 
@@ -51,9 +51,9 @@ class Board {
     pngPanel = new PngPanel(this);
 
     // Canvas event.
-    document.query('#canvas').on.mouseDown.add(onMouseDown);
+    document.query('#canvas').onMouseDown.listen(onMouseDown);
     // Redraw every INTERVAL ms.
-    new Timer.repeating(INTERVAL, (t) => redraw());
+    new Timer.repeating(const Duration(milliseconds: INTERVAL), (t) => redraw());
   }
 
   void set width(int width) {

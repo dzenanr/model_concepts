@@ -17,16 +17,16 @@ class JsonPanel {
     modelJsonTextArea = document.query('#modelJson');
 
     fromModelToJsonButton = document.query('#fromModelToJson');
-    fromModelToJsonButton.on.click.add((MouseEvent e) {
+    fromModelToJsonButton.onClick.listen((MouseEvent e) {
       modelJsonTextArea.value =  board.toJson();
       modelJsonTextArea.select();
     });
     fromJsonToModelButton = document.query('#fromJsonToModel');
-    fromJsonToModelButton.on.click.add((MouseEvent e) {
+    fromJsonToModelButton.onClick.listen((MouseEvent e) {
       board.fromJson(modelJsonTextArea.value);
     });
     clearJsonButton = document.query('#clearJson');
-    clearJsonButton.on.click.add((MouseEvent e) {
+    clearJsonButton.onClick.listen((MouseEvent e) {
       clearJson();
     });
 
@@ -34,11 +34,11 @@ class JsonPanel {
     prettyParagraph.contentEditable = "true";
 
     prettyJsonButton = document.query('#prettyJson');
-    prettyJsonButton.on.click.add((MouseEvent e) {
+    prettyJsonButton.onClick.listen((MouseEvent e) {
       prettyParagraph.innerHtml = prettyJson(modelJsonTextArea.value);
     });
     clearPrettyButton = document.query('#clearPretty');
-    clearPrettyButton.on.click.add((MouseEvent e) {
+    clearPrettyButton.onClick.listen((MouseEvent e) {
       clearPrettyJson();
     });
   }

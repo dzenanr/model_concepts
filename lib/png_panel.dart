@@ -11,12 +11,12 @@ final Board board;
   PngPanel(this.board) {
     modelImage = document.query('#modelImage');
     fromModelToPngButton = document.query('#fromModelToPng');
-    fromModelToPngButton.on.click.add((MouseEvent e) {
+    fromModelToPngButton.onClick.listen((MouseEvent e) {
       modelImage.src = board.canvas.toDataUrl("image/png");
       show();
     });
     clearButton = document.query('#clearImage');
-    clearButton.on.click.add((MouseEvent e) {
+    clearButton.onClick.listen((MouseEvent e) {
       hide();
     });
   }
