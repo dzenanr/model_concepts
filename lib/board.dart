@@ -53,7 +53,7 @@ class Board {
     // Canvas event.
     document.query('#canvas').onMouseDown.listen(onMouseDown);
     // Redraw every INTERVAL ms.
-    new Timer.repeating(const Duration(milliseconds: INTERVAL), (t) => redraw());
+    new Timer.periodic(const Duration(milliseconds: INTERVAL), (t) => redraw());
   }
 
   void set width(int width) {
@@ -615,7 +615,7 @@ class Board {
   void onMouseDown(MouseEvent e) {
     bool clickedOnBox = false;
     for (Box box in boxes) {
-      if (box.contains(e.offsetX, e.offsetY)) {
+      if (box.contains(e.offset.x, e.offset.y)) {
         // Clicked on the existing box.
         clickedOnBox = true;
         break;
@@ -624,7 +624,7 @@ class Board {
 
     if (!clickedOnBox) {
       if (toolBar.isSelectToolOn()) {
-        Point clickedPoint = new Point(e.offsetX, e.offsetY);
+        Point clickedPoint = new Point(e.offset.x, e.offset.y);
         Line line = _lineContains(clickedPoint);
         if (line != null) {
           // Select or deselect the existing line.
@@ -636,12 +636,12 @@ class Board {
       } else if (toolBar.isBoxToolOn()) {
         // Create a box in the position of the mouse click on the board,
         // but not on an existing box.
-        Box box = new Box(this, e.offsetX, e.offsetY,
+        Box box = new Box(this, e.offset.x, e.offset.y,
           Box.DEFAULT_WIDTH, Box.DEFAULT_HEIGHT);
-        if (e.offsetX + box.width > width) {
+        if (e.offset.x + box.width > width) {
           box.x = width - box.width - 1;
         }
-        if (e.offsetY + box.height > height) {
+        if (e.offset.y + box.height > height) {
           box.y = height - box.height - 1;
         }
         boxes.add(box);

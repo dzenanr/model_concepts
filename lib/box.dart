@@ -302,10 +302,10 @@ class Box {
 
   void onMouseDown(MouseEvent e) {
     _mouseDown = true;
-    if (board.toolBar.isSelectToolOn() && contains(e.offsetX, e.offsetY)) {
+    if (board.toolBar.isSelectToolOn() && contains(e.offset.x, e.offset.y)) {
       toggleSelection();
     }
-    if (contains(e.offsetX, e.offsetY)) {
+    if (contains(e.offset.x, e.offset.y)) {
       if (board.lastBoxClicked != null && board.lastBoxClicked != this) {
         board.beforeLastBoxClicked = board.lastBoxClicked;
       }
@@ -319,16 +319,16 @@ class Box {
 
   /** Change a position of the box with mouse mouvements. */
   void onMouseMove(MouseEvent e) {
-    if (contains(e.offsetX, e.offsetY) && _mouseDown &&
-        board.countBoxesContain(e.offsetX, e.offsetY) < 2) {
-      x =  (e.offsetX - width / 2).toInt();
+    if (contains(e.offset.x, e.offset.y) && _mouseDown &&
+        board.countBoxesContain(e.offset.x, e.offset.y) < 2) {
+      x =  (e.offset.x - width / 2).toInt();
       if (x < 0) {
         x = 1;
       }
       if (x > board.width - width) {
         x = board.width - width - 1;
       }
-      y = (e.offsetY - height / 2).toInt();
+      y = (e.offset.y - height / 2).toInt();
       if (y < 0) {
         y = 1;
       }

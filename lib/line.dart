@@ -275,7 +275,8 @@ class Line {
       return false;
     }
 
-    Point pointDif = new Point(0, 0);
+    num pointDifX;
+    num pointDifY;
     bool inLineRectX, inLineRectY, inLineRect;
     double coord;
 
@@ -294,18 +295,18 @@ class Line {
       beginPoint = box1.center();
       endPoint = box2.center();
     }
-    pointDif.x = endPoint.x - beginPoint.x;
-    pointDif.y = endPoint.y - beginPoint.y;
+    pointDifX = endPoint.x - beginPoint.x;
+    pointDifY = endPoint.y - beginPoint.y;
 
     // Rapid test: Verify if the point is in the line rectangle.
-    if (pointDif.x > 0) {
+    if (pointDifX > 0) {
       inLineRectX = (point.x >= (beginPoint.x - delta.x)) &&
       (point.x <= (endPoint.x + delta.x));
     } else {
       inLineRectX = (point.x >= (endPoint.x - delta.x)) &&
       (point.x <= (beginPoint.x + delta.x));
     }
-    if (pointDif.y > 0) {
+    if (pointDifY > 0) {
       inLineRectY = (point.y >= (beginPoint.y - delta.y)) &&
       (point.y <= (endPoint.y + delta.y));
     } else {
@@ -318,17 +319,17 @@ class Line {
     }
 
     // If the line is horizontal or vertical there is no need to continue.
-    if ((pointDif.x == 0) || (pointDif.y == 0)) {
+    if ((pointDifX == 0) || (pointDifY == 0)) {
         return true;
     }
 
-    if (pointDif.x.abs() > pointDif.y.abs()) {
+    if (pointDifX.abs() > pointDifY.abs()) {
       coord = beginPoint.y +
-      (((point.x - beginPoint.x) * pointDif.y) / pointDif.x) - point.y;
+      (((point.x - beginPoint.x) * pointDifY) / pointDifX) - point.y;
       return coord.abs() <= delta.y;
     } else {
       coord = beginPoint.x +
-      (((point.y - beginPoint.y) * pointDif.x) / pointDif.y) - point.x;
+      (((point.y - beginPoint.y) * pointDifX) / pointDifY) - point.x;
       return coord.abs() <= delta.x;
     }
   }
