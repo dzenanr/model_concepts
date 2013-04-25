@@ -6,12 +6,16 @@ by Dzenan Ridjanovic
 
 Categories: design tool, graphical models, canvas, local storage, json.
 
-Description: Learning Dart in Spirals by Developing Magic Boxes.
+Description: A graphical design tool for domain models of 
+[dartling] (https://github.com/dzenanr/dartling).
+Spirals can be found in the [mb_spirals] (https://github.com/dzenanr/mb_spirals) 
+project.
 The last spiral is a graphical model designer.
 The JSON representation of a model is generated in Magic Boxes. 
 This representation is used in the 
-[Dartling] (https://github.com/dzenanr/dartling) domain model framework to 
-generate code for the model.
+[dartling_gen] (https://github.com/dzenanr/dartling_gen) project to 
+generate code for a model supported by the
+[dartling] (https://github.com/dzenanr/dartling) domain model framework.
 
 Code:
 https://github.com/dzenanr/magic_boxes
