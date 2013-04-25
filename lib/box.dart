@@ -292,7 +292,8 @@ class Box {
     num yy;
     /* float comparison, because fy may be bigger than the biggest integer */
     if (fy >= y && fy <= y + height) {
-      yy = fy.toInt();
+      //yy = fy.toInt();
+      yy = fy;
     } else {
       yy = (y2 < y1 ? y : y + height);
       xx = (fy - y2) ~/ m + x2;

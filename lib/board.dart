@@ -20,8 +20,8 @@ class Board {
   CanvasElement canvas;
   CanvasRenderingContext2D context;
 
-  int _width;
-  int _height;
+  num _width;
+  num _height;
 
   List<Box> boxes;
   List<Line> lines;
@@ -56,21 +56,21 @@ class Board {
     new Timer.periodic(const Duration(milliseconds: INTERVAL), (t) => redraw());
   }
 
-  void set width(int width) {
+  void set width(num width) {
     _width = width;
-    canvas.width = width;
+    canvas.width = width.toInt();
   }
 
-  int get width {
+  num get width {
     return _width;
   }
 
-  void set height(int height) {
+  void set height(num height) {
     _height = height;
-    canvas.height = height;
+    canvas.height = height.toInt();
   }
 
-  int get height {
+  num get height {
     return _height;
   }
 
@@ -291,53 +291,22 @@ class Board {
     toolBar.backToSelectAsFixedTool();
   }
 
-  void deleteBox(Box boxToDelete) {
-    for (Box box in boxes) {
-      if (box == boxToDelete) {
-        int index = boxes.indexOf(box, 0);
-        boxes.removeRange(index, 1);
+  void deleteSelectedBoxes() {
+    var listCopy = boxes.toList();
+    for (Box box in listCopy) {
+      if (box.isSelected()) {
+        boxes.remove(box);
         if (box == beforeLastBoxClicked) {
           beforeLastBoxClicked == null;
         } else if (box == lastBoxClicked) {
           lastBoxClicked == null;
         }
-        return;
       }
     }
-  }
-
-  void deleteLine(Line lineToDelete) {
-    for (Line line in lines) {
-      if (line == lineToDelete) {
-        int index = lines.indexOf(line, 0);
-        lines.removeRange(index, 1);
-        return;
-      }
-    }
-  }
-
-  void deleteSelectedBoxes() {
-    if (countSelectedBoxes() == 0) {
-      return;
-    }
-    for (Box box in boxes) {
-      if (box.isSelected()) {
-        deleteBox(box);
-      }
-    }
-    deleteSelectedBoxes();
   }
 
   void deleteSelectedLines() {
-    if (countSelectedLines() == 0) {
-      return;
-    }
-    for (Line line in lines) {
-      if (line.isSelected()) {
-        deleteLine(line);
-      }
-    }
-    deleteSelectedLines();
+    lines.removeWhere((l) => l.isSelected());
   }
 
   void deleteSelection() {
