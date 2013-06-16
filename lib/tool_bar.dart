@@ -136,6 +136,7 @@ class ToolBar {
               Item item = new Item(box, itemName, itemCategorySelect.value);
               item.type = itemTypeSelect.value;
               item.init = itemInitInput.value.trim();
+              itemNameInput.value = '';
             }
           }
         }
