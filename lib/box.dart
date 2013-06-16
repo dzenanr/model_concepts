@@ -208,7 +208,7 @@ class Box {
     if (item != null) {
       int index = items.indexOf(item, 0);
       if (index >= 0) {
-        items.removeRange(index, 1);
+        items.removeRange(index, index + 1);
         return true;
       }
     }
