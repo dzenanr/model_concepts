@@ -23,7 +23,6 @@ class ToolBar {
   SelectElement itemCategorySelect;
   SelectElement itemTypeSelect;
   InputElement itemInitInput;
-  ButtonElement addItemButton;
   ButtonElement getItemButton;
   ButtonElement getNextItemButton;
   ButtonElement getPreviousItemButton;
@@ -86,16 +85,16 @@ class ToolBar {
     canvasWidthInput = document.query('#canvasWidth');
     canvasHeightInput = document.query('#canvasHeight');
     canvasWidthInput.valueAsNumber = board.width;
-    canvasWidthInput.onInput.listen((Event e) {
+    canvasWidthInput.onChange.listen((Event e) {
       board.width = canvasWidthInput.valueAsNumber;
     });
     canvasHeightInput.valueAsNumber = board.height;
-    canvasHeightInput.onInput.listen((Event e) {
+    canvasHeightInput.onChange.listen((Event e) {
       board.height = canvasHeightInput.valueAsNumber;
     });
 
     boxNameInput = document.query('#boxName');
-    boxNameInput.onInput.listen((Event e) {
+    boxNameInput.onChange.listen((Event e) {
       Box box = board.lastBoxSelected;
       if (box != null) {
         String boxName = boxNameInput.value.trim();
@@ -117,18 +116,28 @@ class ToolBar {
     });
 
     itemNameInput = document.query('#itemName');
-    itemNameInput.onInput.listen((Event e) {
+    itemNameInput.onChange.listen((Event e) {
       Box box = board.lastBoxSelected;
       if (box != null) {
-        if (currentItem != null) {
-          String itemName = itemNameInput.value.trim();
-          if (itemName != '') {
+        String itemName = itemNameInput.value.trim();
+        if (itemName != '') {
+          if (currentItem != null && currentItem.box == box) {
+            String itemName = itemNameInput.value.trim();
+            if (itemName != '') {
+              Item otherItem = box.findItem(itemName);
+              if (otherItem == null) {
+                currentItem.name = itemName;
+              }
+            }
+            itemNameInput.select();
+          } else {
             Item otherItem = box.findItem(itemName);
             if (otherItem == null) {
-              currentItem.name = itemName;
+              Item item = new Item(box, itemName, itemCategorySelect.value);
+              item.type = itemTypeSelect.value;
+              item.init = itemInitInput.value.trim();
             }
           }
-          itemNameInput.select();
         }
       }
     });
@@ -151,28 +160,12 @@ class ToolBar {
     });
 
     itemInitInput = document.query('#itemInit');
-    itemInitInput.onInput.listen((Event e) {
+    itemInitInput.onChange.listen((Event e) {
       Box box = board.lastBoxSelected;
       if (box != null) {
         if (currentItem != null) {
           currentItem.init = itemInitInput.value.trim();
           itemNameInput.select();
-        }
-      }
-    });
-
-    addItemButton = document.query('#addItem');
-    addItemButton.onClick.listen((MouseEvent e) {
-      Box box = board.lastBoxSelected;
-      if (box != null) {
-        String itemName = itemNameInput.value.trim();
-        if (itemName != '') {
-          Item otherItem = box.findItem(itemName);
-          if (otherItem == null) {
-            Item item = new Item(box, itemName, itemCategorySelect.value);
-            item.type = itemTypeSelect.value;
-            item.init = itemInitInput.value.trim();
-          }
         }
       }
     });
@@ -345,7 +338,7 @@ class ToolBar {
     line12Box2Label = document.query('#line12Box2');
 
     line12MinInput = document.query('#line12Min');
-    line12MinInput.onInput.listen((Event e) {
+    line12MinInput.onChange.listen((Event e) {
       Line line = board.lastLineSelected;
       if (line != null) {
         line.box1box2Min = line12MinInput.value.trim();
@@ -353,7 +346,7 @@ class ToolBar {
     });
 
     line12MaxInput = document.query('#line12Max');
-    line12MaxInput.onInput.listen((Event e) {
+    line12MaxInput.onChange.listen((Event e) {
       Line line = board.lastLineSelected;
       if (line != null) {
         line.box1box2Max = line12MaxInput.value.trim();
@@ -374,7 +367,7 @@ class ToolBar {
     });
 
     line12NameInput = document.query('#line12Name');
-    line12NameInput.onInput.listen((Event e) {
+    line12NameInput.onChange.listen((Event e) {
       Line line = board.lastLineSelected;
       if (line != null) {
         line.box1box2Name = line12NameInput.value.trim();
@@ -385,7 +378,7 @@ class ToolBar {
     line21Box1Label = document.query('#line21Box1');
 
     line21MinInput = document.query('#line21Min');
-    line21MinInput.onInput.listen((Event e) {
+    line21MinInput.onChange.listen((Event e) {
       Line line = board.lastLineSelected;
       if (line != null) {
         line.box2box1Min = line21MinInput.value.trim();
@@ -393,7 +386,7 @@ class ToolBar {
     });
 
     line21MaxInput = document.query('#line21Max');
-    line21MaxInput.onInput.listen((Event e) {
+    line21MaxInput.onChange.listen((Event e) {
       Line line = board.lastLineSelected;
       if (line != null) {
         line.box2box1Max = line21MaxInput.value.trim();
@@ -414,7 +407,7 @@ class ToolBar {
     });
 
     line21NameInput = document.query('#line21Name');
-    line21NameInput.onInput.listen((Event e) {
+    line21NameInput.onChange.listen((Event e) {
       Line line = board.lastLineSelected;
       if (line != null) {
         line.box2box1Name = line21NameInput.value.trim();
@@ -427,6 +420,8 @@ class ToolBar {
     if (box != null) {
       boxNameInput.value = box.title;
       boxEntryCheckbox.checked = box.entry;
+      currentItem = null;
+      itemNameInput.value = '';
     }
   }
 
