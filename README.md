@@ -1,8 +1,8 @@
 
-#Magic Boxes in Dart#
+#Model Concepts in Dart#
 
 by Dzenan Ridjanovic
-2011-12-09 -- 2013-04-25
+2011-12-09 -- 2013-06-17
 
 Categories: design tool, graphical models, canvas, local storage, json.
 
@@ -11,28 +11,21 @@ Description: A graphical design tool for domain models of
 Spirals can be found in the [mb_spirals] (https://github.com/dzenanr/mb_spirals) 
 project.
 The last spiral is a graphical model designer.
-The JSON representation of a model is generated in Magic Boxes. 
+The json representation of a model is generated in Model Concepts. 
 This representation is used in the 
 [dartling_gen] (https://github.com/dzenanr/dartling_gen) project to 
 generate code for a model supported by the
 [dartling] (https://github.com/dzenanr/dartling) domain model framework.
 
-Code:
-https://github.com/dzenanr/magic_boxes
-
-Summary:
-http://goo.gl/DqF7d
+[Summary] (http://goo.gl/DqF7d)
 
 Based on:
-Magic Boxes [in Java]
-http://code.google.com/p/magic-boxes/
+[Magic Boxes (in Java)] (http://code.google.com/p/magic-boxes/)
 and
-Modelibra Modeler [in Java]
-http://www.modelibra.org/
+[Modelibra Modeler (in Java)] (http://www.modelibra.org/)
 
-Blog:
-http://dzenanr.github.com/
+[Blog] (http://dzenanr.github.com/)
 
-On Dart
-https://plus.google.com/u/0/b/113649577593294551754/113649577593294551754/posts
+[On Dart]
+(https://plus.google.com/u/0/b/113649577593294551754/113649577593294551754/posts)
 

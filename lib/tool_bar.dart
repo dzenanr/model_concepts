@@ -124,19 +124,26 @@ class ToolBar {
           if (currentItem != null && currentItem.box == box) {
             String itemName = itemNameInput.value.trim();
             if (itemName != '') {
-              Item otherItem = box.findItem(itemName);
-              if (otherItem == null) {
+              Item item = box.findItem(itemName);
+              if (item == null) {
                 currentItem.name = itemName;
               }
             }
             itemNameInput.select();
           } else {
-            Item otherItem = box.findItem(itemName);
-            if (otherItem == null) {
-              Item item = new Item(box, itemName, itemCategorySelect.value);
-              item.type = itemTypeSelect.value;
-              item.init = itemInitInput.value.trim();
+            Item item = box.findItem(itemName);
+            if (item == null) {
+              Item newItem = new Item(box, itemName, itemCategorySelect.value);
+              newItem.type = itemTypeSelect.value;
+              newItem.init = itemInitInput.value.trim();
               itemNameInput.value = '';
+            } else {
+              currentItem = item;
+              itemNameInput.value = item.name;
+              itemCategorySelect.value = item.category;
+              itemTypeSelect.value = item.type;
+              itemInitInput.value = item.init;
+              itemNameInput.select();
             }
           }
         }
@@ -157,35 +164,13 @@ class ToolBar {
         currentItem.type = itemTypeSelect.value;
         itemNameInput.select();
       }
-      itemInitInput.value = '';
     });
 
     itemInitInput = document.query('#itemInit');
     itemInitInput.onChange.listen((Event e) {
-      Box box = board.lastBoxSelected;
-      if (box != null) {
-        if (currentItem != null) {
-          currentItem.init = itemInitInput.value.trim();
-          itemNameInput.select();
-        }
-      }
-    });
-
-    getItemButton = document.query('#getItem');
-    getItemButton.onClick.listen((MouseEvent e) {
-      Box box = board.lastBoxSelected;
-      if (box != null) {
-        Item item = box.findItem(itemNameInput.value);
-        if (item != null) {
-          currentItem = item;
-          itemNameInput.value = item.name;
-          itemCategorySelect.value = item.category;
-          itemTypeSelect.value = item.type;
-          itemInitInput.value = item.init;
-          itemNameInput.select();
-        } else {
-          currentItem = null;
-        }
+      if (currentItem != null) {
+        currentItem.init = itemInitInput.value.trim();
+        itemNameInput.select();
       }
     });
 
@@ -322,7 +307,7 @@ class ToolBar {
     lineSelect = document.query('#lineCategory');
     lineSelect.onChange.listen((Event e) {
       Line line = board.lastLineSelected;
-      if (line != null) {
+      if (line != null && line.box1.title != '' && line.box2.title != '') {
         line.category = lineSelect.value;
       }
     });

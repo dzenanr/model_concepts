@@ -164,6 +164,8 @@ class Line {
           _twin2 = false;
           twinLine.twin1 = false;
           twinLine.twin2 = true;
+          twinLine._category = 'twin';
+          twinLine.internal = false;
         }
       }
     }
