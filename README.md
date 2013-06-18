@@ -2,11 +2,14 @@
 #Model Concepts in Dart#
 
 by Dzenan Ridjanovic
-2011-12-09 -- 2013-06-17
+2011-12-09 -- 2013-06-18
 
-Categories: design tool, graphical models, canvas, local storage, json.
+**Categories**: design tool, graphical models, canvas, local storage, json.
 
-Description: A graphical design tool for domain models of 
+**Internal name**: Magic Boxes
+
+##Description: 
+A graphical design tool for domain models of 
 [dartling] (https://github.com/dzenanr/dartling).
 Spirals can be found in the [mb_spirals] (https://github.com/dzenanr/mb_spirals) 
 project.
