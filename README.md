@@ -8,7 +8,7 @@ by Dzenan Ridjanovic
 
 **Internal name**: Magic Boxes
 
-##Description: 
+##Description 
 A graphical design tool for domain models of 
 [dartling] (https://github.com/dzenanr/dartling).
 Spirals can be found in the [mb_spirals] (https://github.com/dzenanr/mb_spirals) 
