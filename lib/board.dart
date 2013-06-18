@@ -144,15 +144,13 @@ class Board {
   }
 
   Box boxFromJson(Map<String, Object> boxMap) {
-    String title = boxMap["name"];
-    bool entry = boxMap["entry"];
     num x = boxMap["x"];
     num y = boxMap["y"];
     num width = boxMap["width"];
     num height = boxMap["height"];
     Box box = new Box(this, x, y, width, height);
-    box.title = title;
-    box.entry = entry;
+    box.title = boxMap["name"];
+    box.entry = boxMap["entry"];
     List<Map<String, Object>> itemsList = boxMap["items"];
     for (Map<String, Object> jsonItem in itemsList) {
       itemFromJson(box, jsonItem);
@@ -168,6 +166,8 @@ class Board {
     item.sequence = sequence;
     item.type = itemMap["type"];
     item.init = itemMap["init"];
+    item.essential = itemMap["essential"];
+    item.sensitive = itemMap["sensitive"];
     return item;
   }
 

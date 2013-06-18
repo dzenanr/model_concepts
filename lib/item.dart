@@ -9,8 +9,11 @@ class Item {
   String category; // attribute, guid, identifier, required
   String type; // String, num, int, double, bool, Date, Other
   String init = '';
+  bool essential = false; // will it be displayed in a list (table)?
+  bool sensitive = false; // will it be hidden in a display?
 
   Item(this.box, this.name, this.category) {
+    this.category = category;
     sequence = box.findLastItemSequence() + 10;
     box.items.add(this);
   }
@@ -22,6 +25,8 @@ class Item {
     itemMap["category"] = category;
     itemMap["type"] = type;
     itemMap["init"] = init;
+    itemMap["essential"] = essential;
+    itemMap["sensitive"] = sensitive;
     return itemMap;
   }
 

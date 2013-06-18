@@ -23,6 +23,8 @@ class ToolBar {
   SelectElement itemCategorySelect;
   SelectElement itemTypeSelect;
   InputElement itemInitInput;
+  InputElement itemEssentialCheckbox;
+  InputElement itemSensitiveCheckbox;
   ButtonElement getItemButton;
   ButtonElement getNextItemButton;
   ButtonElement getPreviousItemButton;
@@ -65,6 +67,12 @@ class ToolBar {
 
     boxButton.onClick.listen((MouseEvent e) {
       onTool(BOX);
+    });boxEntryCheckbox = document.query('#boxEntry');
+    boxEntryCheckbox.onChange.listen((Event e) {
+      Box box = board.lastBoxSelected;
+      if (box != null) {
+        box.entry = boxEntryCheckbox.checked;
+      }
     });
     boxButton.onDoubleClick.listen((MouseEvent e) {
       onTool(BOX);
@@ -123,11 +131,9 @@ class ToolBar {
         if (itemName != '') {
           if (currentItem != null && currentItem.box == box) {
             String itemName = itemNameInput.value.trim();
-            if (itemName != '') {
-              Item item = box.findItem(itemName);
-              if (item == null) {
-                currentItem.name = itemName;
-              }
+            Item item = box.findItem(itemName);
+            if (item == null) {
+              currentItem.name = itemName;
             }
             itemNameInput.select();
           } else {
@@ -136,6 +142,11 @@ class ToolBar {
               Item newItem = new Item(box, itemName, itemCategorySelect.value);
               newItem.type = itemTypeSelect.value;
               newItem.init = itemInitInput.value.trim();
+              if (newItem.category == 'identifier') {
+                itemEssentialCheckbox.checked = true;
+              }
+              newItem.essential = itemEssentialCheckbox.checked;
+              newItem.sensitive = itemSensitiveCheckbox.checked;
               itemNameInput.value = '';
             } else {
               currentItem = item;
@@ -143,6 +154,8 @@ class ToolBar {
               itemCategorySelect.value = item.category;
               itemTypeSelect.value = item.type;
               itemInitInput.value = item.init;
+              itemEssentialCheckbox.checked = item.essential;
+              itemSensitiveCheckbox.checked = item.sensitive;
               itemNameInput.select();
             }
           }
@@ -155,6 +168,9 @@ class ToolBar {
       if (currentItem != null) {
         currentItem.category = itemCategorySelect.value;
         itemNameInput.select();
+        if (currentItem.category == 'identifier') {
+          itemEssentialCheckbox.checked = true;
+        }
       }
     });
 
@@ -174,6 +190,22 @@ class ToolBar {
       }
     });
 
+    itemEssentialCheckbox = document.query('#itemEssential');
+    itemEssentialCheckbox.onChange.listen((Event e) {
+      if (currentItem != null) {
+        currentItem.essential = itemEssentialCheckbox.checked;
+        itemNameInput.select();
+      }
+    });
+
+    itemSensitiveCheckbox = document.query('#itemSensitive');
+    itemSensitiveCheckbox.onChange.listen((Event e) {
+      if (currentItem != null) {
+        currentItem.sensitive = itemSensitiveCheckbox.checked;
+        itemNameInput.select();
+      }
+    });
+
     getNextItemButton = document.query('#getNextItem');
     getNextItemButton.onClick.listen((MouseEvent e) {
       Box box = board.lastBoxSelected;
@@ -186,6 +218,8 @@ class ToolBar {
             itemCategorySelect.value = nextItem.category;
             itemTypeSelect.value = nextItem.type;
             itemInitInput.value = nextItem.init;
+            itemEssentialCheckbox.checked = nextItem.essential;
+            itemSensitiveCheckbox.checked = nextItem.sensitive;
             itemNameInput.select();
           } else {
             currentItem = null;
@@ -193,6 +227,8 @@ class ToolBar {
             itemCategorySelect.value = 'attribute';
             itemTypeSelect.value = 'String';
             itemInitInput.value = '';
+            itemEssentialCheckbox.checked = false;
+            itemSensitiveCheckbox.checked = false;
           }
         } else {
           if (!box.items.isEmpty) {
@@ -202,6 +238,8 @@ class ToolBar {
             itemCategorySelect.value = firstItem.category;
             itemTypeSelect.value = firstItem.type;
             itemInitInput.value = firstItem.init;
+            itemEssentialCheckbox.checked = firstItem.essential;
+            itemSensitiveCheckbox.checked = firstItem.sensitive;
             itemNameInput.select();
           }
         }
@@ -220,6 +258,8 @@ class ToolBar {
             itemCategorySelect.value = previousItem.category;
             itemTypeSelect.value = previousItem.type;
             itemInitInput.value = previousItem.init;
+            itemEssentialCheckbox.checked = previousItem.essential;
+            itemSensitiveCheckbox.checked = previousItem.sensitive;
             itemNameInput.select();
           } else {
             currentItem = null;
@@ -227,6 +267,8 @@ class ToolBar {
             itemCategorySelect.value = 'attribute';
             itemTypeSelect.value = 'String';
             itemInitInput.value = '';
+            itemEssentialCheckbox.checked = false;
+            itemSensitiveCheckbox.checked = false;
           }
         } else {
           if (!box.items.isEmpty) {
@@ -236,6 +278,8 @@ class ToolBar {
             itemCategorySelect.value = lastItem.category;
             itemTypeSelect.value = lastItem.type;
             itemInitInput.value = lastItem.init;
+            itemEssentialCheckbox.checked = lastItem.essential;
+            itemSensitiveCheckbox.checked = lastItem.sensitive;
             itemNameInput.select();
           }
         }
@@ -260,6 +304,8 @@ class ToolBar {
             itemCategorySelect.value = 'attribute';
             itemTypeSelect.value = 'String';
             itemInitInput.value = '';
+            itemEssentialCheckbox.checked = false;
+            itemSensitiveCheckbox.checked = false;
           }
         }
       }
@@ -283,6 +329,8 @@ class ToolBar {
             itemCategorySelect.value = 'attribute';
             itemTypeSelect.value = 'String';
             itemInitInput.value = '';
+            itemEssentialCheckbox.checked = false;
+            itemSensitiveCheckbox.checked = false;
           }
         }
       }
@@ -299,6 +347,8 @@ class ToolBar {
             itemCategorySelect.value = 'attribute';
             itemTypeSelect.value = 'String';
             itemInitInput.value = '';
+            itemEssentialCheckbox.checked = false;
+            itemSensitiveCheckbox.checked = false;
           }
         }
       }
