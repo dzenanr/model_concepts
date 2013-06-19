@@ -148,14 +148,16 @@ class ToolBar {
               newItem.essential = itemEssentialCheckbox.checked;
               newItem.sensitive = itemSensitiveCheckbox.checked;
               itemNameInput.value = '';
+              //currentItem = newItem;
+              //itemNameInput.select();
             } else {
-              currentItem = item;
               itemNameInput.value = item.name;
               itemCategorySelect.value = item.category;
               itemTypeSelect.value = item.type;
               itemInitInput.value = item.init;
               itemEssentialCheckbox.checked = item.essential;
               itemSensitiveCheckbox.checked = item.sensitive;
+              currentItem = item;
               itemNameInput.select();
             }
           }
