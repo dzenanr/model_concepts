@@ -107,7 +107,7 @@
         <input type="checkbox" id="boxEntry"/>
         <br/>
         &nbsp; &nbsp;
-        <label for="itemName">Attribute</label>
+        <label for="itemName">attribute</label>
         <input type="text" id="itemName"/>
         <select id="itemCategory">
           <option>attribute</option>
@@ -135,13 +135,13 @@
         <input type="checkbox" id="itemSensitive"/>
         <br/>
         &nbsp; &nbsp;
-        <button class="button" id="getNextItem">Next</button>
-        <button class="button" id="getPreviousItem">Previous</button>
-        <button class="button" id="moveDownItem">Move Down</button>
-        <button class="button" id="moveUpItem">Move Up</button>
-        <button class="button" id="removeItem">Remove</button>
+        <button class="button" id="getNextItem">next</button>
+        <button class="button" id="getPreviousItem">previous</button>
+        <button class="button" id="moveDownItem">move down</button>
+        <button class="button" id="moveUpItem">move up</button>
+        <button class="button" id="removeItem">remove</button>
         <br/>
-        <label>Relationship</label>
+        <label>relationship</label>
         <select id="lineCategory">
           <option>relationship</option>
           <option>inheritance</option>
@@ -174,21 +174,21 @@
     </section>
 
     <section>
-      <button class="button" id="fromModelToJson">From model To json</button>
-      <button class="button" id="fromJsonToModel">From json to model </button>
-      <button class="button" id="clearJson">Clear json</button>
+      <button class="button" id="fromModelToJson">from model to json</button>
+      <button class="button" id="fromJsonToModel">from json to model </button>
+      <button class="button" id="clearJson">clear json</button>
       <textarea name="modelJson" rows=20 cols=120 id="modelJson"></textarea>
     </section>
 
     <section>
-      <button class="button" id="prettyJson">Pretty json</button>
-      <button class="button" id="clearPretty">Clear pretty json</button>
+      <button class="button" id="prettyJson">pretty json</button>
+      <button class="button" id="clearPretty">clear pretty json</button>
       <p id="fromJsonToPretty"></p>
     </section>
 
     <section>
-      <button class="button" id="fromModelToPng">To image</button>
-      <button class="button" id="clearImage">Clear image</button>
+      <button class="button" id="fromModelToPng">to image</button>
+      <button class="button" id="clearImage">clear image</button>
       <p><img alt="Your model as image." id="modelImage"/></p>
     </section>
 
@@ -213,8 +213,8 @@
         <h3>Overview</h3>
       </header>
       <p>
-        With the Model Concepts tool you may create a model of concepts
-        with attributes and relationships.
+        With the Model Concepts tool (internal name: Magic Boxes)
+        you may create a model of concepts with attributes and relationships.
         Click the concept tool in the tool bar (brown background)
         to create a concept by clicking on an empty space in the model.
         To move a concept,
@@ -225,10 +225,11 @@
         The selected concept is displayed in the tool bar.
         A name of the selected concept may be entered in the Concept field of
         the tool bar.
+        Use the Enter key to see the name in the concept's title.
         A concept attribute may be created by entering its name in
-        the Attribute field of the tool bar.
+        the attribute field of the tool bar.
         An existing attribute may be selected by entering its name.
-        The next attribute is obtained by clicking on the Next button.
+        The next attribute is obtained by clicking on the next button.
       </p>
       <p>
         Use the relationship tool to create a relationship between
@@ -326,10 +327,11 @@
         <h3>Tiny User Guide</h3>
       </header>
       <p>
-        Click the concept tool to create a concept (a concept in your domain),
+        Click the concept tool to create a concept,
         by clicking on an empty space in the model.
-        You have to select the concept to enter its name in the
-        concept field of the tool bar.
+        You have to select the concept to enter its name
+        in the Concept field of the tool bar.
+        Use the Enter key to see the name in the concept's title.
       </p>
       <p>
         To move a concept,
@@ -344,11 +346,14 @@
         For the last selected concept,
         its title (name) may be changed by entering text in the
         Concept field of the tool bar.
+        The concept may be declared as entry into the model.
       </p>
       <p>
-        The last selected concept, may be declared as entry into the model.
         A new attribute may be added to the selected concept by entering its
-        name in the Attribute field.
+        name in the attribute field.
+        Use the Enter key to see the name in the concept's attributes.
+        If you want to use characteristics different from those proposed,
+        change them first, then enter a name in the attribute field.
         In addition, it may be declared as guid
         (globally unique identifier--not significant to a user),
         identifier (significant to a user) or required (mandatory value).
@@ -357,13 +362,17 @@
         An attribute type may be changed by selecting a different type
         from the pop-up list.
         An attribute may have an initial (default) value.
+        An essential attribute is one of the most important attributes of
+        the concept. In a default application, essential attributes
+        will be displayed in a list (or a table) of attributes.
+        A value of a sensitive attribute will be displayed as asterisks.
         An existing attribute may be selected, to become the current attribute,
-        by entering its name.
-        The next attribute is obtained by the Next button.
-        The previous attribute is obtained by the Previous button.
+        by entering its name, which is then visually selected.
+        The next attribute is obtained by the next button.
+        The previous attribute is obtained by the previous button.
         The current attribute may be changed,
         including its sequence position within the concept
-        (Move Down or Move Up buttons), or even removed (Remove button).
+        (move down or move up buttons), or even removed (remove button).
         The size of selected concepts may be changed
         by menu items in the View menu.
       </p>
@@ -390,7 +399,8 @@
         The selected relationship may be transformed
         to inheritance relationship (child inherits from parent),
         to reflexive relationship (one concept) or to twin relationships
-        (two relationships between the same two concepts must be first created).
+        (two relationships between the same two concepts must be first created
+        and the last one selected before they are separated as twins).
         The choice is presented in the pop-up list.
         By default, a new relationship is internal.
         The child concept of the internal relationship is not an entry point
@@ -422,18 +432,18 @@
       <p>
         Transform a model, but only non-hidden concepts and relationships, to
         <a href="http://www.json.org/">json</a>
-        by clicking on the From model to json button above the json panel.
+        by clicking on the from model to json button above the json panel.
         Copy the json text from the json panel into a local text file
         to save the model.
         Later, paste the json text into the json panel and click on
-        the From json to model button to obtain the model.
+        the from json to model button to obtain the model.
       </p>
       <p>
-        For a pretty json version of the model, click on the Pretty json button,
-        but only after clicking on the From model to json button.
+        For a pretty json version of the model, click on the pretty json button,
+        but only after clicking on the from model to json button.
       </p>
       <p>
-        Transform a model to an image by clicking on the To image button
+        Transform a model to an image by clicking on the to image button
         in front of the image panel. Copy the image to a local text file.
       </p>
     </section>

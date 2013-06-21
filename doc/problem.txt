@@ -1,0 +1,36 @@
+Problems
+
+----------------
+
+In the ToolBar class of lib/tool_bar.dart 
+
+https://github.com/dzenanr/magic_boxes/blob/master/lib/tool_bar.dart
+
+at https://github.com/dzenanr/magic_boxes there are two elements
+
+InputElement itemNameInput;
+SelectElement itemCategorySelect;
+...
+itemNameInput.onChange.listen((Event e) {
+itemCategorySelect.onChange.listen((Event e) {
+
+A change in itemCategorySelect triggers a change in itemNameInput!?
+
+What shall I do to prevent a change in one element to trigger a change in other element?
+This change complicates a use of the tool.
+
+In the tool, it happens when entering a new attribute for the selected concept:
+
+A new attribute may be added to the selected concept by entering its name in the attribute field.
+Use the Enter key to see the name in the concept's attributes.
+If you want to use characteristics different from those proposed,
+change them first, then enter a name in the attribute field (I want to avoid this.)
+
+Problem:
+If you enter an attribute name first without using the Enter key, then change 
+at least one of its characteristics (e.g., attribute category), the name appears 
+in the concept's attributes but without a changed characteristic. 
+Then, you must select it (by entering again its name) in order to apply the change.
+
+-----------------
+
