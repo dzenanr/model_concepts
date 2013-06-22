@@ -374,7 +374,30 @@ class ToolBar {
     lineSelect.onChange.listen((Event e) {
       Line line = board.lastLineSelected;
       if (line != null && line.box1.title != '' && line.box2.title != '') {
-        line.category = lineSelect.value;
+        if (line.category == 'relationship') {
+          if (lineSelect.value == 'inheritance' ||
+              lineSelect.value == 'reflexive') {
+            line.category = lineSelect.value;
+          } else if (lineSelect.value == 'twin') {
+            if (board.findTwinLine(line) != null) {
+              line.category = lineSelect.value;
+            } else {
+              lineSelect.value = 'relationship';
+            }
+          }
+        } else if (line.category == 'inheritance') {
+          if (lineSelect.value == 'relationship') {
+            line.category = lineSelect.value;
+          } else {
+            lineSelect.value = 'inheritance';
+          }
+        } else if (line.category == 'reflexive') {
+          lineSelect.value = 'reflexive';
+        } else if (line.category == 'twin') {
+          lineSelect.value = 'twin';
+        }
+      } else {
+        lineSelect.value = 'relationship';
       }
     });
 
@@ -475,6 +498,14 @@ class ToolBar {
       boxEntryCheckbox.checked = box.entry;
       currentItem = null;
       itemNameInput.value = '';
+      // the following code does not focus on indicated fields!?
+      /*
+      if (box.title == '') {
+        boxNameInput.focus();
+      } else {
+        itemNameInput.focus();
+      }
+      */
     }
   }
 
@@ -497,6 +528,14 @@ class ToolBar {
       line21MaxInput.value = line.box2box1Max;
       line21IdCheckbox.checked = line.box2box1Id;
       line21NameInput.value = line.box2box1Name;
+      // the following code does not focus on indicated fields!?
+      /*
+      if (line.box1box2Name == '') {
+        line12NameInput.focus();
+      } else {
+        line21NameInput.focus();
+      }
+      */
     }
   }
 

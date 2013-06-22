@@ -9,6 +9,7 @@ class Board {
   static final String DEFAULT_LINE_COLOR = '#000000'; // black
   static final String SOFT_LINE_COLOR = '#999493'; // gray; old: 736f6e
   // static final String SOFT_LINE_COLOR = '#c0c0c0'; // silver
+  static final String SELECTION_COLOR = '#000000'; // black
 
   // The acceptable delta error in pixels for clicking on a line between two boxes.
   static final int DELTA = 8;
@@ -26,8 +27,7 @@ class Board {
   List<Box> boxes;
   List<Line> lines;
 
-  Box beforeLastBoxClicked;
-  Box lastBoxClicked;
+  Box beforeLastBoxSelected;
   Box lastBoxSelected;
   Line lastLineSelected;
 
@@ -296,10 +296,10 @@ class Board {
     for (Box box in listCopy) {
       if (box.isSelected()) {
         boxes.remove(box);
-        if (box == beforeLastBoxClicked) {
-          beforeLastBoxClicked == null;
-        } else if (box == lastBoxClicked) {
-          lastBoxClicked == null;
+        if (box == beforeLastBoxSelected) {
+          beforeLastBoxSelected == null;
+        } else if (box == lastBoxSelected) {
+          lastBoxSelected == null;
         }
       }
     }
@@ -615,11 +615,11 @@ class Board {
         }
         boxes.add(box);
       } else if (toolBar.isLineToolOn()) {
-        // Create a line between the last two clicked boxes.
-        if (beforeLastBoxClicked != null && lastBoxClicked != null &&
-          _boxExists(beforeLastBoxClicked) && _boxExists(lastBoxClicked) &&
-          countLinesBetween(beforeLastBoxClicked, lastBoxClicked) < 2) {
-          Line line = new Line(this, beforeLastBoxClicked, lastBoxClicked);
+        // Create a line between the last two selected boxes.
+        if (beforeLastBoxSelected != null && lastBoxSelected != null &&
+          _boxExists(beforeLastBoxSelected) && _boxExists(lastBoxSelected) &&
+          countLinesBetween(beforeLastBoxSelected, lastBoxSelected) < 2) {
+          Line line = new Line(this, beforeLastBoxSelected, lastBoxSelected);
           lines.add(line);
         }
       }

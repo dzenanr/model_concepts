@@ -34,6 +34,7 @@ class Box {
     document.query('#canvas').onMouseDown.listen(onMouseDown);
     document.query('#canvas').onMouseUp.listen(onMouseUp);
     document.query('#canvas').onMouseMove.listen(onMouseMove);
+    select();
   }
 
   void draw() {
@@ -78,14 +79,14 @@ class Box {
         i++;
       }
       if (isSelected()) {
-        board.context.rect(x, y, SSS, SSS);
-        board.context.rect(x + width - SSS, y, SSS, SSS);
-        board.context.rect(x + width - SSS, y + height - SSS, SSS, SSS);
-        board.context.rect(x, y + height - SSS, SSS, SSS);
+        board.context.fillStyle = Board.SELECTION_COLOR;
+        board.context.fillRect(x - SSS/2, y - SSS/2, SSS, SSS);
+        board.context.fillRect(x + width - SSS/2, y - SSS/2, SSS, SSS);
+        board.context.fillRect(x + width - SSS/2, y + height - SSS/2, SSS, SSS);
+        board.context.fillRect(x - SSS/2, y + height - SSS/2, SSS, SSS);
       }
       board.context.lineWidth = Board.DEFAULT_LINE_WIDTH;
       board.context.strokeStyle = Board.DEFAULT_LINE_COLOR;
-
       board.context.stroke();
       board.context.closePath();
     }
@@ -93,13 +94,22 @@ class Box {
 
   void select() {
     _selected = true;
+    if (board.lastBoxSelected != this) {
+      board.beforeLastBoxSelected = board.lastBoxSelected;
+    }
     board.lastBoxSelected = this;
     board.toolBar.bringSelectedBox();
   }
 
   void deselect() {
     _selected = false;
-    board.lastBoxSelected = null;
+    if (board.lastBoxSelected == this) {
+      board.lastBoxSelected = board.beforeLastBoxSelected;
+      board.beforeLastBoxSelected = null;
+    } else if (board.beforeLastBoxSelected == this) {
+      board.beforeLastBoxSelected = null;
+    }
+
   }
 
   void toggleSelection() {
@@ -306,12 +316,14 @@ class Box {
     if (board.toolBar.isSelectToolOn() && contains(e.offset.x, e.offset.y)) {
       toggleSelection();
     }
+    /*
     if (contains(e.offset.x, e.offset.y)) {
       if (board.lastBoxClicked != null && board.lastBoxClicked != this) {
         board.beforeLastBoxClicked = board.lastBoxClicked;
       }
       board.lastBoxClicked = this;
     }
+    */
   }
 
   void onMouseUp(MouseEvent e) {

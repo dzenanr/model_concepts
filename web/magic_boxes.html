@@ -219,7 +219,7 @@
         to create a concept by clicking on an empty space in the model.
         To move a concept,
         click the concept and keep the mouse down while moving it.
-        Click the concept to select it. Click again to deselect it.
+        Click the concept to select or deselect it.
       </p>
       <p>
         The selected concept is displayed in the tool bar.
@@ -233,9 +233,8 @@
       </p>
       <p>
         Use the relationship tool to create a relationship between
-        two concepts by clicking on the concepts,
-        then by clicking on an empty space in the model.
-        Click the relationship to select it. Click again to deselect it.
+        the last two selected concepts by clicking on an empty space in the model.
+        Click the relationship to select or deselect it.
         The selected relationship is displayed in the tool bar.
       </p>
       <p>
@@ -327,9 +326,9 @@
         <h3>Tiny User Guide</h3>
       </header>
       <p>
-        Click the concept tool to create a concept,
+        Click the concept tool to create a concept
         by clicking on an empty space in the model.
-        You have to select the concept to enter its name
+        A concept must be selected to enter its name
         in the Concept field of the tool bar.
         Use the Enter key to see the name in the concept's title.
       </p>
@@ -339,7 +338,7 @@
         The connected relationships will follow.
       </p>
       <p>
-        Click the concept to select it. Click again to deselect it.
+        Click the unselected concept to select it. Click again to deselect it.
         The selected concept is displayed in the tool bar.
         If there are several selected concepts (and/or relationships),
         you may deselect them all by clicking on an empty space in the model.
@@ -349,12 +348,10 @@
         The concept may be declared as entry into the model.
       </p>
       <p>
-        A new attribute may be added to the selected concept by entering its
-        name in the attribute field.
+        A new attribute may be added to the last selected concept by entering
+        its name in the attribute field.
         Use the Enter key to see the name in the concept's attributes.
-        If you want to use characteristics different from those proposed,
-        change them first, then enter a name in the attribute field.
-        In addition, it may be declared as guid
+        In addition, an attribute may be declared as guid
         (globally unique identifier--not significant to a user),
         identifier (significant to a user) or required (mandatory value).
         The choice is presented in the pop-up list.
@@ -383,8 +380,8 @@
       </p>
       <p>
         Use the relationship tool to create a relationship between the
-        last two clicked concepts by clicking on an empty space in the model.
-        The first selected concept is a parent and the second is a child.
+        last two selected concepts by clicking on an empty space in the model.
+        The last selected concept is a child and before last is a parent.
         By default, the parent concept has 0..N cardinalities.
         The min is 0 and the max is N.
         By default, the child concept has 1..1 cardinalities.
@@ -397,6 +394,7 @@
         from child to parent (neighbor). You cannot create more than
         two relationships between the same two concepts.
         The selected relationship may be transformed
+        (but only if involved concepts are named)
         to inheritance relationship (child inherits from parent),
         to reflexive relationship (one concept) or to twin relationships
         (two relationships between the same two concepts must be first created
@@ -408,7 +406,7 @@
         For the 1..1 cardinalities, the identifier (id) may be checked on.
       </p>
       <p>
-        Click the relationship, or very close to it, to select it.
+        Click the unselected relationship, or very close to it, to select it.
         Click again to deselect it.
         The selected relationship is displayed in the tool bar.
         A reflexive relationship is selected by clicking on a horizontal portion

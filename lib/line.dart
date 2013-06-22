@@ -13,12 +13,12 @@ class Line {
   bool _twin1 = false;
   bool _twin2 = false;
 
-  String box1box2Name; // name from box1 to box2
+  String box1box2Name = ''; // name from box1 to box2
   String box1box2Min; // min cardinality from box1 to box2
   String box1box2Max; // max cardinality from box1 to box2
   bool box1box2Id; // id from box1 to box2
 
-  String box2box1Name; // name from box2 to box1
+  String box2box1Name = ''; // name from box2 to box1
   String box2box1Min; // min cardinality from box2 to box1
   String box2box1Max; // max cardinality from box2 to box1
   bool box2box1Id; // id from box2 to box1
@@ -29,6 +29,7 @@ class Line {
   Line(this.board, this.box1, this.box2) {
     category = 'relationship';
     draw();
+    select();
   }
 
   void draw() {
@@ -48,11 +49,6 @@ class Line {
       } else {
         board.context.moveTo(box1.center().x, box1.center().y);
         board.context.lineTo(box2.center().x, box2.center().y);
-      }
-      if (isSelected()) {
-        board.context.lineWidth = Board.DEFAULT_LINE_WIDTH + 2;
-      } else {
-        board.context.lineWidth = Board.DEFAULT_LINE_WIDTH;
       }
       Point box1box2MinMaxPoint;
       Point box2box1MinMaxPoint;
@@ -100,6 +96,12 @@ class Line {
         board.context.strokeStyle = Board.SOFT_LINE_COLOR;
       } else {
         board.context.strokeStyle = Board.DEFAULT_LINE_COLOR;
+      }
+      if (isSelected()) {
+        board.context.lineWidth = Board.DEFAULT_LINE_WIDTH + 2;
+        board.context.strokeStyle = Board.SELECTION_COLOR;
+      } else {
+        board.context.lineWidth = Board.DEFAULT_LINE_WIDTH;
       }
 
       board.context.stroke();
