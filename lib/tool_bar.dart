@@ -110,6 +110,7 @@ class ToolBar {
           Box otherBox = board.findBox(boxName);
           if (otherBox == null) {
             box.title = boxName;
+            itemNameInput.focus();
           }
         }
       }
@@ -124,18 +125,21 @@ class ToolBar {
     });
 
     itemNameInput = document.query('#itemName');
-    itemNameInput.onChange.listen((Event e) {
+    itemNameInput.onKeyPress.listen((KeyboardEvent e) {
+      if (e.keyCode != 13) return; // 13 is Enter key
       Box box = board.lastBoxSelected;
       if (box != null) {
         String itemName = itemNameInput.value.trim();
         if (itemName != '') {
-          if (currentItem != null && currentItem.box == box) {
-            String itemName = itemNameInput.value.trim();
-            Item item = box.findItem(itemName);
-            if (item == null) {
-              currentItem.name = itemName;
+          if (currentItem != null) {
+            if (currentItem.box == box) {
+              String itemName = itemNameInput.value.trim();
+              Item item = box.findItem(itemName);
+              if (item == null) {
+                currentItem.name = itemName;
+              }
+              itemNameInput.select();
             }
-            itemNameInput.select();
           } else {
             Item item = box.findItem(itemName);
             if (item == null) {
@@ -173,6 +177,8 @@ class ToolBar {
         if (currentItem.category == 'identifier') {
           itemEssentialCheckbox.checked = true;
         }
+      } else {
+        itemNameInput.focus();
       }
     });
 
@@ -181,6 +187,8 @@ class ToolBar {
       if (currentItem != null) {
         currentItem.type = itemTypeSelect.value;
         itemNameInput.select();
+      } else {
+        itemNameInput.focus();
       }
     });
 
@@ -189,6 +197,8 @@ class ToolBar {
       if (currentItem != null) {
         currentItem.init = itemInitInput.value.trim();
         itemNameInput.select();
+      } else {
+        itemNameInput.focus();
       }
     });
 
@@ -197,6 +207,8 @@ class ToolBar {
       if (currentItem != null) {
         currentItem.essential = itemEssentialCheckbox.checked;
         itemNameInput.select();
+      } else {
+        itemNameInput.focus();
       }
     });
 
@@ -205,6 +217,8 @@ class ToolBar {
       if (currentItem != null) {
         currentItem.sensitive = itemSensitiveCheckbox.checked;
         itemNameInput.select();
+      } else {
+        itemNameInput.focus();
       }
     });
 
@@ -409,6 +423,7 @@ class ToolBar {
       Line line = board.lastLineSelected;
       if (line != null) {
         line.box1box2Name = line12NameInput.value.trim();
+        line21NameInput.focus();
       }
     });
 
