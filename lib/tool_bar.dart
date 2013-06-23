@@ -394,7 +394,15 @@ class ToolBar {
         } else if (line.category == 'reflexive') {
           lineSelect.value = 'reflexive';
         } else if (line.category == 'twin') {
-          lineSelect.value = 'twin';
+          if (lineSelect.value == 'relationship') {
+            if (board.findTwinLine(line) == null) {
+              line.category = lineSelect.value;
+            } else {
+              lineSelect.value = 'twin';
+            }
+          } else {
+            lineSelect.value = 'twin';
+          }
         }
       } else {
         lineSelect.value = 'relationship';
