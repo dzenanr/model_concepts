@@ -126,7 +126,7 @@ class ToolBar {
 
     itemNameInput = document.query('#itemName');
     itemNameInput.onKeyPress.listen((KeyboardEvent e) {
-      if (e.keyCode != 13) return; // 13 is Enter key
+      if (e.keyCode != KeyCode.ENTER) return;
       Box box = board.lastBoxSelected;
       if (box != null) {
         String itemName = itemNameInput.value.trim();
