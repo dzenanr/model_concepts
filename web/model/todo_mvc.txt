@@ -27,7 +27,7 @@
                     "category":"required",
                     "name":"completed",
                     "type":"bool",
-                    "essential":true,
+                    "essential":false,
                     "sensitive":false,
                     "init":"false"
                 }
