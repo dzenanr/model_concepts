@@ -1,8 +1,8 @@
 name: magic_boxes
+version: 0.1.0
 author: Dzenan Ridjanovic <dzenanr@gmail.com>
+description: 'A graphical model designer for dartling. Internal name: Magic Boxes.
+  Official name: Model Concepts.'
 homepage: http://ondart.me/
-version: 0.1.1
-description: >
-  A graphical model designer for dartling.
 dependencies:
   browser: any
