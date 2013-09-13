@@ -1,4 +1,4 @@
-part of magic_boxes;
+part of model_concepts;
 
 class Item {
 

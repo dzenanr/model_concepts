@@ -1,4 +1,4 @@
-library magic_boxes;
+library model_concepts;
 
 import 'dart:html';
 import 'dart:async';

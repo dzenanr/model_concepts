@@ -27,87 +27,24 @@ http://scottr.org/presentations/git-in-5-minutes/
 -------------------------------------------------------------
 
 After creating an account, create a remote repository.
-The following is what I did for MagicBoxes.
+The following is what I did for Model Concepts.
 
 Create a New Repository
-Project Name: MagicBoxes
-Description: 
-On Dart
-
-Magic Boxes in Dart
-by Dzenan Ridjanovic
-2011-12-09
-
-Spirals on learning Dart.
+Project Name: model_concepts
+Description:
+A graphical design tool for domain models of dartling.
 
 Based on:
 Magic Boxes [in Java]
-http://code.google.com/p/magic-boxes/ 
-
-Global setup:
- Set up git
-  git config --global user.name "Dzenan Ridjanovic"
-  git config --global user.email dzenanr@gmail.com
-      
-Next steps:
-  mkdir MagicBoxes 
-  cd MagicBoxes 
-  git init
-  touch README 
-  git add README 
-  git commit -m 'first commit'
-  git remote add origin git@github.com:dzenanr/MagicBoxes.git
-  git push -u origin master   
+http://code.google.com/p/magic-boxes/
 
 -------------------------------------------------------------
 
 Git with Git Bash
 
-Clone a remote repository into a local repository.
-
-cd git/dart/learn
-Read only:
-git clone git://github.com/dzenanr/MagicBoxes.git
-Read+Write:
-git clone git@github.com:dzenanr/MagicBoxes.git
-
-Get the latest changes from the remote repository
-
-git pull
-git pull origin master
-
--------------------------------------------------------------
-
-Configure yourself (once for all repositories)
-
-git config --global user.name "Your Name"
-git config --global user.email you@gmail.com
-
-Create a local repository
-
-cd git
-ls
-cd dart
-ls
-cd learn
-
-or
-
-cd git/dart/learn
-
-mkdir YourBoxes
-cd YourBoxes
-git init
-touch README.txt
-git add README.txt
-git commit -m 'first commit'
-git remote add origin git@github.com:accountname/YourBoxes.git
-git push -u origin master
-Enter passphrase for key ... :
-
 Work with a local repository
 
-cd git/dart/learn/YourBoxes
+cd git/dart/model_concepts
 
 git add .
 or
@@ -125,21 +62,18 @@ git status
 
 git push
 git push origin master
-Enter passphrase for key ... :
-
-git status
 
 
 Ignoring files
 
 http://help.github.com/ignore-files/
 
-create .gitignore in MagicBoxes folder
-add 
-MagicBoxes.dart.app.js
+create .gitignore in model_concepts folder
+add
+model_concepts.dart.app.js
 *~
 to exclude JavaScript file that is already in the repository:
-git rm --cached MagicBoxes.dart.app.js
+git rm --cached model_concepts.dart.app.js
 
 
 Tagging for versions (spirals)
@@ -153,8 +87,6 @@ git tag
 To push tags to the remote repository:
 
 git push --tags
-Enter passphrase for key ... :
-
 
 Switching from master to spiral
 
@@ -165,11 +97,10 @@ git checkout -b s01a
 to use branch
 git checkout s01a
 
-
 Switching from spiral to master
 
 to exclude js:
-git checkout MagicBoxes.dart.app.js
+git checkout model_concepts.dart.app.js
 or (see http://scottr.org/presentations/git-in-5-minutes/)
 git stash
 
@@ -184,7 +115,7 @@ git checkout topic-name-1
 git checkout topic-name-2
 
 git checkout master
-git merge topic-name-1 
+git merge topic-name-1
 git branch -d topic-name-1
 
 git merge topic-name-2
@@ -200,86 +131,11 @@ git reset --hard
 to work temporarily on a branch and then delete it
 git checkout -b temp master
 ...
-git branch -D temp 
+git branch -D temp
 
 
 Team Work
 
 git pull origin master
 
-
-____________________________________________________________________
-
-Ubuntu
-
-Dart language projects on GitHub
-
-search for terminal in Dash home.
-check if Ubuntu version is 64bit?
-uname -a
-
-create software and dart folders in Home
-
-Ubuntu Software Center
-search for Java
-install OpenJDK Java 7 Runtime
-
-http://www.dartlang.org/
-Dart Editor
-download 64-bit version as a zip file
-extract the zip file into the software folder
-make a link to DartEditor
-cut and paste the link on the Desktop
-execute DartEditor
-generate default app in the dart folder
-
-Ubunto Software Center
-search for git
-install Git
-
-https://github.com/
-sign up or sign in
-click on Help menu item
-read Beginner
-skip Download and Install Git
-set up SSH keys by following the instructions
-use Ctrl-H to show/hide .files
-hlobal config is done only once
-github.user is your user name from GitHub
-
-cd dart
-ls
-Read only:
-git clone git://github.com/dzenanr/MagicBoxes.git
-Read+Write:
-git clone git@github.com:dzenanr/MagicBoxes.git
-
-DartEditor
-File/Open...
-dart/MagicBoxes/MagicBoxes.dart
-select MagicBoxes.html
-run in Chrome
-
-cd dart/MagicBoxes
-git status
-to ignore changes in JavaScrip file:
-git checkout MagicBoxes.dart.app.js
-git checkout s01
-git status
-to ignore changes in JavaScrip file:
-git checkout MagicBoxes.dart.app.js
-git checkout master
-
-see for ignoring files:
-http://help.github.com/ignore-files/
-
-create .gitignore in MagicBoxes folder
-add 
-MagicBoxes.dart.app.js
-*~
-to exclude JavaScript file that is already in the repository:
-git rm --cached MagicBoxes.dart.app.js
-
-git checkout s01
-git checkout master
 

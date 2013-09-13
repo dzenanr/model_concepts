@@ -1,6 +1,6 @@
 import 'dart:html';
 
-import 'package:magic_boxes/magic_boxes.dart';
+import 'package:model_concepts/model_concepts.dart';
 
 // See the style guide: http://www.dartlang.org/articles/style-guide/ .
 
