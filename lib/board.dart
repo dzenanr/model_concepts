@@ -1,7 +1,6 @@
 part of model_concepts;
 
 class Board {
-
   static final int MIN_WIDTH = 990;
   static final int MIN_HEIGHT = 580;
   static final int DEFAULT_LINE_WIDTH = 1;
@@ -13,8 +12,6 @@ class Board {
 
   // The acceptable delta error in pixels for clicking on a line between two boxes.
   static final int DELTA = 8;
-  // The board is redrawn every INTERVAL ms.
-  static const int INTERVAL = 8;
 
   static final String FILE_NAME = 'model.txt';
 
@@ -50,10 +47,13 @@ class Board {
     jsonPanel = new JsonPanel(this);
     pngPanel = new PngPanel(this);
 
-    // Canvas event.
     document.query('#canvas').onMouseDown.listen(onMouseDown);
-    // Redraw every INTERVAL ms.
-    new Timer.periodic(const Duration(milliseconds: INTERVAL), (t) => redraw());
+    window.animationFrame.then(redrawLoop);
+  }
+
+  void redrawLoop(num delta) {
+    redraw();
+    window.animationFrame.then(redrawLoop);
   }
 
   void set width(num width) {
