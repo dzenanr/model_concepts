@@ -7,7 +7,7 @@ class Item {
   int sequence; // sequence number within the box: 10, 20, ...
   String name;
   String category; // attribute, guid, identifier, required
-  String type; // String, num, int, double, bool, Date, Other
+  String type; // String, num, int, double, bool, DateTime, dynamic, Uri, Email, Other
   String init = '';
   bool essential = false; // will it be displayed in a list (table)?
   bool sensitive = false; // will it be hidden in a display?
