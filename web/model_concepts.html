@@ -351,7 +351,11 @@
         A new attribute may be added to the last selected concept by entering
         its name in the attribute field.
         Use the Enter key to see the name in the concept's attributes.
-        In addition, an attribute may be declared as guid
+        If an attribute name is oid or code, it will not be generated as a
+        specific attribute in dartling, because every concept inherits both the
+        oid (object id generated automatically by dartling) and code
+        (an id that may be null, but if non-null it must be unique) properties.
+        An attribute may be declared as guid
         (globally unique identifier--not significant to a user),
         identifier (significant to a user) or required (mandatory value).
         The choice is presented in the pop-up list.
@@ -359,11 +363,11 @@
         An attribute type may be changed by selecting a different type
         from the pop-up list.
         An attribute may have an initial (default) value.
-        In the attribute init field you may use increment for incrementing a
-        value of the int type in dartling by 1 starting with 1.
+        In the attribute init field, you may use increment for incrementing a
+        value of the int type in dartling by increment starting with increment.
         The empty text indicates that a default value will be a non-null empty
-        String ('').
-        For the DateTime type, the now value determines the today's current time.
+        String. For the DateTime type, the now value determines the today's
+        current time at the moment of adding an entity in dartling.
         An essential attribute is one of the most important attributes of
         the concept. In a default application, essential attributes
         will be displayed in a list (or a table) of attributes.
