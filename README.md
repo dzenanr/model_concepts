@@ -20,6 +20,16 @@ generate code for a model supported by the
 
 [Summary] (http://goo.gl/DqF7d)
 
+If an attribute name is oid or code, it will not be generated as a specific
+attribute in dartling, because every concept inherits both the
+oid (object id generated automatically by dartling) and
+code (an id that may be null, but if non-null it must be unique) properties.
+
+In the attribute init field you may use increment for incrementing a value
+of the int type in dartling by 1 starting with 1.
+The empty text indicates that a default value will be a non-null empty String ('').
+For the DateTime type, the now value determines the today's current time.
+
 Based on:
 [Magic Boxes (in Java)] (http://code.google.com/p/magic-boxes/)
 and
