@@ -2,9 +2,9 @@ part of model_concepts;
 
 class ToolBar {
 
-  static final int SELECT = 1;
-  static final int BOX = 2;
-  static final int LINE = 3;
+  static const int SELECT = 1;
+  static const int BOX = 2;
+  static const int LINE = 3;
 
   final Board board;
 

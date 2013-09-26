@@ -1,15 +1,14 @@
 part of model_concepts;
 
 class Box {
+  static const int DEFAULT_WIDTH = 120;
+  static const int DEFAULT_HEIGHT = 120;
+  static const int DEFAULT_INCREMENT = 20;
 
-  static final int DEFAULT_WIDTH = 120;
-  static final int DEFAULT_HEIGHT = 120;
-  static final int DEFAULT_INCREMENT = 20;
-
-  static final int SSS = 6; // selection square size
-  static final int TBH = 20; // title box height
-  static final int TOS = 4; // text offset size
-  static final int IOS = TBH - TOS; // item offset size
+  static const int SSS = 6; // selection square size
+  static const int TBH = 20; // title box height
+  static const int TOS = 4; // text offset size
+  static const int IOS = TBH - TOS; // item offset size
 
   final Board board;
 
