@@ -14,30 +14,30 @@ class JsonPanel {
   ButtonElement clearPrettyButton;
 
   JsonPanel(this.board) {
-    modelJsonTextArea = document.query('#modelJson');
+    modelJsonTextArea = document.querySelector('#modelJson');
 
-    fromModelToJsonButton = document.query('#fromModelToJson');
+    fromModelToJsonButton = document.querySelector('#fromModelToJson');
     fromModelToJsonButton.onClick.listen((MouseEvent e) {
       modelJsonTextArea.value =  board.toJson();
       modelJsonTextArea.select();
     });
-    fromJsonToModelButton = document.query('#fromJsonToModel');
+    fromJsonToModelButton = document.querySelector('#fromJsonToModel');
     fromJsonToModelButton.onClick.listen((MouseEvent e) {
       board.fromJson(modelJsonTextArea.value);
     });
-    clearJsonButton = document.query('#clearJson');
+    clearJsonButton = document.querySelector('#clearJson');
     clearJsonButton.onClick.listen((MouseEvent e) {
       clearJson();
     });
 
-    prettyParagraph = document.query('#fromJsonToPretty');
+    prettyParagraph = document.querySelector('#fromJsonToPretty');
     prettyParagraph.contentEditable = "true";
 
-    prettyJsonButton = document.query('#prettyJson');
+    prettyJsonButton = document.querySelector('#prettyJson');
     prettyJsonButton.onClick.listen((MouseEvent e) {
       prettyParagraph.innerHtml = prettyJson(modelJsonTextArea.value);
     });
-    clearPrettyButton = document.query('#clearPretty');
+    clearPrettyButton = document.querySelector('#clearPretty');
     clearPrettyButton.onClick.listen((MouseEvent e) {
       clearPrettyJson();
     });

@@ -47,7 +47,7 @@ class Board {
     jsonPanel = new JsonPanel(this);
     pngPanel = new PngPanel(this);
 
-    document.query('#canvas').onMouseDown.listen(onMouseDown);
+    document.querySelector('#canvas').onMouseDown.listen(onMouseDown);
     window.animationFrame.then(redrawLoop);
   }
 

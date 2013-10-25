@@ -30,9 +30,9 @@ class Box {
 
     draw();
     // Box events (actually, canvas events).
-    document.query('#canvas').onMouseDown.listen(onMouseDown);
-    document.query('#canvas').onMouseUp.listen(onMouseUp);
-    document.query('#canvas').onMouseMove.listen(onMouseMove);
+    document.querySelector('#canvas').onMouseDown.listen(onMouseDown);
+    document.querySelector('#canvas').onMouseUp.listen(onMouseUp);
+    document.querySelector('#canvas').onMouseMove.listen(onMouseMove);
     select();
   }
 

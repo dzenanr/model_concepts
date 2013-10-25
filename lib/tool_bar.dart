@@ -52,9 +52,9 @@ class ToolBar {
   InputElement line21NameInput;
 
   ToolBar(this.board) {
-    selectButton = document.query('#select');
-    boxButton = document.query('#box');
-    lineButton = document.query('#line');
+    selectButton = document.querySelector('#select');
+    boxButton = document.querySelector('#box');
+    lineButton = document.querySelector('#line');
 
     // Tool bar events.
     selectButton.onClick.listen((MouseEvent e) {
@@ -67,7 +67,7 @@ class ToolBar {
 
     boxButton.onClick.listen((MouseEvent e) {
       onTool(BOX);
-    });boxEntryCheckbox = document.query('#boxEntry');
+    });boxEntryCheckbox = document.querySelector('#boxEntry');
     boxEntryCheckbox.onChange.listen((Event e) {
       Box box = board.lastBoxSelected;
       if (box != null) {
@@ -90,8 +90,8 @@ class ToolBar {
     onTool(SELECT);
     _fixedTool = SELECT;
 
-    canvasWidthInput = document.query('#canvasWidth');
-    canvasHeightInput = document.query('#canvasHeight');
+    canvasWidthInput = document.querySelector('#canvasWidth');
+    canvasHeightInput = document.querySelector('#canvasHeight');
     canvasWidthInput.valueAsNumber = board.width;
     canvasWidthInput.onChange.listen((Event e) {
       board.width = canvasWidthInput.valueAsNumber;
@@ -101,7 +101,7 @@ class ToolBar {
       board.height = canvasHeightInput.valueAsNumber;
     });
 
-    boxNameInput = document.query('#boxName');
+    boxNameInput = document.querySelector('#boxName');
     boxNameInput.onChange.listen((Event e) {
       Box box = board.lastBoxSelected;
       if (box != null) {
@@ -116,7 +116,7 @@ class ToolBar {
       }
     });
 
-    boxEntryCheckbox = document.query('#boxEntry');
+    boxEntryCheckbox = document.querySelector('#boxEntry');
     boxEntryCheckbox.onChange.listen((Event e) {
       Box box = board.lastBoxSelected;
       if (box != null) {
@@ -124,7 +124,7 @@ class ToolBar {
       }
     });
 
-    itemNameInput = document.query('#itemName');
+    itemNameInput = document.querySelector('#itemName');
     itemNameInput.onKeyPress.listen((KeyboardEvent e) {
       if (e.keyCode != KeyCode.ENTER) return;
       Box box = board.lastBoxSelected;
@@ -169,7 +169,7 @@ class ToolBar {
       }
     });
 
-    itemCategorySelect = document.query('#itemCategory');
+    itemCategorySelect = document.querySelector('#itemCategory');
     itemCategorySelect.onChange.listen((Event e) {
       if (currentItem != null) {
         currentItem.category = itemCategorySelect.value;
@@ -182,7 +182,7 @@ class ToolBar {
       }
     });
 
-    itemTypeSelect = document.query('#itemType');
+    itemTypeSelect = document.querySelector('#itemType');
     itemTypeSelect.onChange.listen((Event e) {
       if (currentItem != null) {
         currentItem.type = itemTypeSelect.value;
@@ -192,7 +192,7 @@ class ToolBar {
       }
     });
 
-    itemInitInput = document.query('#itemInit');
+    itemInitInput = document.querySelector('#itemInit');
     itemInitInput.onChange.listen((Event e) {
       if (currentItem != null) {
         currentItem.init = itemInitInput.value.trim();
@@ -202,7 +202,7 @@ class ToolBar {
       }
     });
 
-    itemEssentialCheckbox = document.query('#itemEssential');
+    itemEssentialCheckbox = document.querySelector('#itemEssential');
     itemEssentialCheckbox.onChange.listen((Event e) {
       if (currentItem != null) {
         currentItem.essential = itemEssentialCheckbox.checked;
@@ -212,7 +212,7 @@ class ToolBar {
       }
     });
 
-    itemSensitiveCheckbox = document.query('#itemSensitive');
+    itemSensitiveCheckbox = document.querySelector('#itemSensitive');
     itemSensitiveCheckbox.onChange.listen((Event e) {
       if (currentItem != null) {
         currentItem.sensitive = itemSensitiveCheckbox.checked;
@@ -222,7 +222,7 @@ class ToolBar {
       }
     });
 
-    getNextItemButton = document.query('#getNextItem');
+    getNextItemButton = document.querySelector('#getNextItem');
     getNextItemButton.onClick.listen((MouseEvent e) {
       Box box = board.lastBoxSelected;
       if (box != null) {
@@ -262,7 +262,7 @@ class ToolBar {
       }
     });
 
-    getPreviousItemButton = document.query('#getPreviousItem');
+    getPreviousItemButton = document.querySelector('#getPreviousItem');
     getPreviousItemButton.onClick.listen((MouseEvent e) {
       Box box = board.lastBoxSelected;
       if (box != null) {
@@ -302,7 +302,7 @@ class ToolBar {
       }
     });
 
-    moveDownItemButton = document.query('#moveDownItem');
+    moveDownItemButton = document.querySelector('#moveDownItem');
     moveDownItemButton.onClick.listen((MouseEvent e) {
       Box box = board.lastBoxSelected;
       if (box != null) {
@@ -327,7 +327,7 @@ class ToolBar {
       }
     });
 
-    moveUpItemButton = document.query('#moveUpItem');
+    moveUpItemButton = document.querySelector('#moveUpItem');
     moveUpItemButton.onClick.listen((MouseEvent e) {
       Box box = board.lastBoxSelected;
       if (box != null) {
@@ -352,7 +352,7 @@ class ToolBar {
       }
     });
 
-    removeItemButton = document.query('#removeItem');
+    removeItemButton = document.querySelector('#removeItem');
     removeItemButton.onClick.listen((MouseEvent e) {
       Box box = board.lastBoxSelected;
       if (box != null) {
@@ -370,7 +370,7 @@ class ToolBar {
       }
     });
 
-    lineSelect = document.query('#lineCategory');
+    lineSelect = document.querySelector('#lineCategory');
     lineSelect.onChange.listen((Event e) {
       Line line = board.lastLineSelected;
       if (line != null && line.box1.title != '' && line.box2.title != '') {
@@ -409,7 +409,7 @@ class ToolBar {
       }
     });
 
-    lineInternalCheckbox = document.query('#lineInternal');
+    lineInternalCheckbox = document.querySelector('#lineInternal');
     lineInternalCheckbox.onChange.listen((Event e) {
       Line line = board.lastLineSelected;
       if (line != null) {
@@ -417,10 +417,10 @@ class ToolBar {
       }
     });
 
-    line12Box1Label = document.query('#line12Box1');
-    line12Box2Label = document.query('#line12Box2');
+    line12Box1Label = document.querySelector('#line12Box1');
+    line12Box2Label = document.querySelector('#line12Box2');
 
-    line12MinInput = document.query('#line12Min');
+    line12MinInput = document.querySelector('#line12Min');
     line12MinInput.onChange.listen((Event e) {
       Line line = board.lastLineSelected;
       if (line != null) {
@@ -428,7 +428,7 @@ class ToolBar {
       }
     });
 
-    line12MaxInput = document.query('#line12Max');
+    line12MaxInput = document.querySelector('#line12Max');
     line12MaxInput.onChange.listen((Event e) {
       Line line = board.lastLineSelected;
       if (line != null) {
@@ -436,7 +436,7 @@ class ToolBar {
       }
     });
 
-    line12IdCheckbox = document.query('#line12Id');
+    line12IdCheckbox = document.querySelector('#line12Id');
     line12IdCheckbox.onChange.listen((Event e) {
       Line line = board.lastLineSelected;
       if (line != null) {
@@ -449,7 +449,7 @@ class ToolBar {
       }
     });
 
-    line12NameInput = document.query('#line12Name');
+    line12NameInput = document.querySelector('#line12Name');
     line12NameInput.onChange.listen((Event e) {
       Line line = board.lastLineSelected;
       if (line != null) {
@@ -458,10 +458,10 @@ class ToolBar {
       }
     });
 
-    line21Box2Label = document.query('#line21Box2');
-    line21Box1Label = document.query('#line21Box1');
+    line21Box2Label = document.querySelector('#line21Box2');
+    line21Box1Label = document.querySelector('#line21Box1');
 
-    line21MinInput = document.query('#line21Min');
+    line21MinInput = document.querySelector('#line21Min');
     line21MinInput.onChange.listen((Event e) {
       Line line = board.lastLineSelected;
       if (line != null) {
@@ -469,7 +469,7 @@ class ToolBar {
       }
     });
 
-    line21MaxInput = document.query('#line21Max');
+    line21MaxInput = document.querySelector('#line21Max');
     line21MaxInput.onChange.listen((Event e) {
       Line line = board.lastLineSelected;
       if (line != null) {
@@ -477,7 +477,7 @@ class ToolBar {
       }
     });
 
-    line21IdCheckbox = document.query('#line21Id');
+    line21IdCheckbox = document.querySelector('#line21Id');
     line21IdCheckbox.onChange.listen((Event e) {
       Line line = board.lastLineSelected;
       if (line != null) {
@@ -490,7 +490,7 @@ class ToolBar {
       }
     });
 
-    line21NameInput = document.query('#line21Name');
+    line21NameInput = document.querySelector('#line21Name');
     line21NameInput.onChange.listen((Event e) {
       Line line = board.lastLineSelected;
       if (line != null) {

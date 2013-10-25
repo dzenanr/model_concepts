@@ -9,13 +9,13 @@ final Board board;
   ButtonElement clearButton;
 
   PngPanel(this.board) {
-    modelImage = document.query('#modelImage');
-    fromModelToPngButton = document.query('#fromModelToPng');
+    modelImage = document.querySelector('#modelImage');
+    fromModelToPngButton = document.querySelector('#fromModelToPng');
     fromModelToPngButton.onClick.listen((MouseEvent e) {
       modelImage.src = board.canvas.toDataUrl("image/png");
       show();
     });
-    clearButton = document.query('#clearImage');
+    clearButton = document.querySelector('#clearImage');
     clearButton.onClick.listen((MouseEvent e) {
       hide();
     });
