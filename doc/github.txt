@@ -44,7 +44,7 @@ Git with Git Bash
 
 Work with a local repository
 
-cd git/dart/model_concepts
+cd git/dart/model/model_concepts
 
 git add .
 or
