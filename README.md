@@ -32,9 +32,18 @@ For the DateTime type, the now value determines the today's current time
 at the moment of adding an entity in dartling.
 
 Based on:
+
 [Magic Boxes (in Java)](http://code.google.com/p/magic-boxes/)
+
 and
+
 [Modelibra Modeler (in Java)](http://www.modelibra.org/)
+
+### More Details
+
+[**dartling: Domain Model Framework**](https://docs.google.com/document/d/1xzjqxbJdYxn6Qpx_kIhCqCCjk5yabbXiOng8sixMjdc/edit?usp=sharing)
+
+[*Learning Dart*](http://www.packtpub.com/learning-dart/book) by Dzenan Ridjanovic & Ivo Balbaert
 
 [Blog](http://dzenanr.github.io/)
 
