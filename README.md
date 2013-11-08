@@ -31,7 +31,7 @@ The empty text indicates that a default value will be a non-null empty String.
 For the DateTime type, the now value determines the today's current time
 at the moment of adding an entity in dartling.
 
-Based on:
+### Based On
 
 [Magic Boxes (in Java)](http://code.google.com/p/magic-boxes/)
 
