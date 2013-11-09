@@ -43,9 +43,10 @@ and
 
 [**dartling: Domain Model Framework**](http://goo.gl/Fd08zZ)
 
+[*Version History*](LOG.md)
+
 [*Learning Dart*](http://www.packtpub.com/learning-dart/book) by Dzenan Ridjanovic & Ivo Balbaert
 
 [Blog](http://dzenanr.github.io/)
 
 [On Dart](https://plus.google.com/+OndartMe)
-
