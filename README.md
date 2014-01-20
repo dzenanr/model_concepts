@@ -45,7 +45,7 @@ and
 
 [*Version History*](LOG.md)
 
-[*Learning Dart*](http://www.packtpub.com/learning-dart/book) by Dzenan Ridjanovic & Ivo Balbaert
+[*Learning Dart*](http://learningdart.org/)
 
 [Blog](http://dzenanr.github.io/)
 
