@@ -14,23 +14,37 @@ class Line {
   bool _twin2 = false;
 
   String box1box2Name = ''; // name from box1 to box2
-  String box1box2Min; // min cardinality from box1 to box2
-  String box1box2Max; // max cardinality from box1 to box2
-  bool box1box2Id; // id from box1 to box2
+  String box1box2Min = '0'; // min cardinality from box1 to box2
+  String box1box2Max = 'N'; // max cardinality from box1 to box2
+  bool box1box2Id = false; // id from box1 to box2
 
   String box2box1Name = ''; // name from box2 to box1
-  String box2box1Min; // min cardinality from box2 to box1
-  String box2box1Max; // max cardinality from box2 to box1
-  bool box2box1Id; // id from box2 to box1
+  String box2box1Min = '1'; // min cardinality from box2 to box1
+  String box2box1Max = '1'; // max cardinality from box2 to box1
+  bool box2box1Id = false; // id from box2 to box1
 
   bool _selected = false;
   bool _hidden = false;
 
   Line(this.board, this.box1, this.box2) {
     category = 'relationship';
+    box2.entry = false;
+    var alreadyInternal = false;
+    for (Line l in board.lines) {
+      if (l.box2 == box2) {
+        if (l != this && l.internal) {
+          alreadyInternal = true;
+        }
+      }
+    }
+    if (alreadyInternal) {
+      internal = false;
+    } 
     draw();
     select();
   }
+  
+  bool get external => !internal;
 
   void draw() {
     if (!isHidden()) {
@@ -112,12 +126,14 @@ class Line {
   void set category(String category) {
     _category = category;
     if (category == 'relationship') {
-      box1box2Name = '';
+      //box1box2Name = '';
+      box1box2Name = putInEnglishPlural(box2.title.toLowerCase());
       box1box2Min = '0';
       box1box2Max = 'N';
       box1box2Id = false;
 
-      box2box1Name = '';
+      //box2box1Name = '';
+      box2box1Name = box1.title.toLowerCase();
       box2box1Min = '1';
       box2box1Max = '1';
       box2box1Id = false;
@@ -125,12 +141,12 @@ class Line {
       _twin1 = false;
       _twin2 = false;
     } else if (category == 'inheritance') {
-      box1box2Name = 'as';
+      box1box2Name = 'as${box2.title}';
       box1box2Min = '0';
       box1box2Max = '1';
       box1box2Id = false;
 
-      box2box1Name = 'is';
+      box2box1Name = 'is${box1.title}';
       box2box1Min = '1';
       box2box1Max = '1';
       box2box1Id = true;
@@ -141,7 +157,7 @@ class Line {
       box2 = box1;
       internal = true;
 
-      box1box2Name = _putInEnglishPlural(box1.title.toLowerCase());
+      box1box2Name = putInEnglishPlural(box1.title.toLowerCase());
       box1box2Min = '0';
       box1box2Max = 'N';
       box1box2Id = false;
@@ -169,6 +185,10 @@ class Line {
           twinLine._category = 'twin';
           twinLine.internal = false;
         }
+        box1box2Name = '${putInEnglishPlural(box2.title.toLowerCase())}1';
+        box2box1Name = '${box1.title.toLowerCase()}2';
+        twinLine.box1box2Name = '${putInEnglishPlural(box2.title.toLowerCase())}2';
+        twinLine.box2box1Name = '${box1.title.toLowerCase()}1';
       }
     }
   }
@@ -237,8 +257,8 @@ class Line {
   show() => _hidden = false;
   bool isHidden() => _hidden;
 
-  String _putInEnglishPlural(String text) {
-    String plural = null;
+  String putInEnglishPlural(String text) {
+    String plural = '';
     try {
       if (text.length > 0) {
         String lastCharacterString = text.substring(text.length - 1,
@@ -248,7 +268,7 @@ class Line {
         } else if (lastCharacterString == 'z') {
           plural = '${text}zes';
         } else if (lastCharacterString == 'y') {
-          String withoutLast = _dropEnd(text, lastCharacterString);
+          String withoutLast = dropEnd(text, lastCharacterString);
           plural = '${withoutLast}ies';
         } else {
           plural = '${text}s';
@@ -260,7 +280,7 @@ class Line {
     return plural;
   }
 
-  String _dropEnd(String text, String end) {
+  String dropEnd(String text, String end) {
     String withoutEnd = text;
     int endPosition = text.lastIndexOf(end);
     if (endPosition > 0) {

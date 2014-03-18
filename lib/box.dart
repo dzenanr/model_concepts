@@ -13,7 +13,7 @@ class Box {
   final Board board;
 
   String _name = '';
-  bool entry = false;
+  bool entry = true;
   num x;
   num y;
   num width;
@@ -59,6 +59,7 @@ class Box {
           board.context.font = '${dfs}px sans-serif';
           board.context.fillText(item.name, x + TOS, y + TOS + TBH + i * IOS,
             width - TOS);
+          //print('item name: ${item.name}');
         } else if (item.category == 'guid') {
           board.context.font =
             'italic ${dfs}px sans-serif';
@@ -347,6 +348,14 @@ class Box {
       if (y > board.height - height) {
         y = board.height - height - 1;
       }
+    }
+  }
+
+  display() {
+    print('');
+    print('box: ${title}');
+    for (var item in items) {
+      item.display();
     }
   }
 

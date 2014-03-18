@@ -570,6 +570,7 @@ class Board {
         return line;
       }
     }
+    return null;
   }
 
   bool _boxExists(Box box) {

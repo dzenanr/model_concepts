@@ -36,6 +36,8 @@ class ToolBar {
 
   SelectElement lineSelect;
   InputElement lineInternalCheckbox;
+  ButtonElement eraseLineNamesButton;
+  ButtonElement genLineNamesButton;
 
   LabelElement line12Box1Label;
   LabelElement line12Box2Label;
@@ -140,7 +142,7 @@ class ToolBar {
               }
               itemNameInput.select();
             }
-          } else {
+          } else { // current item is null
             Item item = box.findItem(itemName);
             if (item == null) {
               Item newItem = new Item(box, itemName, itemCategorySelect.value);
@@ -154,7 +156,7 @@ class ToolBar {
               itemNameInput.value = '';
               //currentItem = newItem;
               //itemNameInput.select();
-            } else {
+            } else { // item is not null
               itemNameInput.value = item.name;
               itemCategorySelect.value = item.category;
               itemTypeSelect.value = item.type;
@@ -177,6 +179,8 @@ class ToolBar {
         if (currentItem.category == 'identifier') {
           itemEssentialCheckbox.checked = true;
         }
+        //print('current item name: ${currentItem.name}');
+        //currentItem.box.display();
       } else {
         itemNameInput.focus();
       }
@@ -226,8 +230,15 @@ class ToolBar {
     getNextItemButton.onClick.listen((MouseEvent e) {
       Box box = board.lastBoxSelected;
       if (box != null) {
+        //box.display();
         if (currentItem != null) {
           Item nextItem = box.findNextItem(currentItem);
+          /*
+          if (nextItem == null)
+            print('next item: null');
+          else
+            print('next item name: ${nextItem.name}');
+          */
           if (nextItem != null) {
             currentItem = nextItem;
             itemNameInput.value = nextItem.name;
@@ -237,7 +248,10 @@ class ToolBar {
             itemEssentialCheckbox.checked = nextItem.essential;
             itemSensitiveCheckbox.checked = nextItem.sensitive;
             itemNameInput.select();
-          } else {
+          } else { // next item is null
+            //print('next item is null; current item name: ${currentItem.name}');
+            //Item lastItem = box.findItem(currentItem.name);
+            //print('last item name: ${lastItem.name}');
             currentItem = null;
             itemNameInput.value = '';
             itemCategorySelect.value = 'attribute';
@@ -246,7 +260,7 @@ class ToolBar {
             itemEssentialCheckbox.checked = false;
             itemSensitiveCheckbox.checked = false;
           }
-        } else {
+        } else { // current item is null
           if (!box.items.isEmpty) {
             Item firstItem = box.findFirstItem();
             currentItem = firstItem;
@@ -414,6 +428,65 @@ class ToolBar {
       Line line = board.lastLineSelected;
       if (line != null) {
         line.internal = lineInternalCheckbox.checked;
+        if (line.external) {
+          line.box2.entry = true;
+        } else {
+          var alreadyInternal = false;
+          for (Line l in board.lines) {
+            if (l.box2 == line.box2) {
+              if (l != line && l.internal) {
+                alreadyInternal = true;
+              }
+            }
+          }
+          if (alreadyInternal) {
+            line.internal = false;
+            lineInternalCheckbox.checked = false;
+          } else {
+            line.box2.entry = false;
+          }
+        }
+      }
+    });
+    eraseLineNamesButton = document.querySelector('#eraseLineNames');
+    eraseLineNamesButton.onClick.listen((MouseEvent e) {
+      Line line = board.lastLineSelected;
+      line.box1box2Name = '';
+      line.box2box1Name = '';
+    });
+    genLineNamesButton = document.querySelector('#genLineNames');
+    genLineNamesButton.onClick.listen((MouseEvent e) {
+      Line line = board.lastLineSelected;
+      if (line.twin) {
+        Line twinLine = board.findTwinLine(line);
+        line.box1box2Name = 
+            '${line.putInEnglishPlural(line.box2.title.toLowerCase())}1';
+        line.box2box1Name = '${line.box1.title.toLowerCase()}2';
+        twinLine.box1box2Name = 
+            '${line.putInEnglishPlural(twinLine.box2.title.toLowerCase())}2';
+        twinLine.box2box1Name = '${twinLine.box1.title.toLowerCase()}1';
+      } else if (line.inheritance) {
+        line.box1box2Name = 'as${line.box2.title}';
+        line.box2box1Name = 'is${line.box1.title}';
+      } else {
+        if (line.box1box2Name == '') {
+          if (line.box1box2Max != '1') {
+            line.box1box2Name = 
+                line.putInEnglishPlural(line.box2.title).toLowerCase();
+          } else {
+            line.box1box2Name = 
+                line.box2.title.toLowerCase();
+          }
+        }
+        if (line.box2box1Name == '') {
+          if (line.box2box1Max != '1') {
+            line.box2box1Name = 
+                line.putInEnglishPlural(line.box1.title).toLowerCase();
+          } else {
+            line.box2box1Name = 
+                line.box1.title.toLowerCase();
+          }
+        }
       }
     });
 

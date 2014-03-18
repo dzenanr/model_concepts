@@ -1,7 +1,6 @@
 library model_concepts;
 
 import 'dart:html';
-import 'dart:async';
 import 'dart:convert';
 
 part 'board.dart';

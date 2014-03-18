@@ -1,5 +1,29 @@
 Problems
 
+https://plus.google.com/113649577593294551754/posts/VQD2MZJsX9i
+
+I can reproduce the bug in Model Concepts now. 
+It happens only on the last attribute of the concept (Book) with 2 attributes 
+(title, required; description, required) when you update the last attribute 
+category from required to attribute and then click on the next button. The 
+last attribute disappears from the box (graphical view of the concept, while 
+it is still in the model). After 2 hours of debugging, I still cannot explain 
+why the last attribute disappears from the box while it is in the model. 
+
+tool_bar.dart
+ToolBar class
+ToolBar constructor
+2 break points in events:
+itemCategorySelect.onChange.listen((Event e) {...
+getNextItemButton.onClick.listen((MouseEvent e) {...
+
+box.dart
+Box class
+1 break point in method:
+Item findNextItem(Item currentItem) {...
+
+The bug is present in both stable and dev last versions.﻿
+
 ----------------
 
 Old problem (not present in the last version)
