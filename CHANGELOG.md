@@ -2,11 +2,13 @@
 
 based on [Semantic Versioning](http://semver.org/)
 
-*1.0.1* 2014-03-17
 
 + handle line internal vs. external 
-+ handle box entry
-+ gen line names
+
+*1.0.2* 2014-04-09
+
++ when box is not selected, box and item cannot be named
++ any item change will set item (either new or current)
 
 *1.0.0* 2013-11-09
 

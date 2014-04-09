@@ -1,10 +1,8 @@
 name: model_concepts
-version: 1.0.1
+version: 1.0.2
 author: Dzenan Ridjanovic <dzenanr@gmail.com>
 description: A graphical model designer for dartling.
 homepage: https://github.com/dzenanr/model_concepts
 documentation: http://goo.gl/Fd08zZ
-environment:
-  sdk: '>=0.8.10+8 <2.0.0'
 dependencies:
-  browser: '>=0.9.0 <0.10.0'
+  browser: any

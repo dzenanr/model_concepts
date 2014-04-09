@@ -115,7 +115,13 @@ class ToolBar {
             itemNameInput.focus();
           }
         }
-      }
+      } 
+    });
+    boxNameInput.onInput.listen((Event e) {
+      Box box = board.lastBoxSelected;
+      if (box == null) {
+        boxNameInput.value = '';
+      } 
     });
 
     boxEntryCheckbox = document.querySelector('#boxEntry');
@@ -125,10 +131,8 @@ class ToolBar {
         box.entry = boxEntryCheckbox.checked;
       }
     });
-
-    itemNameInput = document.querySelector('#itemName');
-    itemNameInput.onKeyPress.listen((KeyboardEvent e) {
-      if (e.keyCode != KeyCode.ENTER) return;
+    
+    setItem() {
       Box box = board.lastBoxSelected;
       if (box != null) {
         String itemName = itemNameInput.value.trim();
@@ -154,8 +158,6 @@ class ToolBar {
               newItem.essential = itemEssentialCheckbox.checked;
               newItem.sensitive = itemSensitiveCheckbox.checked;
               itemNameInput.value = '';
-              //currentItem = newItem;
-              //itemNameInput.select();
             } else { // item is not null
               itemNameInput.value = item.name;
               itemCategorySelect.value = item.category;
@@ -167,8 +169,21 @@ class ToolBar {
               itemNameInput.select();
             }
           }
-        }
+        }       
       }
+    }
+
+    itemNameInput = document.querySelector('#itemName');
+    itemNameInput.onKeyPress.listen((KeyboardEvent e) {
+      if (e.keyCode == KeyCode.ENTER) {
+        setItem();
+      } 
+    });
+    itemNameInput.onInput.listen((Event e) {
+      Box box = board.lastBoxSelected;
+      if (box == null) {
+        itemNameInput.value = '';
+      } 
     });
 
     itemCategorySelect = document.querySelector('#itemCategory');
@@ -179,11 +194,13 @@ class ToolBar {
         if (currentItem.category == 'identifier') {
           itemEssentialCheckbox.checked = true;
         }
-        //print('current item name: ${currentItem.name}');
-        //currentItem.box.display();
+        if (currentItem.category == 'attribute') {
+          itemEssentialCheckbox.checked = false;
+        }
       } else {
         itemNameInput.focus();
       }
+      setItem();
     });
 
     itemTypeSelect = document.querySelector('#itemType');
@@ -194,6 +211,7 @@ class ToolBar {
       } else {
         itemNameInput.focus();
       }
+      setItem();
     });
 
     itemInitInput = document.querySelector('#itemInit');
@@ -204,6 +222,7 @@ class ToolBar {
       } else {
         itemNameInput.focus();
       }
+      setItem();
     });
 
     itemEssentialCheckbox = document.querySelector('#itemEssential');
@@ -214,6 +233,7 @@ class ToolBar {
       } else {
         itemNameInput.focus();
       }
+      setItem();
     });
 
     itemSensitiveCheckbox = document.querySelector('#itemSensitive');
@@ -224,6 +244,7 @@ class ToolBar {
       } else {
         itemNameInput.focus();
       }
+      setItem();
     });
 
     getNextItemButton = document.querySelector('#getNextItem');
