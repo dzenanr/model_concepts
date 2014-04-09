@@ -191,14 +191,13 @@ class ToolBar {
       if (currentItem != null) {
         currentItem.category = itemCategorySelect.value;
         itemNameInput.select();
-        if (currentItem.category == 'identifier') {
-          itemEssentialCheckbox.checked = true;
-        }
-        if (currentItem.category == 'attribute') {
-          itemEssentialCheckbox.checked = false;
-        }
       } else {
         itemNameInput.focus();
+      }
+      if (itemCategorySelect.value == 'identifier') {
+        itemEssentialCheckbox.checked = true;
+      } else if (itemCategorySelect.value == 'attribute') {
+        itemEssentialCheckbox.checked = false;
       }
       setItem();
     });
@@ -472,42 +471,46 @@ class ToolBar {
     eraseLineNamesButton = document.querySelector('#eraseLineNames');
     eraseLineNamesButton.onClick.listen((MouseEvent e) {
       Line line = board.lastLineSelected;
-      line.box1box2Name = '';
-      line.box2box1Name = '';
+      if (line != null) {
+        line.box1box2Name = '';
+        line.box2box1Name = '';
+      }
     });
     genLineNamesButton = document.querySelector('#genLineNames');
     genLineNamesButton.onClick.listen((MouseEvent e) {
       Line line = board.lastLineSelected;
-      if (line.twin) {
-        Line twinLine = board.findTwinLine(line);
-        line.box1box2Name = 
-            '${line.putInEnglishPlural(line.box2.title.toLowerCase())}1';
-        line.box2box1Name = '${line.box1.title.toLowerCase()}2';
-        twinLine.box1box2Name = 
-            '${line.putInEnglishPlural(twinLine.box2.title.toLowerCase())}2';
-        twinLine.box2box1Name = '${twinLine.box1.title.toLowerCase()}1';
-      } else if (line.inheritance) {
-        line.box1box2Name = 'as${line.box2.title}';
-        line.box2box1Name = 'is${line.box1.title}';
-      } else {
-        if (line.box1box2Name == '') {
-          if (line.box1box2Max != '1') {
-            line.box1box2Name = 
-                line.putInEnglishPlural(line.box2.title).toLowerCase();
-          } else {
-            line.box1box2Name = 
-                line.box2.title.toLowerCase();
+      if (line != null) {
+        if (line.twin) {
+          Line twinLine = board.findTwinLine(line);
+          line.box1box2Name = 
+              '${line.putInEnglishPlural(line.box2.title.toLowerCase())}1';
+          line.box2box1Name = '${line.box1.title.toLowerCase()}2';
+          twinLine.box1box2Name = 
+              '${line.putInEnglishPlural(twinLine.box2.title.toLowerCase())}2';
+          twinLine.box2box1Name = '${twinLine.box1.title.toLowerCase()}1';
+        } else if (line.inheritance) {
+          line.box1box2Name = 'as${line.box2.title}';
+          line.box2box1Name = 'is${line.box1.title}';
+        } else {
+          if (line.box1box2Name == '') {
+            if (line.box1box2Max != '1') {
+              line.box1box2Name = 
+                  line.putInEnglishPlural(line.box2.title).toLowerCase();
+            } else {
+              line.box1box2Name = 
+                  line.box2.title.toLowerCase();
+            }
           }
-        }
-        if (line.box2box1Name == '') {
-          if (line.box2box1Max != '1') {
-            line.box2box1Name = 
-                line.putInEnglishPlural(line.box1.title).toLowerCase();
-          } else {
-            line.box2box1Name = 
-                line.box1.title.toLowerCase();
+          if (line.box2box1Name == '') {
+            if (line.box2box1Max != '1') {
+              line.box2box1Name = 
+                  line.putInEnglishPlural(line.box1.title).toLowerCase();
+            } else {
+              line.box2box1Name = 
+                  line.box1.title.toLowerCase();
+            }
           }
-        }
+        }        
       }
     });
 
