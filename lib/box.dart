@@ -55,11 +55,10 @@ class Box {
       int dfs = Board.DEFAULT_FONT_SIZE;
       int i = 0;
       for (Item item in items) {
-        if (item.category == 'attribute') {
+        if (item.category.trim() == 'attribute') {
           board.context.font = '${dfs}px sans-serif';
           board.context.fillText(item.name, x + TOS, y + TOS + TBH + i * IOS,
             width - TOS);
-          //print('item name: ${item.name}');
         } else if (item.category == 'guid') {
           board.context.font =
             'italic ${dfs}px sans-serif';
@@ -75,6 +74,12 @@ class Box {
             'bold ${dfs}px sans-serif';
           board.context.fillText(item.name, x + TOS, y + TOS + TBH + i * IOS,
             width - TOS);
+        // added redundancy to avoid the problem of not displaying attributes only
+        } else { 
+          board.context.font = '${dfs}px sans-serif';
+          board.context.fillText(item.name, x + TOS, y + TOS + TBH + i * IOS,
+            width - TOS);
+          //print('item category: ${item.category}');
         }
         i++;
       }

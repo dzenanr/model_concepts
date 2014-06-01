@@ -1,5 +1,9 @@
 Problems
 
+--------
+
+Old problem (not present in the last version)
+
 https://plus.google.com/113649577593294551754/posts/VQD2MZJsX9i
 
 I can reproduce the bug in Model Concepts now. 
@@ -10,6 +14,13 @@ last attribute disappears from the box (graphical view of the concept, while
 it is still in the model). After 2 hours of debugging, I still cannot explain 
 why the last attribute disappears from the box while it is in the model. 
 
+Ibn Box.draw:
+
+if (item.category == 'attribute') {
+  skipped 
+if (item.category.trim() == 'attribute') {
+  not skipped in the last version
+  
 tool_bar.dart
 ToolBar class
 ToolBar constructor

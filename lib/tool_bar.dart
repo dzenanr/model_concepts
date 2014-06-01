@@ -139,7 +139,6 @@ class ToolBar {
         if (itemName != '') {
           if (currentItem != null) {
             if (currentItem.box == box) {
-              String itemName = itemNameInput.value.trim();
               Item item = box.findItem(itemName);
               if (item == null) {
                 currentItem.name = itemName;
@@ -199,7 +198,6 @@ class ToolBar {
       } else if (itemCategorySelect.value == 'attribute') {
         itemEssentialCheckbox.checked = false;
       }
-      setItem();
     });
 
     itemTypeSelect = document.querySelector('#itemType');
@@ -210,7 +208,6 @@ class ToolBar {
       } else {
         itemNameInput.focus();
       }
-      setItem();
     });
 
     itemInitInput = document.querySelector('#itemInit');
@@ -221,7 +218,6 @@ class ToolBar {
       } else {
         itemNameInput.focus();
       }
-      setItem();
     });
 
     itemEssentialCheckbox = document.querySelector('#itemEssential');
@@ -232,7 +228,6 @@ class ToolBar {
       } else {
         itemNameInput.focus();
       }
-      setItem();
     });
 
     itemSensitiveCheckbox = document.querySelector('#itemSensitive');
@@ -243,22 +238,14 @@ class ToolBar {
       } else {
         itemNameInput.focus();
       }
-      setItem();
     });
 
     getNextItemButton = document.querySelector('#getNextItem');
     getNextItemButton.onClick.listen((MouseEvent e) {
       Box box = board.lastBoxSelected;
       if (box != null) {
-        //box.display();
         if (currentItem != null) {
           Item nextItem = box.findNextItem(currentItem);
-          /*
-          if (nextItem == null)
-            print('next item: null');
-          else
-            print('next item name: ${nextItem.name}');
-          */
           if (nextItem != null) {
             currentItem = nextItem;
             itemNameInput.value = nextItem.name;
@@ -269,9 +256,6 @@ class ToolBar {
             itemSensitiveCheckbox.checked = nextItem.sensitive;
             itemNameInput.select();
           } else { // next item is null
-            //print('next item is null; current item name: ${currentItem.name}');
-            //Item lastItem = box.findItem(currentItem.name);
-            //print('last item name: ${lastItem.name}');
             currentItem = null;
             itemNameInput.value = '';
             itemCategorySelect.value = 'attribute';
