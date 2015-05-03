@@ -69,7 +69,8 @@ class ToolBar {
 
     boxButton.onClick.listen((MouseEvent e) {
       onTool(BOX);
-    });boxEntryCheckbox = document.querySelector('#boxEntry');
+    });
+    boxEntryCheckbox = document.querySelector('#boxEntry');
     boxEntryCheckbox.onChange.listen((Event e) {
       Box box = board.lastBoxSelected;
       if (box != null) {
