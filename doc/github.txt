@@ -32,7 +32,7 @@ The following is what I did for Model Concepts.
 Create a New Repository
 Project Name: model_concepts
 Description:
-A graphical design tool for domain models of dartling.
+A graphical design tool for domain models of EDNetCore.
 
 Based on:
 Magic Boxes [in Java]

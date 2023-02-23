@@ -21,15 +21,15 @@ generate code for a model supported by the
 [Summary](http://goo.gl/DqF7d)
 
 If an attribute name is oid or code, it will not be generated as a specific
-attribute in dartling, because every concept inherits both the
-oid (object id generated automatically by dartling) and
+attribute in EDNetCore, because every concept inherits both the
+oid (object id generated automatically by ednet_core) and
 code (an id that may be null, but if non-null it must be unique) properties.
 
 In the attribute init field, you may use increment for incrementing a value
-of the int type in dartling by increment starting with increment.
+of the int type in EDNetCore by increment starting with increment.
 The empty text indicates that a default value will be a non-null empty String.
 For the DateTime type, the now value determines the today's current time
-at the moment of adding an entity in dartling.
+at the moment of adding an entity in EDNetCore.
 
 ### Based On
 
@@ -41,7 +41,7 @@ and
 
 ### More Details
 
-[**dartling: Domain Model Framework**](http://goo.gl/Fd08zZ)
+[**ednet_core: Domain Model Framework**](http://goo.gl/Fd08zZ)
 
 [*Version History*](LOG.md)
 

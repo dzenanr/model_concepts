@@ -1,7 +1,7 @@
 name: model_concepts
 version: 1.0.2
 
-description: A graphical model designer for dartling.
+description: A graphical model designer for EDNetCore.
 homepage: https://github.com/dzenanr/model_concepts
 documentation: http://goo.gl/Fd08zZ
 environment:
