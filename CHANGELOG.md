@@ -1,4 +1,4 @@
-## Version history of [model_concepts](https://github.com/dzenanr/model_concepts)
+## Version history of [model_concepts](https://github.com/ednet-dev/model_concepts)
 
 based on [Semantic Versioning](http://semver.org/)
 

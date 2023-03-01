@@ -9,7 +9,7 @@ started on 2011-12-09
 ##Description
 A graphical design tool for domain models of
 [EDNetCore](https://github.com/ednet-dev/ednet_core).
-Spirals can be found in the [mb_spirals](https://github.com/dzenanr/mb_spirals)
+Spirals can be found in the [mb_spirals](https://github.com/ednet-dev/mb_spirals)
 project.
 The last spiral is a graphical model designer.
 The json representation of a model is generated in Model Concepts.

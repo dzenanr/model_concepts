@@ -41,9 +41,9 @@ Old problem (not present in the last version)
 
 In the ToolBar class of lib/tool_bar.dart
 
-https://github.com/dzenanr/magic_boxes/blob/master/lib/tool_bar.dart
+https://github.com/ednet-dev/magic_boxes/blob/master/lib/tool_bar.dart
 
-at https://github.com/dzenanr/magic_boxes there are two elements
+at https://github.com/ednet-dev/magic_boxes there are two elements
 
 InputElement itemNameInput;
 SelectElement itemCategorySelect;
