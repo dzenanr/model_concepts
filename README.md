@@ -1,9 +1,6 @@
 
 #Model Concepts in Dart#
 
-by Dzenan Ridjanovic
-started on 2011-12-09
-
 **Categories**: design tool, graphical models, canvas, local storage, json.
 
 ##Description
