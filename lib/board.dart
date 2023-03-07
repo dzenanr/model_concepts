@@ -99,8 +99,8 @@ class Board {
     Map<String, Object> boardMap = new Map<String, Object>();
     boardMap["width"] = width;
     boardMap["height"] = height;
-    boardMap["boxes"] = boxesToJson();
-    boardMap["lines"] = linesToJson();
+    boardMap["concepts"] = boxesToJson();
+    boardMap["relations"] = linesToJson();
     return JSON.encode(boardMap);
   }
 
@@ -109,9 +109,9 @@ class Board {
       Map<String, Object> boardMap = JSON.decode(json);
       width = boardMap["width"];
       height = boardMap["height"];
-      List<Map<String, Object>> boxesList = boardMap["boxes"];
+      List<Map<String, Object>> boxesList = boardMap["concepts"];
       boxesFromJson(boxesList);
-      List<Map<String, Object>> linesList = boardMap["lines"];
+      List<Map<String, Object>> linesList = boardMap["relations"];
       linesFromJson(linesList);
     }
   }
@@ -151,7 +151,7 @@ class Board {
     Box box = new Box(this, x, y, width, height);
     box.title = boxMap["name"];
     box.entry = boxMap["entry"];
-    List<Map<String, Object>> itemsList = boxMap["items"];
+    List<Map<String, Object>> itemsList = boxMap["attributes"];
     for (Map<String, Object> jsonItem in itemsList) {
       itemFromJson(box, jsonItem);
     }
@@ -182,34 +182,34 @@ class Board {
   }
 
   Line lineFromJson(Map<String, Object> lineMap) {
-    String box1Name = lineMap["box1Name"];
-    String box2Name = lineMap["box2Name"];
-    Box box1 = findBox(box1Name);
-    Box box2 = findBox(box2Name);
-    if (box1 != null && box2 != null) {
-      Line line = new Line(this, box1, box2);
+    String from = lineMap["from"];
+    String to = lineMap["to"];
+    Box from = findBox(from);
+    Box to = findBox(to);
+    if (from != null && to != null) {
+      Line line = new Line(this, from, to);
       line.category = lineMap["category"];
       line.internal = lineMap["internal"];
 
-      String box1box2Name = lineMap["box1box2Name"];
-      String box1box2Min = lineMap["box1box2Min"];
-      String box1box2Max = lineMap["box1box2Max"];
-      bool box1box2Id = lineMap["box1box2Id"];
+      String fromToName = lineMap["fromToName"];
+      String fromToMin = lineMap["fromToMin"];
+      String fromToMax = lineMap["fromToMax"];
+      bool fromToId = lineMap["fromToId"];
 
-      line.box1box2Name = box1box2Name;
-      line.box1box2Min = box1box2Min;
-      line.box1box2Max = box1box2Max;
-      line.box1box2Id = box1box2Id;
+      line.fromToName = fromToName;
+      line.fromToMin = fromToMin;
+      line.fromToMax = fromToMax;
+      line.fromToId = fromToId;
 
-      String box2box1Name = lineMap["box2box1Name"];
-      String box2box1Min = lineMap["box2box1Min"];
-      String box2box1Max = lineMap["box2box1Max"];
-      bool box2box1Id = lineMap["box2box1Id"];
+      String toFromName = lineMap["toFromName"];
+      String toFromMin = lineMap["toFromMin"];
+      String toFromMax = lineMap["toFromMax"];
+      bool toFromId = lineMap["toFromId"];
 
-      line.box2box1Name = box2box1Name;
-      line.box2box1Min = box2box1Min;
-      line.box2box1Max = box2box1Max;
-      line.box2box1Id = box2box1Id;
+      line.toFromName = toFromName;
+      line.toFromMin = toFromMin;
+      line.toFromMax = toFromMax;
+      line.toFromId = toFromId;
 
       return line;
     }
@@ -340,7 +340,7 @@ class Board {
     for (Box box in boxes) {
       if (box.isSelected()) {
         for (Line line in lines) {
-          if (line.box1 == box || line.box2 == box) {
+          if (line.from == box || line.to == box) {
             line.select();
           }
         }
@@ -350,7 +350,7 @@ class Board {
 
   void selectLinesBetweenBoxes() {
     for (Line line in lines) {
-      if (line.box1.isSelected() && line.box2.isSelected()) {
+      if (line.from.isSelected() && line.to.isSelected()) {
         line.select();
       }
     }
@@ -534,11 +534,11 @@ class Board {
     return count;
   }
 
-  int countLinesBetween(Box box1, Box box2) {
+  int countLinesBetween(Box from, Box to) {
     int count = 0;
     for (Line line in lines) {
-      if ((line.box1 == box1 && line.box2 == box2) ||
-          (line.box1 == box2 && line.box2 == box1)) {
+      if ((line.from == from && line.to == to) ||
+          (line.from == to && line.to == from)) {
         count++;
       }
     }
@@ -556,7 +556,7 @@ class Board {
 
   Line findTwinLine(Line twin) {
     for (Line line in lines) {
-      if (line != twin && line.box1 == twin.box1 && line.box2 == twin.box2) {
+      if (line != twin && line.from == twin.from && line.to == twin.to) {
         return line;
       }
     }

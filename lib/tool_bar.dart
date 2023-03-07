@@ -392,7 +392,7 @@ class ToolBar {
     lineSelect = document.querySelector('#lineCategory');
     lineSelect.onChange.listen((Event e) {
       Line line = board.lastLineSelected;
-      if (line != null && line.box1.title != '' && line.box2.title != '') {
+      if (line != null && line.from.title != '' && line.to.title != '') {
         if (line.category == 'relationship') {
           if (lineSelect.value == 'inheritance' ||
               lineSelect.value == 'reflexive') {
@@ -434,11 +434,11 @@ class ToolBar {
       if (line != null) {
         line.internal = lineInternalCheckbox.checked;
         if (line.external) {
-          line.box2.entry = true;
+          line.to.entry = true;
         } else {
           var alreadyInternal = false;
           for (Line l in board.lines) {
-            if (l.box2 == line.box2) {
+            if (l.to == line.to) {
               if (l != line && l.internal) {
                 alreadyInternal = true;
               }
@@ -448,7 +448,7 @@ class ToolBar {
             line.internal = false;
             lineInternalCheckbox.checked = false;
           } else {
-            line.box2.entry = false;
+            line.to.entry = false;
           }
         }
       }
@@ -457,8 +457,8 @@ class ToolBar {
     eraseLineNamesButton.onClick.listen((MouseEvent e) {
       Line line = board.lastLineSelected;
       if (line != null) {
-        line.box1box2Name = '';
-        line.box2box1Name = '';
+        line.fromToName = '';
+        line.toFromName = '';
       }
     });
     genLineNamesButton = document.querySelector('#genLineNames');
@@ -467,32 +467,32 @@ class ToolBar {
       if (line != null) {
         if (line.twin) {
           Line twinLine = board.findTwinLine(line);
-          line.box1box2Name = 
-              '${line.putInEnglishPlural(line.box2.title.toLowerCase())}1';
-          line.box2box1Name = '${line.box1.title.toLowerCase()}2';
-          twinLine.box1box2Name = 
-              '${line.putInEnglishPlural(twinLine.box2.title.toLowerCase())}2';
-          twinLine.box2box1Name = '${twinLine.box1.title.toLowerCase()}1';
+          line.fromToName = 
+              '${line.putInEnglishPlural(line.to.title.toLowerCase())}1';
+          line.toFromName = '${line.from.title.toLowerCase()}2';
+          twinLine.fromToName = 
+              '${line.putInEnglishPlural(twinLine.to.title.toLowerCase())}2';
+          twinLine.toFromName = '${twinLine.from.title.toLowerCase()}1';
         } else if (line.inheritance) {
-          line.box1box2Name = 'as${line.box2.title}';
-          line.box2box1Name = 'is${line.box1.title}';
+          line.fromToName = 'as${line.to.title}';
+          line.toFromName = 'is${line.from.title}';
         } else {
-          if (line.box1box2Name == '') {
-            if (line.box1box2Max != '1') {
-              line.box1box2Name = 
-                  line.putInEnglishPlural(line.box2.title).toLowerCase();
+          if (line.fromToName == '') {
+            if (line.fromToMax != '1') {
+              line.fromToName = 
+                  line.putInEnglishPlural(line.to.title).toLowerCase();
             } else {
-              line.box1box2Name = 
-                  line.box2.title.toLowerCase();
+              line.fromToName = 
+                  line.to.title.toLowerCase();
             }
           }
-          if (line.box2box1Name == '') {
-            if (line.box2box1Max != '1') {
-              line.box2box1Name = 
-                  line.putInEnglishPlural(line.box1.title).toLowerCase();
+          if (line.toFromName == '') {
+            if (line.toFromMax != '1') {
+              line.toFromName = 
+                  line.putInEnglishPlural(line.from.title).toLowerCase();
             } else {
-              line.box2box1Name = 
-                  line.box1.title.toLowerCase();
+              line.toFromName = 
+                  line.from.title.toLowerCase();
             }
           }
         }        
@@ -506,7 +506,7 @@ class ToolBar {
     line12MinInput.onChange.listen((Event e) {
       Line line = board.lastLineSelected;
       if (line != null) {
-        line.box1box2Min = line12MinInput.value.trim();
+        line.fromToMin = line12MinInput.value.trim();
       }
     });
 
@@ -514,7 +514,7 @@ class ToolBar {
     line12MaxInput.onChange.listen((Event e) {
       Line line = board.lastLineSelected;
       if (line != null) {
-        line.box1box2Max = line12MaxInput.value.trim();
+        line.fromToMax = line12MaxInput.value.trim();
       }
     });
 
@@ -522,11 +522,11 @@ class ToolBar {
     line12IdCheckbox.onChange.listen((Event e) {
       Line line = board.lastLineSelected;
       if (line != null) {
-        if (line.box1box2Min == '1' && line.box1box2Max == '1') {
-          line.box1box2Id = line12IdCheckbox.checked;
+        if (line.fromToMin == '1' && line.fromToMax == '1') {
+          line.fromToId = line12IdCheckbox.checked;
         } else {
           line12IdCheckbox.checked = false;
-          line.box1box2Id = false;
+          line.fromToId = false;
         }
       }
     });
@@ -535,7 +535,7 @@ class ToolBar {
     line12NameInput.onChange.listen((Event e) {
       Line line = board.lastLineSelected;
       if (line != null) {
-        line.box1box2Name = line12NameInput.value.trim();
+        line.fromToName = line12NameInput.value.trim();
         line21NameInput.focus();
       }
     });
@@ -547,7 +547,7 @@ class ToolBar {
     line21MinInput.onChange.listen((Event e) {
       Line line = board.lastLineSelected;
       if (line != null) {
-        line.box2box1Min = line21MinInput.value.trim();
+        line.toFromMin = line21MinInput.value.trim();
       }
     });
 
@@ -555,7 +555,7 @@ class ToolBar {
     line21MaxInput.onChange.listen((Event e) {
       Line line = board.lastLineSelected;
       if (line != null) {
-        line.box2box1Max = line21MaxInput.value.trim();
+        line.toFromMax = line21MaxInput.value.trim();
       }
     });
 
@@ -563,11 +563,11 @@ class ToolBar {
     line21IdCheckbox.onChange.listen((Event e) {
       Line line = board.lastLineSelected;
       if (line != null) {
-        if (line.box2box1Min == '1' && line.box2box1Max == '1') {
-          line.box2box1Id = line21IdCheckbox.checked;
+        if (line.toFromMin == '1' && line.toFromMax == '1') {
+          line.toFromId = line21IdCheckbox.checked;
         } else {
           line21IdCheckbox.checked = false;
-          line.box2box1Id = false;
+          line.toFromId = false;
         }
       }
     });
@@ -576,7 +576,7 @@ class ToolBar {
     line21NameInput.onChange.listen((Event e) {
       Line line = board.lastLineSelected;
       if (line != null) {
-        line.box2box1Name = line21NameInput.value.trim();
+        line.toFromName = line21NameInput.value.trim();
       }
     });
   }
@@ -605,22 +605,22 @@ class ToolBar {
       lineSelect.value = line.category;
       lineInternalCheckbox.checked = line.internal;
 
-      line12Box1Label.text = line.box1.title;
-      line12Box2Label.text = line.box2.title;
-      line12MinInput.value = line.box1box2Min;
-      line12MaxInput.value = line.box1box2Max;
-      line12IdCheckbox.checked = line.box1box2Id;
-      line12NameInput.value = line.box1box2Name;
+      line12Box1Label.text = line.from.title;
+      line12Box2Label.text = line.to.title;
+      line12MinInput.value = line.fromToMin;
+      line12MaxInput.value = line.fromToMax;
+      line12IdCheckbox.checked = line.fromToId;
+      line12NameInput.value = line.fromToName;
 
-      line21Box2Label.text = line.box2.title;
-      line21Box1Label.text = line.box1.title;
-      line21MinInput.value = line.box2box1Min;
-      line21MaxInput.value = line.box2box1Max;
-      line21IdCheckbox.checked = line.box2box1Id;
-      line21NameInput.value = line.box2box1Name;
+      line21Box2Label.text = line.to.title;
+      line21Box1Label.text = line.from.title;
+      line21MinInput.value = line.toFromMin;
+      line21MaxInput.value = line.toFromMax;
+      line21IdCheckbox.checked = line.toFromId;
+      line21NameInput.value = line.toFromName;
       // the following code does not focus on indicated fields!?
       /*
-      if (line.box1box2Name == '') {
+      if (line.fromToName == '') {
         line12NameInput.focus();
       } else {
         line21NameInput.focus();

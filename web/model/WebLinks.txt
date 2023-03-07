@@ -1,6 +1,6 @@
 {
     "width":990,
-    "boxes":[
+    "concepts":[
         {
             "entry":true,
             "name":"Category",
@@ -8,7 +8,7 @@
             "height":80,
             "y":102,
             "width":80,
-            "items":[
+            "attributes":[
                 {
                     "category":"identifier",
                     "name":"name",
@@ -39,7 +39,7 @@
             "height":100,
             "y":66,
             "width":100,
-            "items":[
+            "attributes":[
                 {
                     "category":"identifier",
                     "name":"number",
@@ -77,7 +77,7 @@
             "height":120,
             "y":220,
             "width":120,
-            "items":[
+            "attributes":[
                 {
                     "category":"identifier",
                     "name":"name",
@@ -129,7 +129,7 @@
             "height":80,
             "y":222,
             "width":80,
-            "items":[
+            "attributes":[
                 {
                     "category":"required",
                     "name":"text",
@@ -160,7 +160,7 @@
             "height":160,
             "y":330,
             "width":80,
-            "items":[
+            "attributes":[
                 {
                     "category":"identifier",
                     "name":"code",
@@ -226,7 +226,7 @@
             "height":80,
             "y":408,
             "width":80,
-            "items":[
+            "attributes":[
                 {
                     "category":"attribute",
                     "name":"description",
@@ -237,75 +237,75 @@
             ]
         }
     ],
-    "lines":[
+    "relations":[
         {
-            "box1Name":"Category",
-            "box2box1Name":"category",
+            "from":"Category",
+            "toFromName":"category",
             "category":"reflexive",
-            "box2box1Min":"0",
-            "box1box2Min":"0",
-            "box1box2Id":false,
-            "box1box2Max":"N",
-            "box2box1Max":"1",
-            "box2box1Id":false,
-            "box1box2Name":"categories",
-            "box2Name":"Category",
+            "toFromMin":"0",
+            "fromToMin":"0",
+            "fromToId":false,
+            "fromToMax":"N",
+            "toFromMax":"1",
+            "toFromId":false,
+            "fromToName":"categories",
+            "to":"Category",
             "internal":true
         },
         {
-            "box1Name":"Category",
-            "box2box1Name":"",
+            "from":"Category",
+            "toFromName":"",
             "category":"relationship",
-            "box2box1Min":"0",
-            "box1box2Min":"0",
-            "box1box2Id":false,
-            "box1box2Max":"N",
-            "box2box1Max":"1",
-            "box2box1Id":false,
-            "box1box2Name":"",
-            "box2Name":"Question",
+            "toFromMin":"0",
+            "fromToMin":"0",
+            "fromToId":false,
+            "fromToMax":"N",
+            "toFromMax":"1",
+            "toFromId":false,
+            "fromToName":"",
+            "to":"Question",
             "internal":false
         },
         {
-            "box1Name":"Category",
-            "box2box1Name":"",
+            "from":"Category",
+            "toFromName":"",
             "category":"relationship",
-            "box2box1Min":"1",
-            "box1box2Min":"0",
-            "box1box2Id":false,
-            "box1box2Max":"N",
-            "box2box1Max":"1",
-            "box2box1Id":true,
-            "box1box2Name":"",
-            "box2Name":"WebLink",
+            "toFromMin":"1",
+            "fromToMin":"0",
+            "fromToId":false,
+            "fromToMax":"N",
+            "toFromMax":"1",
+            "toFromId":true,
+            "fromToName":"",
+            "to":"WebLink",
             "internal":true
         },
         {
-            "box1Name":"Category",
-            "box2box1Name":"",
+            "from":"Category",
+            "toFromName":"",
             "category":"relationship",
-            "box2box1Min":"1",
-            "box1box2Min":"0",
-            "box1box2Id":false,
-            "box1box2Max":"N",
-            "box2box1Max":"1",
-            "box2box1Id":true,
-            "box1box2Name":"",
-            "box2Name":"Interest",
+            "toFromMin":"1",
+            "fromToMin":"0",
+            "fromToId":false,
+            "fromToMax":"N",
+            "toFromMax":"1",
+            "toFromId":true,
+            "fromToName":"",
+            "to":"Interest",
             "internal":false
         },
         {
-            "box1Name":"Member",
-            "box2box1Name":"",
+            "from":"Member",
+            "toFromName":"",
             "category":"relationship",
-            "box2box1Min":"1",
-            "box1box2Min":"0",
-            "box1box2Id":false,
-            "box1box2Max":"N",
-            "box2box1Max":"1",
-            "box2box1Id":true,
-            "box1box2Name":"",
-            "box2Name":"Interest",
+            "toFromMin":"1",
+            "fromToMin":"0",
+            "fromToId":false,
+            "fromToMax":"N",
+            "toFromMax":"1",
+            "toFromId":true,
+            "fromToName":"",
+            "to":"Interest",
             "internal":true
         }
     ],

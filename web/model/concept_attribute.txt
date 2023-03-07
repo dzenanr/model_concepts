@@ -1,10 +1,10 @@
 {
    "width":990,
-   "lines":[
+   "relations":[
 
    ],
    "height":580,
-   "boxes":[
+   "concepts":[
       {
          "name":"City",
          "x":49,
@@ -12,7 +12,7 @@
          "y":94,
          "entry":true,
          "width":80,
-         "items":[
+         "attributes":[
             {
                "sequence":10,
                "name":"name",
@@ -31,7 +31,7 @@
          "y":95,
          "entry":true,
          "width":80,
-         "items":[
+         "attributes":[
             {
                "sequence":10,
                "name":"firstName",
@@ -50,7 +50,7 @@
          "y":92,
          "entry":true,
          "width":80,
-         "items":[
+         "attributes":[
             {
                "sequence":10,
                "name":"lastName",
@@ -69,7 +69,7 @@
          "y":192,
          "entry":true,
          "width":80,
-         "items":[
+         "attributes":[
             {
                "sequence":10,
                "name":"email",
@@ -88,7 +88,7 @@
          "y":190,
          "entry":true,
          "width":80,
-         "items":[
+         "attributes":[
             {
                "sequence":10,
                "name":"about",
@@ -107,7 +107,7 @@
          "y":189,
          "entry":true,
          "width":80,
-         "items":[
+         "attributes":[
             {
                "sequence":10,
                "name":"category",
@@ -126,7 +126,7 @@
          "y":292,
          "entry":true,
          "width":80,
-         "items":[
+         "attributes":[
             {
                "sequence":10,
                "name":"description",
@@ -145,7 +145,7 @@
          "y":291,
          "entry":true,
          "width":80,
-         "items":[
+         "attributes":[
             {
                "sequence":10,
                "name":"text",

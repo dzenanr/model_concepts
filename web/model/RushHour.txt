@@ -1,6 +1,6 @@
 {
     "width":990,
-    "boxes":[
+    "concepts":[
         {
             "entry":true,
             "name":"Area",
@@ -8,7 +8,7 @@
             "height":80,
             "y":42,
             "width":80,
-            "items":[
+            "attributes":[
                 {
                     "category":"guid",
                     "name":"oid",
@@ -32,7 +32,7 @@
             "height":140,
             "y":42,
             "width":120,
-            "items":[
+            "attributes":[
                 {
                     "category":"guid",
                     "name":"oid",
@@ -91,7 +91,7 @@
             "height":80,
             "y":344,
             "width":80,
-            "items":[
+            "attributes":[
                 {
                     "category":"guid",
                     "name":"oid",
@@ -115,7 +115,7 @@
             "height":140,
             "y":334,
             "width":120,
-            "items":[
+            "attributes":[
                 {
                     "category":"guid",
                     "name":"oid",
@@ -161,47 +161,47 @@
             ]
         }
     ],
-    "lines":[
+    "relations":[
         {
-            "box1Name":"Area",
-            "box2box1Name":"area",
+            "from":"Area",
+            "toFromName":"area",
             "category":"relationship",
-            "box2box1Min":"1",
-            "box1box2Min":"0",
-            "box1box2Id":false,
-            "box1box2Max":"N",
-            "box2box1Max":"1",
-            "box2box1Id":true,
-            "box1box2Name":"parkings",
-            "box2Name":"Parking",
+            "toFromMin":"1",
+            "fromToMin":"0",
+            "fromToId":false,
+            "fromToMax":"N",
+            "toFromMax":"1",
+            "toFromId":true,
+            "fromToName":"parkings",
+            "to":"Parking",
             "internal":false
         },
         {
-            "box1Name":"CarModel",
-            "box2box1Name":"carModel",
+            "from":"CarModel",
+            "toFromName":"carModel",
             "category":"relationship",
-            "box2box1Min":"1",
-            "box1box2Min":"0",
-            "box1box2Id":false,
-            "box1box2Max":"N",
-            "box2box1Max":"1",
-            "box2box1Id":true,
-            "box1box2Name":"cars",
-            "box2Name":"Car",
+            "toFromMin":"1",
+            "fromToMin":"0",
+            "fromToId":false,
+            "fromToMax":"N",
+            "toFromMax":"1",
+            "toFromId":true,
+            "fromToName":"cars",
+            "to":"Car",
             "internal":false
         },
         {
-            "box1Name":"Parking",
-            "box2box1Name":"parking",
+            "from":"Parking",
+            "toFromName":"parking",
             "category":"relationship",
-            "box2box1Min":"1",
-            "box1box2Min":"0",
-            "box1box2Id":false,
-            "box1box2Max":"N",
-            "box2box1Max":"1",
-            "box2box1Id":true,
-            "box1box2Name":"cars",
-            "box2Name":"Car",
+            "toFromMin":"1",
+            "fromToMin":"0",
+            "fromToId":false,
+            "fromToMax":"N",
+            "toFromMax":"1",
+            "toFromId":true,
+            "fromToName":"cars",
+            "to":"Car",
             "internal":true
         }
     ],

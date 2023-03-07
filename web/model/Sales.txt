@@ -1,6 +1,6 @@
 {
     "width":990,
-    "boxes":[
+    "concepts":[
         {
             "entry":true,
             "name":"Customer",
@@ -8,7 +8,7 @@
             "height":240,
             "y":20,
             "width":120,
-            "items":[
+            "attributes":[
                 {
                     "category":"guid",
                     "name":"oid",
@@ -109,7 +109,7 @@
             "height":80,
             "y":312,
             "width":80,
-            "items":[
+            "attributes":[
                 {
                     "category":"guid",
                     "name":"oid",
@@ -140,7 +140,7 @@
             "height":100,
             "y":13,
             "width":80,
-            "items":[
+            "attributes":[
                 {
                     "category":"guid",
                     "name":"oid",
@@ -178,7 +178,7 @@
             "height":140,
             "y":408,
             "width":100,
-            "items":[
+            "attributes":[
                 {
                     "category":"guid",
                     "name":"oid",
@@ -230,7 +230,7 @@
             "height":120,
             "y":404,
             "width":80,
-            "items":[
+            "attributes":[
                 {
                     "category":"guid",
                     "name":"oid",
@@ -275,7 +275,7 @@
             "height":160,
             "y":129,
             "width":80,
-            "items":[
+            "attributes":[
                 {
                     "category":"guid",
                     "name":"oid",
@@ -335,75 +335,75 @@
             ]
         }
     ],
-    "lines":[
+    "relations":[
         {
-            "box1Name":"Order",
-            "box2box1Name":"",
+            "from":"Order",
+            "toFromName":"",
             "category":"relationship",
-            "box2box1Min":"1",
-            "box1box2Min":"0",
-            "box1box2Id":false,
-            "box1box2Max":"N",
-            "box2box1Max":"1",
-            "box2box1Id":true,
-            "box1box2Name":"",
-            "box2Name":"OrderItem",
+            "toFromMin":"1",
+            "fromToMin":"0",
+            "fromToId":false,
+            "fromToMax":"N",
+            "toFromMax":"1",
+            "toFromId":true,
+            "fromToName":"",
+            "to":"OrderItem",
             "internal":true
         },
         {
-            "box1Name":"Category",
-            "box2box1Name":"",
+            "from":"Category",
+            "toFromName":"",
             "category":"relationship",
-            "box2box1Min":"1",
-            "box1box2Min":"0",
-            "box1box2Id":false,
-            "box1box2Max":"N",
-            "box2box1Max":"1",
-            "box2box1Id":false,
-            "box1box2Name":"",
-            "box2Name":"Product",
+            "toFromMin":"1",
+            "fromToMin":"0",
+            "fromToId":false,
+            "fromToMax":"N",
+            "toFromMax":"1",
+            "toFromId":false,
+            "fromToName":"",
+            "to":"Product",
             "internal":false
         },
         {
-            "box1Name":"Product",
-            "box2box1Name":"",
+            "from":"Product",
+            "toFromName":"",
             "category":"relationship",
-            "box2box1Min":"1",
-            "box1box2Min":"0",
-            "box1box2Id":false,
-            "box1box2Max":"N",
-            "box2box1Max":"1",
-            "box2box1Id":false,
-            "box1box2Name":"",
-            "box2Name":"Discount",
+            "toFromMin":"1",
+            "fromToMin":"0",
+            "fromToId":false,
+            "fromToMax":"N",
+            "toFromMax":"1",
+            "toFromId":false,
+            "fromToName":"",
+            "to":"Discount",
             "internal":true
         },
         {
-            "box1Name":"Product",
-            "box2box1Name":"",
+            "from":"Product",
+            "toFromName":"",
             "category":"relationship",
-            "box2box1Min":"1",
-            "box1box2Min":"0",
-            "box1box2Id":false,
-            "box1box2Max":"N",
-            "box2box1Max":"1",
-            "box2box1Id":false,
-            "box1box2Name":"",
-            "box2Name":"OrderItem",
+            "toFromMin":"1",
+            "fromToMin":"0",
+            "fromToId":false,
+            "fromToMax":"N",
+            "toFromMax":"1",
+            "toFromId":false,
+            "fromToName":"",
+            "to":"OrderItem",
             "internal":false
         },
         {
-            "box1Name":"Customer",
-            "box2box1Name":"",
+            "from":"Customer",
+            "toFromName":"",
             "category":"relationship",
-            "box2box1Min":"1",
-            "box1box2Min":"0",
-            "box1box2Id":false,
-            "box1box2Max":"N",
-            "box2box1Max":"1",
-            "box2box1Id":false,
-            "box1box2Name":"",
-            "box2Name":"Order",
+            "toFromMin":"1",
+            "fromToMin":"0",
+            "fromToId":false,
+            "fromToMax":"N",
+            "toFromMax":"1",
+            "toFromId":false,
+            "fromToName":"",
+            "to":"Order",
             "internal":true
         }
     ],

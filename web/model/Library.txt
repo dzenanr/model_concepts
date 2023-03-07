@@ -1,107 +1,107 @@
 {
     "width":990,
-    "lines":[
+    "relations":[
         {
-            "box2box1Max":"1",
-            "box1Name":"Member",
-            "box1box2Min":"0",
-            "box2Name":"BookItem",
-            "box1box2Id":false,
-            "box2box1Id":false,
-            "box2box1Name":"member",
-            "box1box2Max":"N",
-            "box1box2Name":"bookItems",
-            "box2box1Min":"0",
+            "toFromMax":"1",
+            "from":"Member",
+            "fromToMin":"0",
+            "to":"BookItem",
+            "fromToId":false,
+            "toFromId":false,
+            "toFromName":"member",
+            "fromToMax":"N",
+            "fromToName":"bookItems",
+            "toFromMin":"0",
             "category":"relationship",
             "internal":false
         },
         {
-            "box2box1Max":"1",
-            "box1Name":"Category",
-            "box1box2Min":"0",
-            "box2Name":"Category",
-            "box1box2Id":false,
-            "box2box1Id":false,
-            "box2box1Name":"category",
-            "box1box2Max":"N",
-            "box1box2Name":"categories",
-            "box2box1Min":"0",
+            "toFromMax":"1",
+            "from":"Category",
+            "fromToMin":"0",
+            "to":"Category",
+            "fromToId":false,
+            "toFromId":false,
+            "toFromName":"category",
+            "fromToMax":"N",
+            "fromToName":"categories",
+            "toFromMin":"0",
             "category":"reflexive",
             "internal":true
         },
         {
-            "box2box1Max":"1",
-            "box1Name":"Category",
-            "box1box2Min":"0",
-            "box2Name":"Book",
-            "box1box2Id":false,
-            "box2box1Id":false,
-            "box2box1Name":"category",
-            "box1box2Max":"N",
-            "box1box2Name":"books",
-            "box2box1Min":"0",
+            "toFromMax":"1",
+            "from":"Category",
+            "fromToMin":"0",
+            "to":"Book",
+            "fromToId":false,
+            "toFromId":false,
+            "toFromName":"category",
+            "fromToMax":"N",
+            "fromToName":"books",
+            "toFromMin":"0",
             "category":"relationship",
             "internal":false
         },
         {
-            "box2box1Max":"1",
-            "box1Name":"Book",
-            "box1box2Min":"0",
-            "box2Name":"BookItem",
-            "box1box2Id":false,
-            "box2box1Id":true,
-            "box2box1Name":"book",
-            "box1box2Max":"N",
-            "box1box2Name":"bookItems",
-            "box2box1Min":"1",
+            "toFromMax":"1",
+            "from":"Book",
+            "fromToMin":"0",
+            "to":"BookItem",
+            "fromToId":false,
+            "toFromId":true,
+            "toFromName":"book",
+            "fromToMax":"N",
+            "fromToName":"bookItems",
+            "toFromMin":"1",
             "category":"relationship",
             "internal":true
         },
         {
-            "box2box1Max":"1",
-            "box1Name":"Book",
-            "box1box2Min":"0",
-            "box2Name":"Review",
-            "box1box2Id":false,
-            "box2box1Id":false,
-            "box2box1Name":"book",
-            "box1box2Max":"N",
-            "box1box2Name":"reviews",
-            "box2box1Min":"1",
+            "toFromMax":"1",
+            "from":"Book",
+            "fromToMin":"0",
+            "to":"Review",
+            "fromToId":false,
+            "toFromId":false,
+            "toFromName":"book",
+            "fromToMax":"N",
+            "fromToName":"reviews",
+            "toFromMin":"1",
             "category":"relationship",
             "internal":true
         },
         {
-            "box2box1Max":"1",
-            "box1Name":"Book",
-            "box1box2Min":"0",
-            "box2Name":"Author",
-            "box1box2Id":false,
-            "box2box1Id":true,
-            "box2box1Name":"book",
-            "box1box2Max":"N",
-            "box1box2Name":"authors",
-            "box2box1Min":"1",
+            "toFromMax":"1",
+            "from":"Book",
+            "fromToMin":"0",
+            "to":"Author",
+            "fromToId":false,
+            "toFromId":true,
+            "toFromName":"book",
+            "fromToMax":"N",
+            "fromToName":"authors",
+            "toFromMin":"1",
             "category":"relationship",
             "internal":true
         },
         {
-            "box2box1Max":"1",
-            "box1Name":"Writer",
-            "box1box2Min":"0",
-            "box2Name":"Author",
-            "box1box2Id":false,
-            "box2box1Id":true,
-            "box2box1Name":"writer",
-            "box1box2Max":"N",
-            "box1box2Name":"authors",
-            "box2box1Min":"1",
+            "toFromMax":"1",
+            "from":"Writer",
+            "fromToMin":"0",
+            "to":"Author",
+            "fromToId":false,
+            "toFromId":true,
+            "toFromName":"writer",
+            "fromToMax":"N",
+            "fromToName":"authors",
+            "toFromMin":"1",
             "category":"relationship",
             "internal":false
         }
     ],
     "height":580,
-    "boxes":[
+    "concepts":[
         {
             "width":140,
             "entry":true,
@@ -109,7 +109,7 @@
             "x":67,
             "height":180,
             "y":42,
-            "items":[
+            "attributes":[
                 {
                     "sequence":10,
                     "name":"oid",
@@ -200,7 +200,7 @@
             "x":266,
             "height":80,
             "y":105,
-            "items":[
+            "attributes":[
                 {
                     "sequence":10,
                     "name":"oid",
@@ -237,7 +237,7 @@
             "x":493,
             "height":100,
             "y":51,
-            "items":[
+            "attributes":[
                 {
                     "sequence":10,
                     "name":"oid",
@@ -283,7 +283,7 @@
             "x":77,
             "height":80,
             "y":393,
-            "items":[
+            "attributes":[
                 {
                     "sequence":10,
                     "name":"oid",
@@ -320,7 +320,7 @@
             "x":384,
             "height":160,
             "y":331,
-            "items":[
+            "attributes":[
                 {
                     "sequence":10,
                     "name":"oid",
@@ -402,7 +402,7 @@
             "x":732,
             "height":80,
             "y":241,
-            "items":[
+            "attributes":[
                 {
                     "sequence":10,
                     "name":"oid",
@@ -430,7 +430,7 @@
             "x":749,
             "height":80,
             "y":404,
-            "items":[
+            "attributes":[
                 {
                     "sequence":10,
                     "name":"oid",

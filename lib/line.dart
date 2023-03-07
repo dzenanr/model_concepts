@@ -4,8 +4,8 @@ class Line {
 
   final Board board;
 
-  Box box1; // line begin box
-  Box box2; // line end box
+  Box from; // line begin box
+  Box to; // line end box
 
   String _category; // relationship, inheritance, reflexive, twin
   bool internal = true;
@@ -13,25 +13,25 @@ class Line {
   bool _twin1 = false;
   bool _twin2 = false;
 
-  String box1box2Name = ''; // name from box1 to box2
-  String box1box2Min = '0'; // min cardinality from box1 to box2
-  String box1box2Max = 'N'; // max cardinality from box1 to box2
-  bool box1box2Id = false; // id from box1 to box2
+  String fromToName = ''; // name from from to to
+  String fromToMin = '0'; // min cardinality from from to to
+  String fromToMax = 'N'; // max cardinality from from to to
+  bool fromToId = false; // id from from to to
 
-  String box2box1Name = ''; // name from box2 to box1
-  String box2box1Min = '1'; // min cardinality from box2 to box1
-  String box2box1Max = '1'; // max cardinality from box2 to box1
-  bool box2box1Id = false; // id from box2 to box1
+  String toFromName = ''; // name from to to from
+  String toFromMin = '1'; // min cardinality from to to from
+  String toFromMax = '1'; // max cardinality from to to from
+  bool toFromId = false; // id from to to from
 
   bool _selected = false;
   bool _hidden = false;
 
-  Line(this.board, this.box1, this.box2) {
+  Line(this.board, this.from, this.to) {
     category = 'relationship';
-    box2.entry = false;
+    to.entry = false;
     var alreadyInternal = false;
     for (Line l in board.lines) {
-      if (l.box2 == box2) {
+      if (l.to == to) {
         if (l != this && l.internal) {
           alreadyInternal = true;
         }
@@ -50,61 +50,61 @@ class Line {
     if (!isHidden()) {
       board.context.beginPath();
       if (twin1) {
-        board.context.moveTo(box1.twin1().x, box1.twin1().y);
-        board.context.lineTo(box2.twin1().x, box2.twin1().y);
+        board.context.moveTo(from.twin1().x, from.twin1().y);
+        board.context.lineTo(to.twin1().x, to.twin1().y);
       } else if (twin2) {
-        board.context.moveTo(box1.twin2().x, box1.twin2().y);
-        board.context.lineTo(box2.twin2().x, box2.twin2().y);
+        board.context.moveTo(from.twin2().x, from.twin2().y);
+        board.context.lineTo(to.twin2().x, to.twin2().y);
       } else if (reflexive) {
-        board.context.moveTo(box1.center().x, box1.center().y);
-        board.context.lineTo(box1.reflexive1().x, box2.reflexive1().y);
-        board.context.lineTo(box1.reflexive2().x, box2.reflexive2().y);
-        board.context.lineTo(box1.center().x, box2.center().y);
+        board.context.moveTo(from.center().x, from.center().y);
+        board.context.lineTo(from.reflexive1().x, to.reflexive1().y);
+        board.context.lineTo(from.reflexive2().x, to.reflexive2().y);
+        board.context.lineTo(from.center().x, to.center().y);
       } else {
-        board.context.moveTo(box1.center().x, box1.center().y);
-        board.context.lineTo(box2.center().x, box2.center().y);
+        board.context.moveTo(from.center().x, from.center().y);
+        board.context.lineTo(to.center().x, to.center().y);
       }
-      Point box1box2MinMaxPoint;
-      Point box2box1MinMaxPoint;
-      Point box1box2NamePoint;
-      Point box2box1NamePoint;
+      Point fromToMinMaxPoint;
+      Point toFromMinMaxPoint;
+      Point fromToNamePoint;
+      Point toFromNamePoint;
       if (reflexive) {
-        box1box2MinMaxPoint = calculateMinMaxPoint1(box1);
-        box2box1MinMaxPoint = calculateMinMaxPoint2(box1);
-        box1box2NamePoint = calculateNamePoint1(box1);
-        box2box1NamePoint = calculateNamePoint2(box1);
+        fromToMinMaxPoint = calculateMinMaxPoint1(from);
+        toFromMinMaxPoint = calculateMinMaxPoint2(from);
+        fromToNamePoint = calculateNamePoint1(from);
+        toFromNamePoint = calculateNamePoint2(from);
       } else {
-        box1box2MinMaxPoint = calculateMinMaxPointCloseToBeginBox(box1, box2);
-        box2box1MinMaxPoint = calculateMinMaxPointCloseToBeginBox(box2, box1);
-        box1box2NamePoint = calculateNamePointCloseToBeginBox(box1, box2);
-        box2box1NamePoint = calculateNamePointCloseToBeginBox(box2, box1);
+        fromToMinMaxPoint = calculateMinMaxPointCloseToBeginBox(from, to);
+        toFromMinMaxPoint = calculateMinMaxPointCloseToBeginBox(to, from);
+        fromToNamePoint = calculateNamePointCloseToBeginBox(from, to);
+        toFromNamePoint = calculateNamePointCloseToBeginBox(to, from);
       }
 
-      String box1box2MinMax = '$box1box2Min..$box1box2Max';
-      String box2box1MinMax = '$box2box1Min..$box2box1Max';
+      String fromToMinMax = '$fromToMin..$fromToMax';
+      String toFromMinMax = '$toFromMin..$toFromMax';
       int dfs = Board.DEFAULT_FONT_SIZE;
-      if (box1box2Id) {
+      if (fromToId) {
         board.context.font = 'bold italic ${dfs}px sans-serif';
-      } else if (box1box2Min != '0') {
+      } else if (fromToMin != '0') {
         board.context.font = 'bold ${dfs}px sans-serif';
       } else {
         board.context.font = '${dfs}px sans-serif';
       }
-      board.context.fillText(box1box2MinMax, box1box2MinMaxPoint.x,
-        box1box2MinMaxPoint.y);
-      board.context.fillText(box1box2Name, box1box2NamePoint.x,
-        box1box2NamePoint.y);
-      if (box2box1Id) {
+      board.context.fillText(fromToMinMax, fromToMinMaxPoint.x,
+        fromToMinMaxPoint.y);
+      board.context.fillText(fromToName, fromToNamePoint.x,
+        fromToNamePoint.y);
+      if (toFromId) {
         board.context.font = 'bold italic ${dfs}px sans-serif';
-      } else if (box2box1Min != '0') {
+      } else if (toFromMin != '0') {
         board.context.font = 'bold ${dfs}px sans-serif';
       } else {
         board.context.font = '${dfs}px sans-serif';
       }
-      board.context.fillText(box2box1MinMax, box2box1MinMaxPoint.x,
-        box2box1MinMaxPoint.y);
-      board.context.fillText(box2box1Name, box2box1NamePoint.x,
-        box2box1NamePoint.y);
+      board.context.fillText(toFromMinMax, toFromMinMaxPoint.x,
+        toFromMinMaxPoint.y);
+      board.context.fillText(toFromName, toFromNamePoint.x,
+        toFromNamePoint.y);
 
       if (!internal) {
         board.context.strokeStyle = Board.SOFT_LINE_COLOR;
@@ -126,46 +126,46 @@ class Line {
   void set category(String category) {
     _category = category;
     if (category == 'relationship') {
-      //box1box2Name = '';
-      box1box2Name = putInEnglishPlural(box2.title.toLowerCase());
-      box1box2Min = '0';
-      box1box2Max = 'N';
-      box1box2Id = false;
+      //fromToName = '';
+      fromToName = putInEnglishPlural(to.title.toLowerCase());
+      fromToMin = '0';
+      fromToMax = 'N';
+      fromToId = false;
 
-      //box2box1Name = '';
-      box2box1Name = box1.title.toLowerCase();
-      box2box1Min = '1';
-      box2box1Max = '1';
-      box2box1Id = false;
+      //toFromName = '';
+      toFromName = from.title.toLowerCase();
+      toFromMin = '1';
+      toFromMax = '1';
+      toFromId = false;
 
       _twin1 = false;
       _twin2 = false;
     } else if (category == 'inheritance') {
-      box1box2Name = 'as${box2.title}';
-      box1box2Min = '0';
-      box1box2Max = '1';
-      box1box2Id = false;
+      fromToName = 'as${to.title}';
+      fromToMin = '0';
+      fromToMax = '1';
+      fromToId = false;
 
-      box2box1Name = 'is${box1.title}';
-      box2box1Min = '1';
-      box2box1Max = '1';
-      box2box1Id = true;
+      toFromName = 'is${from.title}';
+      toFromMin = '1';
+      toFromMax = '1';
+      toFromId = true;
 
       _twin1 = false;
       _twin2 = false;
     } else if (category == 'reflexive') {
-      box2 = box1;
+      to = from;
       internal = true;
 
-      box1box2Name = putInEnglishPlural(box1.title.toLowerCase());
-      box1box2Min = '0';
-      box1box2Max = 'N';
-      box1box2Id = false;
+      fromToName = putInEnglishPlural(from.title.toLowerCase());
+      fromToMin = '0';
+      fromToMax = 'N';
+      fromToId = false;
 
-      box2box1Name = box1.title.toLowerCase();
-      box2box1Min = '0';
-      box2box1Max = '1';
-      box2box1Id = false;
+      toFromName = from.title.toLowerCase();
+      toFromMin = '0';
+      toFromMax = '1';
+      toFromId = false;
 
       _twin1 = false;
       _twin2 = false;
@@ -185,10 +185,10 @@ class Line {
           twinLine._category = 'twin';
           twinLine.internal = false;
         }
-        box1box2Name = '${putInEnglishPlural(box2.title.toLowerCase())}1';
-        box2box1Name = '${box1.title.toLowerCase()}2';
-        twinLine.box1box2Name = '${putInEnglishPlural(box2.title.toLowerCase())}2';
-        twinLine.box2box1Name = '${box1.title.toLowerCase()}1';
+        fromToName = '${putInEnglishPlural(to.title.toLowerCase())}1';
+        toFromName = '${from.title.toLowerCase()}2';
+        twinLine.fromToName = '${putInEnglishPlural(to.title.toLowerCase())}2';
+        twinLine.toFromName = '${from.title.toLowerCase()}1';
       }
     }
   }
@@ -214,20 +214,20 @@ class Line {
 
   Map<String, Object> toJson() {
     Map<String, Object> lineMap = new Map<String, Object>();
-    lineMap["box1Name"] = box1.title;
-    lineMap["box2Name"] = box2.title;
+    lineMap["from"] = from.title;
+    lineMap["to"] = to.title;
     lineMap["category"] = category;
     lineMap["internal"] = internal;
 
-    lineMap["box1box2Name"] = box1box2Name;
-    lineMap["box1box2Min"] = box1box2Min;
-    lineMap["box1box2Max"] = box1box2Max;
-    lineMap["box1box2Id"] = box1box2Id;
+    lineMap["fromToName"] = fromToName;
+    lineMap["fromToMin"] = fromToMin;
+    lineMap["fromToMax"] = fromToMax;
+    lineMap["fromToId"] = fromToId;
 
-    lineMap["box2box1Name"] = box2box1Name;
-    lineMap["box2box1Min"] = box2box1Min;
-    lineMap["box2box1Max"] = box2box1Max;
-    lineMap["box2box1Id"] = box2box1Id;
+    lineMap["toFromName"] = toFromName;
+    lineMap["toFromMin"] = toFromMin;
+    lineMap["toFromMax"] = toFromMax;
+    lineMap["toFromId"] = toFromId;
 
     return lineMap;
   }
@@ -295,7 +295,7 @@ class Line {
    * with the error of delta in pixels.
    */
   bool contains(Point point, Point delta) {
-    if (box1.contains(point.x.toInt(), point.y.toInt()) || box2.contains(point.x.toInt(), point.y.toInt())) {
+    if (from.contains(point.x.toInt(), point.y.toInt()) || to.contains(point.x.toInt(), point.y.toInt())) {
       return false;
     }
 
@@ -307,17 +307,17 @@ class Line {
     Point beginPoint;
     Point endPoint;
     if (twin1) {
-      beginPoint = box1.twin1();
-      endPoint = box2.twin1();
+      beginPoint = from.twin1();
+      endPoint = to.twin1();
     } else if (twin2) {
-      beginPoint = box1.twin2();
-      endPoint = box2.twin2();
+      beginPoint = from.twin2();
+      endPoint = to.twin2();
     } else if (reflexive) {
-      beginPoint = box1.reflexive1();
-      endPoint = box1.reflexive2();
+      beginPoint = from.reflexive1();
+      endPoint = from.reflexive2();
     } else {
-      beginPoint = box1.center();
-      endPoint = box2.center();
+      beginPoint = from.center();
+      endPoint = to.center();
     }
     pointDifX = endPoint.x - beginPoint.x;
     pointDifY = endPoint.y - beginPoint.y;

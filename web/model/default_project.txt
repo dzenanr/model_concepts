@@ -1,10 +1,10 @@
 {
     "width":990,
-    "lines":[
+    "relations":[
 
     ],
     "height":580,
-    "boxes":[
+    "concepts":[
         {
             "width":80,
             "entry":true,
@@ -12,7 +12,7 @@
             "x":111,
             "height":80,
             "y":90,
-            "items":[
+            "attributes":[
                 {
                     "sequence":10,
                     "name":"name",

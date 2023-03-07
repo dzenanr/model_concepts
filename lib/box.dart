@@ -147,7 +147,7 @@ class Box {
     boxMap["y"] = y;
     boxMap["width"] = width;
     boxMap["height"] = height;
-    boxMap["items"] = itemsToJson();
+    boxMap["attributes"] = itemsToJson();
     return boxMap;
   }
 

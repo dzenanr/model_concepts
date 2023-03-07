@@ -1,37 +1,37 @@
 {
     "width":990,
-    "lines":[
+    "relations":[
         {
-            "box2box1Max":"1",
-            "box1Name":"Presentation",
-            "box1box2Min":"0",
-            "box2Name":"Slide",
-            "box1box2Id":false,
-            "box2box1Id":true,
-            "box2box1Name":"",
-            "box1box2Max":"N",
-            "box1box2Name":"",
-            "box2box1Min":"1",
+            "toFromMax":"1",
+            "from":"Presentation",
+            "fromToMin":"0",
+            "to":"Slide",
+            "fromToId":false,
+            "toFromId":true,
+            "toFromName":"",
+            "fromToMax":"N",
+            "fromToName":"",
+            "toFromMin":"1",
             "category":"relationship",
             "internal":true
         },
         {
-            "box2box1Max":"1",
-            "box1Name":"Slide",
-            "box1box2Min":"0",
-            "box2Name":"Point",
-            "box1box2Id":false,
-            "box2box1Id":true,
-            "box2box1Name":"",
-            "box1box2Max":"N",
-            "box1box2Name":"",
-            "box2box1Min":"1",
+            "toFromMax":"1",
+            "from":"Slide",
+            "fromToMin":"0",
+            "to":"Point",
+            "fromToId":false,
+            "toFromId":true,
+            "toFromName":"",
+            "fromToMax":"N",
+            "fromToName":"",
+            "toFromMin":"1",
             "category":"relationship",
             "internal":true
         }
     ],
     "height":580,
-    "boxes":[
+    "concepts":[
         {
             "width":100,
             "entry":true,
@@ -39,7 +39,7 @@
             "x":48,
             "height":140,
             "y":37,
-            "items":[
+            "attributes":[
                 {
                     "sequence":10,
                     "name":"title",
@@ -103,7 +103,7 @@
             "x":421,
             "height":100,
             "y":149,
-            "items":[
+            "attributes":[
                 {
                     "sequence":10,
                     "name":"number",
@@ -149,7 +149,7 @@
             "x":51,
             "height":140,
             "y":213,
-            "items":[
+            "attributes":[
                 {
                     "sequence":10,
                     "name":"number",

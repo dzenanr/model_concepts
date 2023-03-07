@@ -1,79 +1,79 @@
 {
     "width":990,
-    "lines":[
+    "relations":[
         {
-            "box2box1Max":"1",
-            "box1Name":"Test",
-            "box1box2Min":"0",
-            "box2Name":"Question",
-            "box1box2Id":false,
-            "box2box1Id":true,
-            "box2box1Name":"",
-            "box1box2Max":"N",
-            "box1box2Name":"",
-            "box2box1Min":"1",
+            "toFromMax":"1",
+            "from":"Test",
+            "fromToMin":"0",
+            "to":"Question",
+            "fromToId":false,
+            "toFromId":true,
+            "toFromName":"",
+            "fromToMax":"N",
+            "fromToName":"",
+            "toFromMin":"1",
             "category":"relationship",
             "internal":true
         },
         {
-            "box2box1Max":"1",
-            "box1Name":"Test",
-            "box1box2Min":"0",
-            "box2Name":"Document",
-            "box1box2Id":false,
-            "box2box1Id":false,
-            "box2box1Name":"",
-            "box1box2Max":"N",
-            "box1box2Name":"",
-            "box2box1Min":"0",
+            "toFromMax":"1",
+            "from":"Test",
+            "fromToMin":"0",
+            "to":"Document",
+            "fromToId":false,
+            "toFromId":false,
+            "toFromName":"",
+            "fromToMax":"N",
+            "fromToName":"",
+            "toFromMin":"0",
             "category":"relationship",
             "internal":false
         },
         {
-            "box2box1Max":"1",
-            "box1Name":"Member",
-            "box1box2Min":"0",
-            "box2Name":"Question",
-            "box1box2Id":false,
-            "box2box1Id":false,
-            "box2box1Name":"",
-            "box1box2Max":"N",
-            "box1box2Name":"",
-            "box2box1Min":"0",
+            "toFromMax":"1",
+            "from":"Member",
+            "fromToMin":"0",
+            "to":"Question",
+            "fromToId":false,
+            "toFromId":false,
+            "toFromName":"",
+            "fromToMax":"N",
+            "fromToName":"",
+            "toFromMin":"0",
             "category":"relationship",
             "internal":false
         },
         {
-            "box2box1Max":"1",
-            "box1Name":"Question",
-            "box1box2Min":"0",
-            "box2Name":"Point",
-            "box1box2Id":false,
-            "box2box1Id":true,
-            "box2box1Name":"",
-            "box1box2Max":"N",
-            "box1box2Name":"",
-            "box2box1Min":"1",
+            "toFromMax":"1",
+            "from":"Question",
+            "fromToMin":"0",
+            "to":"Point",
+            "fromToId":false,
+            "toFromId":true,
+            "toFromName":"",
+            "fromToMax":"N",
+            "fromToName":"",
+            "toFromMin":"1",
             "category":"relationship",
             "internal":true
         },
         {
-            "box2box1Max":"1",
-            "box1Name":"Member",
-            "box1box2Min":"0",
-            "box2Name":"Document",
-            "box1box2Id":false,
-            "box2box1Id":false,
-            "box2box1Name":"",
-            "box1box2Max":"N",
-            "box1box2Name":"",
-            "box2box1Min":"1",
+            "toFromMax":"1",
+            "from":"Member",
+            "fromToMin":"0",
+            "to":"Document",
+            "fromToId":false,
+            "toFromId":false,
+            "toFromName":"",
+            "fromToMax":"N",
+            "fromToName":"",
+            "toFromMin":"1",
             "category":"relationship",
             "internal":true
         }
     ],
     "height":580,
-    "boxes":[
+    "concepts":[
         {
             "width":80,
             "entry":true,
@@ -81,7 +81,7 @@
             "x":45,
             "height":60,
             "y":86,
-            "items":[
+            "attributes":[
                 {
                     "sequence":10,
                     "name":"name",
@@ -109,7 +109,7 @@
             "x":601,
             "height":160,
             "y":91,
-            "items":[
+            "attributes":[
                 {
                     "sequence":10,
                     "name":"account",
@@ -191,7 +191,7 @@
             "x":560,
             "height":80,
             "y":288,
-            "items":[
+            "attributes":[
                 {
                     "sequence":10,
                     "name":"number",
@@ -228,7 +228,7 @@
             "x":328,
             "height":60,
             "y":149,
-            "items":[
+            "attributes":[
                 {
                     "sequence":10,
                     "name":"fileName",
@@ -256,7 +256,7 @@
             "x":297,
             "height":120,
             "y":248,
-            "items":[
+            "attributes":[
                 {
                     "sequence":10,
                     "name":"number",

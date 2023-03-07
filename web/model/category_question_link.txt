@@ -1,65 +1,65 @@
 {
    "width":990,
-   "lines":[
+   "relations":[
       {
-         "box2box1Min":"1",
-         "box1Name":"Category",
-         "box1box2Min":"0",
-         "box2Name":"WebLink",
+         "toFromMin":"1",
+         "from":"Category",
+         "fromToMin":"0",
+         "to":"WebLink",
          "category":"relationship",
-         "box2box1Id":true,
-         "box2box1Name":"category",
-         "box1box2Id":false,
-         "box1box2Name":"webLinks",
-         "box1box2Max":"N",
+         "toFromId":true,
+         "toFromName":"category",
+         "fromToId":false,
+         "fromToName":"webLinks",
+         "fromToMax":"N",
          "internal":true,
-         "box2box1Max":"1"
+         "toFromMax":"1"
       },
       {
-         "box2box1Min":"1",
-         "box1Name":"Category",
-         "box1box2Min":"0",
-         "box2Name":"Interest",
+         "toFromMin":"1",
+         "from":"Category",
+         "fromToMin":"0",
+         "to":"Interest",
          "category":"relationship",
-         "box2box1Id":true,
-         "box2box1Name":"category",
-         "box1box2Id":false,
-         "box1box2Name":"interests",
-         "box1box2Max":"N",
+         "toFromId":true,
+         "toFromName":"category",
+         "fromToId":false,
+         "fromToName":"interests",
+         "fromToMax":"N",
          "internal":false,
-         "box2box1Max":"1"
+         "toFromMax":"1"
       },
       {
-         "box2box1Min":"1",
-         "box1Name":"Member",
-         "box1box2Min":"0",
-         "box2Name":"Interest",
+         "toFromMin":"1",
+         "from":"Member",
+         "fromToMin":"0",
+         "to":"Interest",
          "category":"relationship",
-         "box2box1Id":true,
-         "box2box1Name":"member",
-         "box1box2Id":false,
-         "box1box2Name":"interests",
-         "box1box2Max":"N",
+         "toFromId":true,
+         "toFromName":"member",
+         "fromToId":false,
+         "fromToName":"interests",
+         "fromToMax":"N",
          "internal":true,
-         "box2box1Max":"1"
+         "toFromMax":"1"
       },
       {
-         "box2box1Min":"0",
-         "box1Name":"Category",
-         "box1box2Min":"0",
-         "box2Name":"Question",
+         "toFromMin":"0",
+         "from":"Category",
+         "fromToMin":"0",
+         "to":"Question",
          "category":"relationship",
-         "box2box1Id":false,
-         "box2box1Name":"category",
-         "box1box2Id":false,
-         "box1box2Name":"questions",
-         "box1box2Max":"N",
+         "toFromId":false,
+         "toFromName":"category",
+         "fromToId":false,
+         "fromToName":"questions",
+         "fromToMax":"N",
          "internal":false,
-         "box2box1Max":"1"
+         "toFromMax":"1"
       }
    ],
    "height":580,
-   "boxes":[
+   "concepts":[
       {
          "entry":true,
          "name":"Member",
@@ -67,7 +67,7 @@
          "y":288,
          "width":100,
          "height":180,
-         "items":[
+         "attributes":[
             {
                "sequence":10,
                "category":"identifier",
@@ -158,7 +158,7 @@
          "y":72,
          "width":100,
          "height":80,
-         "items":[
+         "attributes":[
             {
                "sequence":20,
                "category":"identifier",
@@ -195,7 +195,7 @@
          "y":236,
          "width":100,
          "height":140,
-         "items":[
+         "attributes":[
             {
                "sequence":20,
                "category":"identifier",
@@ -259,7 +259,7 @@
          "y":403,
          "width":100,
          "height":60,
-         "items":[
+         "attributes":[
             {
                "sequence":10,
                "category":"attribute",
@@ -278,7 +278,7 @@
          "y":182,
          "width":100,
          "height":80,
-         "items":[
+         "attributes":[
             {
                "sequence":10,
                "category":"required",
@@ -315,7 +315,7 @@
          "y":68,
          "width":100,
          "height":140,
-         "items":[
+         "attributes":[
             {
                "sequence":10,
                "category":"identifier",
