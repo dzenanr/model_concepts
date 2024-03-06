@@ -11,4 +11,3 @@ part 'line.dart';
 part 'menu_bar.dart';
 part 'png_panel.dart';
 part 'tool_bar.dart';
-

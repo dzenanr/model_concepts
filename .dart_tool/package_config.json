@@ -1,0 +1,14 @@
+{
+  "configVersion": 2,
+  "packages": [
+    {
+      "name": "model_concepts",
+      "rootUri": "../",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    }
+  ],
+  "generated": "2024-03-06T05:05:23.020439Z",
+  "generator": "pub",
+  "generatorVersion": "3.2.6"
+}

@@ -16,38 +16,38 @@ class Board {
   static const String FILE_NAME = 'model.txt';
 
   CanvasElement canvas;
-  CanvasRenderingContext2D context;
+  late CanvasRenderingContext2D context;
 
-  num _width;
-  num _height;
+  num _width = Board.MIN_WIDTH;
+  num _height = Board.MIN_HEIGHT;
 
-  List<Box> boxes;
-  List<Line> lines;
+  late List<Box> boxes;
+  late List<Line> lines;
 
-  Box beforeLastBoxSelected;
-  Box lastBoxSelected;
-  Line lastLineSelected;
+  Box? beforeLastBoxSelected;
+  Box? lastBoxSelected;
+  Line? lastLineSelected;
 
-  MenuBar menuBar;
-  ToolBar toolBar;
-  JsonPanel jsonPanel;
-  PngPanel pngPanel;
+  late MenuBar menuBar;
+  late ToolBar toolBar;
+  late JsonPanel jsonPanel;
+  late PngPanel pngPanel;
 
   Board(this.canvas) {
-    context = canvas.getContext('2d');
-    _width = canvas.width;
-    _height = canvas.height;
+    context = canvas.getContext('2d') as CanvasRenderingContext2D;
+    _width = canvas.width as num;
+    _height = canvas.height as num;
     border();
 
-    boxes = new List<Box>();
-    lines = new List<Line>();
+    boxes = List<Box>.empty();
+    lines = new List<Line>.empty();
 
     menuBar = new MenuBar(this);
     toolBar = new ToolBar(this);
     jsonPanel = new JsonPanel(this);
     pngPanel = new PngPanel(this);
 
-    document.querySelector('#canvas').onMouseDown.listen(onMouseDown);
+    document.querySelector('#canvas')?.onMouseDown.listen(onMouseDown);
     window.animationFrame.then(redrawLoop);
   }
 
@@ -74,16 +74,16 @@ class Board {
     return _height;
   }
 
-  void openModel(String name) {
-    String json = window.localStorage[name];
+  void openModel(String? name) {
+    String? json = window.localStorage[name];
     if (json != null) {
       fromJson(json);
     }
   }
 
-  void saveModel(String name) {
-    String json = toJson();
-    if (json != null) {
+  void saveModel(String? name) {
+    String? json = toJson();
+    if (json != null && name != null) {
       window.localStorage[name] = json;
     }
   }
@@ -95,7 +95,7 @@ class Board {
     pngPanel.hide();
   }
 
-  String toJson() {
+  String? toJson() {
     Map<String, Object> boardMap = new Map<String, Object>();
     boardMap["width"] = width;
     boardMap["height"] = height;
@@ -104,20 +104,22 @@ class Board {
     return JSON.encode(boardMap);
   }
 
-  void fromJson(String json) {
+  void fromJson(String? json) {
     if (json != null && json.trim() != '') {
       Map<String, Object> boardMap = JSON.decode(json);
-      width = boardMap["width"];
-      height = boardMap["height"];
-      List<Map<String, Object>> boxesList = boardMap["concepts"];
+      width = boardMap["width"] as num;
+      height = boardMap["height"] as num;
+      List<Map<String, Object>> boxesList =
+          boardMap["concepts"] as List<Map<String, Object>>;
       boxesFromJson(boxesList);
-      List<Map<String, Object>> linesList = boardMap["relations"];
+      List<Map<String, Object>> linesList =
+          boardMap["relations"] as List<Map<String, Object>>;
       linesFromJson(linesList);
     }
   }
 
   List<Map<String, Object>> boxesToJson() {
-    List<Map<String, Object>> boxesList = new List<Map<String, Object>>();
+    List<Map<String, Object>> boxesList = List<Map<String, Object>>.empty();
     for (Box box in boxes) {
       if (!box.isHidden()) {
         boxesList.add(box.toJson());
@@ -127,7 +129,7 @@ class Board {
   }
 
   List<Map<String, Object>> linesToJson() {
-    List<Map<String, Object>> linesList = new List<Map<String, Object>>();
+    List<Map<String, Object>> linesList = List<Map<String, Object>>.empty();
     for (Line line in lines) {
       if (!line.isHidden()) {
         linesList.add(line.toJson());
@@ -137,21 +139,22 @@ class Board {
   }
 
   void boxesFromJson(List<Map<String, Object>> boxesList) {
-    boxes = new List<Box>();
+    boxes = List<Box>.empty();
     for (Map<String, Object> jsonBox in boxesList) {
       boxes.add(boxFromJson(jsonBox));
     }
   }
 
   Box boxFromJson(Map<String, Object> boxMap) {
-    num x = boxMap["x"];
-    num y = boxMap["y"];
-    num width = boxMap["width"];
-    num height = boxMap["height"];
+    num x = boxMap["x"] as num;
+    num y = boxMap["y"] as num;
+    num width = boxMap["width"] as num;
+    num height = boxMap["height"] as num;
     Box box = new Box(this, x, y, width, height);
-    box.title = boxMap["name"];
-    box.entry = boxMap["entry"];
-    List<Map<String, Object>> itemsList = boxMap["attributes"];
+    box.title = boxMap["name"] as String;
+    box.entry = boxMap["entry"] as bool;
+    List<Map<String, Object>> itemsList =
+        boxMap["attributes"] as List<Map<String, Object>>;
     for (Map<String, Object> jsonItem in itemsList) {
       itemFromJson(box, jsonItem);
     }
@@ -159,52 +162,52 @@ class Board {
   }
 
   Item itemFromJson(Box box, Map<String, Object> itemMap) {
-    String name = itemMap["name"];
-    String category = itemMap["category"];
+    String name = itemMap["name"] as String;
+    String category = itemMap["category"] as String;
     Item item = new Item(box, name, category);
-    int sequence = itemMap["sequence"];
+    int sequence = itemMap["sequence"] as int;
     item.sequence = sequence;
-    item.type = itemMap["type"];
-    item.init = itemMap["init"];
-    item.essential = itemMap["essential"];
-    item.sensitive = itemMap["sensitive"];
+    item.type = itemMap["type"] as String;
+    item.init = itemMap["init"] as String;
+    item.essential = itemMap["essential"] as bool;
+    item.sensitive = itemMap["sensitive"] as bool;
     return item;
   }
 
   void linesFromJson(List<Map<String, Object>> linesList) {
-    lines = new List<Line>();
+    lines = List<Line>.empty();
     for (Map<String, Object> jsonLine in linesList) {
-      Line line = lineFromJson(jsonLine);
+      Line? line = lineFromJson(jsonLine);
       if (line != null) {
         lines.add(line);
       }
     }
   }
 
-  Line lineFromJson(Map<String, Object> lineMap) {
-    String from = lineMap["from"];
-    String to = lineMap["to"];
-    Box from = findBox(from);
-    Box to = findBox(to);
+  Line? lineFromJson(Map<String, Object> lineMap) {
+    String? fromString = lineMap["from"] as String?;
+    String? toString = lineMap["to"] as String?;
+    Box? from = findBox(fromString);
+    Box? to = findBox(toString);
     if (from != null && to != null) {
       Line line = new Line(this, from, to);
-      line.category = lineMap["category"];
-      line.internal = lineMap["internal"];
+      line.category = lineMap["category"] as String;
+      line.internal = lineMap["internal"] as bool;
 
-      String fromToName = lineMap["fromToName"];
-      String fromToMin = lineMap["fromToMin"];
-      String fromToMax = lineMap["fromToMax"];
-      bool fromToId = lineMap["fromToId"];
+      String fromToName = lineMap["fromToName"] as String;
+      String fromToMin = lineMap["fromToMin"] as String;
+      String fromToMax = lineMap["fromToMax"] as String;
+      bool fromToId = lineMap["fromToId"] as bool;
 
       line.fromToName = fromToName;
       line.fromToMin = fromToMin;
       line.fromToMax = fromToMax;
       line.fromToId = fromToId;
 
-      String toFromName = lineMap["toFromName"];
-      String toFromMin = lineMap["toFromMin"];
-      String toFromMax = lineMap["toFromMax"];
-      bool toFromId = lineMap["toFromId"];
+      String toFromName = lineMap["toFromName"] as String;
+      String toFromMin = lineMap["toFromMin"] as String;
+      String toFromMax = lineMap["toFromMax"] as String;
+      bool toFromId = lineMap["toFromId"] as bool;
 
       line.toFromName = toFromName;
       line.toFromMin = toFromMin;
@@ -247,7 +250,8 @@ class Board {
   }
 
   void createBoxesInDiagonal() {
-    int x = 0; int y = 0;
+    int x = 0;
+    int y = 0;
     while (true) {
       if (x <= width - Box.DEFAULT_WIDTH && y <= height - Box.DEFAULT_HEIGHT) {
         Box box = new Box(this, x, y, Box.DEFAULT_WIDTH, Box.DEFAULT_HEIGHT);
@@ -261,7 +265,8 @@ class Board {
   }
 
   void createBoxesAsTiles() {
-    int x = 0; int y = 0;
+    int x = 0;
+    int y = 0;
     while (true) {
       if (x <= width - Box.DEFAULT_WIDTH) {
         Box box = new Box(this, x, y, Box.DEFAULT_WIDTH, Box.DEFAULT_HEIGHT);
@@ -297,9 +302,9 @@ class Board {
       if (box.isSelected()) {
         boxes.remove(box);
         if (box == beforeLastBoxSelected) {
-          beforeLastBoxSelected == null;
+          beforeLastBoxSelected = null;
         } else if (box == lastBoxSelected) {
-          lastBoxSelected == null;
+          lastBoxSelected = null;
         }
       }
     }
@@ -527,14 +532,15 @@ class Board {
     Point delta = new Point(DELTA, DELTA);
     int count = 0;
     for (Line line in lines) {
-      if (line.isSelected() && line.contains(new Point(pointX, pointY), delta)) {
+      if (line.isSelected() &&
+          line.contains(new Point(pointX, pointY), delta)) {
         count++;
       }
     }
     return count;
   }
 
-  int countLinesBetween(Box from, Box to) {
+  int countLinesBetween(Box? from, Box? to) {
     int count = 0;
     for (Line line in lines) {
       if ((line.from == from && line.to == to) ||
@@ -545,7 +551,7 @@ class Board {
     return count;
   }
 
-  Box findBox(String boxName) {
+  Box? findBox(String? boxName) {
     for (Box box in boxes) {
       if (box.title == boxName) {
         return box;
@@ -554,7 +560,7 @@ class Board {
     return null;
   }
 
-  Line findTwinLine(Line twin) {
+  Line? findTwinLine(Line twin) {
     for (Line line in lines) {
       if (line != twin && line.from == twin.from && line.to == twin.to) {
         return line;
@@ -563,7 +569,7 @@ class Board {
     return null;
   }
 
-  Line _lineContains(Point point) {
+  Line? _lineContains(Point point) {
     Point delta = new Point(DELTA, DELTA);
     for (Line line in lines) {
       if (line.contains(point, delta)) {
@@ -573,7 +579,7 @@ class Board {
     return null;
   }
 
-  bool _boxExists(Box box) {
+  bool _boxExists(Box? box) {
     for (Box b in boxes) {
       if (b == box) {
         return true;
@@ -585,7 +591,7 @@ class Board {
   void onMouseDown(MouseEvent e) {
     bool clickedOnBox = false;
     for (Box box in boxes) {
-      if (box.contains(e.offset.x, e.offset.y)) {
+      if (box.contains(e.offset.x.toInt(), e.offset.y.toInt())) {
         // Clicked on the existing box.
         clickedOnBox = true;
         break;
@@ -595,7 +601,7 @@ class Board {
     if (!clickedOnBox) {
       if (toolBar.isSelectToolOn()) {
         Point clickedPoint = new Point(e.offset.x, e.offset.y);
-        Line line = _lineContains(clickedPoint);
+        Line? line = _lineContains(clickedPoint);
         if (line != null) {
           // Select or deselect the existing line.
           line.toggleSelection();
@@ -606,8 +612,8 @@ class Board {
       } else if (toolBar.isBoxToolOn()) {
         // Create a box in the position of the mouse click on the board,
         // but not on an existing box.
-        Box box = new Box(this, e.offset.x, e.offset.y,
-          Box.DEFAULT_WIDTH, Box.DEFAULT_HEIGHT);
+        Box box = new Box(this, e.offset.x, e.offset.y, Box.DEFAULT_WIDTH,
+            Box.DEFAULT_HEIGHT);
         if (e.offset.x + box.width > width) {
           box.x = width - box.width - 1;
         }
@@ -617,15 +623,16 @@ class Board {
         boxes.add(box);
       } else if (toolBar.isLineToolOn()) {
         // Create a line between the last two selected boxes.
-        if (beforeLastBoxSelected != null && lastBoxSelected != null &&
-          _boxExists(beforeLastBoxSelected) && _boxExists(lastBoxSelected) &&
-          countLinesBetween(beforeLastBoxSelected, lastBoxSelected) < 2) {
-          Line line = new Line(this, beforeLastBoxSelected, lastBoxSelected);
+        if (beforeLastBoxSelected != null &&
+            lastBoxSelected != null &&
+            _boxExists(beforeLastBoxSelected) &&
+            _boxExists(lastBoxSelected) &&
+            countLinesBetween(beforeLastBoxSelected, lastBoxSelected) < 2) {
+          Line line = new Line(this, beforeLastBoxSelected!, lastBoxSelected!);
           lines.add(line);
         }
       }
       toolBar.backToFixedTool();
     }
   }
-
 }

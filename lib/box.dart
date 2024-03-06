@@ -19,20 +19,20 @@ class Box {
   num width;
   num height;
 
-  List<Item> items;
+  late List<Item> items;
 
   bool _selected = false;
   bool _hidden = false;
   bool _mouseDown = false;
 
   Box(this.board, this.x, this.y, this.width, this.height) {
-    items = new List<Item>();
+    items = List<Item>.empty();
 
     draw();
     // Box events (actually, canvas events).
-    document.querySelector('#canvas').onMouseDown.listen(onMouseDown);
-    document.querySelector('#canvas').onMouseUp.listen(onMouseUp);
-    document.querySelector('#canvas').onMouseMove.listen(onMouseMove);
+    document.querySelector('#canvas')?.onMouseDown.listen(onMouseDown);
+    document.querySelector('#canvas')?.onMouseUp.listen(onMouseUp);
+    document.querySelector('#canvas')?.onMouseMove.listen(onMouseMove);
     select();
   }
 
@@ -57,38 +57,36 @@ class Box {
       for (Item item in items) {
         if (item.category.trim() == 'attribute') {
           board.context.font = '${dfs}px sans-serif';
-          board.context.fillText(item.name, x + TOS, y + TOS + TBH + i * IOS,
-            width - TOS);
+          board.context.fillText(
+              item.name, x + TOS, y + TOS + TBH + i * IOS, width - TOS);
         } else if (item.category == 'guid') {
-          board.context.font =
-            'italic ${dfs}px sans-serif';
-          board.context.fillText(item.name, x + TOS, y + TOS + TBH + i * IOS,
-            width - TOS);
+          board.context.font = 'italic ${dfs}px sans-serif';
+          board.context.fillText(
+              item.name, x + TOS, y + TOS + TBH + i * IOS, width - TOS);
         } else if (item.category == 'identifier') {
-          board.context.font =
-            'bold italic ${dfs}px sans-serif';
-          board.context.fillText(item.name, x + TOS, y + TOS + TBH + i * IOS,
-            width - TOS);
+          board.context.font = 'bold italic ${dfs}px sans-serif';
+          board.context.fillText(
+              item.name, x + TOS, y + TOS + TBH + i * IOS, width - TOS);
         } else if (item.category == 'required') {
-          board.context.font =
-            'bold ${dfs}px sans-serif';
-          board.context.fillText(item.name, x + TOS, y + TOS + TBH + i * IOS,
-            width - TOS);
-        // added redundancy to avoid the problem of not displaying attributes only
-        } else { 
+          board.context.font = 'bold ${dfs}px sans-serif';
+          board.context.fillText(
+              item.name, x + TOS, y + TOS + TBH + i * IOS, width - TOS);
+          // added redundancy to avoid the problem of not displaying attributes only
+        } else {
           board.context.font = '${dfs}px sans-serif';
-          board.context.fillText(item.name, x + TOS, y + TOS + TBH + i * IOS,
-            width - TOS);
+          board.context.fillText(
+              item.name, x + TOS, y + TOS + TBH + i * IOS, width - TOS);
           //print('item category: ${item.category}');
         }
         i++;
       }
       if (isSelected()) {
         board.context.fillStyle = Board.SELECTION_COLOR;
-        board.context.fillRect(x - SSS/2, y - SSS/2, SSS, SSS);
-        board.context.fillRect(x + width - SSS/2, y - SSS/2, SSS, SSS);
-        board.context.fillRect(x + width - SSS/2, y + height - SSS/2, SSS, SSS);
-        board.context.fillRect(x - SSS/2, y + height - SSS/2, SSS, SSS);
+        board.context.fillRect(x - SSS / 2, y - SSS / 2, SSS, SSS);
+        board.context.fillRect(x + width - SSS / 2, y - SSS / 2, SSS, SSS);
+        board.context
+            .fillRect(x + width - SSS / 2, y + height - SSS / 2, SSS, SSS);
+        board.context.fillRect(x - SSS / 2, y + height - SSS / 2, SSS, SSS);
       }
       board.context.lineWidth = Board.DEFAULT_LINE_WIDTH;
       board.context.strokeStyle = Board.DEFAULT_LINE_COLOR;
@@ -114,7 +112,6 @@ class Box {
     } else if (board.beforeLastBoxSelected == this) {
       board.beforeLastBoxSelected = null;
     }
-
   }
 
   void toggleSelection() {
@@ -152,7 +149,7 @@ class Box {
   }
 
   List<Map<String, Object>> itemsToJson() {
-    List<Map<String, Object>> itemsList = new List<Map<String, Object>>();
+    List<Map<String, Object>> itemsList = List<Map<String, Object>>.empty();
     for (Item item in items) {
       itemsList.add(item.toJson());
     }
@@ -168,7 +165,7 @@ class Box {
     }
   }
 
-  Item findItem(String name) {
+  Item? findItem(String name) {
     for (Item item in items) {
       if (item.name == name) {
         return item;
@@ -177,7 +174,7 @@ class Box {
     return null;
   }
 
-  Item findFirstItem() {
+  Item? findFirstItem() {
     if (items.isEmpty) {
       return null;
     } else {
@@ -185,7 +182,7 @@ class Box {
     }
   }
 
-  Item findLastItem() {
+  Item? findLastItem() {
     if (items.isEmpty) {
       return null;
     } else {
@@ -193,7 +190,7 @@ class Box {
     }
   }
 
-  Item findPreviousItem(Item currentItem) {
+  Item? findPreviousItem(Item? currentItem) {
     sortItemsBySequence();
     for (Item item in items) {
       if (item == currentItem) {
@@ -206,7 +203,7 @@ class Box {
     return null;
   }
 
-  Item findNextItem(Item currentItem) {
+  Item? findNextItem(Item? currentItem) {
     sortItemsBySequence();
     for (Item item in items) {
       if (item == currentItem) {
@@ -219,7 +216,7 @@ class Box {
     return null;
   }
 
-  bool removeItem(Item item) {
+  bool removeItem(Item? item) {
     if (item != null) {
       int index = items.indexOf(item, 0);
       if (index >= 0) {
@@ -263,13 +260,13 @@ class Box {
   }
 
   Point reflexive1() {
-    int reflexiveX = x;
+    int reflexiveX = x.toInt();
     int reflexiveY = (y - height / 2).toInt();
     return new Point(reflexiveX, reflexiveY);
   }
 
   Point reflexive2() {
-    int reflexiveX = x + width;
+    int reflexiveX = x.toInt() + width.toInt();
     int reflexiveY = (y - height / 2).toInt();
     return new Point(reflexiveX, reflexiveY);
   }
@@ -294,10 +291,12 @@ class Box {
     num y1 = lineBeginPoint.y;
     num x2 = lineEndPoint.x;
     num y2 = lineEndPoint.y;
-    if (x2 == x1) { /* vertical line */
+    if (x2 == x1) {
+      /* vertical line */
       return new Point(x2, (y2 < y1 ? y : y + height));
     }
-    if (y2 == y1) { /* horizontal line */
+    if (y2 == y1) {
+      /* horizontal line */
       return new Point((x2 < x1 ? x : x + width), y2);
     }
 
@@ -318,7 +317,8 @@ class Box {
 
   void onMouseDown(MouseEvent e) {
     _mouseDown = true;
-    if (board.toolBar.isSelectToolOn() && contains(e.offset.x, e.offset.y)) {
+    if (board.toolBar.isSelectToolOn() &&
+        contains(e.offset.x.toInt(), e.offset.y.toInt())) {
       toggleSelection();
     }
     /*
@@ -337,9 +337,10 @@ class Box {
 
   /** Change a position of the box with mouse mouvements. */
   void onMouseMove(MouseEvent e) {
-    if (contains(e.offset.x, e.offset.y) && _mouseDown &&
-        board.countBoxesContain(e.offset.x, e.offset.y) < 2) {
-      x =  (e.offset.x - width / 2).toInt();
+    if (contains(e.offset.x.toInt(), e.offset.y.toInt()) &&
+        _mouseDown &&
+        board.countBoxesContain(e.offset.x.toInt(), e.offset.y.toInt()) < 2) {
+      x = (e.offset.x - width / 2).toInt();
       if (x < 0) {
         x = 1;
       }
@@ -363,5 +364,4 @@ class Box {
       item.display();
     }
   }
-
 }

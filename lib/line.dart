@@ -1,13 +1,12 @@
 part of model_concepts;
 
 class Line {
-
   final Board board;
 
   Box from; // line begin box
   Box to; // line end box
 
-  String _category; // relationship, inheritance, reflexive, twin
+  late String _category; // relationship, inheritance, reflexive, twin
   bool internal = true;
 
   bool _twin1 = false;
@@ -39,11 +38,11 @@ class Line {
     }
     if (alreadyInternal) {
       internal = false;
-    } 
+    }
     draw();
     select();
   }
-  
+
   bool get external => !internal;
 
   void draw() {
@@ -90,10 +89,9 @@ class Line {
       } else {
         board.context.font = '${dfs}px sans-serif';
       }
-      board.context.fillText(fromToMinMax, fromToMinMaxPoint.x,
-        fromToMinMaxPoint.y);
-      board.context.fillText(fromToName, fromToNamePoint.x,
-        fromToNamePoint.y);
+      board.context
+          .fillText(fromToMinMax, fromToMinMaxPoint.x, fromToMinMaxPoint.y);
+      board.context.fillText(fromToName, fromToNamePoint.x, fromToNamePoint.y);
       if (toFromId) {
         board.context.font = 'bold italic ${dfs}px sans-serif';
       } else if (toFromMin != '0') {
@@ -101,10 +99,9 @@ class Line {
       } else {
         board.context.font = '${dfs}px sans-serif';
       }
-      board.context.fillText(toFromMinMax, toFromMinMaxPoint.x,
-        toFromMinMaxPoint.y);
-      board.context.fillText(toFromName, toFromNamePoint.x,
-        toFromNamePoint.y);
+      board.context
+          .fillText(toFromMinMax, toFromMinMaxPoint.x, toFromMinMaxPoint.y);
+      board.context.fillText(toFromName, toFromNamePoint.x, toFromNamePoint.y);
 
       if (!internal) {
         board.context.strokeStyle = Board.SOFT_LINE_COLOR;
@@ -169,8 +166,8 @@ class Line {
 
       _twin1 = false;
       _twin2 = false;
-    }  else if (category == 'twin') {
-      Line twinLine = board.findTwinLine(this);
+    } else if (category == 'twin') {
+      Line? twinLine = board.findTwinLine(this);
       if (twinLine != null) {
         if (twinLine.twin) {
           _twin1 = false;
@@ -261,8 +258,8 @@ class Line {
     String plural = '';
     try {
       if (text.length > 0) {
-        String lastCharacterString = text.substring(text.length - 1,
-            text.length);
+        String lastCharacterString =
+            text.substring(text.length - 1, text.length);
         if (lastCharacterString == 'x') {
           plural = '${text}es';
         } else if (lastCharacterString == 'z') {
@@ -295,7 +292,8 @@ class Line {
    * with the error of delta in pixels.
    */
   bool contains(Point point, Point delta) {
-    if (from.contains(point.x.toInt(), point.y.toInt()) || to.contains(point.x.toInt(), point.y.toInt())) {
+    if (from.contains(point.x.toInt(), point.y.toInt()) ||
+        to.contains(point.x.toInt(), point.y.toInt())) {
       return false;
     }
 
@@ -325,17 +323,17 @@ class Line {
     // Rapid test: Verify if the point is in the line rectangle.
     if (pointDifX > 0) {
       inLineRectX = (point.x >= (beginPoint.x - delta.x)) &&
-      (point.x <= (endPoint.x + delta.x));
+          (point.x <= (endPoint.x + delta.x));
     } else {
       inLineRectX = (point.x >= (endPoint.x - delta.x)) &&
-      (point.x <= (beginPoint.x + delta.x));
+          (point.x <= (beginPoint.x + delta.x));
     }
     if (pointDifY > 0) {
       inLineRectY = (point.y >= (beginPoint.y - delta.y)) &&
-      (point.y <= (endPoint.y + delta.y));
+          (point.y <= (endPoint.y + delta.y));
     } else {
       inLineRectY = (point.y >= (endPoint.y - delta.y)) &&
-      (point.y <= (beginPoint.y + delta.y));
+          (point.y <= (beginPoint.y + delta.y));
     }
     inLineRect = inLineRectX && inLineRectY;
     if (!inLineRect) {
@@ -344,16 +342,18 @@ class Line {
 
     // If the line is horizontal or vertical there is no need to continue.
     if ((pointDifX == 0) || (pointDifY == 0)) {
-        return true;
+      return true;
     }
 
     if (pointDifX.abs() > pointDifY.abs()) {
       coord = beginPoint.y +
-      (((point.x - beginPoint.x) * pointDifY) / pointDifX) - point.y;
+          (((point.x - beginPoint.x) * pointDifY) / pointDifX) -
+          point.y;
       return coord.abs() <= delta.y;
     } else {
       coord = beginPoint.x +
-      (((point.y - beginPoint.y) * pointDifX) / pointDifY) - point.x;
+          (((point.y - beginPoint.y) * pointDifX) / pointDifY) -
+          point.x;
       return coord.abs() <= delta.x;
     }
   }
@@ -374,8 +374,8 @@ class Line {
       lineBeginPoint = beginBox.center();
       lineEndPoint = endBox.center();
     }
-    Point beginPoint = beginBox.getIntersectionPoint(lineBeginPoint,
-      lineEndPoint);
+    Point beginPoint =
+        beginBox.getIntersectionPoint(lineBeginPoint, lineEndPoint);
     Point endPoint = endBox.getIntersectionPoint(lineEndPoint, lineBeginPoint);
 
     int x1 = beginPoint.x.toInt();
@@ -403,8 +403,8 @@ class Line {
 
   Point calculateNamePointCloseToBeginBox(Box beginBox, Box endBox) {
     if (reflexive) {
-      return new Point(beginBox.reflexive1().x + 30,
-        beginBox.reflexive1().y + 30);
+      return new Point(
+          beginBox.reflexive1().x + 30, beginBox.reflexive1().y + 30);
     }
 
     num x = 0;
@@ -422,8 +422,8 @@ class Line {
       lineBeginPoint = beginBox.center();
       lineEndPoint = endBox.center();
     }
-    Point beginPoint = beginBox.getIntersectionPoint(lineBeginPoint,
-      lineEndPoint);
+    Point beginPoint =
+        beginBox.getIntersectionPoint(lineBeginPoint, lineEndPoint);
     Point endPoint = endBox.getIntersectionPoint(lineEndPoint, lineBeginPoint);
 
     num x1 = beginPoint.x;
@@ -434,16 +434,16 @@ class Line {
     if (x1 <= x2) {
       x = (x1 + 3 * ((x2 - x1) / 8));
       if (y1 <= y2) {
-          y = (y1 + 3 * ((y2 - y1) / 8));
+        y = (y1 + 3 * ((y2 - y1) / 8));
       } else {
-          y = (y2 + 5 * ((y1 - y2) / 8));
+        y = (y2 + 5 * ((y1 - y2) / 8));
       }
     } else {
       x = (x2 + 5 * ((x1 - x2) / 8));
       if (y1 <= y2) {
-          y = (y1 + 3 * ((y2 - y1) / 8));
+        y = (y1 + 3 * ((y2 - y1) / 8));
       } else {
-          y = (y2 + 5 * ((y1 - y2) / 8));
+        y = (y2 + 5 * ((y1 - y2) / 8));
       }
     }
     return new Point(x, y);
@@ -464,5 +464,4 @@ class Line {
   Point calculateNamePoint2(Box box) {
     return new Point(box.reflexive2().x + 10, box.reflexive2().y);
   }
-
 }

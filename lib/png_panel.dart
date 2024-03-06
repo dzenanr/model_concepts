@@ -1,32 +1,31 @@
 part of model_concepts;
 
 class PngPanel {
+  final Board board;
 
-final Board board;
-
-  ImageElement modelImage;
-  ButtonElement fromModelToPngButton;
-  ButtonElement clearButton;
+  ImageElement? modelImage;
+  ButtonElement? fromModelToPngButton;
+  ButtonElement? clearButton;
 
   PngPanel(this.board) {
-    modelImage = document.querySelector('#modelImage');
-    fromModelToPngButton = document.querySelector('#fromModelToPng');
-    fromModelToPngButton.onClick.listen((MouseEvent e) {
-      modelImage.src = board.canvas.toDataUrl("image/png");
+    modelImage = document.querySelector('#modelImage') as ImageElement;
+    fromModelToPngButton =
+        document.querySelector('#fromModelToPng') as ButtonElement;
+    fromModelToPngButton?.onClick.listen((MouseEvent e) {
+      modelImage?.src = board.canvas.toDataUrl("image/png");
       show();
     });
-    clearButton = document.querySelector('#clearImage');
-    clearButton.onClick.listen((MouseEvent e) {
+    clearButton = document.querySelector('#clearImage') as ButtonElement;
+    clearButton?.onClick.listen((MouseEvent e) {
       hide();
     });
   }
 
   void hide() {
-    modelImage.hidden = true;
+    modelImage?.hidden = true;
   }
 
   void show() {
-    modelImage.hidden = false;
+    modelImage?.hidden = false;
   }
-
 }

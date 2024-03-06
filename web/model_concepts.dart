@@ -11,6 +11,6 @@ import 'package:model_concepts/model_concepts.dart';
 
 void main() {
   // Get a reference to the canvas.
-  CanvasElement canvas = document.querySelector('#canvas');
+  CanvasElement canvas = document.querySelector('#canvas') as CanvasElement;
   Board board = new Board(canvas);
 }
