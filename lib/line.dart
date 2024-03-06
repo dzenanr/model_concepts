@@ -271,7 +271,7 @@ class Line {
           plural = '${text}s';
         }
       }
-    } on Exception catch (e) {
+    } on Exception {
       return text;
     }
     return plural;
