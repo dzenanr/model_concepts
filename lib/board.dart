@@ -39,8 +39,8 @@ class Board {
     _height = canvas.height as num;
     border();
 
-    boxes = List<Box>.empty();
-    lines = new List<Line>.empty();
+    boxes = List<Box>.empty(growable: true);
+    lines = new List<Line>.empty(growable: true);
 
     menuBar = new MenuBar(this);
     toolBar = new ToolBar(this);
@@ -106,7 +106,7 @@ class Board {
 
   void fromJson(String? json) {
     if (json != null && json.trim() != '') {
-      Map<String, Object> boardMap = jsonDecode(json);
+      const boardMap = jsonDecode(json);
       width = boardMap["width"] as num;
       height = boardMap["height"] as num;
       List<Map<String, Object>> boxesList =
@@ -119,7 +119,8 @@ class Board {
   }
 
   List<Map<String, Object>> boxesToJson() {
-    List<Map<String, Object>> boxesList = List<Map<String, Object>>.empty();
+    List<Map<String, Object>> boxesList =
+        List<Map<String, Object>>.empty(growable: true);
     for (Box box in boxes) {
       if (!box.isHidden()) {
         boxesList.add(box.toJson());
@@ -129,7 +130,8 @@ class Board {
   }
 
   List<Map<String, Object>> linesToJson() {
-    List<Map<String, Object>> linesList = List<Map<String, Object>>.empty();
+    List<Map<String, Object>> linesList =
+        List<Map<String, Object>>.empty(growable: true);
     for (Line line in lines) {
       if (!line.isHidden()) {
         linesList.add(line.toJson());
@@ -139,7 +141,7 @@ class Board {
   }
 
   void boxesFromJson(List<Map<String, Object>> boxesList) {
-    boxes = List<Box>.empty();
+    boxes = List<Box>.empty(growable: true);
     for (Map<String, Object> jsonBox in boxesList) {
       boxes.add(boxFromJson(jsonBox));
     }
@@ -175,7 +177,7 @@ class Board {
   }
 
   void linesFromJson(List<Map<String, Object>> linesList) {
-    lines = List<Line>.empty();
+    lines = List<Line>.empty(growable: true);
     for (Map<String, Object> jsonLine in linesList) {
       Line? line = lineFromJson(jsonLine);
       if (line != null) {
