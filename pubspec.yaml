@@ -6,4 +6,8 @@ homepage: https://github.com/ednet-dev/model_concepts
 documentation: http://goo.gl/Fd08zZ
 environment:
   sdk: '>=2.18.6 <3.0.0'
-
+dev_dependencies:
+  webdev: ^3.4.0
+  build_runner: ^2.4.8
+  build_test: ^2.2.2
+  build_web_compilers: ^4.0.9
