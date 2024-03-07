@@ -26,7 +26,7 @@ class Box {
   bool _mouseDown = false;
 
   Box(this.board, this.x, this.y, this.width, this.height) {
-    items = List<Item>.empty();
+    items = List<Item>.empty(growable: true);
 
     draw();
     // Box events (actually, canvas events).
@@ -149,7 +149,8 @@ class Box {
   }
 
   List<Map<String, Object>> itemsToJson() {
-    List<Map<String, Object>> itemsList = List<Map<String, Object>>.empty();
+    List<Map<String, Object>> itemsList =
+        List<Map<String, Object>>.empty(growable: true);
     for (Item item in items) {
       itemsList.add(item.toJson());
     }

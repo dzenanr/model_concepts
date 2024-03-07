@@ -106,21 +106,18 @@ class Board {
 
   void fromJson(String? json) {
     if (json != null && json.trim() != '') {
-      const boardMap = jsonDecode(json);
+      final boardMap = jsonDecode(json);
       width = boardMap["width"] as num;
       height = boardMap["height"] as num;
-      List<Map<String, Object>> boxesList =
-          boardMap["concepts"] as List<Map<String, Object>>;
+      final boxesList = boardMap["concepts"];
       boxesFromJson(boxesList);
-      List<Map<String, Object>> linesList =
-          boardMap["relations"] as List<Map<String, Object>>;
+      final linesList = boardMap["relations"];
       linesFromJson(linesList);
     }
   }
 
-  List<Map<String, Object>> boxesToJson() {
-    List<Map<String, Object>> boxesList =
-        List<Map<String, Object>>.empty(growable: true);
+  boxesToJson() {
+    final boxesList = List<Map<String, Object>>.empty(growable: true);
     for (Box box in boxes) {
       if (!box.isHidden()) {
         boxesList.add(box.toJson());
@@ -129,9 +126,8 @@ class Board {
     return boxesList;
   }
 
-  List<Map<String, Object>> linesToJson() {
-    List<Map<String, Object>> linesList =
-        List<Map<String, Object>>.empty(growable: true);
+  linesToJson() {
+    final linesList = List<Map<String, Object>>.empty(growable: true);
     for (Line line in lines) {
       if (!line.isHidden()) {
         linesList.add(line.toJson());
@@ -140,14 +136,21 @@ class Board {
     return linesList;
   }
 
-  void boxesFromJson(List<Map<String, Object>> boxesList) {
-    boxes = List<Box>.empty(growable: true);
-    for (Map<String, Object> jsonBox in boxesList) {
-      boxes.add(boxFromJson(jsonBox));
+  void boxesFromJson(List<dynamic> boxesList) {
+    boxes.clear(); // Assuming `boxes` is already initialized as a growable list
+    for (final dynamic jsonBox in boxesList) {
+      if (jsonBox is Map<String, dynamic>) {
+        // Ensure each item is a Map<String, dynamic>
+        Box newBox = boxFromJson(
+            jsonBox); // Your existing function to create a Box from JSON
+        boxes.add(newBox);
+      } else {
+        throw FormatException('Invalid box data');
+      }
     }
   }
 
-  Box boxFromJson(Map<String, Object> boxMap) {
+  Box boxFromJson(Map<String, dynamic> boxMap) {
     num x = boxMap["x"] as num;
     num y = boxMap["y"] as num;
     num width = boxMap["width"] as num;
@@ -155,15 +158,17 @@ class Board {
     Box box = new Box(this, x, y, width, height);
     box.title = boxMap["name"] as String;
     box.entry = boxMap["entry"] as bool;
-    List<Map<String, Object>> itemsList =
-        boxMap["attributes"] as List<Map<String, Object>>;
-    for (Map<String, Object> jsonItem in itemsList) {
-      itemFromJson(box, jsonItem);
+    final itemsList = boxMap["attributes"] as List<dynamic>; // Change here
+    for (final jsonItem in itemsList) {
+      if (jsonItem is Map<String, dynamic>) {
+        // Add this check
+        itemFromJson(box, jsonItem);
+      }
     }
     return box;
   }
 
-  Item itemFromJson(Box box, Map<String, Object> itemMap) {
+  Item itemFromJson(Box box, Map<String, dynamic> itemMap) {
     String name = itemMap["name"] as String;
     String category = itemMap["category"] as String;
     Item item = new Item(box, name, category);
@@ -171,22 +176,31 @@ class Board {
     item.sequence = sequence;
     item.type = itemMap["type"] as String;
     item.init = itemMap["init"] as String;
-    item.essential = itemMap["essential"] as bool;
-    item.sensitive = itemMap["sensitive"] as bool;
+
+    // Use the `??` operator to provide a default value (false) if `null` is encountered
+    item.essential = itemMap["essential"] as bool? ?? false;
+    item.sensitive = itemMap["sensitive"] as bool? ?? false;
+
     return item;
   }
 
-  void linesFromJson(List<Map<String, Object>> linesList) {
-    lines = List<Line>.empty(growable: true);
-    for (Map<String, Object> jsonLine in linesList) {
-      Line? line = lineFromJson(jsonLine);
-      if (line != null) {
-        lines.add(line);
+  void linesFromJson(List<dynamic> linesList) {
+    lines.clear(); // Assuming `lines` is already initialized as a growable list
+    for (final dynamic jsonLine in linesList) {
+      if (jsonLine is Map<String, dynamic>) {
+        // Ensure each item is a Map<String, dynamic>
+        Line? line =
+            lineFromJson(jsonLine); // Adjust `lineFromJson` as necessary
+        if (line != null) {
+          lines.add(line);
+        }
+      } else {
+        throw FormatException('Invalid line data');
       }
     }
   }
 
-  Line? lineFromJson(Map<String, Object> lineMap) {
+  Line? lineFromJson(Map<String, dynamic> lineMap) {
     String? fromString = lineMap["from"] as String?;
     String? toString = lineMap["to"] as String?;
     Box? from = findBox(fromString);
